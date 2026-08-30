@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Dark navy rounded background -->
+  <rect width="32" height="32" rx="7" fill="#0D1526"/>
+  <!-- Subtle inner gradient layer -->
+  <rect width="32" height="32" rx="7" fill="url(#bgGradient)" opacity="0.5"/>
+
+  <!-- 'T' letter — accent blue, left-anchored -->
+  <!-- Horizontal bar of T -->
+  <rect x="3.5" y="8" width="11" height="2.5" rx="1.2" fill="#2D9CDB"/>
+  <!-- Vertical stem of T -->
+  <rect x="7.5" y="10.5" width="3" height="13.5" rx="1.2" fill="#2D9CDB"/>
+
+  <!-- 'B' letter — white, right-anchored -->
+  <!-- Vertical backbone of B -->
+  <rect x="16" y="8" width="2.8" height="16" rx="1.2" fill="#FFFFFF"/>
+  <!-- Upper bump of B -->
+  <path d="M18.8 8 Q24 8 24 11.5 Q24 15 18.8 15 Z" fill="#FFFFFF"/>
+  <!-- Lower bump of B (slightly wider) -->
+  <path d="M18.8 15 Q25 15 25 19 Q25 24 18.8 24 Z" fill="#FFFFFF"/>
+
+  <!-- Circuit node accent — top-right corner -->
+  <line x1="27" y1="4" x2="27" y2="7" stroke="#00D4AA" stroke-width="1" stroke-linecap="round"/>
+  <line x1="24" y1="5" x2="26.3" y2="5" stroke="#00D4AA" stroke-width="1" stroke-linecap="round"/>
+  <line x1="27" y1="7" x2="29" y2="5" stroke="#00D4AA" stroke-width="1" stroke-linecap="round"/>
+  <!-- Central circuit dot -->
+  <circle cx="27" cy="7" r="2" fill="#00D4AA"/>
+  <!-- Inner highlight -->
+  <circle cx="27" cy="7" r="0.8" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A2A4A"/>
+      <stop offset="100%" stop-color="#0D1526"/>
+    </linearGradient>
+  </defs>
+</svg>

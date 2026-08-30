@@ -1,0 +1,24 @@
+{
+  "name": "techboy-sol-web",
+  "version": "2.0.0",
+  "description": "Tech Boy Solutions — Modern SaaS Corporate Platform & Technology Services",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/run-all-tests.js",
+    "test:t1": "node -e \"const {runTier1Tests}=require('./tests/tier1-features.test'); console.log(runTier1Tests());\"",
+    "test:t2": "node -e \"const {runTier2Tests}=require('./tests/tier2-boundaries.test'); console.log(runTier2Tests());\"",
+    "test:t3": "node -e \"const {runTier3Tests}=require('./tests/tier3-interactions.test'); console.log(runTier3Tests());\"",
+    "test:t4": "node -e \"const {runTier4Tests}=require('./tests/tier4-scenarios.test'); console.log(runTier4Tests());\"",
+    "test:t5": "node -e \"const {runTier5Tests}=require('./tests/tier5-adversarial-hardening.test'); console.log(runTier5Tests());\""
+  },
+  "keywords": [
+    "tech-boy-solutions",
+    "saas",
+    "bento-grid",
+    "glassmorphism",
+    "e2e-testing"
+  ],
+  "author": "Tech Boy Solutions",
+  "license": "ISC"
+}

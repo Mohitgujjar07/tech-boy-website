@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Boy Solutions | Complete Technology, Software & Hardware Solutions</title>
+  
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Tech Boy Solutions provides website development, custom software, computer repair, custom PC builds, networking, Wi-Fi, IoT projects, and complete IT support in Tumakuru, Karnataka.">
+  <meta name="keywords" content="Tech Boy Solutions, software development, website design, PC repair, laptop service, custom PC build, LAN networking, Wi-Fi setup, IoT projects, final year student guidance, Excel automation, IT solutions Tumakuru">
+  <meta name="author" content="Tech Boy Solutions">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tech Boy Solutions | Your Technology. Our Solution.">
+  <meta property="og:description" content="Complete technology solutions across software development, hardware repair, custom PC builds, networking, IoT, and IT support.">
+  <meta property="og:image" content="assets/favicon.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Tech Boy Solutions",
+    "url": "https://techboysolutions.com",
+    "logo": "assets/favicon.svg",
+    "description": "Complete technology solutions partner providing software development, computer repair, custom PC builds, networking, IoT projects, and IT support in Tumakuru, Karnataka, India.",
+    "slogan": "Your Technology. Our Solution.",
+    "telephone": "+916364768498",
+    "email": "lalithulalu@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tumakuru",
+      "addressRegion": "Karnataka",
+      "addressCountry": "India"
+    }
+  }
+  </script>
+</head>
+<body class="light-theme">
+
+  <!-- ============================================================
+       1. APPLE iOS FLOATING GLASSMORPHISM HEADER (Dynamic Island)
+       ============================================================ -->
+  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="nav-brand" aria-label="Tech Boy Solutions Home">
+        <span class="brand-badge">
+          <svg viewBox="0 0 28 28" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="28" rx="8" fill="#2563EB"/>
+            <path d="M7 9H17M12 9V20" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M17 9H20.5C21.88 9 23 10.12 23 11.5C23 12.88 21.88 14 20.5 14H17M17 14H21.5C22.88 14 24 15.12 24 16.5C24 17.88 22.88 19 21.5 19H17V9" stroke="#93C5FD" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">Tech Boy <span class="brand-highlight">Solutions</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#services" class="nav-item">Services</a></li>
+          <li><a href="#projects" class="nav-item">Student Projects</a></li>
+          <li><a href="#why-us" class="nav-item">Why Us</a></li>
+          <li><a href="#faq" class="nav-item">FAQ</a></li>
+          <li><a href="#contact" class="nav-item">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA & Mobile Trigger -->
+      <div class="nav-actions">
+        <a href="#contact" class="apple-btn-cta">
+          <span>Get Consultation</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Glass Slide-Out Menu -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay">
+    <div class="mobile-drawer-card">
+      <div class="drawer-header">
+        <span class="brand-text">Tech Boy <span class="brand-highlight">Solutions</span></span>
+        <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+      </div>
+      <ul class="drawer-nav-list">
+        <li><a href="#services" class="drawer-link">Services & Solutions</a></li>
+        <li><a href="#projects" class="drawer-link">Student Innovation Lab</a></li>
+        <li><a href="#why-us" class="drawer-link">How We Work</a></li>
+        <li><a href="#faq" class="drawer-link">FAQ & Diagnostics</a></li>
+        <li><a href="#contact" class="drawer-link">Contact & Location</a></li>
+      </ul>
+      <div class="drawer-footer">
+        <a href="#contact" class="apple-btn-cta w-full text-center">Request Free Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============================================================
+         2. HERO HUB (High-Impact + Live Interactive Command Hub)
+         ============================================================ -->
+    <section id="hero" class="hero-hub">
+      <div class="apple-ambient-glow glow-top"></div>
+      <div class="apple-ambient-glow glow-bottom"></div>
+
+      <div class="container hero-container">
+        
+        <!-- Left: Hero Messaging -->
+        <div class="hero-text-block">
+          <div class="apple-pill-badge">
+            <span class="live-dot"></span>
+            <span>Your Technology. Our Solution. &bull; Tumakuru, Karnataka</span>
+          </div>
+
+          <h1 class="hero-title">
+            Complete Technology Solutions.<br>
+            Built Around
+            <span class="gradient-rotator" id="heroRotator">Your Business.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            From responsive websites & custom software to computer repairs, custom PC builds, structured LAN networking, and student IoT engineering guidance — Tech Boy Solutions is your single technology partner.
+          </p>
+
+          <div class="hero-actions-row">
+            <a href="#contact" class="apple-btn-primary">
+              <span>Start Your Project</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+            <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="apple-btn-secondary whatsapp-secondary-btn">
+              <i data-lucide="message-circle" class="text-emerald"></i>
+              <span>WhatsApp Chat</span>
+            </a>
+          </div>
+
+          <!-- Trust Proof Row -->
+          <div class="trust-proof-row">
+            <div class="trust-item"><i data-lucide="shield-check" class="icon-blue"></i> 100% Custom Specs</div>
+            <div class="trust-item"><i data-lucide="zap" class="icon-amber"></i> Fast Turnaround</div>
+            <div class="trust-item"><i data-lucide="map-pin" class="icon-purple"></i> Tumakuru & Remote</div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Live Command Showcase Canvas -->
+        <div class="hero-showcase-block">
+          <div class="apple-window-card">
+            
+            <!-- Window Title Bar -->
+            <div class="window-header">
+              <div class="window-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="window-tab-buttons">
+                <button class="hub-tab-btn active" data-hub="software"><i data-lucide="code-2"></i> Software Hub</button>
+                <button class="hub-tab-btn" data-hub="hardware"><i data-lucide="cpu"></i> Hardware Hub</button>
+              </div>
+              <span class="status-indicator"><span class="pulse-green"></span> Active</span>
+            </div>
+
+            <!-- Hub Body 1: Software Preview -->
+            <div class="hub-body active" id="hub-software">
+              <div class="hub-card-grid">
+                <div class="hub-metric-tile">
+                  <span class="tile-label">Web Solutions</span>
+                  <h4>Corporate Portals & Web Apps</h4>
+                  <p>Next-gen responsive websites with modern UI/UX, SEO, and fast load times.</p>
+                  <div class="tech-pills">
+                    <span>Websites</span>
+                    <span>Portfolios</span>
+                    <span>Admin Panels</span>
+                  </div>
+                </div>
+                <div class="hub-metric-tile">
+                  <span class="tile-label">Automation</span>
+                  <h4>Custom Software & Excel Dashboards</h4>
+                  <p>Tailored billing tools, CRM workflows, and automated Excel systems.</p>
+                  <div class="tech-pills">
+                    <span>Custom CRM</span>
+                    <span>Excel Formulas</span>
+                    <span>QA Testing</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-quick-bar">
+                <span><i data-lucide="check" class="text-emerald"></i> Clean Code</span>
+                <span><i data-lucide="check" class="text-emerald"></i> Responsive</span>
+                <span><i data-lucide="check" class="text-emerald"></i> Tested</span>
+              </div>
+            </div>
+
+            <!-- Hub Body 2: Hardware Preview -->
+            <div class="hub-body" id="hub-hardware">
+              <div class="hub-card-grid">
+                <div class="hub-metric-tile">
+                  <span class="tile-label">Repair & Upgrade</span>
+                  <h4>Laptop & Desktop Servicing</h4>
+                  <p>Diagnostics, thermal servicing, SSD/RAM speed upgrades & Windows recovery.</p>
+                  <div class="tech-pills">
+                    <span>Chip Repair</span>
+                    <span>SSD Upgrade</span>
+                    <span>OS Repair</span>
+                  </div>
+                </div>
+                <div class="hub-metric-tile">
+                  <span class="tile-label">Infrastructure</span>
+                  <h4>Custom PC Assembly & LAN Wi-Fi</h4>
+                  <p>Creator/Gaming PC builds and small office Cat6 cabling & Wi-Fi routers.</p>
+                  <div class="tech-pills">
+                    <span>Custom Rig</span>
+                    <span>Wi-Fi Setup</span>
+                    <span>IoT ESP32</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-quick-bar">
+                <span><i data-lucide="check" class="text-emerald"></i> Genuine Parts</span>
+                <span><i data-lucide="check" class="text-emerald"></i> Stress Tested</span>
+                <span><i data-lucide="check" class="text-emerald"></i> Warranty</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. COMPACT INTERACTIVE SOLUTIONS BENTO HUB (#services)
+         ============================================================ -->
+    <section id="services" class="section-compact bg-slate-50">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <span class="apple-eyebrow">Solutions Portfolio</span>
+          <h2>Everything in Technology, Under One Roof</h2>
+          <p class="section-lead">Select a category below to explore all our services in one compact view.</p>
+        </div>
+
+        <!-- Interactive Category Switcher Tabs -->
+        <div class="category-tabs-bar">
+          <button class="cat-tab-btn active" data-category="web">
+            <i data-lucide="globe"></i>
+            <span>Software & Web</span>
+          </button>
+          <button class="cat-tab-btn" data-category="hardware">
+            <i data-lucide="cpu"></i>
+            <span>Hardware & Repair</span>
+          </button>
+          <button class="cat-tab-btn" data-category="network">
+            <i data-lucide="network"></i>
+            <span>Networking & Wi-Fi</span>
+          </button>
+          <button class="cat-tab-btn" data-category="iot">
+            <i data-lucide="radio"></i>
+            <span>IoT & Electronics</span>
+          </button>
+          <button class="cat-tab-btn" data-category="office">
+            <i data-lucide="file-spreadsheet"></i>
+            <span>Office & Excel</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Category Content Panels -->
+        <div class="category-panels-wrapper">
+          
+          <!-- Panel 1: Software & Web -->
+          <div class="category-panel active" id="panel-web">
+            <div class="bento-grid-4">
+              <div class="bento-card">
+                <div class="bento-icon icon-blue"><i data-lucide="globe"></i></div>
+                <h3>Business & Corporate Websites</h3>
+                <p>High-performance websites designed for companies, institutions, and startups with SEO & mobile optimization.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Fast Loading Speed</li>
+                  <li><i data-lucide="check-circle-2"></i> Lead Capture Forms</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Business Website')">Request Quote &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-cyan"><i data-lucide="user-check"></i></div>
+                <h3>Personal Portfolio Websites</h3>
+                <p>Clean personal portfolios for students, developers, designers, and job seekers to showcase achievements.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Custom Domain Setup</li>
+                  <li><i data-lucide="check-circle-2"></i> Project Gallery</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Personal Portfolio')">Request Quote &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-indigo"><i data-lucide="code-2"></i></div>
+                <h3>Custom Software & Web Apps</h3>
+                <p>Tailored management tools, customer portals, and internal dashboards built around your business workflow.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Cloud Integration</li>
+                  <li><i data-lucide="check-circle-2"></i> Role-Based Access</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Custom Software')">Request Quote &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-purple"><i data-lucide="palette"></i></div>
+                <h3>UI/UX & Graphic Design</h3>
+                <p>Modern user interface wireframes, product prototypes, and corporate branding assets.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> High-Fidelity Mockups</li>
+                  <li><i data-lucide="check-circle-2"></i> Vector Graphics</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('UI/UX Design')">Request Quote &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 2: Hardware & Repair -->
+          <div class="category-panel" id="panel-hardware">
+            <div class="bento-grid-4">
+              <div class="bento-card">
+                <div class="bento-icon icon-amber"><i data-lucide="laptop"></i></div>
+                <h3>Laptop Repair & Servicing</h3>
+                <p>Thermal paste replacement, overheating fixes, display troubleshooting, and slow-boot optimization.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Thermal Servicing</li>
+                  <li><i data-lucide="check-circle-2"></i> OS Reinstallation</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Laptop Repair')">Book Repair &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-blue"><i data-lucide="monitor"></i></div>
+                <h3>Custom PC Building</h3>
+                <p>Balanced component selection, professional cable management, BIOS tuning, and stress testing for editing/gaming.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Optimum Price/Perf</li>
+                  <li><i data-lucide="check-circle-2"></i> Benchmarking</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Custom PC Build')">Build PC &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-emerald"><i data-lucide="hard-drive"></i></div>
+                <h3>RAM & SSD Speed Upgrades</h3>
+                <p>Upgrade sluggish mechanical hard drives to NVMe/SATA SSDs for instant 10x boot and application speedup.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Data Migration</li>
+                  <li><i data-lucide="check-circle-2"></i> 1-Day Turnaround</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Computer Upgrade')">Upgrade Now &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-purple"><i data-lucide="wrench"></i></div>
+                <h3>Desktop Troubleshooting & AMC</h3>
+                <p>PSU replacement, motherboard diagnostics, malware removal, and periodic corporate maintenance.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Hardware Diagnostic</li>
+                  <li><i data-lucide="check-circle-2"></i> Office Support</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('PC Troubleshooting')">Get Support &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 3: Networking & Wi-Fi -->
+          <div class="category-panel" id="panel-network">
+            <div class="bento-grid-4">
+              <div class="bento-card">
+                <div class="bento-icon icon-cyan"><i data-lucide="network"></i></div>
+                <h3>Structured LAN Cabling</h3>
+                <p>Cat6 Gigabit cabling, patch panel crimping, and clean rack routing for multi-desk office setups.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Gigabit Switches</li>
+                  <li><i data-lucide="check-circle-2"></i> Tidy Cable Routing</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('LAN Networking')">Plan LAN &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-blue"><i data-lucide="wifi"></i></div>
+                <h3>Wi-Fi & Range Optimization</h3>
+                <p>Eliminate office Wi-Fi dead zones using dual-band mesh routers and strategically placed access points.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Zero Dead Zones</li>
+                  <li><i data-lucide="check-circle-2"></i> Guest Isolation</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Wi-Fi Optimization')">Fix Wi-Fi &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-emerald"><i data-lucide="router"></i></div>
+                <h3>Router & Firewall Security</h3>
+                <p>Bandwidth allocation per department, firewall rules, port forwarding, and secure network segmentation.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Bandwidth Control</li>
+                  <li><i data-lucide="check-circle-2"></i> Secure Passwords</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Router Configuration')">Configure &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-purple"><i data-lucide="server"></i></div>
+                <h3>Network Storage & Printer Sharing</h3>
+                <p>Local shared network folders, centralized backups, and automated network printer sharing.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Shared Drives</li>
+                  <li><i data-lucide="check-circle-2"></i> Network Printing</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Network Storage')">Set Up &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 4: IoT & Electronics -->
+          <div class="category-panel" id="panel-iot">
+            <div class="bento-grid-4">
+              <div class="bento-card">
+                <div class="bento-icon icon-purple"><i data-lucide="radio"></i></div>
+                <h3>IoT Prototypes & Microcontrollers</h3>
+                <p>ESP32, ESP8266, Arduino, and Raspberry Pi circuits connected to sensors and live cloud dashboards.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> MQTT / HTTP Cloud</li>
+                  <li><i data-lucide="check-circle-2"></i> Sensor Integration</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('IoT Prototype')">Start IoT &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-cyan"><i data-lucide="cpu"></i></div>
+                <h3>Smart Environment Telemetry</h3>
+                <p>Real-time temperature, air quality, humidity, soil moisture, and motion monitoring systems.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Live Web Charts</li>
+                  <li><i data-lucide="check-circle-2"></i> Alert Triggers</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Smart Telemetry')">Design System &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-amber"><i data-lucide="circuit-board"></i></div>
+                <h3>Circuit Debugging & Assembly</h3>
+                <p>Breadboard testing, PCB layout verification, sensor calibration, and relay switching modules.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Voltage Regulation</li>
+                  <li><i data-lucide="check-circle-2"></i> Code Debugging</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Circuit Debugging')">Get Help &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-emerald"><i data-lucide="award"></i></div>
+                <h3>Student Project Prototyping</h3>
+                <p>Hands-on engineering final-year project guidance with circuit schematics and code explanations.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Working Prototype</li>
+                  <li><i data-lucide="check-circle-2"></i> Viva Guidance</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Student IoT Project')">Discuss Project &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 5: Office & Excel -->
+          <div class="category-panel" id="panel-office">
+            <div class="bento-grid-4">
+              <div class="bento-card">
+                <div class="bento-icon icon-emerald"><i data-lucide="file-spreadsheet"></i></div>
+                <h3>Automated Excel Dashboards</h3>
+                <p>Dynamic spreadsheets with automated KPI calculation formulas, interactive charts, and invoice trackers.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> XLOOKUP / Formulas</li>
+                  <li><i data-lucide="check-circle-2"></i> Visual Charts</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Excel Automation')">Build Sheet &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-blue"><i data-lucide="file-text"></i></div>
+                <h3>Word Document Templates</h3>
+                <p>Formatted business proposals, company letterheads, project reports, and invoice templates.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Corporate Branding</li>
+                  <li><i data-lucide="check-circle-2"></i> Print-Ready PDF</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Word Template')">Create Template &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-amber"><i data-lucide="presentation"></i></div>
+                <h3>PowerPoint Pitch Decks</h3>
+                <p>Visual presentation decks for project reviews, corporate seminars, and client pitches.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Slide Visuals</li>
+                  <li><i data-lucide="check-circle-2"></i> Data Infographics</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('PowerPoint Deck')">Design Deck &rarr;</button>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon icon-indigo"><i data-lucide="layers"></i></div>
+                <h3>Shop Billing & Inventory Sheets</h3>
+                <p>Structured stock ledgers, customer credit tracking, and daily sales balance sheets.</p>
+                <ul class="card-features-list">
+                  <li><i data-lucide="check-circle-2"></i> Auto Balance</li>
+                  <li><i data-lucide="check-circle-2"></i> Zero Coding Needed</li>
+                </ul>
+                <button class="card-action-btn" onclick="prefillContact('Shop Inventory Sheet')">Get Setup &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. STUDENT INNOVATION LAB & PROJECT SHOWCASE (#projects)
+         ============================================================ -->
+    <section id="projects" class="section-compact">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <span class="apple-eyebrow">Innovation Lab</span>
+          <h2>Final-Year & Academic Engineering Projects</h2>
+          <p class="section-lead">Full-cycle project guidance for Diploma, BE, BTech, and BCA/MCA students.</p>
+        </div>
+
+        <div class="projects-bento-grid">
+          
+          <div class="project-bento-card">
+            <div class="card-tag-pill">IoT & Cloud</div>
+            <h4>Cloud-Connected Smart Sensor Station</h4>
+            <p>ESP32 microcontroller transmitting real-time sensor metrics to a live cloud dashboard over MQTT with alert notifications.</p>
+            <div class="project-meta-pills">
+              <span>ESP32</span>
+              <span>MQTT</span>
+              <span>Web Dashboard</span>
+            </div>
+            <button class="project-modal-trigger" onclick="openProjectModal('iot-station')">
+              <i data-lucide="eye"></i>
+              <span>View Architecture & Viva Guide</span>
+            </button>
+          </div>
+
+          <div class="project-bento-card">
+            <div class="card-tag-pill">Web & Database</div>
+            <h4>Inventory & Billing Web Portal</h4>
+            <p>Full-stack web application featuring user authentication, stock ledger tracking, GST invoice generator, and reporting.</p>
+            <div class="project-meta-pills">
+              <span>Node / React</span>
+              <span>SQL</span>
+              <span>Invoicing</span>
+            </div>
+            <button class="project-modal-trigger" onclick="openProjectModal('web-billing')">
+              <i data-lucide="eye"></i>
+              <span>View Architecture & Viva Guide</span>
+            </button>
+          </div>
+
+          <div class="project-bento-card">
+            <div class="card-tag-pill">Hardware & Workstation</div>
+            <h4>Creator & Editing PC Assembly</h4>
+            <p>High-efficiency custom workstation configured for 4K video rendering, CAD modeling, and machine learning workloads.</p>
+            <div class="project-meta-pills">
+              <span>Multi-Core CPU</span>
+              <span>Gen4 NVMe</span>
+              <span>Thermal Tuning</span>
+            </div>
+            <button class="project-modal-trigger" onclick="openProjectModal('custom-pc')">
+              <i data-lucide="eye"></i>
+              <span>View Specs & Benchmark</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. INTEGRATED PIPELINE & WHY US (#why-us)
+         ============================================================ -->
+    <section id="why-us" class="section-compact bg-slate-50">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <span class="apple-eyebrow">Our Methodology</span>
+          <h2>How We Build & Support Your Solutions</h2>
+          <p class="section-lead">A transparent, 4-step engineering workflow built for quality and speed.</p>
+        </div>
+
+        <!-- 4-Step Interactive Pipeline -->
+        <div class="pipeline-bento-strip">
+          <div class="pipeline-item">
+            <span class="step-num">01</span>
+            <h4>Requirement Scope</h4>
+            <p>We analyze your technical problem, project requirement, or business goals in plain language.</p>
+          </div>
+          <div class="pipeline-item">
+            <span class="step-num">02</span>
+            <h4>Solution Blueprint</h4>
+            <p>We propose the exact architecture, compatible components, or software framework with transparent pricing.</p>
+          </div>
+          <div class="pipeline-item">
+            <span class="step-num">03</span>
+            <h4>Build & Testing</h4>
+            <p>We build, code, assemble, and stress-test your system to ensure zero bugs and optimum performance.</p>
+          </div>
+          <div class="pipeline-item">
+            <span class="step-num">04</span>
+            <h4>Delivery & Support</h4>
+            <p>Direct handover with training, setup assistance, and continuous technical support.</p>
+          </div>
+        </div>
+
+        <!-- 4 Trust Pillars -->
+        <div class="trust-pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon"><i data-lucide="check" class="text-blue"></i></div>
+            <div>
+              <strong>100% Tailored Solutions</strong>
+              <p>No generic templates or mismatched parts. Every solution is built for your exact use case.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon"><i data-lucide="shield-check" class="text-emerald"></i></div>
+            <div>
+              <strong>Transparent & Direct Pricing</strong>
+              <p>No hidden charges. Clear itemized estimates before starting any hardware or software project.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon"><i data-lucide="clock" class="text-amber"></i></div>
+            <div>
+              <strong>Quick Turnaround</strong>
+              <p>Fast diagnostic turnaround on repairs and agile milestones on web and software projects.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon"><i data-lucide="phone-call" class="text-purple"></i></div>
+            <div>
+              <strong>Tumakuru & Remote IT Support</strong>
+              <p>On-site visits in Tumakuru district and seamless remote desktop/software consulting nationwide.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. 1-CLICK PROBLEM DIAGNOSTIC & FAQ (#faq)
+         ============================================================ -->
+    <section id="faq" class="section-compact">
+      <div class="container">
+        
+        <!-- 1-Click Problem Chips Container -->
+        <div class="diagnostic-box">
+          <span class="diagnostic-badge"><i data-lucide="sparkles"></i> 1-Click Problem Diagnostic</span>
+          <h3>Have a Technology Problem? Click Below</h3>
+          <p>Click your requirement to automatically pre-fill the consultation form with zero technical jargon:</p>
+          
+          <div class="problem-chips-grid">
+            <button class="diag-chip" onclick="prefillContact('I need a professional website for my business.')">
+              <i data-lucide="mouse-pointer-click"></i> “I need a business website.”
+            </button>
+            <button class="diag-chip" onclick="prefillContact('My laptop is very slow and needs an SSD/RAM upgrade.')">
+              <i data-lucide="mouse-pointer-click"></i> “My laptop is very slow.”
+            </button>
+            <button class="diag-chip" onclick="prefillContact('I need a final-year IoT engineering project.')">
+              <i data-lucide="mouse-pointer-click"></i> “Final-year student IoT project.”
+            </button>
+            <button class="diag-chip" onclick="prefillContact('I need full Wi-Fi and LAN cabling in my office.')">
+              <i data-lucide="mouse-pointer-click"></i> “Office Wi-Fi & LAN setup.”
+            </button>
+            <button class="diag-chip" onclick="prefillContact('I need a custom PC built for video editing & coding.')">
+              <i data-lucide="mouse-pointer-click"></i> “Custom PC build for editing.”
+            </button>
+            <button class="diag-chip" onclick="prefillContact('I need an automated Excel sheet to track shop billing.')">
+              <i data-lucide="mouse-pointer-click"></i> “Excel automation for business.”
+            </button>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-accordion-block">
+          <div class="section-header-center mb-6">
+            <span class="apple-eyebrow">Clear Answers</span>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+
+          <div class="faq-list">
+            
+            <div class="faq-card">
+              <button class="faq-head" aria-expanded="false">
+                <span>Do you handle both software and hardware requirements?</span>
+                <i data-lucide="chevron-down" class="faq-arrow"></i>
+              </button>
+              <div class="faq-content">
+                <p>Yes. Tech Boy Solutions is a comprehensive technology provider. We develop websites and custom software, while also offering laptop/PC repairs, custom PC building, SSD/RAM upgrades, LAN networking, Wi-Fi configuration, and IoT prototypes.</p>
+              </div>
+            </div>
+
+            <div class="faq-card">
+              <button class="faq-head" aria-expanded="false">
+                <span>Can you repair or upgrade a slow laptop/computer?</span>
+                <i data-lucide="chevron-down" class="faq-arrow"></i>
+              </button>
+              <div class="faq-content">
+                <p>Yes. We diagnose hardware and software issues, perform thermal paste servicing, and install high-speed SSDs and RAM upgrades that provide instant speedups to older computers.</p>
+              </div>
+            </div>
+
+            <div class="faq-card">
+              <button class="faq-head" aria-expanded="false">
+                <span>Do you provide final-year engineering and diploma project guidance?</span>
+                <i data-lucide="chevron-down" class="faq-arrow"></i>
+              </button>
+              <div class="faq-content">
+                <p>Yes. We guide students on IoT (ESP32, Arduino, Raspberry Pi), full-stack web applications, and embedded systems, including circuit schematics, source code explanation, and viva exam preparation.</p>
+              </div>
+            </div>
+
+            <div class="faq-card">
+              <button class="faq-head" aria-expanded="false">
+                <span>Where are you located and how do I contact you?</span>
+                <i data-lucide="chevron-down" class="faq-arrow"></i>
+              </button>
+              <div class="faq-content">
+                <p>We are based in Tumakuru, Karnataka, India. You can call or WhatsApp us directly at <strong>+91 63647 68498</strong> or email <strong>lalithulalu@gmail.com</strong> / <strong>lalithlalu.com@yahoo.com</strong>.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. UNIFIED CONTACT HUB & CONSULTATION (#contact)
+         ============================================================ -->
+    <section id="contact" class="section-compact bg-slate-50">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <span class="apple-eyebrow">Get In Touch</span>
+          <h2>Let's Build Your Technology Solution</h2>
+          <p class="section-lead">Call, WhatsApp, or submit your requirement below for immediate response.</p>
+        </div>
+
+        <div class="contact-hub-grid">
+          
+          <!-- Left: Verified Contact Details Card -->
+          <div class="contact-details-card">
+            <h3>Direct Contact Channels</h3>
+            <p class="card-desc">Reach out directly for urgent repairs, custom PC builds, web projects, or student guidance.</p>
+
+            <div class="contact-actions-stack">
+              
+              <a href="tel:+916364768498" class="contact-action-item">
+                <div class="action-icon icon-blue"><i data-lucide="phone"></i></div>
+                <div>
+                  <span class="action-label">Call Us Directly</span>
+                  <strong class="action-val">+91 63647 68498</strong>
+                  <span class="action-sub">Mon &ndash; Sat: 9:00 AM &ndash; 8:00 PM</span>
+                </div>
+              </a>
+
+              <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="contact-action-item">
+                <div class="action-icon icon-emerald"><i data-lucide="message-circle"></i></div>
+                <div>
+                  <span class="action-label">Instant WhatsApp Chat</span>
+                  <strong class="action-val">+91 63647 68498</strong>
+                  <span class="action-sub">Fastest quotes & technical replies</span>
+                </div>
+              </a>
+
+              <a href="mailto:lalithulalu@gmail.com" class="contact-action-item">
+                <div class="action-icon icon-cyan"><i data-lucide="mail"></i></div>
+                <div>
+                  <span class="action-label">Primary Email</span>
+                  <strong class="action-val">lalithulalu@gmail.com</strong>
+                  <span class="action-sub">Alt: lalithlalu.com@yahoo.com</span>
+                </div>
+              </a>
+
+              <div class="contact-action-item">
+                <div class="action-icon icon-purple"><i data-lucide="map-pin"></i></div>
+                <div>
+                  <span class="action-label">Location & Service Hub</span>
+                  <strong class="action-val">Tumakuru, Karnataka, India</strong>
+                  <span class="action-sub">Local on-site visits & remote support</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: Interactive Consultation Form -->
+          <div class="consultation-form-card">
+            <h3>Request a Free Quote / Consultation</h3>
+            <p class="form-subtext">Fill in your requirement below and we will get back to you promptly.</p>
+
+            <form id="consultationForm" novalidate>
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label for="fullName">Your Name <span class="req">*</span></label>
+                  <input type="text" id="fullName" name="fullName" required placeholder="e.g. Rahul Sharma">
+                  <span class="field-error" id="fullNameError"></span>
+                </div>
+                <div class="form-field">
+                  <label for="phone">Phone / WhatsApp <span class="req">*</span></label>
+                  <input type="tel" id="phone" name="phone" required placeholder="e.g. 6364768498">
+                  <span class="field-error" id="phoneError"></span>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="name@example.com">
+                  <span class="field-error" id="emailError"></span>
+                </div>
+                <div class="form-field">
+                  <label for="serviceSelect">Service Required <span class="req">*</span></label>
+                  <select id="serviceSelect" name="service" required>
+                    <option value="">Select a service category</option>
+                    <option value="Website Development">Website Development</option>
+                    <option value="Personal Portfolio">Personal Portfolio Website</option>
+                    <option value="Custom Software">Custom Software / CRM</option>
+                    <option value="Laptop / PC Repair">Laptop / PC Repair & Servicing</option>
+                    <option value="Custom PC Build">Custom PC Build (Gaming / Editing)</option>
+                    <option value="Computer Upgrade">Computer SSD / RAM Upgrade</option>
+                    <option value="Networking & Wi-Fi">LAN Cabling & Wi-Fi Setup</option>
+                    <option value="Student Project">Final-Year Student Project Guidance</option>
+                    <option value="Excel Solutions">Excel Sheet / Office Automation</option>
+                    <option value="Other">Other Requirement</option>
+                  </select>
+                  <span class="field-error" id="serviceError"></span>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="message">Describe Your Requirement / Issue <span class="req">*</span></label>
+                <textarea id="message" name="message" rows="3" required placeholder="Describe your computer problem, website project, or student requirement..."></textarea>
+                <span class="field-error" id="messageError"></span>
+              </div>
+
+              <button type="submit" class="apple-btn-submit" id="submitBtn">
+                <span>Submit & Send to WhatsApp</span>
+                <i data-lucide="send"></i>
+              </button>
+
+              <div class="form-success-banner" id="formSuccess">
+                <i data-lucide="check-circle" class="text-emerald"></i>
+                <span>Thank you! Your request has been recorded. Redirecting to WhatsApp...</span>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Detail Modal -->
+  <div class="apple-modal-overlay" id="projectModal" aria-hidden="true" role="dialog">
+    <div class="apple-modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+      <div id="modalContent">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimalist Apple-Grade Footer -->
+  <footer class="apple-footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="brand-text">Tech Boy <span class="brand-highlight">Solutions</span></span>
+        <p class="footer-tagline">Complete Technology Solutions &bull; Tumakuru, Karnataka, India</p>
+      </div>
+      <div class="footer-links-row">
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-right">
+        <p class="copyright">&copy; 2026 Tech Boy Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
