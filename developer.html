@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechBoy DEVSTREAM — Developer-Centric Light Tech Observability & Telemetry</title>
+  
+  <!-- SEO Meta -->
+  <meta name="description" content="High-contrast Light Tech developer UI featuring distributed event streaming, regression detection, failure clustering, and nanosecond trace telemetry.">
+  <meta name="theme-color" content="#FAFAFA">
+
+  <!-- Google Fonts: Inter Display + Geist Mono / JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="developer.css">
+</head>
+<body class="light-tech-body">
+
+  <!-- ============================================================
+       1. ABSOLUTE HEADER (top: 38px, padding: 56px)
+       ============================================================ -->
+  <header class="dev-header">
+    <a href="developer.html" class="dev-brand" aria-label="TechBoy DEVSTREAM Home">
+      <svg class="dev-brand-svg" viewBox="0 0 32 32" aria-hidden="true">
+        <polygon points="16,2 30,9 30,23 16,30 2,23 2,9" stroke="#121212" stroke-width="2.5" fill="none"/>
+        <polyline points="2,9 16,16 30,9" stroke="#121212" stroke-width="2" fill="none"/>
+        <line x1="16" y1="16" x2="16" y2="30" stroke="#121212" stroke-width="2"/>
+        <circle cx="16" cy="16" r="3.5" fill="#52a8ff"/>
+      </svg>
+      <span class="dev-brand-name">TechBoy <span class="dev-brand-sub">DEVSTREAM</span></span>
+    </a>
+
+    <nav class="dev-nav" aria-label="Main Navigation">
+      <a href="#hero" class="dev-nav-link active">Overview</a>
+      <a href="#stream" class="dev-nav-link">Event Stream</a>
+      <a href="#bento" class="dev-nav-link">Bento Grid</a>
+      <a href="#metrics" class="dev-nav-link">Metrics</a>
+      <a href="index.html" class="dev-nav-link agency-link">&larr; Agency Site</a>
+    </nav>
+
+    <div class="dev-header-actions">
+      <a href="#demo" class="btn-square" id="headerCtaBtn">
+        <span>Book a demo</span>
+        <span class="btn-arrow-icon">&nearr;</span>
+      </a>
+      <button class="dev-mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="dev-drawer-overlay" id="devDrawer" role="dialog" aria-hidden="true">
+    <div class="dev-drawer-content">
+      <div class="dev-drawer-header">
+        <span class="dev-brand-name">TechBoy <span class="dev-brand-sub">DEVSTREAM</span></span>
+        <button class="dev-drawer-close" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+      </div>
+      <nav class="dev-drawer-nav">
+        <a href="#hero" class="drawer-link">Overview</a>
+        <a href="#stream" class="drawer-link">Event Stream Table</a>
+        <a href="#bento" class="drawer-link">Bento Features</a>
+        <a href="#metrics" class="drawer-link">Metrics Grid</a>
+        <a href="index.html" class="drawer-link">&larr; Return to Main Agency</a>
+      </nav>
+      <div>
+        <a href="#demo" class="btn-square" style="width: 100%;">
+          <span>Book a demo</span>
+          <span class="btn-arrow-icon">&nearr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       2. HERO SECTION (100svh Canvas Frame, Light Scrim)
+       ============================================================ -->
+  <section id="hero" class="dev-hero">
+    <img src="hero.jpg" alt="Developer Telemetry Mesh" class="dev-hero-bg">
+    <div class="dev-hero-scrim"></div>
+    <div class="dev-hero-grid-bg"></div>
+
+    <div class="dev-container dev-hero-content">
+      <div class="dev-hero-badge">
+        <span class="v-chip"><span class="v-chip-dot dot-active"></span> V2.4 LIGHT TECH PIPELINE</span>
+        <span>ZERO-OVERHEAD TELEMETRY</span>
+      </div>
+
+      <h1 class="headline-fluid">
+        Real-Time Distributed Tracing &amp; High-Throughput <span class="accent">Stream Observability.</span>
+      </h1>
+
+      <p class="hero-subtext">
+        Isolate latency outliers, cluster failure cascades, and replay code revisions across microservices with rigorous nanosecond precision and high-contrast monospace visibility.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#stream" class="btn-square">
+          <span>Explore Live Event Stream</span>
+          <span class="btn-arrow-icon">&nearr;</span>
+        </a>
+        <a href="#metrics" class="btn-square btn-square-outline">
+          <span>Inspect P99 Metrics</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. EVENT STREAM TABLE (Card Layout, 240px Sidebar + Table)
+       ============================================================ -->
+  <section id="stream" class="dev-section">
+    <div class="dev-container">
+      
+      <div class="section-header-dev">
+        <span class="section-tag">// Data Visualization</span>
+        <h2 class="section-title-dev">Distributed Event Stream Engine</h2>
+        <p class="section-desc-dev">Real-time waterfall trace representation with nanosecond duration bar rendering and span hierarchy inspection.</p>
+      </div>
+
+      <!-- Card-based Table Container -->
+      <div class="event-stream-card">
+        
+        <!-- Header with Trace ID and duration chips -->
+        <div class="stream-card-header">
+          <div class="stream-header-left">
+            <span class="trace-label">TRACE ID:</span>
+            <span class="trace-id">trace_992f8a1c_4b</span>
+            <span class="v-chip"><span class="v-chip-dot dot-pass"></span> PASS</span>
+            <span class="v-chip"><span class="v-chip-dot dot-active"></span> INGESTION: 24.8ms</span>
+          </div>
+          <div class="stream-header-right">
+            <span class="v-chip"><span class="v-chip-dot dot-pass"></span> SPANS: 8/8 OK</span>
+            <span class="v-chip"><span class="v-chip-dot dot-warn"></span> MEMORY: 18.4 MB</span>
+          </div>
+        </div>
+
+        <!-- Split View: 240px Left Sidebar + Right Table -->
+        <div class="stream-split-view">
+          
+          <!-- Left Sidebar (240px) -->
+          <aside class="event-sidebar">
+            <div class="event-sidebar-title">Stream Events (8)</div>
+            <ul class="event-list" id="eventList">
+              <li class="event-item active" data-span="auth">
+                <span class="v-chip-dot dot-active"></span>
+                <span>evt_auth_validate</span>
+              </li>
+              <li class="event-item" data-span="db">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_db_pool_acquire</span>
+              </li>
+              <li class="event-item" data-span="cache">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_cache_lookup</span>
+              </li>
+              <li class="event-item" data-span="grpc">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_grpc_dispatch</span>
+              </li>
+              <li class="event-item" data-span="marshal">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_payload_marshal</span>
+              </li>
+              <li class="event-item" data-span="commit">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_commit_sink</span>
+              </li>
+              <li class="event-item" data-span="pubsub">
+                <span class="v-chip-dot dot-pass"></span>
+                <span>evt_pubsub_ack</span>
+              </li>
+              <li class="event-item" data-span="audit">
+                <span class="v-chip-dot dot-warn"></span>
+                <span>evt_audit_flush</span>
+              </li>
+            </ul>
+          </aside>
+
+          <!-- Right Table: SPAN, START, DURATION -->
+          <div class="stream-table-wrap">
+            <table class="stream-table">
+              <thead>
+                <tr>
+                  <th style="width: 280px;">SPAN</th>
+                  <th>START &amp; TIMELINE OFFSET</th>
+                  <th style="width: 140px;">DURATION</th>
+                </tr>
+              </thead>
+              <tbody id="streamTableBody">
+                <tr class="highlighted" data-span-row="auth">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-active"></span>
+                      <span>auth.service.validate</span>
+                    </div>
+                    <span class="span-pkg">internal/security/jwt.go:142</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 0.0ms | Duration: 4.2ms">
+                      <div class="timeline-bar-inner active" style="left: 0%; width: 22%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">4.20 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="db">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>postgres.pool.acquire</span>
+                    </div>
+                    <span class="span-pkg">pkg/storage/pgx_pool.go:88</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 3.8ms | Duration: 6.1ms">
+                      <div class="timeline-bar-inner" style="left: 18%; width: 28%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">6.12 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="cache">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>redis.cluster.get_key</span>
+                    </div>
+                    <span class="span-pkg">pkg/cache/cluster_client.go:34</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 7.2ms | Duration: 1.8ms">
+                      <div class="timeline-bar-inner" style="left: 32%; width: 14%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">1.84 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="grpc">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>grpc.inventory.check_sku</span>
+                    </div>
+                    <span class="span-pkg">gen/proto/inventory_grpc.pb.go:210</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 9.4ms | Duration: 5.4ms">
+                      <div class="timeline-bar-inner" style="left: 44%; width: 26%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">5.40 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="marshal">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>json.proto.marshal_buffer</span>
+                    </div>
+                    <span class="span-pkg">internal/codec/fastjson.go:94</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 14.2ms | Duration: 2.1ms">
+                      <div class="timeline-bar-inner" style="left: 64%; width: 16%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">2.10 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="commit">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>sql.transaction.commit</span>
+                    </div>
+                    <span class="span-pkg">pkg/storage/tx_manager.go:62</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 16.0ms | Duration: 3.5ms">
+                      <div class="timeline-bar-inner" style="left: 72%; width: 20%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">3.50 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="pubsub">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-pass"></span>
+                      <span>kafka.producer.emit_event</span>
+                    </div>
+                    <span class="span-pkg">internal/bus/kafka_sink.go:128</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 19.1ms | Duration: 1.2ms">
+                      <div class="timeline-bar-inner" style="left: 86%; width: 10%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">1.22 ms</span>
+                  </td>
+                </tr>
+
+                <tr data-span-row="audit">
+                  <td>
+                    <div class="span-name">
+                      <span class="v-chip-dot dot-warn"></span>
+                      <span>audit.trail.async_flush</span>
+                    </div>
+                    <span class="span-pkg">internal/audit/batch_writer.go:45</span>
+                  </td>
+                  <td>
+                    <div class="timeline-bar-container" title="Offset: 20.3ms | Duration: 0.4ms">
+                      <div class="timeline-bar-inner" style="left: 92%; width: 8%;"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="duration-val">0.42 ms</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. BENTO FEATURE GRID (3 Columns)
+       Card 1: Regression (PASS/FAIL status rows)
+       Card 2: Failure Clustering (stacked horizontal bar charts)
+       Card 3: Version Replay (code-diff view with green/blue borders)
+       ============================================================ -->
+  <section id="bento" class="dev-section" style="background-color: #FFFFFF; border-top: 1px solid var(--border-card); border-bottom: 1px solid var(--border-card);">
+    <div class="dev-container">
+      
+      <div class="section-header-dev">
+        <span class="section-tag">// Core Capabilities</span>
+        <h2 class="section-title-dev">Engineered for Microservice Reliability</h2>
+        <p class="section-desc-dev">Continuous automated regression tracking, failure clustering, and live code-diff replay.</p>
+      </div>
+
+      <div class="dev-bento-grid">
+        
+        <!-- Card 1: Regression -->
+        <div class="dev-bento-card">
+          <div class="bento-header">
+            <span class="v-chip" style="margin-bottom: 10px;"><span class="v-chip-dot dot-pass"></span> AUTOMATED TEST MATRIX</span>
+            <h3 class="bento-title">Regression Detection</h3>
+            <p class="bento-subtitle">Continuous delta benchmarks comparing production builds against baseline commits.</p>
+          </div>
+
+          <div class="regression-list">
+            <div class="regression-row">
+              <span class="regression-name">v2.4.10-release (Auth Service)</span>
+              <div class="regression-meta">
+                <span class="v-chip"><span class="v-chip-dot dot-pass"></span> PASS</span>
+                <span class="delta-pct positive">+4.2%</span>
+              </div>
+            </div>
+
+            <div class="regression-row">
+              <span class="regression-name">v2.4.09-patch (Payment Gateway)</span>
+              <div class="regression-meta">
+                <span class="v-chip"><span class="v-chip-dot dot-pass"></span> PASS</span>
+                <span class="delta-pct positive">+1.8%</span>
+              </div>
+            </div>
+
+            <div class="regression-row">
+              <span class="regression-name">v2.4.08-rc2 (Search Indexer)</span>
+              <div class="regression-meta">
+                <span class="v-chip"><span class="v-chip-dot dot-fail"></span> FAIL</span>
+                <span class="delta-pct negative">-12.4%</span>
+              </div>
+            </div>
+
+            <div class="regression-row">
+              <span class="regression-name">v2.4.07-hotfix (Cache Engine)</span>
+              <div class="regression-meta">
+                <span class="v-chip"><span class="v-chip-dot dot-pass"></span> PASS</span>
+                <span class="delta-pct positive">+8.9%</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#stream" class="btn-square btn-square-outline" style="width: 100%;">
+            <span>Inspect Benchmark History</span>
+            <span class="btn-arrow-icon">&nearr;</span>
+          </a>
+        </div>
+
+        <!-- Card 2: Failure Clustering -->
+        <div class="dev-bento-card">
+          <div class="bento-header">
+            <span class="v-chip" style="margin-bottom: 10px;"><span class="v-chip-dot dot-active"></span> ERROR TELEMETRY</span>
+            <h3 class="bento-title">Failure Clustering</h3>
+            <p class="bento-subtitle">Categorized error metrics displaying root-cause distributions across cluster nodes.</p>
+          </div>
+
+          <div class="cluster-chart-wrap">
+            <div class="cluster-group">
+              <div class="cluster-meta-row">
+                <span class="cluster-name">Postgres Deadlock / Lock Timeout</span>
+                <span>64.2% &bull; 1,420 err</span>
+              </div>
+              <div class="cluster-stacked-bar">
+                <div class="bar-segment seg-fail" style="width: 64%;"></div>
+                <div class="bar-segment seg-blue" style="width: 24%;"></div>
+                <div class="bar-segment seg-muted" style="width: 12%;"></div>
+              </div>
+            </div>
+
+            <div class="cluster-group">
+              <div class="cluster-meta-row">
+                <span class="cluster-name">gRPC Upstream Timeout (1000ms)</span>
+                <span>24.8% &bull; 548 err</span>
+              </div>
+              <div class="cluster-stacked-bar">
+                <div class="bar-segment seg-blue" style="width: 55%;"></div>
+                <div class="bar-segment seg-green" style="width: 30%;"></div>
+                <div class="bar-segment seg-muted" style="width: 15%;"></div>
+              </div>
+            </div>
+
+            <div class="cluster-group">
+              <div class="cluster-meta-row">
+                <span class="cluster-name">Redis Circuit Breaker Tripped</span>
+                <span>11.0% &bull; 242 err</span>
+              </div>
+              <div class="cluster-stacked-bar">
+                <div class="bar-segment seg-green" style="width: 70%;"></div>
+                <div class="bar-segment seg-muted" style="width: 30%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#stream" class="btn-square btn-square-outline" style="width: 100%;">
+            <span>View Crash Diagnostic</span>
+            <span class="btn-arrow-icon">&nearr;</span>
+          </a>
+        </div>
+
+        <!-- Card 3: Version Replay -->
+        <div class="dev-bento-card">
+          <div class="bento-header">
+            <span class="v-chip" style="margin-bottom: 10px;"><span class="v-chip-dot dot-active"></span> COMMIT REPLAY</span>
+            <h3 class="bento-title">Version Replay &amp; Diff</h3>
+            <p class="bento-subtitle">Line-by-line commit diff view isolating performance regression source code.</p>
+          </div>
+
+          <div class="code-diff-card">
+            <div class="diff-line normal">
+              <span class="diff-num">41</span>
+              <span class="diff-sign"> </span>
+              <span>func AcquireConn(ctx context.Context) (*Conn, error) {</span>
+            </div>
+            <div class="diff-line modified">
+              <span class="diff-num">42</span>
+              <span class="diff-sign">~</span>
+              <span>  ctx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)</span>
+            </div>
+            <div class="diff-line added">
+              <span class="diff-num">43</span>
+              <span class="diff-sign">+</span>
+              <span>  defer cancel() // prevent context leak in high QPS loop</span>
+            </div>
+            <div class="diff-line added">
+              <span class="diff-num">44</span>
+              <span class="diff-sign">+</span>
+              <span>  return pool.AcquireWithContext(ctx)</span>
+            </div>
+            <div class="diff-line normal">
+              <span class="diff-num">45</span>
+              <span class="diff-sign"> </span>
+              <span>}</span>
+            </div>
+          </div>
+
+          <a href="#stream" class="btn-square btn-square-outline" style="width: 100%;">
+            <span>Launch Diff Inspector</span>
+            <span class="btn-arrow-icon">&nearr;</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. METRICS GRID (4 Columns, Border-Connected, 56px Geist Mono)
+       ============================================================ -->
+  <section id="metrics" class="dev-section">
+    <div class="dev-container">
+      
+      <div class="section-header-dev">
+        <span class="section-tag">// Nanosecond Precision</span>
+        <h2 class="section-title-dev">Telemetry Ingestion Benchmarks</h2>
+        <p class="section-desc-dev">Measured under synthetic load of 500,000 active concurrent WebSocket and gRPC connections.</p>
+      </div>
+
+      <div class="metrics-grid-wrap">
+        
+        <!-- Cell 1: Latency -->
+        <div class="metric-cell">
+          <div class="metric-head-row">
+            <span class="metric-title">P99 Ingestion Latency</span>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-value">1.24</span>
+            <span class="metric-unit">ms</span>
+          </div>
+          <p class="metric-subline">End-to-end trace parsing and disk buffer persistence across all edge nodes.</p>
+        </div>
+
+        <!-- Cell 2: Volume -->
+        <div class="metric-cell">
+          <div class="metric-head-row">
+            <span class="metric-title">Traces Ingested / Day</span>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-value">840</span>
+            <span class="metric-unit">M</span>
+          </div>
+          <p class="metric-subline">Compressed spans processed daily with sub-millisecond index query latency.</p>
+        </div>
+
+        <!-- Cell 3: Availability -->
+        <div class="metric-cell">
+          <div class="metric-head-row">
+            <span class="metric-title">Pipeline Availability</span>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-value">99.99</span>
+            <span class="metric-unit">%</span>
+          </div>
+          <p class="metric-subline">Multi-zone high-availability failover with zero recorded event packet loss.</p>
+        </div>
+
+        <!-- Cell 4: Throughput -->
+        <div class="metric-cell">
+          <div class="metric-head-row">
+            <span class="metric-title">Spans / Transaction</span>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-value">12.8</span>
+            <span class="metric-unit">k</span>
+          </div>
+          <p class="metric-subline">Average concurrent span hierarchy depth resolved per distributed transaction.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. CALL TO ACTION STRIP
+       ============================================================ -->
+  <section id="demo" class="dev-section" style="background: #FFFFFF; border-top: 1px solid var(--border-card);">
+    <div class="dev-container" style="text-align: center; max-width: 800px;">
+      <span class="v-chip" style="margin-bottom: 16px;"><span class="v-chip-dot dot-active"></span> READY TO DEPLOY</span>
+      <h2 class="section-title-dev" style="margin-bottom: 16px;">Supercharge Your Engineering Telemetry</h2>
+      <p class="section-desc-dev" style="margin: 0 auto 36px;">Deploy our zero-overhead eBPF agents into your Kubernetes or Bare-Metal clusters in under 5 minutes.</p>
+      
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions%2C%20I%20want%20to%20schedule%20a%20DEVSTREAM%20Demo." target="_blank" rel="noopener noreferrer" class="btn-square" style="font-size: 16px; padding: 14px 28px;">
+          <span>Schedule Enterprise Demo</span>
+          <span class="btn-arrow-icon">&nearr;</span>
+        </a>
+        <a href="index.html#contact" class="btn-square btn-square-outline" style="font-size: 16px; padding: 14px 28px;">
+          <span>Contact Tech Boy Engineering</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. LIGHT TECH MINIMALIST FOOTER
+       ============================================================ -->
+  <footer class="dev-footer">
+    <div class="dev-container dev-footer-inner">
+      <div class="dev-footer-left">
+        <svg class="dev-brand-svg" viewBox="0 0 32 32" style="width: 22px; height: 22px;">
+          <polygon points="16,2 30,9 30,23 16,30 2,23 2,9" stroke="#121212" stroke-width="2.5" fill="none"/>
+          <circle cx="16" cy="16" r="3.5" fill="#52a8ff"/>
+        </svg>
+        <span class="dev-footer-copy">&copy; 2026 TechBoy Solutions &bull; DEVSTREAM Telemetry Platform</span>
+      </div>
+      <div class="dev-footer-links">
+        <a href="index.html">Main Agency</a>
+        <a href="#hero">Overview</a>
+        <a href="#stream">Event Stream</a>
+        <a href="#bento">Bento Grid</a>
+        <a href="#metrics">Metrics</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="developer.js"></script>
+</body>
+</html>

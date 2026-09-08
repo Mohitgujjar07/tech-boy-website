@@ -379,7 +379,7 @@ class Assert {
 function makeHttpRequest(urlPath = '/', port = 3000) {
   return new Promise((resolve, reject) => {
     const options = {
-      hostname: 'localhost',
+      hostname: '127.0.0.1',
       port: port,
       path: urlPath,
       method: 'GET',

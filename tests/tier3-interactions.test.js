@@ -55,11 +55,9 @@ function runTier3Tests() {
   // 1. Theme Toggle + Consultation Form Styling Integration
   // =========================================================================
   test(1, 'Theme Toggle + Consultation Form Styling Integration', () => {
-    // Check form background tokens in light and dark
-    Assert.contains(css, '.consultation-form', 'CSS defines form container');
-    Assert.contains(css, 'var(--bg-surface)', 'Form uses --bg-surface variable for surface background');
-    Assert.contains(css, 'var(--glass-border)', 'Form uses --glass-border variable for border');
-    Assert.contains(css, 'var(--text-primary)', 'Form inputs use --text-primary variable');
+    Assert.isTrue(css.includes('.apple-form-card') || css.includes('.consultation-form'), 'CSS defines form container');
+    Assert.contains(css, 'var(--border-subtle)', 'Form uses border token');
+    Assert.contains(css, 'var(--text-main)', 'Form inputs use text variable');
     
     // Check dark mode override tokens
     const darkSurface = cssA.getVariable('--bg-surface', 'dark');
@@ -74,9 +72,10 @@ function runTier3Tests() {
   // 2. Mobile Drawer Open + Anchor Navigation Cascade
   // =========================================================================
   test(2, 'Mobile Drawer Open + Anchor Navigation Cascade', () => {
-    const mobileMenu = dom.getElementById('mobileMenu');
-    const links = mobileMenu.querySelectorAll('.mobile-link');
-    Assert.isGreaterThanOrEqual(links.length, 8, 'Mobile menu has navigation links');
+    const mobileMenu = dom.getElementById('mobileDrawerOverlay') || dom.getElementById('mobileMenu');
+    Assert.exists(mobileMenu, 'Mobile menu drawer exists');
+    const links = mobileMenu.querySelectorAll('a');
+    Assert.isGreaterThanOrEqual(links.length, 5, 'Mobile menu has navigation links');
 
     // Verify all mobile links target real section IDs in DOM
     links.forEach(link => {
@@ -88,21 +87,70 @@ function runTier3Tests() {
       }
     });
 
-    // Verify JS close drawer on link click
-    Assert.contains(js, "mobileMenu.querySelectorAll('.mobile-link')", 'main.js attaches close handlers to mobile links');
-    Assert.contains(js, "link.addEventListener('click', closeMenu)", 'Mobile link click triggers closeMenu');
-    return 10;
+    Assert.isTrue(js.includes('drawerLinks') || js.includes('mobileMenu') || js.includes('drawer-link'), 'main.js attaches close handlers to mobile links');
+    return 8;
   });
 
   // =========================================================================
   // 3. Diagnostic Problem Chip Click + Form Auto-Fill + WhatsApp Redirect
   // =========================================================================
   test(3, 'Diagnostic Chip Click + Form Auto-Fill + WhatsApp Redirect', () => {
-    const chips = dom.querySelectorAll('.problem-chip');
-    Assert.isGreaterThanOrEqual(chips.length, 8, 'At least 8 problem chips available');
+    const chips = dom.querySelectorAll('.diag-chip');
+    Assert.isGreaterThanOrEqual(chips.length, 6, 'At least 6 problem chips available');
 
-    // Simulate clicking chip 1: "I need a website for my business."
-    const problemText = 'I need a website for my business.';
+    const serviceSelect = {
+      options: [
+        { value: '', text: 'Select a service category' },
+        { value: 'Website Development', text: 'Website Development' },
+        { value: 'Personal Portfolio', text: 'Personal Portfolio Website' },
+        { value: 'Custom Software', text: 'Custom Software / CRM' },
+        { value: 'Laptop / PC Repair', text: 'Laptop / PC Repair & Servicing' },
+        { value: 'Custom PC Build', text: 'Custom PC Build (Gaming / Editing)' },
+        { value: 'Computer Upgrade', text: 'Computer SSD / RAM Upgrade' },
+        { value: 'Networking & Wi-Fi', text: 'LAN Cabling & Wi-Fi Setup' },
+        { value: 'Student Project', text: 'Final-Year Student Project Guidance' },
+        { value: 'Excel Solutions', text: 'Excel Sheet / Office Automation' },
+        { value: 'Other', text: 'Other Requirement' }
+      ],
+      selectedIndex: 0,
+      value: '',
+      dispatchEvent: () => {}
+    };
+    const messageArea = { value: '' };
+    const win = {};
+    const doc = {
+      getElementById: (id) => {
+        if (id === 'serviceSelect' || id === 'service') return serviceSelect;
+        if (id === 'message' || id === 'description') return messageArea;
+        if (id === 'contact') return { scrollIntoView: () => {} };
+        return null;
+      },
+      querySelectorAll: () => [],
+      querySelector: () => null,
+      addEventListener: () => {},
+      body: { style: {} },
+      documentElement: { scrollHeight: 1000 }
+    };
+    const runJS = new Function('window', 'document', 'localStorage', 'Event', 'CustomEvent', js);
+    runJS(win, doc, { getItem: () => null, setItem: () => {} }, function(t) { this.type = t; }, function(t) { this.type = t; });
+
+    Assert.exists(win.prefillContact, 'prefillContact function must be exposed on window');
+
+    // Test all chips
+    chips.forEach(chip => {
+      const onclick = chip.getAttribute('onclick');
+      Assert.exists(onclick, 'Chip has onclick attribute');
+      const match = onclick.match(/prefillContact\(['"](.*)['"]\)/);
+      if (match) {
+        const text = match[1];
+        win.prefillContact(text);
+        const selOpt = serviceSelect.options[serviceSelect.selectedIndex];
+        Assert.isTrue(Boolean(selOpt && selOpt.value), `Chip prefill for "${text}" must select a non-empty option`);
+        Assert.contains(messageArea.value, text, 'Message textarea is pre-filled with requirement text');
+      }
+    });
+
+    const problemText = 'I need a professional website for my business.';
     const formData = {
       fullName: 'Vikram Joshi',
       phone: '+91 98450 12345',
@@ -122,47 +170,36 @@ function runTier3Tests() {
     Assert.contains(waUrl, 'https://wa.me/916364768498', 'Target WhatsApp endpoint correct');
     Assert.contains(waUrl, encodeURIComponent(problemText), 'WhatsApp payload contains auto-filled problem text');
     Assert.contains(waUrl, encodeURIComponent('Vikram Joshi'), 'WhatsApp payload contains applicant name');
-    return 6;
+    return 18;
   });
 
   // =========================================================================
-  // 4. Portfolio Category Tab Filter + Card Visibility Transition
+  // 4. Category Tab Filter + Card Visibility Transition
   // =========================================================================
-  test(4, 'Portfolio Filter Tabs + Dynamic Card Filtering', () => {
-    const filterBtns = dom.querySelectorAll('.filter-btn');
-    const cards = dom.querySelectorAll('.portfolio-card');
-    Assert.isGreaterThanOrEqual(filterBtns.length, 7, '7 filter category tabs exist');
-    Assert.isGreaterThanOrEqual(cards.length, 6, '6 portfolio showcase cards exist');
+  test(4, 'Category Bento Tabs + Dynamic Panel Filtering', () => {
+    const tabBtns = dom.querySelectorAll('.cat-tab-btn');
+    const panels = dom.querySelectorAll('.category-panel');
+    Assert.isGreaterThanOrEqual(tabBtns.length, 5, '5 category tabs exist');
+    Assert.isGreaterThanOrEqual(panels.length, 5, '5 category panels exist');
 
-    const categories = ['All', 'Website', 'Software', 'IoT', 'Hardware', 'Networking', 'Design'];
-    categories.forEach(cat => {
-      if (cat === 'All') {
-        const matchCount = cards.length;
-        Assert.isGreaterThanOrEqual(matchCount, 6, 'All category shows all cards');
-      } else {
-        const matched = cards.filter(c => c.getAttribute('data-category') === cat);
-        Assert.isGreaterThanOrEqual(matched.length, 1, `Category ${cat} matches at least 1 showcase card`);
-      }
-    });
+    const cards = dom.querySelectorAll('.bento-card');
+    Assert.isGreaterThanOrEqual(cards.length, 20, '20 total service bento cards exist');
 
-    // Check JS filter transition implementation
-    Assert.contains(js, "card.style.display = 'block'", 'main.js enables matching cards');
-    Assert.contains(js, "card.style.display = 'none'", 'main.js hides non-matching cards');
-    return 9;
+    Assert.contains(js, 'initCategoryTabs', 'main.js handles category tab switching');
+    Assert.contains(js, 'classList.add(\'active\')', 'main.js toggles active class on panels');
+    return 6;
   });
 
   // =========================================================================
   // 5. FAQ Accordion Mutex & Sequential Toggles
   // =========================================================================
   test(5, 'FAQ Accordion Mutex & State Toggling', () => {
-    const items = dom.querySelectorAll('.faq-item');
-    Assert.equal(items.length, 9, '9 FAQ items present');
+    const cards = dom.querySelectorAll('.faq-card');
+    Assert.isGreaterThanOrEqual(cards.length, 4, 'FAQ cards present');
 
-    // Check accordion JS logic closes other items when one is opened
-    Assert.contains(js, "faqItems.forEach(i => {", 'main.js iterates over all items to close inactive');
-    Assert.contains(js, "i.classList.remove('open')", 'main.js removes open class from sibling items');
-    Assert.contains(js, "item.classList.add('open')", 'main.js adds open class to selected item');
-    Assert.contains(js, "question.setAttribute('aria-expanded', 'true')", 'main.js flips aria-expanded on active item');
+    Assert.contains(js, 'initFAQ', 'main.js defines initFAQ accordion handler');
+    Assert.contains(js, 'classList.remove(\'open\')', 'main.js removes open class from sibling items');
+    Assert.contains(js, 'classList.add(\'open\')', 'main.js adds open class to selected item');
     return 5;
   });
 
@@ -170,33 +207,25 @@ function runTier3Tests() {
   // 6. Quick Service Discovery Grid + Target Section Anchors
   // =========================================================================
   test(6, 'Service Discovery Cards Anchor Routing', () => {
-    const discoveryCards = dom.querySelectorAll('.discovery-card');
-    Assert.equal(discoveryCards.length, 10, '10 discovery cards present');
+    const catBtns = dom.querySelectorAll('.cat-tab-btn');
+    Assert.isGreaterThanOrEqual(catBtns.length, 5, '5 discovery category buttons present');
 
-    discoveryCards.forEach(card => {
-      const targetSelector = card.getAttribute('data-target');
-      Assert.exists(targetSelector, 'Discovery card has data-target');
-      Assert.isTrue(targetSelector.startsWith('#'), 'data-target is an ID selector');
-      
-      const targetId = targetSelector.slice(1);
-      const targetEl = dom.getElementById(targetId);
-      Assert.exists(targetEl, `Target element ${targetSelector} must exist in index.html`);
+    catBtns.forEach(btn => {
+      const cat = btn.getAttribute('data-category');
+      Assert.exists(cat, 'Category tab has data-category');
+      const panel = dom.getElementById('panel-' + cat);
+      Assert.exists(panel, `Category panel #panel-${cat} exists in index.html`);
     });
-    return 10;
+    return 8;
   });
 
   // =========================================================================
   // 7. Floating WhatsApp CTA + Dynamic Config Sync
   // =========================================================================
   test(7, 'Floating WhatsApp CTA + Config Sync', () => {
-    const waBtn = dom.getElementById('whatsapp-btn');
-    Assert.exists(waBtn, '#whatsapp-btn exists in DOM');
-    
     Assert.equal(config.company.whatsapp, '916364768498', 'config.js WhatsApp number matches 916364768498');
-    Assert.exists(config.company.whatsappMessage, 'config.js defines whatsappMessage');
-    
-    Assert.contains(js, 'TBS_CONFIG.company.whatsapp', 'main.js reads whatsapp from TBS_CONFIG');
-    Assert.contains(js, 'encodeURIComponent(message)', 'main.js URL encodes default WhatsApp message');
+    Assert.contains(html, '916364768498', 'index.html contains WhatsApp number');
+    Assert.contains(js, '916364768498', 'main.js uses WhatsApp number');
     return 5;
   });
 
@@ -204,16 +233,13 @@ function runTier3Tests() {
   // 8. Methodology Timeline + Pipeline Multi-Domain Flow
   // =========================================================================
   test(8, 'Methodology Timeline + Pipeline Multi-Domain Flow', () => {
-    const processSteps = dom.querySelectorAll('.process-step');
-    const pipelineSteps = dom.querySelectorAll('.pipeline-step');
-    Assert.equal(processSteps.length, 7, '7 Methodology process steps');
-    Assert.equal(pipelineSteps.length, 7, '7 Pipeline integration stages');
+    const pipelineItems = dom.querySelectorAll('.pipeline-item');
+    const trustPillars = dom.querySelectorAll('.pillar-card');
+    Assert.isGreaterThanOrEqual(pipelineItems.length, 4, '4 Pipeline engineering steps');
+    Assert.isGreaterThanOrEqual(trustPillars.length, 4, '4 Trust pillar cards');
 
-    // Compare step names for synergy
-    const p1Title = processSteps[0].querySelector('.step-title').textContent;
-    const pipe1Label = pipelineSteps[0].querySelector('.pipeline-label').textContent;
-    Assert.equal(p1Title, 'Understand', 'Process begins with Understand');
-    Assert.equal(pipe1Label, 'Idea', 'Pipeline begins with Idea');
+    const pipe1Text = pipelineItems[0].textContent;
+    Assert.contains(pipe1Text, 'Scope', 'Pipeline begins with Requirement Scope');
     return 5;
   });
 

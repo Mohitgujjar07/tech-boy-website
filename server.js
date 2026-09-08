@@ -1,8 +1,10 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
-const PORT = 3000;
+const DEFAULT_PORT = 3000; // PORT = 3000
+const PORT = parseInt(process.env.PORT || process.argv[2] || DEFAULT_PORT, 10);
 const BASE_DIR = path.resolve(__dirname);
 
 const MIME_TYPES = {
@@ -45,6 +47,31 @@ const server = http.createServer((req, res) => {
   });
 });
 
+function getNetworkAddresses() {
+  const interfaces = os.networkInterfaces();
+  const addresses = [];
+  for (const name of Object.keys(interfaces)) {
+    for (const net of interfaces[name]) {
+      if (net.family === 'IPv4' && !net.internal) {
+        addresses.push(net.address);
+      }
+    }
+  }
+  return addresses;
+}
+
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+  const networkIps = getNetworkAddresses();
+  console.log('\n======================================================');
+  console.log('   Tech Boy Solutions — Local & Network Web Server    ');
+  console.log('======================================================');
+  console.log(`  > Local:    http://localhost:${PORT}/`);
+  if (networkIps.length > 0) {
+    networkIps.forEach(ip => {
+      console.log(`  > Network:  http://${ip}:${PORT}/`);
+    });
+  } else {
+    console.log(`  > Network:  http://192.168.29.75:${PORT}/`);
+  }
+  console.log('======================================================\n');
 });

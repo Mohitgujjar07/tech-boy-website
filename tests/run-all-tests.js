@@ -12,6 +12,9 @@ const { runTier2Tests } = require('./tier2-boundaries.test');
 const { runTier3Tests } = require('./tier3-interactions.test');
 const { runTier4Tests } = require('./tier4-scenarios.test');
 const { runTier5Tests } = require('./tier5-adversarial-hardening.test');
+const { runDeveloperPlatformTests } = require('./developer-platform.test');
+const { runScrollExpandTests } = require('./scroll-expand.test');
+const { runMorphSliderTests } = require('./morph-slider.test');
 const { makeHttpRequest } = require('./test-utils');
 
 // ANSI Color Codes
@@ -27,8 +30,8 @@ const GRAY = '\x1b[90m';
 async function main() {
   const overallStartTime = Date.now();
 
-  console.log(`\n${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   TECH BOY SOLUTIONS — E2E TEST SUITE (TIERS 1 - 5)                           ${RESET}`);
+  console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
+  console.log(`${BOLD}${BLUE}   TECH BOY SOLUTIONS — E2E TEST SUITE (TIERS 1 - 8)                           ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 
@@ -42,7 +45,7 @@ async function main() {
   // -------------------------------------------------------------------------
   // Tier 1: Feature Coverage
   // -------------------------------------------------------------------------
-  console.log(`${BOLD}${CYAN}▶ EXECUTING TIER 1: Feature Coverage (49 Features)${RESET}`);
+  console.log(`${BOLD}${CYAN}▶ EXECUTING TIER 1: Feature Coverage (50 Features)${RESET}`);
   const t1Results = runTier1Tests();
   let t1Passed = 0;
   let t1Failed = 0;
@@ -205,14 +208,104 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
+  // Tier 6: Developer Platform Light Tech Spec Suite (developer.html)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 6: Developer Platform Light Tech (developer.html)${RESET}`);
+  let t6Passed = 0;
+  let t6Failed = 0;
+  let t6Assertions = 0;
+  try {
+    const devRes = runDeveloperPlatformTests();
+    t6Passed = devRes.passed;
+    t6Assertions = devRes.assertions;
+  } catch (err) {
+    t6Failed = 1;
+    console.error(`  ${RED}✖ Developer Platform suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t6Passed + t6Failed);
+  totalPassed += t6Passed;
+  totalFailed += t6Failed;
+  totalAssertions += t6Assertions;
+
+  tierReports.push({
+    tier: 'Tier 6: Developer Platform Spec',
+    total: t6Passed + t6Failed,
+    passed: t6Passed,
+    failed: t6Failed,
+    assertions: t6Assertions
+  });
+
+  // -------------------------------------------------------------------------
+  // Tier 7: React Bits <ScrollExpand /> Spec Suite (scroll-expand.test.js)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 7: React Bits <ScrollExpand /> Spec Suite${RESET}`);
+  let t7Passed = 0;
+  let t7Failed = 0;
+  let t7Assertions = 0;
+  try {
+    const seRes = runScrollExpandTests();
+    t7Passed = seRes.passed;
+    t7Assertions = seRes.assertions;
+  } catch (err) {
+    t7Failed = 1;
+    console.error(`  ${RED}✖ ScrollExpand suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t7Passed + t7Failed);
+  totalPassed += t7Passed;
+  totalFailed += t7Failed;
+  totalAssertions += t7Assertions;
+
+  tierReports.push({
+    tier: 'Tier 7: ScrollExpand Spec',
+    total: t7Passed + t7Failed,
+    passed: t7Passed,
+    failed: t7Failed,
+    assertions: t7Assertions
+  });
+
+  // -------------------------------------------------------------------------
+  // Tier 8: React Bits <MorphSlider /> Spec Suite (morph-slider.test.js)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 8: React Bits <MorphSlider /> Spec Suite${RESET}`);
+  let t8Passed = 0;
+  let t8Failed = 0;
+  let t8Assertions = 0;
+  try {
+    const msRes = runMorphSliderTests();
+    t8Passed = msRes.passed;
+    t8Assertions = msRes.assertions;
+  } catch (err) {
+    t8Failed = 1;
+    console.error(`  ${RED}✖ MorphSlider suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t8Passed + t8Failed);
+  totalPassed += t8Passed;
+  totalFailed += t8Failed;
+  totalAssertions += t8Assertions;
+
+  tierReports.push({
+    tier: 'Tier 8: MorphSlider Spec',
+    total: t8Passed + t8Failed,
+    passed: t8Passed,
+    failed: t8Failed,
+    assertions: t8Assertions
+  });
+
+  // -------------------------------------------------------------------------
   // Optional Live HTTP Server Check
   // -------------------------------------------------------------------------
   console.log(`\n${BOLD}${CYAN}▶ CHECKING LOCAL HTTP SERVER STATUS${RESET}`);
-  const httpCheck = await makeHttpRequest('/', 3000);
+  const testPort = parseInt(process.env.PORT || '3001', 10);
+  const httpCheck = await makeHttpRequest('/', testPort);
   if (httpCheck.statusCode === 200) {
-    console.log(`  ${GREEN}✔${RESET} Local server is ACTIVE on http://localhost:3000 (HTTP 200 OK)`);
+    console.log(`  ${GREEN}✔${RESET} Local server is ACTIVE on http://localhost:${testPort} (HTTP 200 OK)`);
   } else {
-    console.log(`  ${YELLOW}ℹ${RESET} Local server on port 3000 is not currently running (offline fallback verified)`);
+    const fallbackCheck = await makeHttpRequest('/', 3000);
+    if (fallbackCheck.statusCode === 200) {
+      console.log(`  ${GREEN}✔${RESET} Local server is ACTIVE on http://localhost:3000 (HTTP 200 OK)`);
+    } else {
+      console.log(`  ${YELLOW}ℹ${RESET} Local server is not currently running (offline fallback verified)`);
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -238,7 +331,7 @@ async function main() {
   console.log(`  ${BOLD}Pass Rate:${RESET} ${finalColor}${((totalPassed / totalTests) * 100).toFixed(1)}%${RESET}`);
 
   if (totalFailed === 0) {
-    console.log(`\n${BOLD}${GREEN}✔ ALL 5 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
+    console.log(`\n${BOLD}${GREEN}✔ ALL 8 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
     process.exit(0);
   } else {
     console.log(`\n${BOLD}${RED}✖ ${totalFailed} TEST(S) FAILED${RESET}\n`);

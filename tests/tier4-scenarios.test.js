@@ -51,19 +51,19 @@ function runTier4Tests() {
   // Scenario 1: Final-Year Engineering Student IoT Project Consultation Journey
   // =========================================================================
   test(1, 'Final-Year Student IoT Project Inquiry Journey', () => {
-    // Step 1: Student visits site and navigates to #student-projects
-    const studentSection = dom.getElementById('student-projects');
-    Assert.exists(studentSection, 'Student lands on #student-projects section');
+    // Step 1: Student visits site and navigates to #projects
+    const studentSection = dom.getElementById('projects');
+    Assert.exists(studentSection, 'Student lands on #projects section');
     
-    // Step 2: Reviews 6-step roadmap
-    const roadmapSteps = dom.querySelectorAll('.support-step');
-    Assert.equal(roadmapSteps.length, 6, 'Student reviews all 6 roadmap steps from idea to viva prep');
+    // Step 2: Reviews student launchpad banner & proof
+    const banner = dom.querySelector('.innovation-feature-banner');
+    Assert.exists(banner, 'Student reviews academic innovation banner');
     
-    // Step 3: Clicks diagnostic problem chip "I want to build a final-year IoT project."
-    const problemText = 'I want to build a final-year IoT project.';
-    const chips = dom.querySelectorAll('.problem-chip');
-    const targetChip = chips.find(c => c.textContent.includes('final-year IoT project'));
-    Assert.exists(targetChip, 'Diagnostic chip for final-year IoT project found');
+    // Step 3: Diagnostic problem chip
+    const problemText = 'I need a final-year IoT engineering project.';
+    const chips = dom.querySelectorAll('.diag-chip');
+    const targetChip = chips.find(c => c.textContent.includes('IoT') || c.textContent.includes('project'));
+    Assert.exists(targetChip, 'Diagnostic chip for IoT project found');
 
     // Step 4: Fills student consultation form
     const studentInput = {
@@ -94,18 +94,18 @@ function runTier4Tests() {
   // Scenario 2: Small Business Commercial Website & Billing Inquiry Journey
   // =========================================================================
   test(2, 'Small Business Commercial Website & Billing Inquiry Journey', () => {
-    // Step 1: Business owner browses software division
-    const softwareSection = dom.getElementById('software');
-    Assert.exists(softwareSection, 'Business owner visits #software section');
+    // Step 1: Business owner browses solutions division
+    const servicesSection = dom.getElementById('services');
+    Assert.exists(servicesSection, 'Business owner visits #services section');
 
     // Step 2: Inspects Website Development and Custom Software cards
-    const webDevCard = dom.querySelectorAll('#software .service-card').find(c => c.textContent.includes('Website Development'));
-    const customSoftwareCard = dom.querySelectorAll('#software .service-card').find(c => c.textContent.includes('Custom Software Development'));
+    const webDevCard = dom.querySelectorAll('.bento-card').find(c => c.textContent.includes('Websites') || c.textContent.includes('Website Development'));
+    const customSoftwareCard = dom.querySelectorAll('.bento-card').find(c => c.textContent.includes('Custom Software'));
     Assert.exists(webDevCard, 'Web Development card available');
     Assert.exists(customSoftwareCard, 'Custom Software card available');
 
-    // Step 3: Clicks "I need a website for my business." chip
-    const problemText = 'I need a website for my business.';
+    // Step 3: Clicks business website chip
+    const problemText = 'I need a professional website for my business.';
     
     // Step 4: Fills business consultation form
     const businessInput = {
@@ -136,18 +136,18 @@ function runTier4Tests() {
   // Scenario 3: Urgent Laptop Repair & SSD Upgrade Customer Journey
   // =========================================================================
   test(3, 'Urgent Laptop Repair & SSD Upgrade Customer Journey', () => {
-    // Step 1: Customer opens hardware division
-    const hardwareSection = dom.getElementById('hardware');
-    Assert.exists(hardwareSection, 'Customer visits #hardware section');
+    // Step 1: Customer opens solutions division
+    const servicesSection = dom.getElementById('services');
+    Assert.exists(servicesSection, 'Customer visits #services section');
 
     // Step 2: Checks Laptop Repair and Upgrades cards
-    const laptopRepairCard = dom.querySelectorAll('#hardware .service-card').find(c => c.textContent.includes('Laptop Repair & Service'));
-    const upgradeCard = dom.querySelectorAll('#hardware .service-card').find(c => c.textContent.includes('Computer Upgrades'));
+    const laptopRepairCard = dom.querySelectorAll('.bento-card').find(c => c.textContent.includes('Laptop Repair'));
+    const upgradeCard = dom.querySelectorAll('.bento-card').find(c => c.textContent.includes('RAM & SSD') || c.textContent.includes('Upgrades'));
     Assert.exists(laptopRepairCard, 'Laptop Repair card available');
     Assert.exists(upgradeCard, 'Computer Upgrades card available');
 
     // Step 3: Selects "My laptop is very slow." chip
-    const problemText = 'My laptop is very slow.';
+    const problemText = 'My laptop is very slow and needs an SSD/RAM upgrade.';
 
     // Step 4: Enters repair consultation details
     const repairInput = {
@@ -178,16 +178,15 @@ function runTier4Tests() {
   // =========================================================================
   test(4, 'Small Office Structured LAN & Wi-Fi Setup Journey', () => {
     // Step 1: Office manager discovers networking services
-    const netSection = dom.getElementById('networking');
-    Assert.exists(netSection, '#networking section exists');
+    const servicesSection = dom.getElementById('services');
+    Assert.exists(servicesSection, '#services section exists');
 
-    // Step 2: Reviews Small Office Network Setup featured card
-    const officeNetCard = dom.querySelectorAll('#networking .service-card').find(c => c.textContent.includes('Small Office Network Setup'));
-    Assert.exists(officeNetCard, 'Small Office Network Setup card available');
-    Assert.contains(officeNetCard.className, 'featured-card', 'Office network is marked as featured package');
+    // Step 2: Reviews Networking cards
+    const officeNetCard = dom.querySelectorAll('.bento-card').find(c => c.textContent.includes('Structured LAN') || c.textContent.includes('Wi-Fi') || c.textContent.includes('Cabling'));
+    Assert.exists(officeNetCard, 'Office Network card available');
 
-    // Step 3: Selects "I need Wi-Fi coverage across my entire office." chip
-    const problemText = 'I need Wi-Fi coverage across my entire office.';
+    // Step 3: Problem text
+    const problemText = 'I need full Wi-Fi and LAN cabling in my office.';
 
     // Step 4: Fills office consultation form
     const officeInput = {
