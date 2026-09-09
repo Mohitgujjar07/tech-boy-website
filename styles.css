@@ -3208,11 +3208,22 @@ body.dark-theme .section-compact.bg-slate-50 {
   -webkit-text-fill-color: #0F172A !important;
 }
 
+[data-theme="dark"] .section-header-center h2,
+body.dark-theme .section-header-center h2 {
+  color: #F0F4FA !important;
+  -webkit-text-fill-color: #F0F4FA !important;
+}
+
 .section-lead {
   color: #475569 !important;
   font-size: 1.05rem;
   max-width: 600px;
   margin: 0 auto 36px;
+}
+
+[data-theme="dark"] .section-lead,
+body.dark-theme .section-lead {
+  color: #94A8C4 !important;
 }
 
 /* ============================================================
@@ -4096,27 +4107,41 @@ body.dark-theme .cta-grand-bg {
 }
 
 /* ============================================================
-   CONTACT SECTION ATMOSPHERIC BACKDROP
+   CONTACT SECTION ATMOSPHERIC BACKDROP (Creation of Adam Matrix Hands)
    ============================================================ */
+#contact {
+  position: relative;
+  overflow: hidden;
+}
+
+#contact .container {
+  position: relative;
+  z-index: 2;
+}
+
 .contact-bg-layer {
   position: absolute;
   inset: 0;
-  background-image: url('assets/art/digital-cloud-sunset.jpg');
+  background-image: url('assets/art/touch-hands-matrix.png');
   background-repeat: no-repeat;
-  background-position: center 40%;
-  background-size: cover;
-  opacity: 0.10;
-  filter: saturate(1.2) contrast(1.05);
+  background-position: center 25px;
+  background-size: min(880px, 94vw) auto;
+  opacity: 0.22;
+  filter: invert(1) contrast(1.18);
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 1;
-  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
-  mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 85%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 85%);
 }
 
 [data-theme="dark"] .contact-bg-layer,
 body.dark-theme .contact-bg-layer {
-  opacity: 0.30;
-  filter: saturate(1.35) contrast(1.15);
+  opacity: 0.52;
+  filter: contrast(1.25) brightness(1.2);
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 88%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 88%);
 }
 
 /* ============================================================
