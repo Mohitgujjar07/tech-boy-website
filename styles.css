@@ -3678,15 +3678,71 @@ body.dark-theme .section-lead {
 }
 
 /* ============================================================
-   TESTIMONIALS STRIP (Client & Student Proof)
-   ============================================================ */
-/* ============================================================
-   TESTIMONIALS INFINITE MARQUEE WITH ALPHA MASK
+   TESTIMONIALS STRIP (Client & Student Proof Matrix Portal)
    ============================================================ */
 .testimonials-strip {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
   margin-top: 56px;
-  padding: 40px 0 10px;
+  padding: 48px 16px 20px;
   width: 100%;
+}
+
+.testimonials-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/testimonials-matrix-portal.jpg');
+  background-repeat: no-repeat;
+  background-position: center 20%;
+  background-size: cover;
+  opacity: 0.16;
+  filter: saturate(1.2) contrast(1.08);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 85%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 85%);
+}
+
+[data-theme="dark"] .testimonials-bg-layer,
+body.dark-theme .testimonials-bg-layer {
+  opacity: 0.38;
+  filter: saturate(1.35) contrast(1.18);
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 88%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 30%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 88%);
+}
+
+.testimonials-strip .section-header-center,
+.testimonials-strip .testimonials-marquee-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.testimonials-strip .section-header-center h3 {
+  font-family: var(--font-ui);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 800;
+  color: #0F172A !important;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+[data-theme="dark"] .testimonials-strip .section-header-center h3,
+body.dark-theme .testimonials-strip .section-header-center h3 {
+  color: #F8FAFC !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .testimonials-strip .section-lead,
+body.dark-theme .testimonials-strip .section-lead {
+  color: #CBD5E1 !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .testimonials-strip .apple-eyebrow,
+body.dark-theme .testimonials-strip .apple-eyebrow {
+  color: #38BDF8 !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
 }
 
 .testimonials-marquee-wrapper {
@@ -3866,6 +3922,39 @@ body.dark-theme .section-lead {
 .testimonial-author span {
   font-size: 0.775rem;
   color: #64748B;
+}
+
+[data-theme="dark"] .testimonial-card,
+body.dark-theme .testimonial-card {
+  background: rgba(8, 16, 30, 0.90) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark"] .testimonial-quote,
+body.dark-theme .testimonial-quote {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .testimonial-author strong,
+body.dark-theme .testimonial-author strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .testimonial-author span,
+body.dark-theme .testimonial-author span {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .testimonial-author,
+body.dark-theme .testimonial-author {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .author-avatar,
+body.dark-theme .author-avatar {
+  background: rgba(37, 99, 235, 0.2) !important;
+  color: #60A5FA !important;
 }
 
 /* ============================================================
