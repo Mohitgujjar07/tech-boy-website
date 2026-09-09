@@ -1796,26 +1796,40 @@ body.dark-theme .services-bg-layer {
   line-height: 1.5;
 }
 
-/* Why Us / Methodology Atmospheric Backdrop (Digital Sunset Cloud) */
+/* ============================================================
+   WHY US / METHODOLOGY ATMOSPHERIC BACKDROP (Golden Halo Matrix Ring)
+   ============================================================ */
+#why-us {
+  position: relative;
+  overflow: hidden;
+}
+
+#why-us .container {
+  position: relative;
+  z-index: 2;
+}
+
 .why-us-bg-layer {
   position: absolute;
   inset: 0;
-  background-image: url('assets/art/digital-cloud-sunset.jpg');
+  background-image: url('assets/art/methodology-halo-ring.jpg');
   background-repeat: no-repeat;
-  background-position: center 25%;
+  background-position: center 12%;
   background-size: cover;
-  opacity: 0.12;
-  filter: saturate(1.2) contrast(1.06);
+  opacity: 0.16;
+  filter: saturate(1.2) contrast(1.08);
   pointer-events: none;
   z-index: 1;
-  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 35%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
-  mask-image: radial-gradient(ellipse 95% 75% at 50% 35%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 28%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
+  mask-image: radial-gradient(ellipse 95% 75% at 50% 28%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
 }
 
 [data-theme="dark"] .why-us-bg-layer,
 body.dark-theme .why-us-bg-layer {
-  opacity: 0.35;
-  filter: saturate(1.35) contrast(1.15);
+  opacity: 0.40;
+  filter: saturate(1.35) contrast(1.18);
+  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 28%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 88%);
+  mask-image: radial-gradient(ellipse 95% 75% at 50% 28%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 88%);
 }
 
 /* Methodology Engineering Excellence Showcase Banner */
@@ -4032,6 +4046,40 @@ body.dark-theme .author-avatar {
   color: #475569 !important;
   font-size: 0.85rem;
   margin-top: 4px;
+}
+
+[data-theme="dark"] .pipeline-item,
+body.dark-theme .pipeline-item {
+  background: rgba(8, 16, 30, 0.90) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark"] .pipeline-item h4,
+body.dark-theme .pipeline-item h4 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .pipeline-item p,
+body.dark-theme .pipeline-item p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .pillar-card,
+body.dark-theme .pillar-card {
+  background: rgba(8, 16, 30, 0.90) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark"] .pillar-card strong,
+body.dark-theme .pillar-card strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .pillar-card p,
+body.dark-theme .pillar-card p {
+  color: #94A3B8 !important;
 }
 
 /* ============================================================
