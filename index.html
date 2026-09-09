@@ -90,7 +90,7 @@
         <ul class="nav-list">
           <li><a href="#services" class="nav-item">Services</a></li>
           <li><a href="#work" class="nav-item">Our Work</a></li>
-          <li><a href="#projects" class="nav-item">Student Projects</a></li>
+          <li><a href="#projects" class="nav-item" title="Student Innovation Lab &amp; Projects">Projects</a></li>
           <li><a href="#why-us" class="nav-item">Why Us</a></li>
           <li><a href="#faq" class="nav-item">FAQ</a></li>
           <li><a href="#contact" class="nav-item">Contact</a></li>
@@ -98,8 +98,12 @@
         </ul>
       </nav>
 
-      <!-- CTA & Mobile Trigger -->
+      <!-- CTA, Theme Toggle & Mobile Trigger -->
       <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+          <i data-lucide="moon" class="theme-icon-dark"></i>
+          <i data-lucide="sun" class="theme-icon-light"></i>
+        </button>
         <a href="#contact" class="apple-btn-cta">
           <span>Get Consultation</span>
           <i data-lucide="arrow-right"></i>
@@ -130,7 +134,7 @@
         <li><a href="#why-us" class="drawer-link">How We Work</a></li>
         <li><a href="#faq" class="drawer-link">FAQ &amp; Diagnostics</a></li>
         <li><a href="#contact" class="drawer-link">Contact &amp; Location</a></li>
-        <li><a href="developer.html" class="drawer-link">Developer Platform ↗</a></li>
+        <li><button type="button" class="drawer-link" onclick="window.location.href='developer.html'" style="text-align: left; width: 100%; display: flex; align-items: center; justify-content: space-between; background: none; border: none; font-size: inherit; cursor: pointer;"><span>Developer Platform</span> <span>↗</span></button></li>
       </ul>
       <div class="drawer-footer">
         <a href="#contact" class="apple-btn-cta w-full text-center">Request Free Quote</a>
