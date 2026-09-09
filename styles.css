@@ -2174,6 +2174,45 @@ body.dark-theme .diagnostic-bg-layer {
 
 .diag-chip svg { width: 15px; height: 15px; color: var(--accent-primary); }
 
+/* ============================================================
+   CLEAR ANSWERS & FAQ ATMOSPHERIC BACKDROP (Emerald Matrix Clouds)
+   ============================================================ */
+.faq-accordion-block {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 40px 16px 20px;
+}
+
+.faq-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/emerald-matrix-clouds.png');
+  background-repeat: no-repeat;
+  background-position: center 0%;
+  background-size: cover;
+  opacity: 0.16;
+  filter: saturate(1.2) contrast(1.08);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 20%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+  mask-image: radial-gradient(ellipse 95% 75% at 50% 20%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+}
+
+[data-theme="dark"] .faq-bg-layer,
+body.dark-theme .faq-bg-layer {
+  opacity: 0.38;
+  filter: saturate(1.35) contrast(1.15);
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 20%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 85%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 20%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 85%);
+}
+
+.faq-accordion-block .section-header-center,
+.faq-accordion-block .faq-list {
+  position: relative;
+  z-index: 2;
+}
+
 .faq-list {
   max-width: 780px;
   margin: 0 auto;
