@@ -1777,12 +1777,106 @@ body.dark-theme .hero-bg-layer {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 40px 32px;
-  text-align: center;
+  padding: 36px;
   margin-bottom: 48px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+}
+
+/* Diagnostic Ambient Background Layer (Glowing Paper Plane) */
+.diagnostic-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/diagnostic-paper-plane.jpg');
+  background-repeat: no-repeat;
+  background-position: right 5% center;
+  background-size: 520px;
+  opacity: 0.08;
+  filter: saturate(1.2) blur(1px);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 85% 50%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 80%);
+  mask-image: radial-gradient(ellipse 75% 75% at 85% 50%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 80%);
+}
+
+[data-theme="dark"] .diagnostic-bg-layer,
+body.dark-theme .diagnostic-bg-layer {
+  opacity: 0.22;
+  filter: saturate(1.4) blur(1px);
+}
+
+/* Diagnostic Grid Layout: Visual + Interactive Content */
+.diagnostic-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.diagnostic-visual {
+  position: relative;
+  width: 100%;
+}
+
+.diagnostic-art-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #020508;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.18), 0 8px 20px -4px rgba(6, 182, 212, 0.22);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.diagnostic-art-frame:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 20px 42px -6px rgba(245, 158, 11, 0.25), 0 12px 26px -2px rgba(6, 182, 212, 0.32);
+}
+
+.diagnostic-art-img {
+  width: 100%;
+  height: 100%;
+  max-height: 290px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diagnostic-art-frame:hover .diagnostic-art-img {
+  transform: scale(1.05);
+}
+
+.diagnostic-art-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  font-family: var(--font-ui);
+  font-size: 0.775rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.diagnostic-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .diagnostic-badge {
@@ -1824,16 +1918,39 @@ body.dark-theme .hero-bg-layer {
 .diagnostic-box p {
   font-size: 0.925rem;
   color: var(--text-muted);
-  margin-bottom: 26px;
+  margin-bottom: 24px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.diagnostic-body .problem-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
   position: relative;
 }
 
-.problem-chips-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  position: relative;
+@media (max-width: 920px) {
+  .diagnostic-box {
+    padding: 28px 20px;
+  }
+  .diagnostic-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .diagnostic-visual {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .diagnostic-body {
+    align-items: center;
+    text-align: center;
+  }
+  .diagnostic-body .problem-chips-grid {
+    justify-content: center;
+  }
 }
 
 .diag-chip {
@@ -3581,10 +3698,17 @@ main { position: relative; z-index: 1; }
 .diagnostic-box {
   background: #FFFFFF !important;
   border: 1px solid rgba(226, 232, 240, 0.9) !important;
-  border-radius: 24px;
+  border-radius: 28px;
   padding: 36px;
   box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05) !important;
   margin-bottom: 48px;
+}
+
+[data-theme="dark"] .diagnostic-box,
+body.dark-theme .diagnostic-box {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(37, 99, 235, 0.3) !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5) !important;
 }
 
 .diagnostic-box h3 {
@@ -3594,10 +3718,20 @@ main { position: relative; z-index: 1; }
   margin: 12px 0 8px;
 }
 
+[data-theme="dark"] .diagnostic-box h3,
+body.dark-theme .diagnostic-box h3 {
+  color: #F8FAFC !important;
+}
+
 .diagnostic-box p {
   color: #475569 !important;
   font-size: 0.95rem;
   margin-bottom: 20px;
+}
+
+[data-theme="dark"] .diagnostic-box p,
+body.dark-theme .diagnostic-box p {
+  color: #94A3B8 !important;
 }
 
 .diag-chip,
@@ -3611,6 +3745,15 @@ main { position: relative; z-index: 1; }
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+}
+
+[data-theme="dark"] .diag-chip,
+[data-theme="dark"] .diagnostic-chip,
+body.dark-theme .diag-chip,
+body.dark-theme .diagnostic-chip {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F1F5F9 !important;
 }
 
 .diag-chip:hover,

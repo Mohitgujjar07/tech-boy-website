@@ -900,29 +900,49 @@
         
         <!-- 1-Click Problem Chips Container -->
         <div class="diagnostic-box">
-          <span class="diagnostic-badge"><i data-lucide="sparkles"></i> 1-Click Problem Diagnostic</span>
-          <h3>Have a Technology Problem? Click Below</h3>
-          <p>Click your requirement to automatically pre-fill the consultation form with zero technical jargon:</p>
-          
-          <div class="problem-chips-grid">
-            <button class="diag-chip" onclick="prefillContact('I need a professional website for my business.')">
-              <i data-lucide="mouse-pointer-click"></i> “I need a business website.”
-            </button>
-            <button class="diag-chip" onclick="prefillContact('My laptop is very slow and needs an SSD/RAM upgrade.')">
-              <i data-lucide="mouse-pointer-click"></i> “My laptop is very slow.”
-            </button>
-            <button class="diag-chip" onclick="prefillContact('I need a final-year IoT engineering project.')">
-              <i data-lucide="mouse-pointer-click"></i> “Final-year student IoT project.”
-            </button>
-            <button class="diag-chip" onclick="prefillContact('I need full Wi-Fi and LAN cabling in my office.')">
-              <i data-lucide="mouse-pointer-click"></i> “Office Wi-Fi & LAN setup.”
-            </button>
-            <button class="diag-chip" onclick="prefillContact('I need a custom PC built for video editing & coding.')">
-              <i data-lucide="mouse-pointer-click"></i> “Custom PC build for editing.”
-            </button>
-            <button class="diag-chip" onclick="prefillContact('I need an automated Excel sheet to track shop billing.')">
-              <i data-lucide="mouse-pointer-click"></i> “Excel automation for business.”
-            </button>
+          <div class="diagnostic-bg-layer" aria-hidden="true"></div>
+          <div class="diagnostic-inner">
+            
+            <!-- Visual Spotlight: Glowing Point-Cloud Paper Plane -->
+            <div class="diagnostic-visual">
+              <div class="diagnostic-art-frame">
+                <img src="assets/art/diagnostic-paper-plane.jpg" alt="1-Click Problem Diagnostic Fast Dispatch" class="diagnostic-art-img" loading="lazy">
+                <div class="diagnostic-art-glow"></div>
+                <div class="diagnostic-art-badge">
+                  <span class="live-dot"></span>
+                  <span>Instant 1-Click Dispatch</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Column: Headline, Subtitle & Interactive Problem Chips -->
+            <div class="diagnostic-body">
+              <span class="diagnostic-badge"><i data-lucide="sparkles"></i> 1-Click Problem Diagnostic</span>
+              <h3>Have a Technology Problem? Click Below</h3>
+              <p>Click your requirement to automatically pre-fill the consultation form with zero technical jargon:</p>
+              
+              <div class="problem-chips-grid">
+                <button class="diag-chip" onclick="prefillContact('I need a professional website for my business.')">
+                  <i data-lucide="mouse-pointer-click"></i> “I need a business website.”
+                </button>
+                <button class="diag-chip" onclick="prefillContact('My laptop is very slow and needs an SSD/RAM upgrade.')">
+                  <i data-lucide="mouse-pointer-click"></i> “My laptop is very slow.”
+                </button>
+                <button class="diag-chip" onclick="prefillContact('I need a final-year IoT engineering project.')">
+                  <i data-lucide="mouse-pointer-click"></i> “Final-year student IoT project.”
+                </button>
+                <button class="diag-chip" onclick="prefillContact('I need full Wi-Fi and LAN cabling in my office.')">
+                  <i data-lucide="mouse-pointer-click"></i> “Office Wi-Fi & LAN setup.”
+                </button>
+                <button class="diag-chip" onclick="prefillContact('I need a custom PC built for video editing & coding.')">
+                  <i data-lucide="mouse-pointer-click"></i> “Custom PC build for editing.”
+                </button>
+                <button class="diag-chip" onclick="prefillContact('I need an automated Excel sheet to track shop billing.')">
+                  <i data-lucide="mouse-pointer-click"></i> “Excel automation for business.”
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
 
