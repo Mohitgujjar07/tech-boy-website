@@ -21,7 +21,7 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
-const server = http.createServer((req, res) => {
+function handleRequest(req, res) {
   let reqPath = decodeURI(req.url.split('?')[0]);
   if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
 
@@ -45,7 +45,7 @@ const server = http.createServer((req, res) => {
 
     fs.createReadStream(filePath).pipe(res);
   });
-});
+}
 
 function getNetworkAddresses() {
   const interfaces = os.networkInterfaces();
@@ -60,6 +60,8 @@ function getNetworkAddresses() {
   return addresses;
 }
 
+const server = http.createServer(handleRequest);
+
 server.listen(PORT, '0.0.0.0', () => {
   const networkIps = getNetworkAddresses();
   console.log('\n======================================================');
@@ -73,5 +75,19 @@ server.listen(PORT, '0.0.0.0', () => {
   } else {
     console.log(`  > Network:  http://192.168.29.75:${PORT}/`);
   }
-  console.log('======================================================\n');
+
+  // Also bind companion port (8080 <-> 3000) so both ports work simultaneously
+  const ALT_PORT = (PORT === 3000) ? 8080 : 3000;
+  const altServer = http.createServer(handleRequest);
+  altServer.listen(ALT_PORT, '0.0.0.0', () => {
+    console.log(`  > Local:    http://localhost:${ALT_PORT}/`);
+    if (networkIps.length > 0) {
+      networkIps.forEach(ip => {
+        console.log(`  > Network:  http://${ip}:${ALT_PORT}/`);
+      });
+    }
+    console.log('======================================================\n');
+  }).on('error', () => {
+    console.log('======================================================\n');
+  });
 });

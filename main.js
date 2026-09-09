@@ -268,9 +268,9 @@ function initHeroRotator() {
   if (!rotator) return;
 
   const phrases = [
+    'Your Growth.',
     'Your Business.',
     'Your Needs.',
-    'Your Growth.',
     'Any Challenge.',
     'Every Requirement.',
     'Modern Technology.'
