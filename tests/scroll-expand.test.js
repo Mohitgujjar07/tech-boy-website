@@ -88,7 +88,7 @@ function runScrollExpandTests() {
     
     const mount = dom.querySelector('[data-scroll-expand="true"]');
     Assert.exists(mount, 'data-scroll-expand="true" mount element exists');
-    Assert.contains(html, 'data-src="/hero.jpg"', 'Points to /hero.jpg media');
+    Assert.contains(html, 'data-src="assets/art/built-to-scale-horizon.jpg"', 'Points to built-to-scale-horizon media');
     Assert.contains(html, 'data-title="Built to scale"', 'Includes "Built to scale" title');
     Assert.contains(html, 'data-use-window-scroll="true"', 'Enables window scroll driving');
     return 7;
@@ -98,11 +98,11 @@ function runScrollExpandTests() {
   test('Overlay Children & CTA Architecture', () => {
     const headline = dom.querySelector('.scroll-expand-headline');
     Assert.exists(headline, '.scroll-expand-headline exists');
-    Assert.contains(headline.textContent, 'Every pixel, everywhere', 'Headline matches React Bits copy');
+    Assert.contains(headline.textContent, 'Engineered to Scale', 'Headline matches Tech Boy Solutions copy');
 
     const lead = dom.querySelector('.scroll-expand-lead');
     Assert.exists(lead, '.scroll-expand-lead exists');
-    Assert.contains(lead.textContent, 'The frame opens up as you scroll', 'Lead matches React Bits narrative');
+    Assert.contains(lead.textContent, 'Tumakuru', 'Lead matches Tech Boy Solutions narrative');
 
     const actions = dom.querySelector('.scroll-expand-actions');
     Assert.exists(actions, 'Action buttons container exists');

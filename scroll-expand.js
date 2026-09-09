@@ -146,6 +146,7 @@
         const out = smoothstep(0.4, 0.88, p);
         this.titleEl.style.opacity = `${1 - out}`;
         this.titleEl.style.transform = `translate3d(0, ${-28 * out}px, 0) scale(${1 + 0.06 * out})`;
+        this.titleEl.style.visibility = (1 - out) < 0.02 ? 'hidden' : 'visible';
       }
 
       if (this.hintEl) {
