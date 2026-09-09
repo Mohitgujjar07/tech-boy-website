@@ -1711,6 +1711,210 @@ body.dark-theme .services-bg-layer {
 }
 
 /* ============================================================
+   PREBUILT SOFTWARE CATALOG MATRIX & SEARCH
+   ============================================================ */
+.prebuilt-catalog-box {
+  margin-top: 32px;
+  background: var(--bg-card);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.prebuilt-catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.prebuilt-catalog-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.prebuilt-header-badge-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.12));
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prebuilt-header-badge-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.prebuilt-catalog-title h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.prebuilt-catalog-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.prebuilt-search-wrap {
+  position: relative;
+  min-width: 300px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.prebuilt-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+.prebuilt-search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  outline: none;
+  transition: var(--transition);
+}
+
+.prebuilt-search-input:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.prebuilt-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.prebuilt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.prebuilt-tag svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-primary);
+  transition: transform 0.22s ease;
+}
+
+.prebuilt-tag:hover {
+  transform: translateY(-2px);
+  background: #FFFFFF;
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+}
+
+.prebuilt-tag:hover svg {
+  transform: scale(1.15);
+}
+
+/* Dark Theme Overrides for Prebuilt Catalog */
+[data-theme="dark"] .prebuilt-catalog-box,
+body.dark-theme .prebuilt-catalog-box {
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(56, 189, 248, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.08);
+}
+
+[data-theme="dark"] .prebuilt-header-badge-icon,
+body.dark-theme .prebuilt-header-badge-icon {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .prebuilt-search-input,
+body.dark-theme .prebuilt-search-input {
+  background: rgba(2, 6, 23, 0.7);
+  border-color: rgba(56, 189, 248, 0.25);
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .prebuilt-search-input:focus,
+body.dark-theme .prebuilt-search-input:focus {
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+[data-theme="dark"] .prebuilt-tag,
+body.dark-theme .prebuilt-tag {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(56, 189, 248, 0.2);
+  color: #CBD5E1;
+}
+
+[data-theme="dark"] .prebuilt-tag svg,
+body.dark-theme .prebuilt-tag svg {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .prebuilt-tag:hover,
+body.dark-theme .prebuilt-tag:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38BDF8;
+  color: #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+@media (max-width: 768px) {
+  .prebuilt-catalog-box {
+    padding: 22px 18px;
+  }
+  .prebuilt-search-wrap {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+/* ============================================================
    4. STUDENT PROJECTS BENTO
    ============================================================ */
 .projects-bento-grid {

@@ -377,10 +377,16 @@ window.prefillContact = function(serviceText) {
         keywords: ['student', 'project', 'viva', 'academic', 'iot', 'smart', 'arduino', 'esp32', 'sensor', 'telemetry', 'final-year', 'final year', 'embedded', 'circuit', 'lab'],
         patterns: ['student', 'project', 'academic', 'iot']
       },
-      // 7. Excel & Office Automation
+      // 7. Prebuilt Software & Productivity Tools
       {
-        keywords: ['excel', 'office', 'vba', 'formula', 'macro', 'sheet', 'spreadsheet', 'template', 'powerpoint', 'word template', 'deck', 'billing sheet', 'inventory sheet'],
-        patterns: ['excel', 'office']
+        keywords: [
+          'prebuilt', 'software', 'tools', 'activator', 'antivirus', 'autocad', 'photoshop',
+          'driver', 'windows', 'utility', 'utilities', 'excel', 'office', 'vba', 'formula', 'macro',
+          'sheet', 'spreadsheet', 'template', 'powerpoint', 'word template', 'deck',
+          'billing sheet', 'inventory sheet', 'cad', 'converter', 'compression', 'video tools',
+          'audio tools', 'recovery', 'security', 'pdf', 'graphic design', 'emulator', 'ide'
+        ],
+        patterns: ['excel', 'office', 'prebuilt', 'software', 'tools']
       },
       // 8. Custom Software & CRM
       {
@@ -893,6 +899,28 @@ function initCursorSpotlight() {
 }
 
 // =========================================================================
+// 16b. Live Prebuilt Software Catalog Search
+// =========================================================================
+function initPrebuiltSoftwareSearch() {
+  const searchInput = document.getElementById('softwareSearchInput');
+  const tagsGrid = document.getElementById('prebuiltTagsGrid');
+  if (!searchInput || !tagsGrid) return;
+
+  searchInput.addEventListener('input', (e) => {
+    const query = (e.target.value || '').toLowerCase().trim();
+    const tags = tagsGrid.querySelectorAll('.prebuilt-tag');
+    tags.forEach(tag => {
+      const text = tag.textContent.toLowerCase();
+      if (!query || text.includes(query)) {
+        tag.style.display = 'inline-flex';
+      } else {
+        tag.style.display = 'none';
+      }
+    });
+  });
+}
+
+// =========================================================================
 // 17. DOM Content Loaded Bootstrap
 // =========================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -917,6 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initConsultationForm();
   initCardTiltEffect();
   initCursorSpotlight();
+  initPrebuiltSoftwareSearch();
 
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
