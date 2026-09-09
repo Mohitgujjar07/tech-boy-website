@@ -6207,6 +6207,74 @@ body.dark-theme .back-to-top:hover {
 }
 
 /* ============================================================
+   WORK SHOWCASE SECTION (Homepage #work Section)
+   ============================================================ */
+.work-showcase-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-showcase-section > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.work-showcase-bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url('assets/art/work-showcase-dev-monitors.jpg');
+  background-size: cover;
+  background-position: center 38%;
+  background-repeat: no-repeat;
+  opacity: 0.36;
+  mix-blend-mode: multiply;
+  filter: contrast(1.15) brightness(1.02);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 40%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 40%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+[data-theme="dark"] .work-showcase-bg-layer,
+body.dark-theme .work-showcase-bg-layer {
+  opacity: 0.72;
+  mix-blend-mode: screen;
+  filter: brightness(1.18) contrast(1.25) saturate(1.15);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 40%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 96%),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 88%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 40%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 96%),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 88%, rgba(0, 0, 0, 0) 100%);
+}
+
+.work-showcase-section .apple-eyebrow {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .work-showcase-section .apple-eyebrow,
+body.dark-theme .work-showcase-section .apple-eyebrow {
+  color: #38BDF8;
+  background: rgba(14, 165, 233, 0.16);
+  border-color: rgba(56, 189, 248, 0.38);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.18);
+}
+
+[data-theme="dark"] .work-showcase-section .section-header-center h2,
+body.dark-theme .work-showcase-section .section-header-center h2 {
+  color: #FFFFFF;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .work-showcase-section .section-lead,
+body.dark-theme .work-showcase-section .section-lead {
+  color: #E2E8F0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
    WORK GATEWAY HUB (Homepage #work Section)
    ============================================================ */
 .work-gateway-hub {
@@ -6480,13 +6548,13 @@ body.dark-theme .gateway-roadmap-badge {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background-image: url('assets/art/work-hero-meadow-beam.png');
+  background-image: url('assets/art/work-showcase-dev-monitors.jpg');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 36%;
   background-repeat: no-repeat;
-  opacity: 0.16;
+  opacity: 0.38;
   mix-blend-mode: multiply;
-  filter: contrast(1.1) brightness(1.04);
+  filter: contrast(1.15) brightness(1.02);
   -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%),
                       linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
   mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%),
@@ -6496,9 +6564,9 @@ body.dark-theme .gateway-roadmap-badge {
 
 [data-theme="dark"] .work-hero-bg-layer,
 body.dark-theme .work-hero-bg-layer {
-  opacity: 0.55;
+  opacity: 0.75;
   mix-blend-mode: screen;
-  filter: brightness(1.15) contrast(1.25);
+  filter: brightness(1.18) contrast(1.25) saturate(1.15);
   -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 96%),
                       linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 82%, rgba(0, 0, 0, 0) 100%);
   mask-image: radial-gradient(ellipse 95% 85% at 50% 35%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 96%),
