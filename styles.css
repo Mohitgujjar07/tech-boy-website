@@ -1770,6 +1770,172 @@ body.dark-theme .hero-bg-layer {
   line-height: 1.5;
 }
 
+/* Why Us / Methodology Atmospheric Backdrop (Digital Sunset Cloud) */
+.why-us-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/digital-cloud-sunset.jpg');
+  background-repeat: no-repeat;
+  background-position: center 25%;
+  background-size: cover;
+  opacity: 0.12;
+  filter: saturate(1.2) contrast(1.06);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 35%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+  mask-image: radial-gradient(ellipse 95% 75% at 50% 35%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+}
+
+[data-theme="dark"] .why-us-bg-layer,
+body.dark-theme .why-us-bg-layer {
+  opacity: 0.35;
+  filter: saturate(1.35) contrast(1.15);
+}
+
+/* Methodology Engineering Excellence Showcase Banner */
+.methodology-feature-banner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 36px 0;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .methodology-feature-banner,
+body.dark-theme .methodology-feature-banner {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+}
+
+.methodology-art-wrap {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  background: #020508;
+}
+
+.methodology-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.methodology-feature-banner:hover .methodology-banner-img {
+  transform: scale(1.04);
+}
+
+.methodology-art-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  font-family: var(--font-ui);
+  font-size: 0.775rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.methodology-text-wrap {
+  padding: 32px 32px 32px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.methodology-text-wrap h3 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 8px 0 10px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+[data-theme="dark"] .methodology-text-wrap h3,
+body.dark-theme .methodology-text-wrap h3 {
+  color: #F8FAFC !important;
+}
+
+.methodology-text-wrap p {
+  font-size: 0.925rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+[data-theme="dark"] .methodology-text-wrap p,
+body.dark-theme .methodology-text-wrap p {
+  color: #94A3B8 !important;
+}
+
+.methodology-metrics-row {
+  display: flex;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+[data-theme="dark"] .methodology-metrics-row,
+body.dark-theme .methodology-metrics-row {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.methodology-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2563EB;
+}
+
+[data-theme="dark"] .methodology-metric strong,
+body.dark-theme .methodology-metric strong {
+  color: #38BDF8 !important;
+}
+
+.methodology-metric span {
+  font-size: 0.78rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .methodology-metric span,
+body.dark-theme .methodology-metric span {
+  color: #94A3B8 !important;
+}
+
+@media (max-width: 900px) {
+  .methodology-feature-banner {
+    grid-template-columns: 1fr;
+  }
+  .methodology-text-wrap {
+    padding: 24px 20px;
+  }
+  .methodology-art-wrap {
+    min-height: 220px;
+  }
+}
+
 /* ============================================================
    6. 1-CLICK DIAGNOSTIC & FAQ
    ============================================================ */
@@ -2946,6 +3112,17 @@ main { position: relative; z-index: 1; }
   border-top: 1px solid rgba(226, 232, 240, 0.7) !important;
   border-bottom: 1px solid rgba(226, 232, 240, 0.7) !important;
   padding: 95px 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .section-compact,
+[data-theme="dark"] .section-compact.bg-slate-50,
+body.dark-theme .section-compact,
+body.dark-theme .section-compact.bg-slate-50 {
+  background: #020508 !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .apple-eyebrow {
@@ -3784,6 +3961,97 @@ body.dark-theme .diagnostic-chip {
   color: #475569 !important;
   padding: 0 24px 20px;
   line-height: 1.65;
+}
+
+/* ============================================================
+   READY TO BUILD GRAND ACTION BANNER (Digital Sunset Cloud)
+   ============================================================ */
+.cta-grand-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  margin-top: 56px;
+  background: #020508;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.25);
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.cta-grand-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/digital-cloud-sunset.jpg');
+  background-repeat: no-repeat;
+  background-position: center 30%;
+  background-size: cover;
+  opacity: 0.35;
+  filter: saturate(1.3) contrast(1.1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .cta-grand-bg,
+body.dark-theme .cta-grand-bg {
+  opacity: 0.45;
+  filter: saturate(1.4) contrast(1.15);
+}
+
+.cta-grand-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.cta-grand-content h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: #FFFFFF !important;
+  margin: 16px 0 12px;
+  letter-spacing: -0.02em;
+  background: none !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+.cta-grand-content p {
+  font-size: 1.05rem;
+  color: #E2E8F0 !important;
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+
+.cta-grand-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ============================================================
+   CONTACT SECTION ATMOSPHERIC BACKDROP
+   ============================================================ */
+.contact-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/digital-cloud-sunset.jpg');
+  background-repeat: no-repeat;
+  background-position: center 40%;
+  background-size: cover;
+  opacity: 0.10;
+  filter: saturate(1.2) contrast(1.05);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 85%);
+}
+
+[data-theme="dark"] .contact-bg-layer,
+body.dark-theme .contact-bg-layer {
+  opacity: 0.30;
+  filter: saturate(1.35) contrast(1.15);
 }
 
 /* ============================================================
