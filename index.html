@@ -57,6 +57,21 @@
     }
   }
   </script>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.documentElement.classList.remove('light-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body class="light-theme">
 
@@ -781,286 +796,205 @@
         </div>
 
         <!-- Production Work Grid -->
-        <div class="work-grid">
+        <!-- Production Work Grid (Compact High-Density Showcase) -->
+        <div class="work-grid work-grid-compact">
           
           <!-- Project 1: VMS -->
-          <div class="work-card reveal" data-category="enterprise all">
-            <div class="work-card-media">
-              <div class="work-media-glow glow-blue"></div>
-              <div class="work-media-inner">
-                <div class="work-badge-row">
-                  <span class="work-status-badge status-deployed">
-                    <span class="status-pulse-dot"></span>
-                    Production Deployed
-                  </span>
-                  <span class="work-tech-chip">Enterprise Platform</span>
-                </div>
-                <div class="work-media-icon-box">
-                  <i data-lucide="shield-check"></i>
-                </div>
-                <div class="work-media-caption">
-                  <span class="media-title">Multi-Tenant VMS Engine</span>
-                  <span class="media-sub">[ Visual &amp; Demo Walkthrough Preview ]</span>
-                </div>
+          <div class="work-card work-card-compact reveal" data-category="enterprise all">
+            <div class="work-compact-top">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  Production Deployed
+                </span>
+                <span class="work-tech-chip">Enterprise Security</span>
+              </div>
+              <div class="work-compact-icon glow-blue">
+                <i data-lucide="shield-check"></i>
               </div>
             </div>
 
-            <div class="work-card-content">
+            <div class="work-compact-body">
               <div class="work-card-eyebrow">Enterprise Gate Security &bull; Multi-Tenant</div>
               <h3 class="work-card-title">Centralised Multi-Tenant Visitor Management System (VMS)</h3>
-              <p class="work-card-tagline">Next-Generation Enterprise Gate Security, Visitor Lifecycle &amp; Campus Intelligence Platform</p>
-              <p class="work-card-desc">An enterprise-scale platform built for high-security campuses, corporate parks, and educational institutions. Manages visitor pre-registration, biometric/QR check-in, real-time gate pass issuance, automated host notifications, and campus emergency evacuation headcounts.</p>
+              <p class="work-card-tagline">Next-Gen enterprise gate security, instant QR passes &amp; campus evacuation intelligence.</p>
               
-              <ul class="work-specs-list">
-                <li><i data-lucide="check-circle-2"></i> Multi-tenant data segregation with granular host permissions</li>
-                <li><i data-lucide="check-circle-2"></i> Sub-second QR code generation and gate scanner verification</li>
-                <li><i data-lucide="check-circle-2"></i> Live campus headcount &amp; automated emergency evacuation roster</li>
-                <li><i data-lucide="check-circle-2"></i> Instant WhatsApp and SMS host notifications on visitor arrival</li>
-              </ul>
-
               <div class="work-tech-stack">
                 <span>React.js</span>
-                <span>Node.js / Express</span>
+                <span>Node.js</span>
                 <span>PostgreSQL</span>
                 <span>Redis</span>
-                <span>WebSockets</span>
-                <span>Docker</span>
               </div>
+            </div>
 
-              <div class="work-card-actions">
-                <button type="button" class="apple-btn-primary" onclick="openProjectModal('vms')">
-                  <span>View System Architecture &amp; Specs</span>
-                  <i data-lucide="layers"></i>
-                </button>
-                <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Centralised Multi-Tenant Visitor Management System (VMS)')">
-                  <span>Request Similar Build</span>
-                  <i data-lucide="arrow-right"></i>
-                </button>
-              </div>
+            <div class="work-card-actions">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('vms')">
+                <span>Explore Architecture &amp; Details</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Centralised Multi-Tenant Visitor Management System (VMS)')">
+                <span>Inquire</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Project 2: Computer Lab Ledger System -->
-          <div class="work-card reveal" data-category="institutional all">
-            <div class="work-card-media">
-              <div class="work-media-glow glow-cyan"></div>
-              <div class="work-media-inner">
-                <div class="work-badge-row">
-                  <span class="work-status-badge status-deployed">
-                    <span class="status-pulse-dot"></span>
-                    Collegiate Production
-                  </span>
-                  <span class="work-tech-chip">Google Gemini AI Vision</span>
-                </div>
-                <div class="work-media-icon-box">
-                  <i data-lucide="brain"></i>
-                </div>
-                <div class="work-media-caption">
-                  <span class="media-title">Lab Ledger AI OCR Engine</span>
-                  <span class="media-sub">[ Visual &amp; Demo Walkthrough Preview ]</span>
-                </div>
+          <div class="work-card work-card-compact reveal" data-category="institutional all">
+            <div class="work-compact-top">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  Collegiate Production
+                </span>
+                <span class="work-tech-chip">Google Gemini AI Vision</span>
+              </div>
+              <div class="work-compact-icon glow-cyan">
+                <i data-lucide="brain"></i>
               </div>
             </div>
 
-            <div class="work-card-content">
+            <div class="work-compact-body">
               <div class="work-card-eyebrow">Institutional AI &bull; Lab Management</div>
               <h3 class="work-card-title">Computer Lab Ledger System</h3>
-              <p class="work-card-tagline">Next-generation digital laboratory management system designed for collegiate computer science &amp; IT departments.</p>
-              <p class="work-card-desc">Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports.</p>
+              <p class="work-card-tagline">AI-powered handwriting OCR &amp; pg_trgm roster reconciliation for collegiate IT labs.</p>
               
-              <ul class="work-specs-list">
-                <li><i data-lucide="check-circle-2"></i> Handwritten sign-in sheet ingestion via Google Gemini Vision OCR</li>
-                <li><i data-lucide="check-circle-2"></i> Fuzzy trigram (pg_trgm) matching against official collegiate rosters</li>
-                <li><i data-lucide="check-circle-2"></i> Real-time computer bench hardware incident &amp; defect tracking</li>
-                <li><i data-lucide="check-circle-2"></i> Automated audit-ready PDF &amp; Excel institutional compliance reports</li>
-              </ul>
-
               <div class="work-tech-stack">
-                <span>Google Gemini Vision</span>
-                <span>FastAPI / Python</span>
-                <span>PostgreSQL (pg_trgm)</span>
-                <span>Tailwind CSS</span>
-                <span>PDFKit</span>
+                <span>Gemini Vision</span>
+                <span>FastAPI</span>
+                <span>PostgreSQL</span>
+                <span>Tailwind</span>
               </div>
+            </div>
 
-              <div class="work-card-actions">
-                <button type="button" class="apple-btn-primary" onclick="openProjectModal('lab-ledger')">
-                  <span>View System Architecture &amp; Specs</span>
-                  <i data-lucide="layers"></i>
-                </button>
-                <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Computer Lab Ledger System')">
-                  <span>Request Similar Build</span>
-                  <i data-lucide="arrow-right"></i>
-                </button>
-              </div>
+            <div class="work-card-actions">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('lab-ledger')">
+                <span>Explore Architecture &amp; Details</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Computer Lab Ledger System')">
+                <span>Inquire</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Project 3: Elector Lookup Portal -->
-          <div class="work-card reveal" data-category="enterprise all">
-            <div class="work-card-media">
-              <div class="work-media-glow glow-emerald"></div>
-              <div class="work-media-inner">
-                <div class="work-badge-row">
-                  <span class="work-status-badge status-deployed">
-                    <span class="status-pulse-dot"></span>
-                    High-Throughput Production
-                  </span>
-                  <span class="work-tech-chip">Sub-Second Indexing</span>
-                </div>
-                <div class="work-media-icon-box">
-                  <i data-lucide="search-check"></i>
-                </div>
-                <div class="work-media-caption">
-                  <span class="media-title">Elector ETL &amp; Search Portal</span>
-                  <span class="media-sub">[ Visual &amp; Demo Walkthrough Preview ]</span>
-                </div>
+          <div class="work-card work-card-compact reveal" data-category="enterprise all">
+            <div class="work-compact-top">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  High-Throughput Production
+                </span>
+                <span class="work-tech-chip">Sub-Second Indexing</span>
+              </div>
+              <div class="work-compact-icon glow-emerald">
+                <i data-lucide="search-check"></i>
               </div>
             </div>
 
-            <div class="work-card-content">
+            <div class="work-compact-body">
               <div class="work-card-eyebrow">Enterprise Web Portal &bull; High-Performance ETL</div>
               <h3 class="work-card-title">Elector Lookup Portal</h3>
-              <p class="work-card-tagline">Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector (voter) profile lookups by EPIC number.</p>
-              <p class="work-card-desc">Engineered for large-scale institutional identity queries with sub-second response times across vast datasets. Features high-volume multi-threaded data ingestion, sanitized search caches, and zero-compromise cryptographic access controls.</p>
+              <p class="work-card-tagline">Sub-second EPIC voter queries across millions of records with cryptographic audit safety.</p>
               
-              <ul class="work-specs-list">
-                <li><i data-lucide="check-circle-2"></i> Sub-second instant elector lookups by EPIC number across millions of records</li>
-                <li><i data-lucide="check-circle-2"></i> Multi-stage resilient ETL pipeline for bulk dataset ingestion &amp; sanitization</li>
-                <li><i data-lucide="check-circle-2"></i> Cryptographically signed operator audit trails &amp; role-based access</li>
-                <li><i data-lucide="check-circle-2"></i> Air-gapped and intranet-ready secure deployment architecture</li>
-              </ul>
-
               <div class="work-tech-stack">
-                <span>Node.js / Go Pipeline</span>
+                <span>Node.js / Go</span>
+                <span>Redis Index</span>
                 <span>PostgreSQL Partitioning</span>
-                <span>Redis In-Memory Index</span>
-                <span>Tailwind CSS</span>
-                <span>JWT Security</span>
               </div>
+            </div>
 
-              <div class="work-card-actions">
-                <button type="button" class="apple-btn-primary" onclick="openProjectModal('elector-portal')">
-                  <span>View System Architecture &amp; Specs</span>
-                  <i data-lucide="layers"></i>
-                </button>
-                <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Elector Lookup Portal')">
-                  <span>Request Similar Build</span>
-                  <i data-lucide="arrow-right"></i>
-                </button>
-              </div>
+            <div class="work-card-actions">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('elector-portal')">
+                <span>Explore Architecture &amp; Details</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Elector Lookup Portal')">
+                <span>Inquire</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
             </div>
           </div>
 
           <!-- Project 4: Vivian Vaidhya Fest 2026 -->
-          <div class="work-card reveal" data-category="event all">
-            <div class="work-card-media">
-              <div class="work-media-glow glow-purple"></div>
-              <div class="work-media-inner">
-                <div class="work-badge-row">
-                  <span class="work-status-badge status-live">
-                    <span class="status-pulse-dot dot-live"></span>
-                    Live Event Production
-                  </span>
-                  <span class="work-tech-chip">Web Audio API &bull; Sync</span>
-                </div>
-                <div class="work-media-icon-box">
-                  <i data-lucide="music-4"></i>
-                </div>
-                <div class="work-media-caption">
-                  <span class="media-title">Realtime Concert Gate Scanner</span>
-                  <span class="media-sub">[ Visual &amp; Demo Walkthrough Preview ]</span>
-                </div>
+          <div class="work-card work-card-compact reveal" data-category="event all">
+            <div class="work-compact-top">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-live">
+                  <span class="status-pulse-dot dot-live"></span>
+                  Live Event Production
+                </span>
+                <span class="work-tech-chip">Web Audio API &bull; Sync</span>
+              </div>
+              <div class="work-compact-icon glow-purple">
+                <i data-lucide="music-4"></i>
               </div>
             </div>
 
-            <div class="work-card-content">
+            <div class="work-compact-body">
               <div class="work-card-eyebrow">Live High-Throughput Event Operations &bull; Concert Tech</div>
               <h3 class="work-card-title">Vivian Vaidhya Fest 2026 — Concert Entry System</h3>
-              <p class="work-card-tagline">A premium, realtime concert ticket scanning and operations dashboard built for live high-throughput event entry.</p>
-              <p class="work-card-desc">Designed for high-pressure concert gate operations with sub-100ms optical ticket verification, cinematic dark-glassmorphism aesthetic, hardware-accelerated sound synthesis for access control feedback, and live multi-device syncing across all entry gates.</p>
+              <p class="work-card-tagline">Realtime optical ticket verification with zero-latency synthesized sound &amp; multi-gate sync.</p>
               
-              <ul class="work-specs-list">
-                <li><i data-lucide="check-circle-2"></i> Sub-100ms optical QR validation and fraud/duplicate ticket detection</li>
-                <li><i data-lucide="check-circle-2"></i> Web Audio API hardware-accelerated sound synthesis for pass/reject audio cues</li>
-                <li><i data-lucide="check-circle-2"></i> Real-time multi-gate WebSocket telemetry &amp; live capacity dashboard</li>
-                <li><i data-lucide="check-circle-2"></i> Offline-first IndexedDB cache ensuring uninterrupted scanning during network dips</li>
-              </ul>
-
               <div class="work-tech-stack">
                 <span>Web Audio API</span>
-                <span>HTML5 Canvas QR</span>
+                <span>Canvas QR</span>
                 <span>WebSockets</span>
                 <span>IndexedDB</span>
-                <span>Dark Glassmorphism</span>
               </div>
+            </div>
 
-              <div class="work-card-actions">
-                <button type="button" class="apple-btn-primary" onclick="openProjectModal('concert-entry')">
-                  <span>View System Architecture &amp; Specs</span>
-                  <i data-lucide="layers"></i>
-                </button>
-                <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Vivian Vaidhya Fest Concert Entry System')">
-                  <span>Request Similar Build</span>
-                  <i data-lucide="arrow-right"></i>
-                </button>
-              </div>
+            <div class="work-card-actions">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('concert-entry')">
+                <span>Explore Architecture &amp; Details</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Vivian Vaidhya Fest Concert Entry System')">
+                <span>Inquire</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
             </div>
           </div>
 
-          <!-- Future Builds Showcase -->
-          <div class="work-card work-card-future reveal" data-category="future all">
-            <div class="work-card-media">
-              <div class="work-media-glow glow-amber"></div>
-              <div class="work-media-inner">
-                <div class="work-badge-row">
-                  <span class="work-status-badge status-roadmap">
-                    <span class="status-pulse-dot dot-roadmap"></span>
-                    Active Engineering Roadmap
-                  </span>
-                  <span class="work-tech-chip">Next-Gen Labs</span>
-                </div>
-                <div class="work-media-icon-box">
-                  <i data-lucide="sparkles"></i>
-                </div>
-                <div class="work-media-caption">
-                  <span class="media-title">Future Systems &amp; R&amp;D Pipeline</span>
-                  <span class="media-sub">[ Innovations Currently In Development ]</span>
-                </div>
+          <!-- Project 5: Future Builds Showcase -->
+          <div class="work-card work-card-compact work-card-future reveal" data-category="future all">
+            <div class="work-compact-top">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-roadmap">
+                  <span class="status-pulse-dot dot-roadmap"></span>
+                  Active Engineering Roadmap
+                </span>
+                <span class="work-tech-chip">Next-Gen Labs</span>
+              </div>
+              <div class="work-compact-icon glow-amber">
+                <i data-lucide="sparkles"></i>
               </div>
             </div>
 
-            <div class="work-card-content">
+            <div class="work-compact-body">
               <div class="work-card-eyebrow">Upcoming Projects &bull; In Active Development</div>
               <h3 class="work-card-title">Future Builds &amp; Next-Gen Technology Systems</h3>
-              <p class="work-card-tagline">Expanding our engineering frontier across edge computer vision, multi-tenant cloud ecosystems, and smart campus IoT.</p>
-              <p class="work-card-desc">We are continuously architecting new systems across diverse industries. From distributed microservices billing frameworks to sub-GHz long-range sensor telemetry and autonomous multi-camera edge AI, our engineering pipeline is actively building what comes next.</p>
+              <p class="work-card-tagline">Edge AI multi-camera vision, cloud microservices billing, and sub-GHz IoT mesh arrays.</p>
               
-              <ul class="work-specs-list">
-                <li><i data-lucide="check-circle-2"></i> Autonomous Fleet Telemetry &amp; Edge Vision Tracking Systems</li>
-                <li><i data-lucide="check-circle-2"></i> Cloud-Native Microservices Multi-Store Billing &amp; Inventory Suite</li>
-                <li><i data-lucide="check-circle-2"></i> Sub-GHz Long-Range Industrial IoT Mesh Sensor Array</li>
-                <li><i data-lucide="check-circle-2"></i> Next-Gen Student Research &amp; Capstone Incubator Platforms</li>
-              </ul>
-
               <div class="work-tech-stack">
                 <span>Edge AI / OpenCV</span>
-                <span>Sub-GHz IoT Mesh</span>
+                <span>Sub-GHz IoT</span>
                 <span>Kubernetes</span>
                 <span>Next.js</span>
-                <span>MQTT Cloud</span>
               </div>
+            </div>
 
-              <div class="work-card-actions">
-                <button type="button" class="apple-btn-primary" onclick="openProjectModal('future-builds')">
-                  <span>Explore Upcoming Roadmap</span>
-                  <i data-lucide="compass"></i>
-                </button>
-                <button type="button" class="apple-btn-secondary" onclick="prefillContact('Discuss a Custom / Future Technology Build')">
-                  <span>Propose a Project</span>
-                  <i data-lucide="arrow-right"></i>
-                </button>
-              </div>
+            <div class="work-card-actions">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('future-builds')">
+                <span>Explore Upcoming Roadmap</span>
+                <i data-lucide="compass"></i>
+              </button>
+              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Discuss a Custom / Future Technology Build')">
+                <span>Inquire</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
             </div>
           </div>
 

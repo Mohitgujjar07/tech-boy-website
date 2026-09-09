@@ -676,28 +676,66 @@ window.openProjectModal = function(projectId) {
   const data = projectData[projectId];
   if (!modal || !content || !data) return;
 
+  const isStudent = ['iot-station', 'web-billing', 'custom-pc', 'autonomous-rover', 'excel-cockpit', 'enterprise-lan'].includes(projectId);
+  const ctaText = isStudent ? 'Request Student Project Guidance' : 'Request Similar Architecture / Build Guidance';
+  const ctaPrefill = isStudent ? ('Guidance for ' + data.title) : ('Inquiry regarding ' + data.title);
+
   content.innerHTML = `
-    <span class="apple-eyebrow" style="margin-bottom: 8px;">${data.category}</span>
-    <h3 style="font-family: var(--font-ui); font-size: 1.35rem; font-weight: 700; margin-bottom: 12px;">${data.title}</h3>
-    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">${data.desc}</p>
-    
-    <h4 style="font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">Key Components / Stack:</h4>
-    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;">
-      ${data.bom.map(item => `<span style="background: #F1F5F9; border: 1px solid #E2E8F0; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">${item}</span>`).join('')}
+    <div class="modal-header-block">
+      <div class="modal-badge-row">
+        <span class="work-status-badge status-deployed">
+          <span class="status-pulse-dot"></span>
+          Verified Architecture
+        </span>
+        <span class="modal-category-tag">${data.category}</span>
+      </div>
+      <h3 class="modal-project-title">${data.title}</h3>
     </div>
 
-    <h4 style="font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">Viva Exam Questions & Insights:</h4>
-    <ul style="display: flex; flex-direction: column; gap: 8px; font-size: 0.825rem; color: var(--text-muted); margin-bottom: 24px;">
-      ${data.viva.map(q => `<li style="background: #F8FAFC; border-left: 3px solid #2563EB; padding: 8px 12px; border-radius: 4px;">${q}</li>`).join('')}
-    </ul>
+    <div class="modal-body-section">
+      <h4 class="modal-section-heading"><i data-lucide="info"></i> System Overview &amp; Field Scope</h4>
+      <p class="modal-desc-text">${data.desc}</p>
+    </div>
+    
+    <div class="modal-body-section">
+      <h4 class="modal-section-heading"><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+      <div class="modal-chips-grid">
+        ${data.bom.map(item => `<span class="modal-spec-chip"><i data-lucide="check"></i> ${item}</span>`).join('')}
+      </div>
+    </div>
 
-    <a href="#contact" class="apple-btn-primary" onclick="closeProjectModal(); prefillContact('Guidance for ' + '${data.title}');" style="display: inline-flex; width: 100%; justify-content: center;">
-      Request Student Project Guidance
-    </a>
+    <div class="modal-body-section">
+      <h4 class="modal-section-heading"><i data-lucide="help-circle"></i> Engineering Defense &amp; Technical Viva Q&amp;A</h4>
+      <div class="modal-viva-list">
+        ${data.viva.map(q => {
+          const parts = q.split('?');
+          if (parts.length >= 2) {
+            return `
+              <div class="modal-viva-card">
+                <div class="modal-viva-q"><strong>Q:</strong> ${parts[0]}?</div>
+                <div class="modal-viva-a"><strong>A:</strong> ${parts.slice(1).join('?').trim()}</div>
+              </div>
+            `;
+          }
+          return `<div class="modal-viva-card"><div class="modal-viva-q">${q}</div></div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="modal-actions-footer">
+      <a href="#contact" class="apple-btn-primary modal-cta-btn" onclick="closeProjectModal(); prefillContact('${ctaPrefill.replace(/'/g, "\\'")}');">
+        <span>${ctaText}</span>
+        <i data-lucide="arrow-right"></i>
+      </a>
+      <button type="button" class="apple-btn-secondary modal-cancel-btn" onclick="closeProjectModal()">
+        Close
+      </button>
+    </div>
   `;
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
   if (typeof lucide !== 'undefined') lucide.createIcons();
 };
 
@@ -706,6 +744,10 @@ window.closeProjectModal = function() {
   if (modal) {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+    const mobileMenu = document.getElementById('mobileDrawerOverlay') || document.getElementById('mobileMenu');
+    if (!mobileMenu || !mobileMenu.classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
   }
 };
 
@@ -916,12 +958,27 @@ function initConsultationForm() {
 // =========================================================================
 // 14. Theme Manager (Light SaaS Default & Dark Mode Persistence)
 // =========================================================================
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-theme', theme);
+  if (theme === 'dark') {
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+    document.documentElement.classList.remove('light-theme');
+    document.documentElement.classList.add('dark-theme');
+  } else {
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+    document.documentElement.classList.remove('dark-theme');
+    document.documentElement.classList.add('light-theme');
+  }
+}
+
 function initThemeToggle() {
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = localStorage.getItem('tbs_theme') || 'light';
 
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  document.body.setAttribute('data-theme', savedTheme);
+  applyTheme(savedTheme);
 
   if (!themeToggle) return;
 
@@ -929,8 +986,7 @@ function initThemeToggle() {
     const currentTheme = document.body.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-    document.documentElement.setAttribute('data-theme', newTheme);
-    document.body.setAttribute('data-theme', newTheme);
+    applyTheme(newTheme);
     localStorage.setItem('tbs_theme', newTheme);
 
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
