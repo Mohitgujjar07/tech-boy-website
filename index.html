@@ -104,7 +104,7 @@
       <nav class="nav-menu">
         <ul class="nav-list">
           <li><a href="#services" class="nav-item">Services</a></li>
-          <li><a href="#work" class="nav-item">Our Work</a></li>
+          <li><a href="work.html" class="nav-item">Our Work <span class="nav-ext-arrow">&rarr;</span></a></li>
           <li><a href="#projects" class="nav-item" title="Student Innovation Lab &amp; Projects">Projects</a></li>
           <li><a href="#why-us" class="nav-item">Why Us</a></li>
           <li><a href="#faq" class="nav-item">FAQ</a></li>
@@ -771,231 +771,91 @@
           <p class="section-lead">Explore our deployed enterprise platforms, collegiate lab systems, and high-throughput real-time event software engineered in Tumakuru — plus our active future roadmap.</p>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="work-filter-tabs reveal">
-          <button type="button" class="work-filter-btn active" data-filter="all">
-            <i data-lucide="layout-grid"></i>
-            <span>All Systems</span>
-          </button>
-          <button type="button" class="work-filter-btn" data-filter="enterprise">
-            <i data-lucide="shield-check"></i>
-            <span>Enterprise &amp; Gate Security</span>
-          </button>
-          <button type="button" class="work-filter-btn" data-filter="institutional">
-            <i data-lucide="cpu"></i>
-            <span>Institutional AI &amp; Labs</span>
-          </button>
-          <button type="button" class="work-filter-btn" data-filter="event">
-            <i data-lucide="ticket"></i>
-            <span>Live Event Tech</span>
-          </button>
-          <button type="button" class="work-filter-btn" data-filter="future">
-            <i data-lucide="sparkles"></i>
-            <span>Future Builds (Roadmap)</span>
-          </button>
-        </div>
+        <!-- Production Work Gateway Hub (Clean, High-Impact Spotlight) -->
+        <div class="work-gateway-hub reveal">
+          <div class="work-gateway-top-bar">
+            <div class="gateway-live-badge">
+              <span class="status-pulse-dot"></span>
+              <span>5 Deployed Platforms &bull; Tumakuru Engineered</span>
+            </div>
+            <div class="gateway-meta-tag">Production Case Studies</div>
+          </div>
 
-        <!-- Production Work Grid -->
-        <!-- Production Work Grid (Compact High-Density Showcase) -->
-        <div class="work-grid work-grid-compact">
-          
-          <!-- Project 1: VMS -->
-          <div class="work-card work-card-compact reveal" data-category="enterprise all">
-            <div class="work-compact-top">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  Production Deployed
-                </span>
-                <span class="work-tech-chip">Enterprise Security</span>
-              </div>
-              <div class="work-compact-icon glow-blue">
+          <div class="work-gateway-grid">
+            
+            <!-- Pillar 1: VMS -->
+            <a href="work.html" class="gateway-item-card">
+              <div class="gateway-item-icon glow-blue">
                 <i data-lucide="shield-check"></i>
               </div>
-            </div>
-
-            <div class="work-compact-body">
-              <div class="work-card-eyebrow">Enterprise Gate Security &bull; Multi-Tenant</div>
-              <h3 class="work-card-title">Centralised Multi-Tenant Visitor Management System (VMS)</h3>
-              <p class="work-card-tagline">Next-Gen enterprise gate security, instant QR passes &amp; campus evacuation intelligence.</p>
-              
-              <div class="work-tech-stack">
-                <span>React.js</span>
-                <span>Node.js</span>
-                <span>PostgreSQL</span>
-                <span>Redis</span>
+              <div class="gateway-item-info">
+                <span class="gateway-item-domain">Enterprise Security</span>
+                <h4>Multi-Tenant Visitor System (VMS)</h4>
+                <p>Digital QR gate passes &amp; campus evacuation intelligence.</p>
               </div>
-            </div>
+              <span class="gateway-item-arrow">&rarr;</span>
+            </a>
 
-            <div class="work-card-actions">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('vms')">
-                <span>Explore Architecture &amp; Details</span>
-                <i data-lucide="layers"></i>
-              </button>
-              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Centralised Multi-Tenant Visitor Management System (VMS)')">
-                <span>Inquire</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Project 2: Computer Lab Ledger System -->
-          <div class="work-card work-card-compact reveal" data-category="institutional all">
-            <div class="work-compact-top">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  Collegiate Production
-                </span>
-                <span class="work-tech-chip">Google Gemini AI Vision</span>
-              </div>
-              <div class="work-compact-icon glow-cyan">
+            <!-- Pillar 2: Computer Lab Ledger -->
+            <a href="work.html" class="gateway-item-card">
+              <div class="gateway-item-icon glow-cyan">
                 <i data-lucide="brain"></i>
               </div>
-            </div>
-
-            <div class="work-compact-body">
-              <div class="work-card-eyebrow">Institutional AI &bull; Lab Management</div>
-              <h3 class="work-card-title">Computer Lab Ledger System</h3>
-              <p class="work-card-tagline">AI-powered handwriting OCR &amp; pg_trgm roster reconciliation for collegiate IT labs.</p>
-              
-              <div class="work-tech-stack">
-                <span>Gemini Vision</span>
-                <span>FastAPI</span>
-                <span>PostgreSQL</span>
-                <span>Tailwind</span>
+              <div class="gateway-item-info">
+                <span class="gateway-item-domain">Institutional AI</span>
+                <h4>Computer Lab Ledger System</h4>
+                <p>Google Gemini Vision OCR &amp; student roster reconciliation.</p>
               </div>
-            </div>
+              <span class="gateway-item-arrow">&rarr;</span>
+            </a>
 
-            <div class="work-card-actions">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('lab-ledger')">
-                <span>Explore Architecture &amp; Details</span>
-                <i data-lucide="layers"></i>
-              </button>
-              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Computer Lab Ledger System')">
-                <span>Inquire</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Project 3: Elector Lookup Portal -->
-          <div class="work-card work-card-compact reveal" data-category="enterprise all">
-            <div class="work-compact-top">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  High-Throughput Production
-                </span>
-                <span class="work-tech-chip">Sub-Second Indexing</span>
-              </div>
-              <div class="work-compact-icon glow-emerald">
+            <!-- Pillar 3: Elector Lookup Portal -->
+            <a href="work.html" class="gateway-item-card">
+              <div class="gateway-item-icon glow-emerald">
                 <i data-lucide="search-check"></i>
               </div>
-            </div>
-
-            <div class="work-compact-body">
-              <div class="work-card-eyebrow">Enterprise Web Portal &bull; High-Performance ETL</div>
-              <h3 class="work-card-title">Elector Lookup Portal</h3>
-              <p class="work-card-tagline">Sub-second EPIC voter queries across millions of records with cryptographic audit safety.</p>
-              
-              <div class="work-tech-stack">
-                <span>Node.js / Go</span>
-                <span>Redis Index</span>
-                <span>PostgreSQL Partitioning</span>
+              <div class="gateway-item-info">
+                <span class="gateway-item-domain">High-Performance ETL</span>
+                <h4>Elector Lookup Portal</h4>
+                <p>Sub-second EPIC queries across millions of voter records.</p>
               </div>
-            </div>
+              <span class="gateway-item-arrow">&rarr;</span>
+            </a>
 
-            <div class="work-card-actions">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('elector-portal')">
-                <span>Explore Architecture &amp; Details</span>
-                <i data-lucide="layers"></i>
-              </button>
-              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Elector Lookup Portal')">
-                <span>Inquire</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </div>
+            <!-- Pillar 4: Vivian Vaidhya Fest -->
+            <a href="work.html" class="gateway-item-card">
+              <div class="gateway-item-icon glow-purple">
+                <i data-lucide="ticket"></i>
+              </div>
+              <div class="gateway-item-info">
+                <span class="gateway-item-domain">Live Event Tech</span>
+                <h4>Vivian Vaidhya Fest 2026</h4>
+                <p>Concert ticket ingress with synthesized Web Audio API sound.</p>
+              </div>
+              <span class="gateway-item-arrow">&rarr;</span>
+            </a>
+
           </div>
 
-          <!-- Project 4: Vivian Vaidhya Fest 2026 -->
-          <div class="work-card work-card-compact reveal" data-category="event all">
-            <div class="work-compact-top">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-live">
-                  <span class="status-pulse-dot dot-live"></span>
-                  Live Event Production
-                </span>
-                <span class="work-tech-chip">Web Audio API &bull; Sync</span>
-              </div>
-              <div class="work-compact-icon glow-purple">
-                <i data-lucide="music-4"></i>
-              </div>
+          <!-- Gateway Future Roadmap & Client Collab Bar -->
+          <div class="gateway-roadmap-row">
+            <div class="gateway-roadmap-text">
+              <i data-lucide="sparkles" class="text-amber"></i>
+              <span><strong>Active Roadmap &amp; Future Client Builds:</strong> Edge AI Vehicle Tracking &bull; Cloud Microservices Billing SaaS &bull; Sub-GHz Mesh Arrays</span>
             </div>
-
-            <div class="work-compact-body">
-              <div class="work-card-eyebrow">Live High-Throughput Event Operations &bull; Concert Tech</div>
-              <h3 class="work-card-title">Vivian Vaidhya Fest 2026 — Concert Entry System</h3>
-              <p class="work-card-tagline">Realtime optical ticket verification with zero-latency synthesized sound &amp; multi-gate sync.</p>
-              
-              <div class="work-tech-stack">
-                <span>Web Audio API</span>
-                <span>Canvas QR</span>
-                <span>WebSockets</span>
-                <span>IndexedDB</span>
-              </div>
-            </div>
-
-            <div class="work-card-actions">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('concert-entry')">
-                <span>Explore Architecture &amp; Details</span>
-                <i data-lucide="layers"></i>
-              </button>
-              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Vivian Vaidhya Fest Concert Entry System')">
-                <span>Inquire</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </div>
+            <div class="gateway-roadmap-badge">Active R&amp;D</div>
           </div>
 
-          <!-- Project 5: Future Builds Showcase -->
-          <div class="work-card work-card-compact work-card-future reveal" data-category="future all">
-            <div class="work-compact-top">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-roadmap">
-                  <span class="status-pulse-dot dot-roadmap"></span>
-                  Active Engineering Roadmap
-                </span>
-                <span class="work-tech-chip">Next-Gen Labs</span>
-              </div>
-              <div class="work-compact-icon glow-amber">
-                <i data-lucide="sparkles"></i>
-              </div>
-            </div>
-
-            <div class="work-compact-body">
-              <div class="work-card-eyebrow">Upcoming Projects &bull; In Active Development</div>
-              <h3 class="work-card-title">Future Builds &amp; Next-Gen Technology Systems</h3>
-              <p class="work-card-tagline">Edge AI multi-camera vision, cloud microservices billing, and sub-GHz IoT mesh arrays.</p>
-              
-              <div class="work-tech-stack">
-                <span>Edge AI / OpenCV</span>
-                <span>Sub-GHz IoT</span>
-                <span>Kubernetes</span>
-                <span>Next.js</span>
-              </div>
-            </div>
-
-            <div class="work-card-actions">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('future-builds')">
-                <span>Explore Upcoming Roadmap</span>
-                <i data-lucide="compass"></i>
-              </button>
-              <button type="button" class="apple-btn-secondary" onclick="prefillContact('Discuss a Custom / Future Technology Build')">
-                <span>Inquire</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </div>
+          <!-- Action Buttons -->
+          <div class="work-gateway-actions">
+            <a href="work.html" class="apple-btn-cta gateway-main-cta">
+              <span>View Full Work &amp; Case Studies Page</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+            <a href="#contact" class="apple-btn-secondary gateway-sub-cta" onclick="prefillContact('Discuss a New Client Project / Custom Web Build')">
+              <span>Partner With Us / Future Client Inquiry</span>
+              <i data-lucide="handshake"></i>
+            </a>
           </div>
 
         </div>
@@ -1689,7 +1549,7 @@
       </div>
       <div class="footer-links-row">
         <a href="#services">Services</a>
-        <a href="#work">Our Work</a>
+        <a href="work.html">Our Work</a>
         <a href="#projects">Projects</a>
         <a href="#why-us">Why Us</a>
         <a href="#faq">FAQ</a>

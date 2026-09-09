@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary Meta Tags -->
+  <title>Production Work &amp; Deployed Web Systems | Tech Boy Solutions</title>
+  <meta name="title" content="Production Work &amp; Deployed Web Systems | Tech Boy Solutions">
+  <meta name="description" content="Explore our deployed enterprise platforms, collegiate lab systems, and high-throughput real-time event software engineered in Tumakuru — plus our active client roadmap.">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/logo-circle.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Anti-FOUC Theme Pre-Initialization -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.documentElement.classList.remove('light-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="light-theme">
+
+  <!-- Cosmic ASCII Matrix Background Canvas -->
+  <div class="cosmic-canvas-wrap" aria-hidden="true">
+    <canvas id="cosmicAsciiCanvas"></canvas>
+  </div>
+
+  <!-- ============================================================
+       APPLE iOS FLOATING GLASSMORPHISM HEADER (Dynamic Island)
+       ============================================================ -->
+  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="nav-brand" aria-label="Tech Boy Solutions Home">
+        <span class="brand-badge">
+          <img src="assets/logo-circle.png" alt="Tech Boy Solutions Logo" class="brand-logo-img" width="38" height="38">
+          <svg viewBox="0 0 28 28" width="0" height="0" class="brand-badge-token" aria-hidden="true" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;">
+            <rect width="28" height="28" rx="8" fill="#2563EB"/>
+            <path d="M7 9H17M12 9V20" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M17 9H20.5C21.88 9 23 10.12 23 11.5C23 12.88 21.88 14 20.5 14H17M17 14H21.5C22.88 14 24 15.12 24 16.5C24 17.88 22.88 19 21.5 19H17V9" stroke="#93C5FD" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">Tech Boy <span class="brand-highlight">Solutions</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html#services" class="nav-item">Services</a></li>
+          <li><a href="work.html" class="nav-item active" style="color: #2563EB; font-weight: 700;">Our Work</a></li>
+          <li><a href="index.html#projects" class="nav-item" title="Student Innovation Lab &amp; Projects">Projects</a></li>
+          <li><a href="index.html#why-us" class="nav-item">Why Us</a></li>
+          <li><a href="index.html#faq" class="nav-item">FAQ</a></li>
+          <li><a href="index.html#contact" class="nav-item">Contact</a></li>
+          <li><a href="developer.html" class="nav-item dev-link-highlight" title="High-Contrast Light Tech Tracing UI">Dev Platform ↗</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA, Theme Toggle & Mobile Trigger -->
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+          <i data-lucide="moon" class="theme-icon-dark"></i>
+          <i data-lucide="sun" class="theme-icon-light"></i>
+        </button>
+        <a href="index.html#contact" class="apple-btn-cta">
+          <span>Get Consultation</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobileDrawerOverlay">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Glass Slide-Out Menu -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" role="dialog" aria-hidden="true">
+    <div class="mobile-drawer-card">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <img src="assets/logo-circle.png" alt="Tech Boy Solutions Logo" class="drawer-logo-img" width="32" height="32">
+          <span>Tech Boy Solutions</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link">Home</a>
+        <a href="index.html#services" class="drawer-link">Services</a>
+        <a href="work.html" class="drawer-link active" style="color: #2563EB; font-weight: 700;">Our Work</a>
+        <a href="index.html#projects" class="drawer-link">Projects</a>
+        <a href="index.html#why-us" class="drawer-link">Why Us</a>
+        <a href="index.html#faq" class="drawer-link">FAQ</a>
+        <a href="index.html#contact" class="drawer-link">Contact</a>
+        <a href="developer.html" class="drawer-link">Dev Platform ↗</a>
+      </nav>
+      <div class="drawer-footer">
+        <a href="index.html#contact" class="apple-btn-cta" style="width: 100%; justify-content: center;">
+          <span>Start Consultation</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main id="main-content">
+
+    <!-- ============================================================
+         DEDICATED PAGE HERO: Production Work & Deployed Systems
+         ============================================================ -->
+    <section class="work-page-hero">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="briefcase"></i> Production Work &amp; Deployments</span>
+          <h1 class="work-page-main-title">Software &amp; Web Systems We’ve Built</h1>
+          <p class="section-lead">Explore our deployed enterprise platforms, collegiate lab systems, and high-throughput real-time event software engineered in Tumakuru — plus our active future roadmap and upcoming client builds.</p>
+        </div>
+
+        <!-- Metric Highlights Banner -->
+        <div class="work-page-stats-bar reveal revealed">
+          <div class="work-stat-pill">
+            <span class="stat-num">5+</span>
+            <span class="stat-lbl">Production Platforms</span>
+          </div>
+          <div class="work-stat-pill">
+            <span class="stat-num">10K+</span>
+            <span class="stat-lbl">Daily Gate Passes</span>
+          </div>
+          <div class="work-stat-pill">
+            <span class="stat-num">99.4%</span>
+            <span class="stat-lbl">AI Vision OCR Accuracy</span>
+          </div>
+          <div class="work-stat-pill">
+            <span class="stat-num">&lt; 85ms</span>
+            <span class="stat-lbl">Median Voter Query</span>
+          </div>
+          <div class="work-stat-pill">
+            <span class="stat-num">Zero</span>
+            <span class="stat-lbl">Gate Failover Incidents</span>
+          </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="work-filter-tabs reveal revealed" style="margin-top: 36px;">
+          <button type="button" class="work-filter-btn active" data-filter="all">
+            <i data-lucide="layout-grid"></i>
+            <span>All Systems</span>
+          </button>
+          <button type="button" class="work-filter-btn" data-filter="enterprise">
+            <i data-lucide="shield-check"></i>
+            <span>Enterprise &amp; Gate Security</span>
+          </button>
+          <button type="button" class="work-filter-btn" data-filter="institutional">
+            <i data-lucide="cpu"></i>
+            <span>Institutional AI &amp; Labs</span>
+          </button>
+          <button type="button" class="work-filter-btn" data-filter="event">
+            <i data-lucide="ticket"></i>
+            <span>Live Event Tech</span>
+          </button>
+          <button type="button" class="work-filter-btn" data-filter="future">
+            <i data-lucide="sparkles"></i>
+            <span>Future Builds (Roadmap)</span>
+          </button>
+          <button type="button" class="work-filter-btn" data-filter="client">
+            <i data-lucide="handshake"></i>
+            <span>Future Client Builds</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FULL PRODUCTION SHOWCASE (Detailed Architecture Cards)
+         ============================================================ -->
+    <section class="section-compact" style="padding-top: 10px;">
+      <div class="container">
+        
+        <div class="work-grid work-grid-full">
+          
+          <!-- Project 1: VMS -->
+          <article class="work-card work-card-detailed reveal revealed" data-category="enterprise all">
+            <div class="work-detailed-header">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  Production Deployed
+                </span>
+                <span class="work-tech-chip">Enterprise Security &bull; Multi-Tenant</span>
+              </div>
+              <div class="work-compact-icon glow-blue">
+                <i data-lucide="shield-check"></i>
+              </div>
+            </div>
+
+            <div class="work-detailed-content">
+              <div class="work-card-eyebrow">Enterprise Gate Security &bull; Visitor Lifecycle Platform</div>
+              <h2 class="work-detailed-title">Centralised Multi-Tenant Visitor Management System (VMS)</h2>
+              <p class="work-detailed-desc">An enterprise-scale platform built for high-security campuses, corporate parks, and educational institutions. Streamlines the visitor lifecycle from digital pre-registration and instant optical QR gate passes to live security telemetry, blacklisting enforcement, and emergency evacuation headcounts.</p>
+              
+              <!-- Key Architecture Highlights -->
+              <div class="work-architecture-box">
+                <h4><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+                <div class="modal-chips-grid">
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Multi-Tenant Isolated DB Architecture</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Optical QR Code Verification Terminal</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> WhatsApp &amp; SMS Cloud Dispatcher</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Real-Time Campus Headcount &amp; Evacuation Engine</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Granular RBAC Permissions</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> AES-256 Encrypted Visitor Audit Logs</span>
+                </div>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="work-tech-stack-row">
+                <span class="tech-tag">React.js</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">PostgreSQL RLS</span>
+                <span class="tech-tag">Redis Cache</span>
+                <span class="tech-tag">HMAC-SHA256</span>
+                <span class="tech-tag">Docker</span>
+              </div>
+            </div>
+
+            <div class="work-detailed-footer">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('vms')">
+                <span>Explore Deep Architecture (Modal)</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Centralised Multi-Tenant Visitor Management System (VMS)')">
+                <span>Inquire About This Build</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 2: Computer Lab Ledger System -->
+          <article class="work-card work-card-detailed reveal revealed" data-category="institutional all">
+            <div class="work-detailed-header">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  Collegiate Production Deployed
+                </span>
+                <span class="work-tech-chip">Google Gemini AI Vision &bull; OCR</span>
+              </div>
+              <div class="work-compact-icon glow-cyan">
+                <i data-lucide="brain"></i>
+              </div>
+            </div>
+
+            <div class="work-detailed-content">
+              <div class="work-card-eyebrow">Institutional AI &bull; Digital Laboratory Management</div>
+              <h2 class="work-detailed-title">Computer Lab Ledger System</h2>
+              <p class="work-detailed-desc">Next-generation digital laboratory management system designed for collegiate computer science &amp; IT departments. Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports.</p>
+              
+              <!-- Key Architecture Highlights -->
+              <div class="work-architecture-box">
+                <h4><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+                <div class="modal-chips-grid">
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Google Gemini Vision OCR Ingestion Pipeline</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> PostgreSQL Fuzzy Trigram (pg_trgm) Matching</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Lab Hardware Incident &amp; Defect Tracking</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Departmental Utilization &amp; Attendance Analytics</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Audit-Ready One-Click PDF Compliance Dispatcher</span>
+                </div>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="work-tech-stack-row">
+                <span class="tech-tag">Google Gemini Vision</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">PostgreSQL pg_trgm</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">PDFKit</span>
+              </div>
+            </div>
+
+            <div class="work-detailed-footer">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('lab-ledger')">
+                <span>Explore Deep Architecture (Modal)</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Computer Lab Ledger System')">
+                <span>Inquire About This Build</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 3: Elector Lookup Portal -->
+          <article class="work-card work-card-detailed reveal revealed" data-category="enterprise all">
+            <div class="work-detailed-header">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-deployed">
+                  <span class="status-pulse-dot"></span>
+                  High-Throughput Production Deployed
+                </span>
+                <span class="work-tech-chip">Sub-Second Indexing &bull; Cryptographic Safety</span>
+              </div>
+              <div class="work-compact-icon glow-emerald">
+                <i data-lucide="search-check"></i>
+              </div>
+            </div>
+
+            <div class="work-detailed-content">
+              <div class="work-card-eyebrow">Enterprise Web Portal &bull; High-Performance ETL Pipeline</div>
+              <h2 class="work-detailed-title">Elector Lookup Portal</h2>
+              <p class="work-detailed-desc">Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector (voter) profile lookups by EPIC number. Engineered for large-scale institutional identity queries with sub-second response times, multi-stage sanitization, and cryptographic audit security.</p>
+              
+              <!-- Key Architecture Highlights -->
+              <div class="work-architecture-box">
+                <h4><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+                <div class="modal-chips-grid">
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> High-Throughput Go / Node.js ETL Streaming Pipeline</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> PostgreSQL Range Partitioned Elector Tables</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Redis In-Memory Distributed Indexing Layer</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Cryptographically Signed Operator Audit Logging</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Air-Gapped Intranet Network Deployment</span>
+                </div>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="work-tech-stack-row">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Go Micro-service</span>
+                <span class="tech-tag">Redis Index</span>
+                <span class="tech-tag">PostgreSQL Partitioning</span>
+                <span class="tech-tag">Docker</span>
+              </div>
+            </div>
+
+            <div class="work-detailed-footer">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('elector-portal')">
+                <span>Explore Deep Architecture (Modal)</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Elector Lookup Portal')">
+                <span>Inquire About This Build</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 4: Vivian Vaidhya Fest 2026 -->
+          <article class="work-card work-card-detailed reveal revealed" data-category="event all">
+            <div class="work-detailed-header">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-live">
+                  <span class="status-pulse-dot dot-live"></span>
+                  Live Event Production Deployed
+                </span>
+                <span class="work-tech-chip">Web Audio API Synthesizer &bull; Zero-Latency</span>
+              </div>
+              <div class="work-compact-icon glow-purple">
+                <i data-lucide="music-4"></i>
+              </div>
+            </div>
+
+            <div class="work-detailed-content">
+              <div class="work-card-eyebrow">Live High-Throughput Event Operations &bull; Concert Tech</div>
+              <h2 class="work-detailed-title">Vivian Vaidhya Fest 2026 — Concert Entry System</h2>
+              <p class="work-detailed-desc">A premium, realtime concert ticket scanning and operations dashboard built for live high-throughput event entry. Features a cinematic dark-glassmorphism aesthetic, instant QR verification, hardware-accelerated sound synthesis for access control, and live multi-device syncing.</p>
+              
+              <!-- Key Architecture Highlights -->
+              <div class="work-architecture-box">
+                <h4><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+                <div class="modal-chips-grid">
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Sub-100ms Optical HTML5 Canvas QR Parser</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Web Audio API Synthesizer (Zero Audio Latency)</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Multi-Gate Real-Time WebSocket Synchronization Bus</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> IndexedDB Resilient Offline Gate Pass Cache</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Dark-Glassmorphism High-Contrast Operator UI</span>
+                </div>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="work-tech-stack-row">
+                <span class="tech-tag">Web Audio API</span>
+                <span class="tech-tag">HTML5 Canvas QR</span>
+                <span class="tech-tag">WebSockets</span>
+                <span class="tech-tag">IndexedDB Cache</span>
+                <span class="tech-tag">Vanilla ES6+</span>
+              </div>
+            </div>
+
+            <div class="work-detailed-footer">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('concert-entry')">
+                <span>Explore Deep Architecture (Modal)</span>
+                <i data-lucide="layers"></i>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Vivian Vaidhya Fest Concert Entry System')">
+                <span>Inquire About This Build</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 5: Future Builds Showcase -->
+          <article class="work-card work-card-detailed work-card-future reveal revealed" data-category="future all">
+            <div class="work-detailed-header">
+              <div class="work-badge-row">
+                <span class="work-status-badge status-roadmap">
+                  <span class="status-pulse-dot dot-roadmap"></span>
+                  Active Engineering Roadmap
+                </span>
+                <span class="work-tech-chip">Next-Gen R&amp;D Lab &bull; Tumakuru</span>
+              </div>
+              <div class="work-compact-icon glow-amber">
+                <i data-lucide="sparkles"></i>
+              </div>
+            </div>
+
+            <div class="work-detailed-content">
+              <div class="work-card-eyebrow">Upcoming Projects &bull; In Active Development</div>
+              <h2 class="work-detailed-title">Future Builds &amp; Next-Gen Technology Systems</h2>
+              <p class="work-detailed-desc">Active engineering prototypes and future production builds currently undergoing development in our Tumakuru laboratory — spanning autonomous edge computer vision, cloud-native microservices billing engines, and industrial IoT environmental arrays.</p>
+              
+              <!-- Key Architecture Highlights -->
+              <div class="work-architecture-box">
+                <h4><i data-lucide="layers"></i> Architecture &amp; Bill of Materials (BOM)</h4>
+                <div class="modal-chips-grid">
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Edge AI Multi-Camera Computer Vision Pipelines</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Cloud-Native Distributed Microservices Billing SaaS</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Sub-GHz Industrial IoT Mesh Telemetry Arrays</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Student Capstone Engineering Research Incubator</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> High-Frequency Realtime Event Streaming</span>
+                </div>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="work-tech-stack-row">
+                <span class="tech-tag">Edge AI / OpenCV</span>
+                <span class="tech-tag">Sub-GHz IoT</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">Go Microservices</span>
+              </div>
+            </div>
+
+            <div class="work-detailed-footer">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('future-builds')">
+                <span>Explore Upcoming Roadmap (Modal)</span>
+                <i data-lucide="compass"></i>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Discuss a Custom / Future Technology Build')">
+                <span>Inquire About Roadmap</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEDICATED SECTION: FUTURE CLIENT BUILDS & PARTNERSHIPS
+         ============================================================ -->
+    <section class="client-builds-section section-compact" data-category="client all">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="handshake"></i> Partner With Us</span>
+          <h2>Future Client Builds &amp; Custom Engineering</h2>
+          <p class="section-lead">Have an enterprise software need, collegiate automation challenge, or custom IoT hardware requirement? Here is how we engineer, deploy, and scale custom solutions for future clients.</p>
+        </div>
+
+        <div class="client-build-grid">
+          
+          <!-- Client Track 1 -->
+          <div class="client-build-card reveal revealed">
+            <div class="client-card-icon glow-blue">
+              <i data-lucide="globe-2"></i>
+            </div>
+            <div class="client-card-tag">Enterprise Software</div>
+            <h3>Custom SaaS &amp; Business Portals</h3>
+            <p>Tailor-made multi-tenant portals, automated invoicing, customer CRM, and cloud-synced databases engineered for your exact business logic with zero monthly platform lock-ins.</p>
+            <ul class="client-features-list">
+              <li><i data-lucide="check-circle-2"></i> Role-Based Permissions (RBAC)</li>
+              <li><i data-lucide="check-circle-2"></i> Real-time Postgres &amp; Redis sync</li>
+              <li><i data-lucide="check-circle-2"></i> Custom REST &amp; GraphQL APIs</li>
+            </ul>
+            <a href="index.html#contact" class="card-action-btn" onclick="prefillContact('Client Inquiry: Custom SaaS & Business Portal')">Start Client Build &rarr;</a>
+          </div>
+
+          <!-- Client Track 2 -->
+          <div class="client-build-card reveal revealed">
+            <div class="client-card-icon glow-cyan">
+              <i data-lucide="graduation-cap"></i>
+            </div>
+            <div class="client-card-tag">Collegiate &amp; Institutional</div>
+            <h3>Institutional AI &amp; Exam Portals</h3>
+            <p>Automate college departments with Google Gemini AI handwriting OCR, automated roster attendance reconciliation, incident logs, and digital examination seat engines.</p>
+            <ul class="client-features-list">
+              <li><i data-lucide="check-circle-2"></i> Handwriting OCR Ingestion</li>
+              <li><i data-lucide="check-circle-2"></i> Fuzzy student database matching</li>
+              <li><i data-lucide="check-circle-2"></i> NAAC &amp; NBA compliance PDFs</li>
+            </ul>
+            <a href="index.html#contact" class="card-action-btn" onclick="prefillContact('Client Inquiry: Institutional AI & Exam System')">Deploy for College &rarr;</a>
+          </div>
+
+          <!-- Client Track 3 -->
+          <div class="client-build-card reveal revealed">
+            <div class="client-card-icon glow-purple">
+              <i data-lucide="ticket"></i>
+            </div>
+            <div class="client-card-tag">Events &amp; Ingress</div>
+            <h3>Real-Time Live Event Ingress Tech</h3>
+            <p>Sub-second optical QR gate scanners, hardware sound feedback synthesis, multi-gate WebSocket mesh networks, and offline failover caches for concerts, fests, and exhibitions.</p>
+            <ul class="client-features-list">
+              <li><i data-lucide="check-circle-2"></i> 0ms synthesized audio signals</li>
+              <li><i data-lucide="check-circle-2"></i> Multi-gate anti-passback sync</li>
+              <li><i data-lucide="check-circle-2"></i> 100% offline-tolerant IndexedDB</li>
+            </ul>
+            <a href="index.html#contact" class="card-action-btn" onclick="prefillContact('Client Inquiry: Live Event Ingress System')">Equip Your Event &rarr;</a>
+          </div>
+
+          <!-- Client Track 4 -->
+          <div class="client-build-card reveal revealed">
+            <div class="client-card-icon glow-emerald">
+              <i data-lucide="cpu"></i>
+            </div>
+            <div class="client-card-tag">IoT &amp; Hardware</div>
+            <h3>Hardware Prototyping &amp; Telemetry</h3>
+            <p>ESP32, Raspberry Pi, and microcontroller sensor arrays connected to live cloud dashboards for industrial temperature, motion, energy, and smart agriculture monitoring.</p>
+            <ul class="client-features-list">
+              <li><i data-lucide="check-circle-2"></i> MQTT / HTTP telemetry pipelines</li>
+              <li><i data-lucide="check-circle-2"></i> Custom PCB &amp; breadboard assembly</li>
+              <li><i data-lucide="check-circle-2"></i> Live web telemetry dashboards</li>
+            </ul>
+            <a href="index.html#contact" class="card-action-btn" onclick="prefillContact('Client Inquiry: Hardware IoT & Telemetry Build')">Design Hardware &rarr;</a>
+          </div>
+
+        </div>
+
+        <!-- Fast Client Inquiry Card -->
+        <div class="client-inquiry-box reveal revealed">
+          <div class="client-inquiry-content">
+            <div class="client-inquiry-badge"><i data-lucide="sparkles"></i> Let's Build Together</div>
+            <h3>Have a Custom Build Requirement?</h3>
+            <p>Tell us your requirements, deadline, and target platform. We provide end-to-end architecture, transparent milestones, and reliable software engineered right here in Tumakuru.</p>
+          </div>
+          <div class="client-inquiry-actions">
+            <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions!%20I%20would%20like%20to%20discuss%20a%20new%20client%20project%20build." target="_blank" rel="noopener noreferrer" class="apple-btn-cta whatsapp-direct-btn">
+              <i data-lucide="message-square"></i>
+              <span>WhatsApp Us Directly</span>
+            </a>
+            <a href="index.html#contact" class="apple-btn-secondary">
+              <span>Submit Project Requirement</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       INTERACTIVE ARCHITECTURAL MODAL (#projectModal)
+       ============================================================ -->
+  <div class="apple-modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="apple-modal-card">
+      <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-content" id="modalContent">
+        <!-- Dynamically populated by main.js openProjectModal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       APPLE FOOTER
+       ============================================================ -->
+  <footer class="apple-footer">
+    <div class="container">
+      <div class="footer-bottom-grid" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 32px 0;">
+        <div class="footer-brand-col">
+          <div class="brand-text" style="font-weight: 800; font-size: 1.1rem;">Tech Boy <span class="brand-highlight" style="color: #2563EB;">Solutions</span></div>
+          <p class="footer-tagline" style="font-size: 0.85rem; margin-top: 4px;">Complete Technology Solutions &bull; Tumakuru, Karnataka, India</p>
+        </div>
+        <div class="footer-links-row" style="display: flex; gap: 16px; font-size: 0.85rem;">
+          <a href="index.html">Home</a>
+          <a href="index.html#services">Services</a>
+          <a href="work.html" style="color: #2563EB; font-weight: 700;">Our Work</a>
+          <a href="index.html#projects">Projects</a>
+          <a href="index.html#why-us">Why Us</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="developer.html">Dev Platform ↗</a>
+        </div>
+        <div class="copyright" style="font-size: 0.8rem;">&copy; 2026 Tech Boy Solutions. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions!%20I%20would%20like%20to%20discuss%20a%20new%20project." 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     class="whatsapp-fab" 
+     aria-label="Chat directly on WhatsApp with Tech Boy Solutions"
+     title="Chat with Us on WhatsApp">
+    <i data-lucide="message-circle"></i>
+    <span class="fab-pulse"></span>
+  </a>
+
+  <!-- Floating Back to Top Button -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top of page" title="Back to top">
+    <i data-lucide="chevron-up"></i>
+  </button>
+
+  <!-- Cosmic ASCII Canvas Background -->
+  <script src="ascii-cosmic-shader.js"></script>
+  <!-- Main Platform Controller -->
+  <script src="main.js"></script>
+</body>
+</html>
