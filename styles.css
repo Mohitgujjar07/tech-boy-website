@@ -2625,13 +2625,36 @@ body.dark-theme .faq-bg-layer {
   color: var(--accent-primary);
 }
 
-/* Clean Luminous Light Footer */
+/* Clean Luminous Light Footer with Cyber Matrix Desk Atmospheric Backdrop */
 .apple-footer {
   background: #FFFFFF;
-  padding: 48px 0 36px;
+  padding: 56px 0 40px;
   position: relative;
   overflow: hidden;
   border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.footer-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/footer-cyber-desk.jpg');
+  background-repeat: no-repeat;
+  background-position: center 42%;
+  background-size: cover;
+  opacity: 0.18;
+  filter: saturate(1.22) contrast(1.1);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 90%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 90%);
+}
+
+[data-theme="dark"] .footer-bg-layer,
+body.dark-theme .footer-bg-layer {
+  opacity: 0.45;
+  filter: saturate(1.35) contrast(1.2);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
 }
 
 .apple-footer::before {
@@ -2642,6 +2665,7 @@ body.dark-theme .faq-bg-layer {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.25), rgba(139, 92, 246, 0.2), transparent);
+  z-index: 2;
 }
 
 .apple-footer::after {
@@ -2654,6 +2678,7 @@ body.dark-theme .faq-bg-layer {
   background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  z-index: 2;
 }
 
 .footer-container {
@@ -2663,7 +2688,7 @@ body.dark-theme .faq-bg-layer {
   flex-wrap: wrap;
   gap: 20px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .apple-footer .brand-text {
@@ -4409,6 +4434,43 @@ body.dark-theme .contact-bg-layer {
 
 .apple-footer .copyright {
   color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .apple-footer,
+body.dark-theme .apple-footer {
+  background: #020508 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .apple-footer a,
+body.dark-theme .apple-footer a {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .apple-footer a:hover,
+body.dark-theme .apple-footer a:hover {
+  color: #38BDF8 !important;
+}
+
+[data-theme="dark"] .apple-footer .brand-text,
+body.dark-theme .apple-footer .brand-text {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .apple-footer .brand-highlight,
+body.dark-theme .apple-footer .brand-highlight {
+  color: #38BDF8 !important;
+}
+
+[data-theme="dark"] .apple-footer .footer-tagline,
+body.dark-theme .apple-footer .footer-tagline {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .apple-footer .copyright,
+body.dark-theme .apple-footer .copyright {
+  color: #64748B !important;
 }
 
 /* ============================================================
