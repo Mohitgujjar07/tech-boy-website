@@ -34,7 +34,7 @@ function updateActiveNavLink() {
   const navLinks = document.querySelectorAll('.nav-menu .nav-item, .nav-links .nav-link, #desktopNavLinks a');
   if (!navLinks.length) return;
 
-  const sections = ['about', 'services', 'software', 'hardware', 'student-projects', 'projects', 'why-us', 'faq', 'contact'];
+  const sections = ['about', 'services', 'software', 'hardware', 'work', 'portfolio', 'student-projects', 'projects', 'why-us', 'faq', 'contact'];
   let currentId = '';
 
   const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
@@ -60,7 +60,7 @@ function updateActiveNavLink() {
 
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href && (href === `#${currentId}` || (currentId === 'projects' && href === '#projects') || (currentId === 'services' && href === '#services'))) {
+    if (href && (href === `#${currentId}` || ((currentId === 'work' || currentId === 'portfolio') && (href === '#work' || href === '#portfolio')) || (currentId === 'projects' && href === '#projects') || (currentId === 'services' && href === '#services'))) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
@@ -558,6 +558,56 @@ function initFAQ() {
 // 11. Student Project Detail Modal & Bill of Materials
 // =========================================================================
 const projectData = {
+  'vms': {
+    title: 'Centralised Multi-Tenant Visitor Management System (VMS)',
+    category: 'Enterprise Gate Security & Campus Intelligence',
+    desc: 'An enterprise-scale platform built for high-security campuses, corporate parks, and educational institutions. Streamlines the visitor lifecycle from digital pre-registration and instant optical QR gate passes to live security telemetry, blacklisting enforcement, and emergency evacuation headcounts.',
+    bom: ['Multi-Tenant Isolated Tenant Database Architecture', 'Optical QR Code Verification Terminal', 'WhatsApp & SMS Cloud Notification Dispatcher', 'Real-Time Campus Headcount & Evacuation Engine', 'Granular Role-Based Access Control (RBAC)', 'AES-256 Encrypted Visitor Audit Logs'],
+    viva: [
+      'How is tenant data security ensured? Using PostgreSQL Row-Level Security (RLS) with strictly scoped tenant isolation contexts.',
+      'How does gate pass verification achieve sub-second speeds? QR tokens are signed with HMAC-SHA256 and verified locally on gatekeeper tablets with in-memory Redis cache.'
+    ]
+  },
+  'lab-ledger': {
+    title: 'Computer Lab Ledger System',
+    category: 'Institutional AI & Digital Lab Management',
+    desc: 'Next-generation digital laboratory management system designed for collegiate computer science & IT departments. Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports.',
+    bom: ['Google Gemini Vision OCR Ingestion Pipeline', 'PostgreSQL Fuzzy Trigram (pg_trgm) Matching Engine', 'Lab Hardware Incident & Defect Tracking Module', 'Departmental Utilization & Attendance Analytics', 'Audit-Ready One-Click PDF Compliance Dispatcher'],
+    viva: [
+      'How is messy handwriting recognized accurately? High-resolution scans are pre-processed with contrast normalization before sending to Google Gemini Vision with structured JSON schema prompt guidance.',
+      'Why pg_trgm fuzzy matching? Trigram string similarity tolerates student spelling variations and OCR misreads against the official collegiate database.'
+    ]
+  },
+  'elector-portal': {
+    title: 'Elector Lookup Portal',
+    category: 'High-Throughput Secure Internal Portal',
+    desc: 'Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector (voter) profile lookups by EPIC number. Engineered for large-scale institutional identity queries with sub-second response times, multi-stage sanitization, and cryptographic audit security.',
+    bom: ['High-Throughput Go / Node.js ETL Streaming Pipeline', 'PostgreSQL Range Partitioned Elector Tables', 'Redis In-Memory Distributed Indexing Layer', 'Cryptographically Signed Operator Audit Logging', 'Air-Gapped Intranet Network Deployment Architecture'],
+    viva: [
+      'How are sub-second queries achieved over massive elector datasets? Partitioned database indexing combined with in-memory Redis key-value caching of indexed EPIC tokens.',
+      'How is data privacy maintained? End-to-end data encryption at rest and in transit, with role-based masking of sensitive demographic fields.'
+    ]
+  },
+  'concert-entry': {
+    title: 'Vivian Vaidhya Fest 2026 — Concert Entry System',
+    category: 'Live Event High-Throughput Operations',
+    desc: 'A premium, realtime concert ticket scanning and operations dashboard built for live high-throughput event entry. Features a cinematic dark-glassmorphism aesthetic, instant QR verification, hardware-accelerated sound synthesis for access control, and live multi-device syncing.',
+    bom: ['Sub-100ms Optical HTML5 Canvas QR Parser', 'Web Audio API Synthesizer (Access Pass / Fail Frequencies)', 'Multi-Gate Real-Time WebSocket Synchronization Bus', 'IndexedDB Resilient Offline Gate Pass Cache', 'Cinematic Dark-Glassmorphism High-Contrast Operator UI'],
+    viva: [
+      'Why Web Audio API sound synthesis? Generating audio waveforms procedurally on the device eliminates audio asset loading latency, providing zero-latency acoustic confirmation to gate stewards.',
+      'How is anti-passback enforced across multiple gates? Atomic WebSocket broadcasts mark ticket IDs as scanned cluster-wide within 35ms, while IndexedDB protects against cellular dropouts.'
+    ]
+  },
+  'future-builds': {
+    title: 'Future Builds & Next-Gen Technology Systems',
+    category: 'Active Engineering Roadmap & R&D Lab',
+    desc: 'Active engineering prototypes and future production builds currently undergoing development in our Tumakuru laboratory — spanning autonomous edge computer vision, cloud-native microservices billing engines, and industrial IoT environmental arrays.',
+    bom: ['Edge AI Multi-Camera Computer Vision Pipelines', 'Cloud-Native Distributed Microservices Architecture', 'Sub-GHz Industrial IoT Mesh Telemetry Arrays', 'Student Capstone Engineering Research Incubator', 'High-Frequency Realtime Event Streaming Architecture'],
+    viva: [
+      'What is our future roadmap methodology? We bridge academic innovation with production reliability, creating hardened software and hardware systems ready for real-world deployment.',
+      'How can clients partner with us on future builds? We provide custom architecture consultation and rapid prototype development from concept to full production.'
+    ]
+  },
   'iot-station': {
     title: 'Cloud-Connected Smart Sensor Station',
     category: 'IoT & Embedded Systems',
@@ -685,6 +735,43 @@ function initProjectFilter() {
       const filter = btn.getAttribute('data-filter') || 'all';
 
       projectCards.forEach(card => {
+        const category = card.getAttribute('data-category') || '';
+        if (filter === 'all' || category.includes(filter)) {
+          card.style.display = 'flex';
+          requestAnimationFrame(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0) scale(1)';
+          });
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            if (card.style.opacity === '0') {
+              card.style.display = 'none';
+            }
+          }, 240);
+        }
+      });
+    });
+  });
+}
+
+// =========================================================================
+// 11b. Flagship Work Showcase Filter
+// =========================================================================
+function initWorkFilter() {
+  const filterBtns = document.querySelectorAll('.work-filter-btn');
+  const workCards = document.querySelectorAll('.work-card');
+  if (!filterBtns.length || !workCards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter') || 'all';
+
+      workCards.forEach(card => {
         const category = card.getAttribute('data-category') || '';
         if (filter === 'all' || category.includes(filter)) {
           card.style.display = 'flex';
@@ -939,6 +1026,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroHubTabs();
   initCategoryTabs();
   initProjectFilter();
+  initWorkFilter();
   initFAQ();
   initModalClose();
   initKeyboardAccessibility();

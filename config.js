@@ -542,6 +542,111 @@ const TBS_CONFIG = {
     categories: ['All', 'Website', 'Software', 'IoT', 'Hardware', 'Networking', 'Design', 'Student Project'],
     projects: [
       {
+        id: 'vms',
+        title: 'Centralised Multi-Tenant Visitor Management System (VMS)',
+        category: 'Software',
+        badge: 'Enterprise Gate Security',
+        desc: 'Next-Generation Enterprise Gate Security, Visitor Lifecycle & Campus Intelligence Platform.',
+        tags: ['Enterprise', 'Security', 'VMS', 'Multi-Tenant', 'QR Passes', 'Real-Time Sync'],
+        diagram: ['Digital Pre-Registration Portal', 'Gatekeeper High-Speed Scanner Terminal', 'PostgreSQL Row-Level Isolated Tenant Database', 'Real-time WebSocket Campus Headcount', 'Automated WhatsApp & SMS Host Alerts'],
+        bom: [
+          'Multi-Tenant Isolated Tenant Database Architecture',
+          'Optical QR Code Verification Terminal',
+          'WhatsApp & SMS Cloud Notification Dispatcher',
+          'Real-Time Campus Headcount & Evacuation Engine',
+          'Granular Role-Based Access Control (RBAC)'
+        ],
+        deliverables: [
+          'Production-Grade Source Code & Cloud Deployment',
+          'Gatekeeper Tablet App & Admin Security Dashboard',
+          'Tenant Isolation & Role Security Audit',
+          '1-Year Maintenance & Automated Cloud Backups'
+        ]
+      },
+      {
+        id: 'lab-ledger',
+        title: 'Computer Lab Ledger System',
+        category: 'Software',
+        badge: 'Institutional AI & OCR',
+        desc: 'Collegiate Computer Science & IT Digital Laboratory Management System using Google Gemini Vision OCR.',
+        tags: ['Institutional AI', 'Gemini Vision OCR', 'Fuzzy Matching', 'FastAPI', 'PostgreSQL'],
+        diagram: ['Handwritten Ledger Scanner / Camera', 'Google Gemini Vision OCR Ingestion Pipeline', 'PostgreSQL pg_trgm Student Roster Matcher', 'Hardware Incident Defect Tracker', 'Instant Audit-Ready PDF Compliance Dispatcher'],
+        bom: [
+          'Google Gemini Vision OCR Ingestion Pipeline',
+          'PostgreSQL Fuzzy Trigram (pg_trgm) Matching Engine',
+          'Lab Hardware Incident & Defect Tracking Module',
+          'Departmental Utilization & Attendance Analytics',
+          'Audit-Ready One-Click PDF Compliance Dispatcher'
+        ],
+        deliverables: [
+          'Production OCR Pipeline & Collegiate Dashboard',
+          'Roster Synchronization & Database Schema',
+          'Departmental Reporting Module & User Guide'
+        ]
+      },
+      {
+        id: 'elector-portal',
+        title: 'Elector Lookup Portal',
+        category: 'Software',
+        badge: 'High-Performance ETL',
+        desc: 'Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector profile lookups by EPIC number.',
+        tags: ['Web Portal', 'ETL Pipeline', 'Redis Caching', 'PostgreSQL Partitioning', 'Zero-Compromise Security'],
+        diagram: ['Secure Operator Intranet Client', 'Redis In-Memory Key-Value Index', 'PostgreSQL Partitioned Elector Store', 'High-Throughput Go / Node ETL Pipeline', 'Cryptographic Audit Logging Engine'],
+        bom: [
+          'High-Throughput Go / Node.js ETL Streaming Pipeline',
+          'PostgreSQL Range Partitioned Elector Tables',
+          'Redis In-Memory Distributed Indexing Layer',
+          'Cryptographically Signed Operator Audit Logging',
+          'Air-Gapped Intranet Network Deployment Architecture'
+        ],
+        deliverables: [
+          'Air-Gapped Intranet Production Deployment',
+          'Sub-Second Querying Performance Audit',
+          'Cryptographic Operator Audit Trails'
+        ]
+      },
+      {
+        id: 'concert-entry',
+        title: 'Vivian Vaidhya Fest 2026 — Concert Entry System',
+        category: 'Software',
+        badge: 'Live Event Operations',
+        desc: 'Realtime concert ticket scanning and operations dashboard built for live high-throughput event entry with Web Audio API sound synthesis.',
+        tags: ['Event Tech', 'QR Scanner', 'Web Audio API', 'Realtime Sync', 'Dark Glassmorphism'],
+        diagram: ['Mobile Gate Optical QR Scanner', 'HTML5 Canvas High-FPS Optical Decoder', 'Web Audio API Hardware Sound Synthesizer', 'Multi-Gate Real-Time WebSocket Synchronization Bus', 'IndexedDB Offline-First Fallback Engine'],
+        bom: [
+          'Sub-100ms Optical HTML5 Canvas QR Parser',
+          'Web Audio API Synthesizer (Access Pass / Fail Frequencies)',
+          'Multi-Gate Real-Time WebSocket Synchronization Bus',
+          'IndexedDB Resilient Offline Gate Pass Cache',
+          'Cinematic Dark-Glassmorphism High-Contrast Operator UI'
+        ],
+        deliverables: [
+          'High-Throughput Production Gate Scanning Suite',
+          'Live Multi-Gate Operations Analytics Dashboard',
+          'Zero-Latency Sound Synthesis Library'
+        ]
+      },
+      {
+        id: 'future-builds',
+        title: 'Future Builds & Next-Gen Technology Systems',
+        category: 'IoT',
+        badge: 'Engineering Roadmap',
+        desc: 'Active engineering prototypes and future production builds currently undergoing development in our Tumakuru laboratory.',
+        tags: ['Future Roadmap', 'Edge AI', 'Sub-GHz Mesh', 'Microservices', 'Incubator'],
+        diagram: ['Edge Computer Vision Sensors', 'Sub-GHz Long-Range Mesh Network', 'Cloud Microservices Event Bus', 'Realtime Analytics Engine', 'Autonomous Web Client Dashboard'],
+        bom: [
+          'Edge AI Multi-Camera Computer Vision Pipelines',
+          'Cloud-Native Distributed Microservices Architecture',
+          'Sub-GHz Industrial IoT Mesh Telemetry Arrays',
+          'Student Capstone Engineering Research Incubator'
+        ],
+        deliverables: [
+          'Active Laboratory Prototypes',
+          'Custom Architecture Consultation',
+          'Production Deployment Roadmap'
+        ]
+      },
+      {
         id: 'proj-website',
         title: 'Business & Corporate Portal',
         category: 'Website',
