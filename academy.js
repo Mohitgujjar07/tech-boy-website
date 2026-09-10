@@ -5,11 +5,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Reset initial scroll position if no deep-link hash is specified
+  if (!window.location.hash && window.scrollY > 0) {
+    window.scrollTo(0, 0);
+  }
+
   initTheme();
   initMobileDrawer();
   initCurriculumTabs();
   initFaqAccordion();
   initScrollReveal();
+  initBackToTop();
+  initScrollSpy();
 });
 
 // ------------------------------------------------------------
@@ -209,7 +216,7 @@ function downloadResourceMock(filename) {
   const sampleContent = `# AarambhX Academy — Course Syllabus & Lab Manual
 Document: ${filename}
 Issued by: Aarambhx Technology Educational Platform, Tumakuru
-Official Contact: +91 94812 61244 | techboysolutions007@gmail.com
+Official Contact: +91 94812 61244 | lalithulalu@gmail.com
 
 ------------------------------------------------------------
 1. Overview & Prerequisite Assessment
@@ -261,6 +268,58 @@ Sent from AarambhX Academy Platform`;
 
   const waUrl = `https://wa.me/919481261244?text=${encodeURIComponent(waPayload)}`;
   window.open(waUrl, '_blank');
+}
+
+// ------------------------------------------------------------
+// 9. BACK TO TOP BUTTON
+// ------------------------------------------------------------
+function initBackToTop() {
+  const backToTopBtn = document.getElementById('backToTop');
+  if (!backToTopBtn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ------------------------------------------------------------
+// 10. SCROLL-SPY ACTIVE NAV HIGHLIGHTER
+// ------------------------------------------------------------
+function initScrollSpy() {
+  const navLinks = document.querySelectorAll('.nav-menu .nav-item[href^="#"]');
+  const sections = [];
+
+  navLinks.forEach(link => {
+    const id = link.getAttribute('href').substring(1);
+    const section = document.getElementById(id);
+    if (section) {
+      sections.push({ id, link, section });
+    }
+  });
+
+  if (!sections.length) return;
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 140;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const { section, link } = sections[i];
+      if (section.offsetTop <= scrollPos) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        return;
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
 }
 
 // Expose globals for onclick attributes

@@ -2,6 +2,11 @@
    AARAMBHX ACADEMY — EDUCATIONAL PLATFORM STYLESHEET
    ============================================================ */
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
 /* ------------------------------------------------------------
    1. HERO SECTION & AMBIENCE
    ------------------------------------------------------------ */
@@ -1087,5 +1092,328 @@
   .btn-resource-dl {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* ------------------------------------------------------------
+   9. AARAMBHX ACADEMY FOOTER & FLOATING ACTIONS
+   ------------------------------------------------------------ */
+.site-footer.apple-footer {
+  position: relative;
+  background: #ffffff;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 80px 0 40px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+[data-theme="dark"] .site-footer.apple-footer {
+  background: #090d16;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-academy-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin-bottom: 18px;
+  transition: transform 0.2s ease;
+}
+
+.footer-logo:hover {
+  transform: translateY(-2px);
+}
+
+.footer-logo .brand-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-logo .logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.footer-logo .logo-brand {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary, #0f172a);
+}
+
+[data-theme="dark"] .footer-logo .logo-brand {
+  color: #f8fafc;
+}
+
+.footer-logo .logo-accent {
+  color: #2563eb;
+}
+
+[data-theme="dark"] .footer-logo .logo-accent {
+  color: #60a5fa;
+}
+
+.footer-logo .logo-corp {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+[data-theme="dark"] .footer-logo .logo-corp {
+  color: #94a3b8;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-secondary, #64748b);
+  max-width: 380px;
+  margin-bottom: 24px;
+}
+
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.footer-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--text-secondary, #64748b);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-contact-link:hover {
+  color: #2563eb;
+  transform: translateX(3px);
+}
+
+[data-theme="dark"] .footer-contact-link:hover {
+  color: #60a5fa;
+}
+
+.footer-contact-link svg {
+  width: 16px;
+  height: 16px;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .footer-contact-link svg {
+  color: #60a5fa;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+[data-theme="dark"] .footer-heading {
+  color: #f1f5f9;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #2563eb;
+  border-radius: 2px;
+}
+
+[data-theme="dark"] .footer-heading::after {
+  background: #60a5fa;
+}
+
+.footer-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links-list a {
+  display: inline-block;
+  font-size: 0.885rem;
+  color: var(--text-secondary, #64748b);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.footer-links-list a:hover {
+  color: #2563eb;
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .footer-links-list a:hover {
+  color: #60a5fa;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+}
+
+[data-theme="dark"] .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom .copyright {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-links a {
+  color: var(--text-secondary, #64748b);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: #2563eb;
+}
+
+[data-theme="dark"] .footer-bottom-links a:hover {
+  color: #60a5fa;
+}
+
+/* WhatsApp FAB & Back to Top */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  z-index: 990;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.whatsapp-fab:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+  color: #ffffff;
+}
+
+.whatsapp-fab svg {
+  width: 26px;
+  height: 26px;
+}
+
+.fab-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  opacity: 0.6;
+  animation: fab-ring-pulse 2.2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes fab-ring-pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .site-footer.apple-footer {
+    padding: 60px 0 30px;
   }
 }
