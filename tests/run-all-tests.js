@@ -13,6 +13,7 @@ const { runTier3Tests } = require('./tier3-interactions.test');
 const { runTier4Tests } = require('./tier4-scenarios.test');
 const { runTier5Tests } = require('./tier5-adversarial-hardening.test');
 const { runDeveloperPlatformTests } = require('./developer-platform.test');
+const { runAcademySpecTests } = require('./academy-spec.test');
 const { runScrollExpandTests } = require('./scroll-expand.test');
 const { runMorphSliderTests } = require('./morph-slider.test');
 const { makeHttpRequest } = require('./test-utils');
@@ -208,19 +209,27 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
-  // Tier 6: Developer Platform Light Tech Spec Suite (developer.html)
+  // Tier 6: AarambhX Academy & Educational Spec Suite (academy.html)
   // -------------------------------------------------------------------------
-  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 6: Developer Platform Light Tech (developer.html)${RESET}`);
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 6: AarambhX Academy & Educational Spec (academy.html)${RESET}`);
   let t6Passed = 0;
   let t6Failed = 0;
   let t6Assertions = 0;
   try {
-    const devRes = runDeveloperPlatformTests();
-    t6Passed = devRes.passed;
-    t6Assertions = devRes.assertions;
+    const acadRes = runAcademySpecTests();
+    t6Passed += acadRes.passed;
+    t6Assertions += acadRes.assertions;
   } catch (err) {
-    t6Failed = 1;
-    console.error(`  ${RED}✖ Developer Platform suite failed: ${err.message}${RESET}`);
+    t6Failed += 1;
+    console.error(`  ${RED}✖ AarambhX Academy suite failed: ${err.message}${RESET}`);
+  }
+  try {
+    const devRes = runDeveloperPlatformTests();
+    t6Passed += devRes.passed;
+    t6Assertions += devRes.assertions;
+  } catch (err) {
+    t6Failed += 1;
+    console.error(`  ${RED}✖ Developer Platform legacy suite failed: ${err.message}${RESET}`);
   }
   totalTests += (t6Passed + t6Failed);
   totalPassed += t6Passed;
@@ -228,7 +237,7 @@ async function main() {
   totalAssertions += t6Assertions;
 
   tierReports.push({
-    tier: 'Tier 6: Developer Platform Spec',
+    tier: 'Tier 6: AarambhX Academy & Platform Spec',
     total: t6Passed + t6Failed,
     passed: t6Passed,
     failed: t6Failed,

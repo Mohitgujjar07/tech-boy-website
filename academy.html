@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary Meta Tags -->
+  <title>AarambhX Academy — Hands-On AI, IoT, Cybersecurity & Enterprise Automation</title>
+  <meta name="title" content="AarambhX Academy — Hands-On AI, IoT, Cybersecurity & Enterprise Automation">
+  <meta name="description" content="Industrial training and hands-on campus workshops for schools, colleges, and institutions in Tumakuru & Karnataka. Master AI from scratch, IoT robotics, cybersecurity, and Excel automation with 100% practical engineering.">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AarambhX Academy — Practical Tech Workshops & Industrial Training">
+  <meta property="og:description" content="Master AI from scratch, IoT robotics, cybersecurity, and enterprise automation with practical, lab-first training.">
+  <meta property="og:image" content="assets/aarambhx-logo.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
+  <link rel="apple-touch-icon" href="assets/aarambhx-logo.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="academy.css">
+
+  <!-- Immediate Theme Initializer -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tb_theme') || localStorage.getItem('tbs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (document.body) document.body.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============================================================
+       1. FLOATING GLASSMORPHIC NAVIGATION BAR
+       ============================================================ -->
+  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      
+      <!-- Brand Logo Badge -->
+      <a href="academy.html" class="nav-brand" aria-label="AarambhX Academy Home">
+        <div class="brand-badge">
+          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-img" width="44" height="44">
+        </div>
+        <span class="brand-name">Aarambh<span class="brand-highlight">X</span> Academy</span>
+      </a>
+
+      <!-- Desktop Links Track -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#overview" class="nav-item active">Overview</a></li>
+          <li><a href="#tracks" class="nav-item">Tracks</a></li>
+          <li><a href="#workshops" class="nav-item">Workshops</a></li>
+          <li><a href="#curriculum" class="nav-item">Curriculum</a></li>
+          <li><a href="#resources" class="nav-item">Resources</a></li>
+          <li><a href="#faq" class="nav-item">FAQ</a></li>
+          <li><a href="index.html" class="nav-item agency-nav-back" style="color: #2563EB; font-weight: 700;" title="Return to Agency Main Site">Agency ↗</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Items & Theme Switcher -->
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+          <i data-lucide="moon" class="theme-icon-dark"></i>
+          <i data-lucide="sun" class="theme-icon-light"></i>
+        </button>
+        <a href="#booking" class="apple-btn-cta desktop-cta">
+          <span>Book Workshop</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation Drawer" aria-expanded="false">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer-overlay" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+    <div class="mobile-drawer-content">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="drawer-logo-img" width="44" height="44">
+          <span class="brand-name">Aarambh<span class="brand-highlight">X</span> Academy</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawerClose" aria-label="Close navigation drawer">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="#overview" class="drawer-link">Overview</a>
+        <a href="#tracks" class="drawer-link">Tracks</a>
+        <a href="#workshops" class="drawer-link">Campus Workshops</a>
+        <a href="#curriculum" class="drawer-link">Curriculum</a>
+        <a href="#resources" class="drawer-link">Resources Hub</a>
+        <a href="#faq" class="drawer-link">FAQ</a>
+        <a href="index.html" class="drawer-link">Agency Main Site ↗</a>
+        <a href="work.html" class="drawer-link">Client Work Portfolio ↗</a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="#booking" class="apple-btn-cta w-full text-center">
+          <span>Book Campus Workshop</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============================================================
+         2. HERO SECTION
+         ============================================================ -->
+    <section id="overview" class="academy-hero-section">
+      <div class="academy-hero-ambient" aria-hidden="true"></div>
+      <div class="container academy-hero-container">
+        
+        <div class="academy-hero-badge reveal revealed">
+          <span class="academy-chip"><span class="chip-dot"></span> INDUSTRIAL TRAINING &amp; WORKSHOPS</span>
+          <span class="academy-location"><i data-lucide="map-pin"></i> Tumakuru &amp; Across Karnataka</span>
+        </div>
+
+        <h1 class="academy-hero-title reveal revealed">
+          Bridging Academia &amp; Industry with <span class="text-gradient">Real-World Tech.</span>
+        </h1>
+
+        <p class="academy-hero-lead reveal revealed">
+          <strong>AarambhX Academy</strong> is the dedicated engineering education and hands-on workshop wing of Aarambhx Technology. We demystify Artificial Intelligence from scratch, build live IoT hardware rigs, train defensive cybersecurity, and automate enterprise workflows for students, schools, polytechnics, and engineering colleges.
+        </p>
+
+        <!-- Stats Counter Row -->
+        <div class="academy-stats-row reveal revealed">
+          <div class="academy-stat-box">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Students Trained</span>
+          </div>
+          <div class="academy-stat-box">
+            <span class="stat-number">12+</span>
+            <span class="stat-label">Campus Workshops</span>
+          </div>
+          <div class="academy-stat-box">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Core Tech Tracks</span>
+          </div>
+          <div class="academy-stat-box">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Hands-On Labs</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="academy-hero-actions reveal revealed">
+          <a href="#tracks" class="apple-btn-cta">
+            <span>Explore Tech Tracks</span>
+            <i data-lucide="arrow-down"></i>
+          </a>
+          <a href="#booking" class="apple-btn-secondary">
+            <span>Book Campus Workshop</span>
+            <i data-lucide="calendar"></i>
+          </a>
+          <a href="https://wa.me/919481261244?text=Hello%20AarambhX%20Academy!%20I%20would%20like%20to%20inquire%20about%20your%20workshops%20and%20training%20programs." target="_blank" rel="noopener noreferrer" class="academy-whatsapp-chip">
+            <i data-lucide="message-circle"></i>
+            <span>Chat with Lead Trainer</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. CORE TECHNOLOGY TRACKS (4 SPECIALIZED TRACKS)
+         ============================================================ -->
+    <section id="tracks" class="section-compact academy-tracks-section">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="layers"></i> Academic &amp; Industrial Tracks</span>
+          <h2>What We Teach &amp; Train</h2>
+          <p class="section-lead">Zero boring PowerPoint lectures. Every session is 100% hands-on, terminal-driven, and designed to build real-world software and hardware prototypes from day one.</p>
+        </div>
+
+        <div class="academy-tracks-grid">
+          
+          <!-- Track 1: AI & Machine Learning -->
+          <div class="academy-track-card reveal revealed" id="track-ai">
+            <div class="track-header">
+              <div class="track-icon glow-blue">
+                <i data-lucide="sparkles"></i>
+              </div>
+              <span class="track-pill pill-blue">MOST POPULAR • FROM SCRATCH</span>
+            </div>
+            <h3>AI &amp; Machine Learning (From Scratch)</h3>
+            <p class="track-desc">
+              Taught right from fundamental math and Python intuition up to multimodal generative models. Students build functional computer vision OCR, sentiment classifiers, and Gemini AI automation pipelines.
+            </p>
+            <div class="track-highlights">
+              <h4>Key Learning Modules:</h4>
+              <ul>
+                <li><i data-lucide="check-circle-2"></i> Python for Data Science, NumPy &amp; Pandas</li>
+                <li><i data-lucide="check-circle-2"></i> Neural Network Intuition &amp; Model Training</li>
+                <li><i data-lucide="check-circle-2"></i> Computer Vision &amp; Real-World OCR Ingestion</li>
+                <li><i data-lucide="check-circle-2"></i> Multimodal Gemini API &amp; LLM Automation</li>
+              </ul>
+            </div>
+            <div class="track-tags">
+              <span>Python</span>
+              <span>PyTorch</span>
+              <span>Gemini Vision</span>
+              <span>OpenCV</span>
+              <span>Jupyter</span>
+            </div>
+            <div class="track-footer">
+              <button type="button" class="btn-track-action" onclick="openBookingModal('AI & Machine Learning')">
+                <span>Inquire Track</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 2: Hands-On IoT & Embedded Hardware -->
+          <div class="academy-track-card reveal revealed" id="track-iot">
+            <div class="track-header">
+              <div class="track-icon glow-emerald">
+                <i data-lucide="cpu"></i>
+              </div>
+              <span class="track-pill pill-emerald">CIRCUITS &amp; SENSORS</span>
+            </div>
+            <h3>IoT, Robotics &amp; Embedded Hardware</h3>
+            <p class="track-desc">
+              Real hardware that communicates. Students wire microcontrollers on physical breadboards, write C/C++ firmware, interface sensor arrays, and publish live cloud telemetry over MQTT networks.
+            </p>
+            <div class="track-highlights">
+              <h4>Key Learning Modules:</h4>
+              <ul>
+                <li><i data-lucide="check-circle-2"></i> ESP32, Arduino &amp; Raspberry Pi Architecture</li>
+                <li><i data-lucide="check-circle-2"></i> Analog/Digital Sensor Interfacing &amp; Wiring</li>
+                <li><i data-lucide="check-circle-2"></i> Real-time MQTT &amp; HTTP Cloud Telemetry</li>
+                <li><i data-lucide="check-circle-2"></i> Smart Campus &amp; Industrial Edge Node Prototyping</li>
+              </ul>
+            </div>
+            <div class="track-tags">
+              <span>ESP32</span>
+              <span>Arduino C++</span>
+              <span>MQTT</span>
+              <span>Raspberry Pi</span>
+              <span>I2C/SPI</span>
+            </div>
+            <div class="track-footer">
+              <button type="button" class="btn-track-action" onclick="openBookingModal('IoT & Embedded Hardware')">
+                <span>Inquire Track</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 3: Cybersecurity & Ethical Hacking -->
+          <div class="academy-track-card reveal revealed" id="track-cyber">
+            <div class="track-header">
+              <div class="track-icon glow-purple">
+                <i data-lucide="shield-check"></i>
+              </div>
+              <span class="track-pill pill-purple">SYSTEM SECURITY</span>
+            </div>
+            <h3>Cybersecurity &amp; Ethical Hacking</h3>
+            <p class="track-desc">
+              Defensive security literacy for future engineers. Students learn packet sniffing, vulnerability auditing, OWASP security postures, zero-trust architectures, and ethical hacking lab scenarios.
+            </p>
+            <div class="track-highlights">
+              <h4>Key Learning Modules:</h4>
+              <ul>
+                <li><i data-lucide="check-circle-2"></i> Network Architecture &amp; Wireshark Packet Forensics</li>
+                <li><i data-lucide="check-circle-2"></i> Web Application Vulnerabilities (OWASP Top 10)</li>
+                <li><i data-lucide="check-circle-2"></i> Ethical Reconnaissance &amp; Port Scanning (Nmap)</li>
+                <li><i data-lucide="check-circle-2"></i> Cryptography, Zero-Trust &amp; Network Defense</li>
+              </ul>
+            </div>
+            <div class="track-tags">
+              <span>Wireshark</span>
+              <span>Kali Linux</span>
+              <span>OWASP</span>
+              <span>Nmap</span>
+              <span>Burp Suite</span>
+            </div>
+            <div class="track-footer">
+              <button type="button" class="btn-track-action" onclick="openBookingModal('Cybersecurity & Ethical Hacking')">
+                <span>Inquire Track</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track 4: Enterprise Automation & Advanced Excel -->
+          <div class="academy-track-card reveal revealed" id="track-excel">
+            <div class="track-header">
+              <div class="track-icon glow-cyan">
+                <i data-lucide="table"></i>
+              </div>
+              <span class="track-pill pill-cyan">PROCESS AUTOMATION</span>
+            </div>
+            <h3>Enterprise Automation &amp; Advanced Excel</h3>
+            <p class="track-desc">
+              Eliminate hours of manual data entry. We train college departments, administrative staff, accountants, and students to build automated spreadsheet workflows, Power Query models, macros, and Python bridges.
+            </p>
+            <div class="track-highlights">
+              <h4>Key Learning Modules:</h4>
+              <ul>
+                <li><i data-lucide="check-circle-2"></i> Advanced Modeling (Dynamic Arrays, XLOOKUP, INDEX)</li>
+                <li><i data-lucide="check-circle-2"></i> Power Query Automated Data Ingestion &amp; Cleansing</li>
+                <li><i data-lucide="check-circle-2"></i> VBA Macros &amp; Repetitive Workflow Automation</li>
+                <li><i data-lucide="check-circle-2"></i> Python-to-Excel Automated PDF &amp; Report Pipelines</li>
+              </ul>
+            </div>
+            <div class="track-tags">
+              <span>Advanced Excel</span>
+              <span>Power Query</span>
+              <span>VBA Macros</span>
+              <span>Python pandas</span>
+              <span>Office Automation</span>
+            </div>
+            <div class="track-footer">
+              <button type="button" class="btn-track-action" onclick="openBookingModal('Enterprise Automation & Excel')">
+                <span>Inquire Track</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. INSTITUTIONAL TRAINING & CAMPUS DELIVERY MODEL
+         ============================================================ -->
+    <section id="workshops" class="section-compact academy-workshops-section">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="graduation-cap"></i> Institutional Partnerships</span>
+          <h2>Campus Workshops &amp; Faculty Training</h2>
+          <p class="section-lead">We travel directly to your school, polytechnic, engineering college, or office. We handle all curriculum preparation, live hardware kits, and student project supervision.</p>
+        </div>
+
+        <div class="academy-delivery-grid">
+          
+          <div class="delivery-card reveal revealed">
+            <div class="delivery-badge">COLLEGES &amp; UNIVERSITIES</div>
+            <div class="delivery-icon"><i data-lucide="terminal"></i></div>
+            <h3>Departmental Bootcamps &amp; Hackathons</h3>
+            <p>Intensive 1-day, 3-day, or 1-week workshops for CSE, ISE, ECE, and AIML branches. Includes live team hackathons and capstone evaluation.</p>
+            <ul class="delivery-list">
+              <li><i data-lucide="check"></i> 100% lab execution on student laptops</li>
+              <li><i data-lucide="check"></i> Turnkey hardware kits (ESP32/Sensors) provided</li>
+              <li><i data-lucide="check"></i> Verifiable co-branded certificates for attendees</li>
+            </ul>
+          </div>
+
+          <div class="delivery-card reveal revealed">
+            <div class="delivery-badge">FACULTY &amp; STAFF</div>
+            <div class="delivery-icon"><i data-lucide="users"></i></div>
+            <h3>Faculty Development Programs (FDP)</h3>
+            <p>Empowering professors and lecturers with cutting-edge industry tooling. Upskill educators in modern generative AI, IoT cloud pipelines, and research tools.</p>
+            <ul class="delivery-list">
+              <li><i data-lucide="check"></i> Aligned with NBA / NAAC accreditation criteria</li>
+              <li><i data-lucide="check"></i> Hands-on AI workflow integration for educators</li>
+              <li><i data-lucide="check"></i> Continuous post-workshop curriculum support</li>
+            </ul>
+          </div>
+
+          <div class="delivery-card reveal revealed">
+            <div class="delivery-badge">SCHOOLS &amp; JUNIOR LABS</div>
+            <div class="delivery-icon"><i data-lucide="lightbulb"></i></div>
+            <h3>School STEAM &amp; Young Innovators</h3>
+            <p>Demystifying electronics and coding for 8th–12th standard students. We make AI and robotics fascinating through tactile, hands-on micro-experiments.</p>
+            <ul class="delivery-list">
+              <li><i data-lucide="check"></i> Safe, modular electronic breadboards</li>
+              <li><i data-lucide="check"></i> Visual block-coding &amp; beginner Python</li>
+              <li><i data-lucide="check"></i> Inspires early technical curiosity</li>
+            </ul>
+          </div>
+
+          <div class="delivery-card reveal revealed">
+            <div class="delivery-badge">OFFICES &amp; INSTITUTES</div>
+            <div class="delivery-icon"><i data-lucide="briefcase"></i></div>
+            <h3>Institutional Workflow Automation</h3>
+            <p>On-site masterclasses for academic office staff, examination committees, and administrative teams to automate repetitive paperwork using Excel and AI.</p>
+            <ul class="delivery-list">
+              <li><i data-lucide="check"></i> Cuts administrative hours by up to 70%</li>
+              <li><i data-lucide="check"></i> In-depth Power Query &amp; macro templates</li>
+              <li><i data-lucide="check"></i> Custom automation designed for your exact forms</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. INTERACTIVE CURRICULUM EXPLORER
+         ============================================================ -->
+    <section id="curriculum" class="section-compact academy-curriculum-section">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="book-open"></i> Detailed Roadmap</span>
+          <h2>Explore Workshop Curricula</h2>
+          <p class="section-lead">Transparent, battle-tested syllabi structured for rapid comprehension and high-retention learning.</p>
+        </div>
+
+        <div class="curriculum-tabs-nav reveal revealed">
+          <button class="curriculum-tab-btn active" data-target="curriculum-ai">
+            <i data-lucide="sparkles"></i> AI &amp; ML
+          </button>
+          <button class="curriculum-tab-btn" data-target="curriculum-iot">
+            <i data-lucide="cpu"></i> IoT &amp; Hardware
+          </button>
+          <button class="curriculum-tab-btn" data-target="curriculum-cyber">
+            <i data-lucide="shield-check"></i> Cybersecurity
+          </button>
+          <button class="curriculum-tab-btn" data-target="curriculum-excel">
+            <i data-lucide="table"></i> Excel &amp; Automation
+          </button>
+        </div>
+
+        <!-- Tab 1: AI Curriculum -->
+        <div class="curriculum-panel active" id="curriculum-ai">
+          <div class="curriculum-timeline">
+            <div class="timeline-step">
+              <span class="step-num">01</span>
+              <div class="step-content">
+                <h4>Python &amp; Mathematical Intuition for AI</h4>
+                <p>Vectorized computing with NumPy, data manipulation using Pandas, gradient descent concepts explained visually, and Jupyter environment setup.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">02</span>
+              <div class="step-content">
+                <h4>Computer Vision &amp; Handwriting OCR</h4>
+                <p>Image processing with OpenCV, contour extraction, feature mapping, and building a handwriting OCR ingestion engine similar to real college exam evaluation.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">03</span>
+              <div class="step-content">
+                <h4>Multimodal LLMs &amp; Gemini API Integration</h4>
+                <p>Prompt engineering, token economics, multimodal vision queries, streaming responses, and building an automated student assistance bot.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">04</span>
+              <div class="step-content">
+                <h4>Production Deployment &amp; Capstone</h4>
+                <p>Packaging AI models into FastAPI web endpoints, deploying to lightweight cloud instances, and live student demo presentations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: IoT Curriculum -->
+        <div class="curriculum-panel" id="curriculum-iot">
+          <div class="curriculum-timeline">
+            <div class="timeline-step">
+              <span class="step-num">01</span>
+              <div class="step-content">
+                <h4>Microcontroller Architecture &amp; Pinout Safety</h4>
+                <p>ESP32 dual-core internals, GPIO pin safety, analog-to-digital conversion (ADC), pulse-width modulation (PWM), and breadboard wiring discipline.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">02</span>
+              <div class="step-content">
+                <h4>Sensors &amp; Actuator Protocols</h4>
+                <p>Interfacing DHT22 temperature sensors, ultrasonic rangefinders, infrared tripwires, relays, and OLED displays over I2C and SPI buses.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">03</span>
+              <div class="step-content">
+                <h4>MQTT Cloud Telemetry &amp; Networking</h4>
+                <p>Connecting microcontrollers to Wi-Fi, publishing telemetry payloads to HiveMQ/EMQX cloud brokers, and handling network reconnect fallbacks.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">04</span>
+              <div class="step-content">
+                <h4>Live Web Dashboard &amp; Hardware Capstone</h4>
+                <p>Building a live real-time dashboard on mobile and web to view dials, trigger physical buzzers, and deploy an automated campus environment node.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Cybersecurity Curriculum -->
+        <div class="curriculum-panel" id="curriculum-cyber">
+          <div class="curriculum-timeline">
+            <div class="timeline-step">
+              <span class="step-num">01</span>
+              <div class="step-content">
+                <h4>TCP/IP Architecture &amp; Wireshark Forensics</h4>
+                <p>Deep-dive into network layers, packet sniffing, dissecting HTTP vs HTTPS handshakes, detecting ARP spoofing, and understanding port scanning mechanisms.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">02</span>
+              <div class="step-content">
+                <h4>Web Security &amp; OWASP Top 10 Vulnerabilities</h4>
+                <p>Hands-on lab simulations of SQL Injection, Cross-Site Scripting (XSS), Broken Object Level Authorization, and remediation strategies in code.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">03</span>
+              <div class="step-content">
+                <h4>Reconnaissance &amp; Defensive Hardening</h4>
+                <p>Ethical penetration testing tools (Nmap, Burp Suite), firewall rules, zero-trust network principles, and secure server configuration.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">04</span>
+              <div class="step-content">
+                <h4>Capture The Flag (CTF) Challenge</h4>
+                <p>A high-energy team CTF competition where students audit a deliberately vulnerable test application and submit defensive patches to win.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Excel Curriculum -->
+        <div class="curriculum-panel" id="curriculum-excel">
+          <div class="curriculum-timeline">
+            <div class="timeline-step">
+              <span class="step-num">01</span>
+              <div class="step-content">
+                <h4>Modern Dynamic Arrays &amp; Formula Mastery</h4>
+                <p>XLOOKUP, FILTER, UNIQUE, SORT, INDEX/MATCH, and nested conditional logic to build responsive financial and student attendance ledgers.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">02</span>
+              <div class="step-content">
+                <h4>Power Query ETL Automation</h4>
+                <p>Connecting disparate CSV and Excel files, automating messy row transformations, merging student lists, and 1-click refreshes that replace manual work.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">03</span>
+              <div class="step-content">
+                <h4>VBA Macros &amp; Automated Batch Invoicing</h4>
+                <p>Writing clean VBA scripts to generate personalized PDF grade reports, send batch emails, and clean corrupt tabular exports with single shortcut keys.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span class="step-num">04</span>
+              <div class="step-content">
+                <h4>AI-Powered Python + Excel Pipelines</h4>
+                <p>Using openpyxl and Python to bridge cloud database queries directly into beautifully formatted Excel spreadsheets for administrative management.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. RESOURCE & DOWNLOAD HUB
+         ============================================================ -->
+    <section id="resources" class="section-compact academy-resources-section">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="download-cloud"></i> Open Learning Hub</span>
+          <h2>Download Syllabus &amp; Workshop Materials</h2>
+          <p class="section-lead">Free access to our curated study guides, lab pinout diagrams, and sample curriculum PDFs.</p>
+        </div>
+
+        <div class="academy-resources-grid">
+          
+          <div class="resource-card reveal revealed">
+            <div class="resource-icon"><i data-lucide="file-text"></i></div>
+            <div class="resource-info">
+              <h4>AI &amp; ML Complete Syllabus (PDF)</h4>
+              <p>Detailed 30-hour module roadmap, prerequisite checklist, and sample project rubrics.</p>
+              <span class="resource-meta">PDF • 4.2 MB • Updated 2026</span>
+            </div>
+            <button class="btn-resource-dl" onclick="downloadResourceMock('AI-ML-Syllabus-AarambhX-Academy.pdf')">
+              <i data-lucide="download"></i>
+              <span>Download</span>
+            </button>
+          </div>
+
+          <div class="resource-card reveal revealed">
+            <div class="resource-icon"><i data-lucide="cpu"></i></div>
+            <div class="resource-info">
+              <h4>IoT Workshop Hardware Kit Checklist (PDF)</h4>
+              <p>Complete component bill of materials (BOM), pinout cheat-sheet, and ESP32 driver setup guide.</p>
+              <span class="resource-meta">PDF • 2.8 MB • Hardware Lab</span>
+            </div>
+            <button class="btn-resource-dl" onclick="downloadResourceMock('IoT-Hardware-Kit-AarambhX-Academy.pdf')">
+              <i data-lucide="download"></i>
+              <span>Download</span>
+            </button>
+          </div>
+
+          <div class="resource-card reveal revealed">
+            <div class="resource-icon"><i data-lucide="shield"></i></div>
+            <div class="resource-info">
+              <h4>Cybersecurity Lab Manual &amp; OWASP Guide</h4>
+              <p>Step-by-step instructions for configuring Kali Linux virtual machines and ethical hacking lab safety.</p>
+              <span class="resource-meta">PDF • 5.1 MB • Security Track</span>
+            </div>
+            <button class="btn-resource-dl" onclick="downloadResourceMock('Cybersecurity-Lab-Manual-AarambhX.pdf')">
+              <i data-lucide="download"></i>
+              <span>Download</span>
+            </button>
+          </div>
+
+          <div class="resource-card reveal revealed">
+            <div class="resource-icon"><i data-lucide="table"></i></div>
+            <div class="resource-info">
+              <h4>Advanced Excel Automation Formula Handbook</h4>
+              <p>Top 50 high-impact productivity formulas, Power Query shortcuts, and reusable macro snippets.</p>
+              <span class="resource-meta">PDF • 3.4 MB • Productivity</span>
+            </div>
+            <button class="btn-resource-dl" onclick="downloadResourceMock('Excel-Automation-Handbook-AarambhX.pdf')">
+              <i data-lucide="download"></i>
+              <span>Download</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. WORKSHOP BOOKING & CONSULTATION ENGINE
+         ============================================================ -->
+    <section id="booking" class="section-compact academy-booking-section">
+      <div class="container">
+        
+        <div class="booking-card reveal revealed">
+          <div class="booking-header">
+            <span class="apple-eyebrow"><i data-lucide="calendar"></i> Fast-Track Consultation</span>
+            <h2>Book a Campus Workshop or Student Training</h2>
+            <p>Tell us your institution, target track, and preferred dates. We will formulate a tailored syllabus, kit logistics, and transparent quotation within 24 hours.</p>
+          </div>
+
+          <form id="academyBookingForm" class="academy-form" onsubmit="handleAcademyBooking(event)">
+            
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="bookingName">Your Name *</label>
+                <input type="text" id="bookingName" name="name" required placeholder="e.g. Dr. Ramesh Kumar / Student Name">
+              </div>
+              <div class="form-group">
+                <label for="bookingOrg">College / School / Organization *</label>
+                <input type="text" id="bookingOrg" name="organization" required placeholder="e.g. SIT Tumakuru / Polytechnic College">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="bookingPhone">WhatsApp Contact Number *</label>
+                <input type="tel" id="bookingPhone" name="phone" required placeholder="e.g. +91 98765 43210">
+              </div>
+              <div class="form-group">
+                <label for="bookingRole">I am inquiring as: *</label>
+                <select id="bookingRole" name="role" required>
+                  <option value="College HOD / Professor">College Principal / HOD / Professor</option>
+                  <option value="Student Club Lead">Student Club Lead / Technical Head</option>
+                  <option value="School Principal / Teacher">School Principal / STEAM Teacher</option>
+                  <option value="Individual Student">Individual Student / Learner</option>
+                  <option value="Corporate / Institution Manager">Corporate / Institutional Manager</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="bookingTrack">Select Technology Track *</label>
+                <select id="bookingTrack" name="track" required>
+                  <option value="AI & Machine Learning (From Scratch)">AI &amp; Machine Learning (From Scratch)</option>
+                  <option value="IoT, Robotics & Embedded Hardware">IoT, Robotics &amp; Embedded Hardware</option>
+                  <option value="Cybersecurity & Ethical Hacking">Cybersecurity &amp; Ethical Hacking</option>
+                  <option value="Enterprise Automation & Advanced Excel">Enterprise Automation &amp; Advanced Excel</option>
+                  <option value="Multi-Domain Customized Bootcamp">Multi-Domain Customized Bootcamp</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="bookingBatch">Estimated Number of Attendees</label>
+                <select id="bookingBatch" name="batch">
+                  <option value="30 - 60 Students (1 Classroom)">30 - 60 Students (1 Classroom)</option>
+                  <option value="60 - 120 Students (Auditorium / Dept)">60 - 120 Students (Auditorium / Dept)</option>
+                  <option value="120+ Students (College-Wide Fest)">120+ Students (College-Wide Fest)</option>
+                  <option value="Faculty Group (10 - 30 Professors)">Faculty Group (10 - 30 Professors)</option>
+                  <option value="Individual Enrollment">Individual Enrollment</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingMessage">Specific Requirements or Preferred Dates (Optional)</label>
+              <textarea id="bookingMessage" name="message" rows="3" placeholder="Describe any particular topics, lab requirements, or tentative dates you have in mind..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="apple-btn-cta submit-btn">
+                <span>Dispatch Inquiry via WhatsApp</span>
+                <i data-lucide="send"></i>
+              </button>
+              <span class="form-privacy-note"><i data-lucide="shield-check"></i> Zero spam. We contact you directly on WhatsApp or phone.</span>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. FREQUENTLY ASKED QUESTIONS (#faq)
+         ============================================================ -->
+    <section id="faq" class="section-compact academy-faq-section">
+      <div class="container">
+        
+        <div class="section-header-center reveal revealed">
+          <span class="apple-eyebrow"><i data-lucide="help-circle"></i> Got Questions?</span>
+          <h2>Frequently Asked Questions</h2>
+          <p class="section-lead">Answers to common questions from college authorities, professors, and student coordinators.</p>
+        </div>
+
+        <div class="academy-faq-accordion reveal revealed">
+          
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Do students require prior programming experience for these workshops?</span>
+              <i data-lucide="chevron-down" class="faq-chevron"></i>
+            </button>
+            <div class="faq-answer">
+              <p>No. Our tracks — particularly AI &amp; Machine Learning and IoT Hardware — are intentionally architected from fundamental first principles. We explain the core logic in simple, intuitive terms before progressing to practical code and circuits.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Does AarambhX Academy bring hardware components for IoT workshops?</span>
+              <i data-lucide="chevron-down" class="faq-chevron"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. For IoT and embedded robotics bootcamps, our team provides complete student lab kits containing ESP32 development boards, breadboards, jumper wires, digital sensors, relays, and displays for hands-on use during the sessions.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Do participants receive recognized certificates?</span>
+              <i data-lucide="chevron-down" class="faq-chevron"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Every student and faculty member who successfully completes the workshop and its practical capstone assignment receives a verified, co-branded Certificate of Completion issued by Aarambhx Technology.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Can the syllabus be tailored to align with our university/NBA requirements?</span>
+              <i data-lucide="chevron-down" class="faq-chevron"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. We regularly coordinate with departmental HODs and academic deans to align our practical workshop modules with VTU or autonomous syllabus requirements and NAAC/NBA value-added course criteria.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Where are workshops conducted?</span>
+              <i data-lucide="chevron-down" class="faq-chevron"></i>
+            </button>
+            <div class="faq-answer">
+              <p>We are headquartered in Tumakuru and conduct on-site workshops across colleges, schools, and institutions throughout Tumakuru, Bengaluru, and Karnataka, as well as live hybrid interactive bootcamps.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       9. FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="academy.html" class="footer-logo">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-img" width="44" height="44">
+            <span class="logo-text">
+              <span class="logo-brand">Aarambh<span class="logo-accent">X</span></span>
+              <span class="logo-corp">Academy</span>
+            </span>
+          </a>
+          <p class="footer-tagline">
+            Bridging academia and modern technology through practical, terminal-first education. Engineering workshops in AI, IoT, Cybersecurity, and Enterprise Automation.
+          </p>
+          <div class="footer-contact-info">
+            <a href="tel:+919481261244" class="footer-contact-link"><i data-lucide="phone"></i> +91 94812 61244</a>
+            <a href="mailto:techboysolutions007@gmail.com" class="footer-contact-link"><i data-lucide="mail"></i> techboysolutions007@gmail.com</a>
+            <span class="footer-contact-link"><i data-lucide="map-pin"></i> Tumakuru, Karnataka, India</span>
+          </div>
+        </div>
+
+        <!-- Links: Academy Tracks -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Academy Tracks</h4>
+          <ul class="footer-links-list">
+            <li><a href="#tracks">AI &amp; Machine Learning</a></li>
+            <li><a href="#tracks">IoT &amp; Embedded Hardware</a></li>
+            <li><a href="#tracks">Cybersecurity Labs</a></li>
+            <li><a href="#tracks">Enterprise Excel Automation</a></li>
+            <li><a href="#curriculum">Course Syllabi</a></li>
+          </ul>
+        </div>
+
+        <!-- Links: Campus Workshops -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Campus Services</h4>
+          <ul class="footer-links-list">
+            <li><a href="#workshops">College Hackathons</a></li>
+            <li><a href="#workshops">Faculty Development (FDP)</a></li>
+            <li><a href="#workshops">School STEAM Labs</a></li>
+            <li><a href="#resources">Download Syllabi</a></li>
+            <li><a href="#booking">Book Campus Workshop</a></li>
+          </ul>
+        </div>
+
+        <!-- Links: Agency Navigation -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Aarambhx Technology</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Agency Home ↗</a></li>
+            <li><a href="work.html">Client Work &amp; Portfolio ↗</a></li>
+            <li><a href="index.html#services">Engineering Services</a></li>
+            <li><a href="index.html#contact">Get Tech Consultation</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aarambhx Technology • AarambhX Academy. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="index.html#privacy">Privacy Policy</a>
+          <a href="index.html#terms">Terms of Service</a>
+          <a href="#overview">Back to top &uarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="academy.js"></script>
+  <script>
+    // Initialize Lucide icons
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

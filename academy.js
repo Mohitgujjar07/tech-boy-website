@@ -1,0 +1,269 @@
+/**
+ * AARAMBHX ACADEMY — INTERACTIVE ENGINE
+ * Manages theme synchronization, mobile navigation, curriculum tabs,
+ * educational FAQ accordion, and WhatsApp consultation dispatching.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initMobileDrawer();
+  initCurriculumTabs();
+  initFaqAccordion();
+  initScrollReveal();
+});
+
+// ------------------------------------------------------------
+// 1. THEME SYNCHRONIZATION
+// ------------------------------------------------------------
+function initTheme() {
+  const themeToggleBtn = document.getElementById('themeToggle') || document.getElementById('themeToggleBtn');
+  const root = document.documentElement;
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('tb_theme', theme);
+    localStorage.setItem('tbs_theme', theme);
+  }
+
+  const currentTheme = localStorage.getItem('tb_theme') || localStorage.getItem('tbs_theme') || 'light';
+  applyTheme(currentTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const activeTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(activeTheme);
+    });
+  }
+}
+
+// ------------------------------------------------------------
+// 2. MOBILE DRAWER NAVIGATION
+// ------------------------------------------------------------
+function initMobileDrawer() {
+  const drawer = document.getElementById('mobileDrawer');
+  const openBtn = document.getElementById('mobileMenuBtn') || document.getElementById('mobileDrawerOpenBtn');
+  const closeBtn = document.getElementById('drawerClose') || document.getElementById('mobileDrawerCloseBtn');
+
+  if (!drawer || !openBtn || !closeBtn) return;
+
+  function openDrawer() {
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    openBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+    openBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  openBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+
+  // Close when clicking outside drawer content
+  drawer.addEventListener('click', (e) => {
+    if (e.target === drawer) {
+      closeDrawer();
+    }
+  });
+
+  // Close on link click
+  const drawerLinks = drawer.querySelectorAll('a');
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // ESC key listener
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('active')) {
+      closeDrawer();
+    }
+  });
+}
+
+// ------------------------------------------------------------
+// 3. CURRICULUM TABS
+// ------------------------------------------------------------
+function initCurriculumTabs() {
+  const tabButtons = document.querySelectorAll('.curriculum-tab-btn');
+  const panels = document.querySelectorAll('.curriculum-panel');
+
+  if (!tabButtons.length || !panels.length) return;
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      
+      tabButtons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+}
+
+// ------------------------------------------------------------
+// 4. FAQ ACCORDION
+// ------------------------------------------------------------
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const questionBtn = item.querySelector('.faq-question');
+    if (!questionBtn) return;
+
+    questionBtn.addEventListener('click', () => {
+      const isExpanded = item.classList.contains('active');
+
+      // Mutex: close all others
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+          const otherBtn = otherItem.querySelector('.faq-question');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Toggle current
+      if (isExpanded) {
+        item.classList.remove('active');
+        questionBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('active');
+        questionBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
+// ------------------------------------------------------------
+// 5. SCROLL REVEAL OBSERVER
+// ------------------------------------------------------------
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      el.classList.add('revealed');
+    }
+  });
+
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '50px 0px 50px 0px',
+    threshold: 0.05
+  });
+
+  reveals.forEach(el => observer.observe(el));
+}
+
+// ------------------------------------------------------------
+// 6. TRACK INQUIRY ACTION SHORTCUT
+// ------------------------------------------------------------
+function openBookingModal(trackName) {
+  const bookingSection = document.getElementById('booking');
+  const trackSelect = document.getElementById('bookingTrack');
+  const nameInput = document.getElementById('bookingName');
+
+  if (bookingSection) {
+    bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  if (trackSelect && trackName) {
+    // Attempt match with dropdown options
+    for (let i = 0; i < trackSelect.options.length; i++) {
+      if (trackSelect.options[i].value.toLowerCase().includes(trackName.toLowerCase())) {
+        trackSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  setTimeout(() => {
+    if (nameInput) nameInput.focus();
+  }, 600);
+}
+
+// ------------------------------------------------------------
+// 7. RESOURCE DOWNLOAD SIMULATION
+// ------------------------------------------------------------
+function downloadResourceMock(filename) {
+  const sampleContent = `# AarambhX Academy — Course Syllabus & Lab Manual
+Document: ${filename}
+Issued by: Aarambhx Technology Educational Platform, Tumakuru
+Official Contact: +91 94812 61244 | techboysolutions007@gmail.com
+
+------------------------------------------------------------
+1. Overview & Prerequisite Assessment
+2. Laboratory Hardware & Software Setup
+3. Weekly Module Progression & Real-World Capstones
+4. Assessment Rubric & Verifiable Certification
+------------------------------------------------------------
+Thank you for learning with AarambhX Academy.
+Visit https://aarambhx.com/academy.html for live workshops.`;
+
+  const blob = new Blob([sampleContent], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ------------------------------------------------------------
+// 8. WHATSAPP BOOKING FORM DISPATCH
+// ------------------------------------------------------------
+function handleAcademyBooking(event) {
+  event.preventDefault();
+  const form = event.target;
+  const formData = new FormData(form);
+
+  const name = formData.get('name') || '';
+  const org = formData.get('organization') || '';
+  const phone = formData.get('phone') || '';
+  const role = formData.get('role') || '';
+  const track = formData.get('track') || '';
+  const batch = formData.get('batch') || '';
+  const message = formData.get('message') || '';
+
+  const waPayload = 
+`🎓 *AarambhX Academy — Workshop / Training Inquiry*
+----------------------------------------
+👤 *Name:* ${name}
+🏛️ *Institution / Org:* ${org}
+💼 *Role:* ${role}
+📱 *Contact:* ${phone}
+🚀 *Target Track:* ${track}
+👥 *Expected Batch:* ${batch}
+${message ? `📝 *Requirements:* ${message}\n` : ''}----------------------------------------
+Sent from AarambhX Academy Platform`;
+
+  const waUrl = `https://wa.me/919481261244?text=${encodeURIComponent(waPayload)}`;
+  window.open(waUrl, '_blank');
+}
+
+// Expose globals for onclick attributes
+window.openBookingModal = openBookingModal;
+window.downloadResourceMock = downloadResourceMock;
+window.handleAcademyBooking = handleAcademyBooking;

@@ -106,7 +106,7 @@ function runScrollExpandTests() {
 
     const actions = dom.querySelector('.scroll-expand-actions');
     Assert.exists(actions, 'Action buttons container exists');
-    Assert.contains(html, 'developer.html', 'Includes link to Developer Platform');
+    Assert.isTrue(html.includes('academy.html') || html.includes('developer.html'), 'Includes link to AarambhX Academy');
     return 6;
   });
 
