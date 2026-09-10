@@ -612,6 +612,16 @@ const projectData = {
       'How can clients partner with us on future builds? We provide custom architecture consultation and rapid prototype development from concept to full production.'
     ]
   },
+  'client-turnkey': {
+    title: 'Custom Client SaaS & Web Systems Platform',
+    category: 'Turnkey Enterprise Software & Cloud Portals',
+    desc: 'Production multi-tenant business platform custom engineered for enterprise clients. Integrates automated GST billing, customer CRM, real-time analytics graphs, automated invoice generator, and mobile responsive web interfaces.',
+    bom: ['Multi-Tenant Isolated DB Architecture', 'Automated GST Billing Engine', 'Real-Time Web Analytics Engine', 'Mobile Responsive iOS & Android PWA', 'REST & GraphQL Cloud APIs'],
+    viva: [
+      'How are new client portals provisioned? With automated microservice templates and tenant-isolated database schemas.',
+      'How is deployment handled? Fully containerized with Docker and automated CI/CD for continuous zero-downtime updates.'
+    ]
+  },
   'iot-station': {
     title: 'Cloud-Connected Smart Sensor Station',
     category: 'IoT & Embedded Systems',
@@ -748,8 +758,69 @@ window.closeProjectModal = function() {
   if (modal) {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+    const mediaModal = document.getElementById('mediaModal');
     const mobileMenu = document.getElementById('mobileDrawerOverlay') || document.getElementById('mobileMenu');
-    if (!mobileMenu || !mobileMenu.classList.contains('open')) {
+    if ((!mediaModal || !mediaModal.classList.contains('open')) && (!mobileMenu || !mobileMenu.classList.contains('open'))) {
+      document.body.style.overflow = '';
+    }
+  }
+};
+
+window.openMediaModal = function(type, title, src, caption) {
+  const modal = document.getElementById('mediaModal');
+  const modalTitle = document.getElementById('mediaModalTitle');
+  const modalBody = document.getElementById('mediaModalBody');
+  const modalCaption = document.getElementById('mediaModalCaption');
+  if (!modal || !modalBody) return;
+
+  if (modalTitle) {
+    modalTitle.innerHTML = `<i data-lucide="${type === 'demo' ? 'play-circle' : 'image'}"></i> <span>${title || 'Project Preview'}</span>`;
+  }
+
+  if (type === 'demo') {
+    modalBody.innerHTML = `
+      <div class="media-demo-player-container">
+        <div style="position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000;">
+          <img src="${src}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85);">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(8,16,32,0.85) 100%);">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: #2563EB; box-shadow: 0 0 25px rgba(37,99,235,0.7); display: flex; align-items: center; justify-content: center; cursor: pointer; transform: scale(1); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <i data-lucide="play" style="width: 28px; height: 28px; color: #FFFFFF; margin-left: 4px;"></i>
+            </div>
+            <div style="margin-top: 14px; font-weight: 700; font-size: 0.95rem; color: #F8FAFC; letter-spacing: 0.02em;">Interactive Platform Demonstration</div>
+            <div style="font-size: 0.78rem; color: #94A3B8; margin-top: 4px;">Real-Time Query &amp; Optical Gate Pass Ingress</div>
+          </div>
+        </div>
+        <div class="media-demo-controls">
+          <button type="button"><i data-lucide="play"></i> Play</button>
+          <div class="media-progress-bar"><div class="media-progress-fill"></div></div>
+          <span>LIVE DEMO HD</span>
+        </div>
+      </div>
+    `;
+  } else {
+    modalBody.innerHTML = `
+      <img src="${src}" alt="${title}" class="media-modal-view-img">
+    `;
+  }
+
+  if (modalCaption) {
+    modalCaption.textContent = caption || title || '';
+  }
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+};
+
+window.closeMediaModal = function() {
+  const modal = document.getElementById('mediaModal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    const projectModal = document.getElementById('projectModal');
+    const mobileMenu = document.getElementById('mobileDrawerOverlay') || document.getElementById('mobileMenu');
+    if ((!projectModal || !projectModal.classList.contains('open')) && (!mobileMenu || !mobileMenu.classList.contains('open'))) {
       document.body.style.overflow = '';
     }
   }
@@ -758,14 +829,25 @@ window.closeProjectModal = function() {
 function initModalClose() {
   const modal = document.getElementById('projectModal');
   const closeBtn = document.getElementById('modalCloseBtn');
-  if (!modal) return;
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', window.closeProjectModal);
+  if (modal) {
+    if (closeBtn) {
+      closeBtn.addEventListener('click', window.closeProjectModal);
+    }
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) window.closeProjectModal();
+    });
   }
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) window.closeProjectModal();
-  });
+
+  const mediaModal = document.getElementById('mediaModal');
+  const mediaCloseBtn = document.getElementById('mediaModalCloseBtn');
+  if (mediaModal) {
+    if (mediaCloseBtn) {
+      mediaCloseBtn.addEventListener('click', window.closeMediaModal);
+    }
+    mediaModal.addEventListener('click', (e) => {
+      if (e.target === mediaModal) window.closeMediaModal();
+    });
+  }
 }
 
 function initProjectFilter() {
@@ -849,6 +931,12 @@ function initKeyboardAccessibility() {
       const modal = document.getElementById('projectModal');
       if (modal && (modal.classList.contains('open') || modal.getAttribute('aria-hidden') === 'false')) {
         window.closeProjectModal();
+      }
+
+      // Close media modal
+      const mediaModal = document.getElementById('mediaModal');
+      if (mediaModal && (mediaModal.classList.contains('open') || mediaModal.getAttribute('aria-hidden') === 'false')) {
+        window.closeMediaModal();
       }
 
       // Close mobile drawer

@@ -171,31 +171,31 @@
           </div>
         </div>
 
-        <!-- Filter Tabs -->
+        <!-- Service & Work Category Filter Tabs -->
         <div class="work-filter-tabs reveal revealed" style="margin-top: 36px;">
           <button type="button" class="work-filter-btn active" data-filter="all">
             <i data-lucide="layout-grid"></i>
-            <span>All Systems</span>
+            <span>All Projects</span>
           </button>
-          <button type="button" class="work-filter-btn" data-filter="enterprise">
-            <i data-lucide="shield-check"></i>
-            <span>Enterprise &amp; Gate Security</span>
+          <button type="button" class="work-filter-btn" data-filter="web">
+            <i data-lucide="globe"></i>
+            <span>Software &amp; Web Systems</span>
           </button>
-          <button type="button" class="work-filter-btn" data-filter="institutional">
-            <i data-lucide="cpu"></i>
-            <span>Institutional AI &amp; Labs</span>
+          <button type="button" class="work-filter-btn" data-filter="ai">
+            <i data-lucide="brain"></i>
+            <span>AI, Vision &amp; Lab Automation</span>
           </button>
           <button type="button" class="work-filter-btn" data-filter="event">
             <i data-lucide="ticket"></i>
-            <span>Live Event Tech</span>
+            <span>Live Event Tech &amp; Ingress</span>
           </button>
-          <button type="button" class="work-filter-btn" data-filter="future">
-            <i data-lucide="sparkles"></i>
-            <span>Future Builds (Roadmap)</span>
+          <button type="button" class="work-filter-btn" data-filter="hardware">
+            <i data-lucide="cpu"></i>
+            <span>Hardware, IoT &amp; Networks</span>
           </button>
           <button type="button" class="work-filter-btn" data-filter="client">
             <i data-lucide="handshake"></i>
-            <span>Future Client Builds</span>
+            <span>Client Deployments</span>
           </button>
         </div>
 
@@ -203,7 +203,7 @@
     </section>
 
     <!-- ============================================================
-         FULL PRODUCTION SHOWCASE (Detailed Architecture Cards)
+         FULL PRODUCTION SHOWCASE (Modern Visual Media Cards)
          ============================================================ -->
     <section class="section-compact" style="padding-top: 10px;">
       <div class="container">
@@ -211,22 +211,36 @@
         <div class="work-grid work-grid-full">
           
           <!-- Project 1: VMS -->
-          <article class="work-card work-card-detailed reveal revealed" data-category="enterprise all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  Production Deployed
-                </span>
-                <span class="work-tech-chip">Enterprise Security &bull; Multi-Tenant</span>
+          <article class="work-card work-card-showcase reveal revealed" data-category="web client all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-blue">
-                <i data-lucide="shield-check"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>vms.gate.techboy.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Live Deployed</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Centralised Multi-Tenant Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Enterprise VMS Dashboard — Live optical gate pass verification and emergency evacuation radar.')">
+              <img src="assets/art/vms-preview.jpg" alt="Visitor Management System Dashboard UI Preview" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Optical QR Code Verification & Live Emergency Evacuation Radar System.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Interactive Simulation — Optical QR Gate Verification & Multi-Tenant Isolated DB Architecture.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Enterprise Gate Security &bull; Visitor Lifecycle</div>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">Software &amp; Web Systems &bull; Enterprise Gate Security</div>
               <h2 class="work-detailed-title">Centralised Multi-Tenant Visitor Management System (VMS)</h2>
               <p class="work-detailed-desc">High-security campus and enterprise platform streamlining digital pre-registration, instant optical QR gate passes, and emergency evacuation headcounts.</p>
               
@@ -263,22 +277,36 @@
           </article>
 
           <!-- Project 2: Computer Lab Ledger System -->
-          <article class="work-card work-card-detailed reveal revealed" data-category="institutional all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  Collegiate Deployed
-                </span>
-                <span class="work-tech-chip">Google Gemini AI &bull; OCR</span>
+          <article class="work-card work-card-showcase reveal revealed" data-category="ai web client all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-cyan">
-                <i data-lucide="brain"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>ledger.lab.collegiate.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Collegiate Deployed</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Collegiate Lab Ledger — Gemini Vision AI handwriting OCR & NAAC compliance audit dashboard.')">
+              <img src="assets/art/lab-ledger-preview.jpg" alt="Computer Lab Ledger UI with Gemini Vision OCR" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Gemini Vision AI Handwriting OCR & Roster Trigram Matching.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Interactive Simulation — Optical Ingestion & NAAC Compliance PDF Generation.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Institutional AI &bull; Lab Management</div>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">AI, Vision &amp; Lab Automation &bull; Collegiate Operations</div>
               <h2 class="work-detailed-title">Computer Lab Ledger System</h2>
               <p class="work-detailed-desc">Next-gen digital laboratory ledger automating physical handwritten sign-in ingestion via Gemini Vision OCR, fuzzy roster matching, and defect logs.</p>
               
@@ -315,22 +343,36 @@
           </article>
 
           <!-- Project 3: Elector Lookup Portal -->
-          <article class="work-card work-card-detailed reveal revealed" data-category="enterprise all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-deployed">
-                  <span class="status-pulse-dot"></span>
-                  High-Throughput Deployed
-                </span>
-                <span class="work-tech-chip">Sub-Second Indexing &bull; Security</span>
+          <article class="work-card work-card-showcase reveal revealed" data-category="web client all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-emerald">
-                <i data-lucide="search-check"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>elector.query.gov.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> High-Throughput</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Elector Lookup Portal', 'assets/art/elector-portal-preview.jpg', 'Elector Lookup Portal — Sub-85ms partitioned database search & cryptographic audit stamp.')">
+              <img src="assets/art/elector-portal-preview.jpg" alt="Elector Lookup Portal High-Throughput Query UI" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Elector Lookup Portal', 'assets/art/elector-portal-preview.jpg', 'Sub-second Partitioned Database Search & Cryptographic Audit Stamps.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Elector Lookup Portal', 'assets/art/elector-portal-preview.jpg', 'Interactive Simulation — High-Throughput Go ETL Ingestion & Sub-85ms Search.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Enterprise Web Portal &bull; High-Performance ETL</div>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">Software &amp; Web Systems &bull; High-Performance ETL</div>
               <h2 class="work-detailed-title">Elector Lookup Portal</h2>
               <p class="work-detailed-desc">Secure internal web portal and streaming ETL pipeline for instant elector profile lookups by EPIC number with sub-second response times.</p>
               
@@ -367,22 +409,36 @@
           </article>
 
           <!-- Project 4: Vivian Vaidhya Fest 2026 -->
-          <article class="work-card work-card-detailed reveal revealed" data-category="event all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-live">
-                  <span class="status-pulse-dot dot-live"></span>
-                  Live Event Deployed
-                </span>
-                <span class="work-tech-chip">Web Audio API &bull; Zero Latency</span>
+          <article class="work-card work-card-showcase reveal revealed" data-category="event client all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-purple">
-                <i data-lucide="music-4"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>ingress.fest.live.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot dot-live"></span> Live Event Deployed</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Vivian Vaidhya Fest 2026 — Concert Entry', 'assets/art/concert-entry-preview.jpg', 'Concert Ingress Terminal — Realtime Web Audio sound feedback & multi-gate gatepass counter.')">
+              <img src="assets/art/concert-entry-preview.jpg" alt="Vivian Vaidhya Fest Concert Entry Scanner Terminal" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Vivian Vaidhya Fest Concert Entry', 'assets/art/concert-entry-preview.jpg', 'Web Audio API Synthesizer & Sub-100ms Optical QR Parser.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Vivian Vaidhya Fest Concert Entry', 'assets/art/concert-entry-preview.jpg', 'Interactive Simulation — 0ms Audio Confirmation & Multi-Gate WebSocket Synchronization.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Live High-Throughput Operations &bull; Concert Tech</div>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">Live Event Tech &amp; Ingress &bull; Zero Latency Operations</div>
               <h2 class="work-detailed-title">Vivian Vaidhya Fest 2026 — Concert Entry</h2>
               <p class="work-detailed-desc">Realtime concert ticket scanning and operations dashboard featuring synthesized sound feedback, sub-100ms optical scanning, and multi-device sync.</p>
               
@@ -418,77 +474,105 @@
             </div>
           </article>
 
-          <!-- Project 5: Future Builds Showcase -->
-          <article class="work-card work-card-detailed work-card-future reveal revealed" data-category="future all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-roadmap">
-                  <span class="status-pulse-dot dot-roadmap"></span>
-                  Engineering Roadmap
-                </span>
-                <span class="work-tech-chip">Next-Gen R&amp;D Lab &bull; Tumakuru</span>
+          <!-- Project 5: Smart Sensor Telemetry & IoT Hardware Station -->
+          <article class="work-card work-card-showcase reveal revealed" data-category="hardware client all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-amber">
-                <i data-lucide="sparkles"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>telemetry.iot.station.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Hardware Deployed</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Smart Sensor Telemetry & IoT Hardware Station', 'assets/art/iot-telemetry-preview.jpg', 'IoT Station — Breadboard circuit wiring, ESP32 telemetry, and live cloud web graphs.')">
+              <img src="assets/art/iot-telemetry-preview.jpg" alt="ESP32 Smart Sensor Station and Web Telemetry Dashboard" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Smart Sensor Station', 'assets/art/iot-telemetry-preview.jpg', 'ESP32 Breadboard Circuit Wiring & Real-Time Sensor Ingestion.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Smart Sensor Station', 'assets/art/iot-telemetry-preview.jpg', 'Interactive Simulation — MQTT Telemetry Stream & Real-time Canvas Graph Rendering.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Upcoming Projects &bull; In Active R&amp;D</div>
-              <h2 class="work-detailed-title">Future Builds &amp; Next-Gen Tech Systems</h2>
-              <p class="work-detailed-desc">Active engineering prototypes under development in our Tumakuru laboratory — edge computer vision, cloud microservices billing, and industrial IoT.</p>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">Hardware, IoT &amp; Networks &bull; Telemetry Station</div>
+              <h2 class="work-detailed-title">Smart Sensor Telemetry &amp; IoT Hardware Station</h2>
+              <p class="work-detailed-desc">Cloud-connected microcontroller sensor array with live MQTT telemetry web graphs, environmental threshold alerts, and industrial edge monitoring.</p>
               
               <!-- Key Architecture Highlights -->
               <div class="work-architecture-box">
                 <h4><i data-lucide="layers"></i> Key Architecture Highlights</h4>
                 <div class="modal-chips-grid">
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Edge AI Multi-Camera Vision Pipelines</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Cloud Distributed Microservices SaaS</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Sub-GHz Industrial IoT Mesh Arrays</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Sub-Second MQTT &amp; WebSockets Ingestion</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Microcontroller Breadboard &amp; Sensor Bus</span>
+                  <span class="modal-spec-chip"><i data-lucide="check"></i> Live Web Telemetry Canvas Charts</span>
                 </div>
               </div>
 
               <!-- Tech Stack Chips -->
               <div class="work-tech-stack-row">
-                <span class="tech-tag">Edge AI</span>
-                <span class="tech-tag">Sub-GHz IoT</span>
-                <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">Go</span>
+                <span class="tech-tag">ESP32 / Arduino</span>
+                <span class="tech-tag">MQTT</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Chart.js</span>
+                <span class="tech-tag">WebSockets</span>
               </div>
             </div>
 
             <div class="work-detailed-footer">
-              <button type="button" class="apple-btn-primary" onclick="openProjectModal('future-builds')">
-                <i data-lucide="compass"></i>
-                <span>Upcoming Roadmap</span>
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('iot-station')">
+                <i data-lucide="layers"></i>
+                <span>Deep Specs</span>
               </button>
-              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Discuss a Custom / Future Technology Build')">
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Smart Sensor Telemetry Station')">
                 <span>Inquire</span>
                 <i data-lucide="arrow-right"></i>
               </a>
             </div>
           </article>
 
-          <!-- Project 6: Custom Client Build / Enterprise Turnkey System -->
-          <article class="work-card work-card-detailed reveal revealed" data-category="client all">
-            <div class="work-detailed-header">
-              <div class="work-badge-row">
-                <span class="work-status-badge status-open-build">
-                  <span class="status-pulse-dot dot-open"></span>
-                  Open For Client Builds
-                </span>
-                <span class="work-tech-chip">Custom Scoped &bull; Turnkey</span>
+          <!-- Project 6: Custom Client SaaS & Web Systems Platform -->
+          <article class="work-card work-card-showcase reveal revealed" data-category="client web all">
+            <div class="work-browser-chrome">
+              <div class="work-traffic-dots">
+                <span class="traffic-red"></span>
+                <span class="traffic-amber"></span>
+                <span class="traffic-green"></span>
               </div>
-              <div class="work-compact-icon glow-cyan">
-                <i data-lucide="handshake"></i>
+              <div class="work-url-pill">
+                <i data-lucide="lock"></i>
+                <span>portal.client-turnkey.techboy.internal</span>
+              </div>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Turnkey Client Deployed</span>
+            </div>
+
+            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Custom Client SaaS & Web Systems Platform', 'assets/art/client-turnkey-preview.jpg', 'Client Platform — Multi-device responsive web portals, automated billing, and live telemetry.')">
+              <img src="assets/art/client-turnkey-preview.jpg" alt="Custom Client SaaS and Web Systems Responsive Dashboard" class="work-card-media-img" loading="lazy">
+              <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
+                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Client SaaS Platform', 'assets/art/client-turnkey-preview.jpg', 'Responsive Multi-Device Web Portals & Automated Billing.')" title="Zoom in on UI">
+                  <i data-lucide="maximize-2"></i>
+                  <span>Photo View</span>
+                </button>
+                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Client SaaS Platform', 'assets/art/client-turnkey-preview.jpg', 'Interactive Simulation — Tenant Isolation, Custom CRM, and Secure Cloud Pipelines.')" title="Watch demo walkthrough">
+                  <i data-lucide="play"></i>
+                  <span>Live Demo</span>
+                </button>
               </div>
             </div>
 
-            <div class="work-detailed-content">
-              <div class="work-card-eyebrow">Custom Engineering &bull; Business &amp; Colleges</div>
-              <h2 class="work-detailed-title">Custom Software &amp; Web Systems for You</h2>
-              <p class="work-detailed-desc">Have a collegiate automation challenge, enterprise security portal, or high-throughput real-time web application? Partner directly with Tech Boy Solutions.</p>
+            <div class="work-showcase-body">
+              <div class="work-category-pill">Client Deployments &bull; Custom Scoped &amp; Turnkey</div>
+              <h2 class="work-detailed-title">Custom Client SaaS &amp; Web Systems Platform</h2>
+              <p class="work-detailed-desc">Bespoke web applications, client dashboards, and automated management platforms custom engineered for businesses and collegiate institutions.</p>
               
               <!-- Key Architecture Highlights -->
               <div class="work-architecture-box">
@@ -510,13 +594,13 @@
             </div>
 
             <div class="work-detailed-footer">
-              <a href="index.html#contact" class="apple-btn-primary" onclick="prefillContact('Inquiry for Custom Client System Build')">
+              <button type="button" class="apple-btn-primary" onclick="openProjectModal('client-turnkey')">
+                <i data-lucide="layers"></i>
+                <span>Deep Specs</span>
+              </button>
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry for Custom Client System Build')">
+                <span>Inquire</span>
                 <i data-lucide="arrow-right"></i>
-                <span>Start Build</span>
-              </a>
-              <a href="https://wa.me/916364768498?text=Hello%20Tech%20Boy%20Solutions,%20I%20would%20like%20to%20discuss%20a%20custom%20software%20project." class="apple-btn-secondary" target="_blank" rel="noopener">
-                <i data-lucide="message-circle"></i>
-                <span>WhatsApp</span>
               </a>
             </div>
           </article>
@@ -638,6 +722,27 @@
       <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
       <div class="modal-content" id="modalContent">
         <!-- Dynamically populated by main.js openProjectModal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FULLSCREEN MEDIA LIGHTBOX MODAL (#mediaModal)
+       ============================================================ -->
+  <div class="media-modal-overlay" id="mediaModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="media-modal-card">
+      <div class="media-modal-header">
+        <div class="media-modal-title" id="mediaModalTitle">
+          <i data-lucide="image"></i>
+          <span>Project Preview</span>
+        </div>
+        <button type="button" class="media-modal-close" id="mediaModalCloseBtn" aria-label="Close media preview">&times;</button>
+      </div>
+      <div class="media-modal-body" id="mediaModalBody">
+        <!-- Dynamically injected: photo or demo player -->
+      </div>
+      <div class="media-modal-footer-caption" id="mediaModalCaption">
+        <!-- Caption injected dynamically -->
       </div>
     </div>
   </div>
