@@ -198,149 +198,263 @@
           <p class="section-lead">Zero boring PowerPoint lectures. Every session is 100% hands-on, terminal-driven, and designed to build real-world software and hardware prototypes from day one.</p>
         </div>
 
-        <div class="academy-tracks-grid">
+        <!-- Compact Category Selector Bar -->
+        <div class="academy-tracks-grid track-categories-nav" role="tablist" aria-label="Academic Tracks Categories">
+          
+          <button type="button" class="track-category-tab active" data-track="track-ai" id="tab-ai" role="tab" aria-selected="true" aria-controls="track-ai">
+            <div class="category-icon glow-blue">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div class="category-meta">
+              <span class="category-pill pill-blue">MOST POPULAR</span>
+              <span class="category-title">AI &amp; Machine Learning</span>
+            </div>
+          </button>
+
+          <button type="button" class="track-category-tab" data-track="track-iot" id="tab-iot" role="tab" aria-selected="false" aria-controls="track-iot">
+            <div class="category-icon glow-emerald">
+              <i data-lucide="cpu"></i>
+            </div>
+            <div class="category-meta">
+              <span class="category-pill pill-emerald">CIRCUITS &amp; SENSORS</span>
+              <span class="category-title">IoT &amp; Hardware</span>
+            </div>
+          </button>
+
+          <button type="button" class="track-category-tab" data-track="track-cyber" id="tab-cyber" role="tab" aria-selected="false" aria-controls="track-cyber">
+            <div class="category-icon glow-purple">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="category-meta">
+              <span class="category-pill pill-purple">SYSTEM DEFENSE</span>
+              <span class="category-title">Cybersecurity</span>
+            </div>
+          </button>
+
+          <button type="button" class="track-category-tab" data-track="track-excel" id="tab-excel" role="tab" aria-selected="false" aria-controls="track-excel">
+            <div class="category-icon glow-cyan">
+              <i data-lucide="table"></i>
+            </div>
+            <div class="category-meta">
+              <span class="category-pill pill-cyan">PROCESS OPS</span>
+              <span class="category-title">Enterprise Excel</span>
+            </div>
+          </button>
+
+        </div>
+
+        <!-- Dynamic Track Detail Showcase -->
+        <div class="track-details-showcase">
           
           <!-- Track 1: AI & Machine Learning -->
-          <div class="academy-track-card reveal revealed" id="track-ai">
-            <div class="track-header">
-              <div class="track-icon glow-blue">
-                <i data-lucide="sparkles"></i>
+          <div class="academy-track-card track-detail-panel active" id="track-ai" role="tabpanel" aria-labelledby="tab-ai">
+            <div class="track-detail-inner">
+              <div class="track-detail-main">
+                <div class="track-detail-header">
+                  <div class="track-icon glow-blue">
+                    <i data-lucide="sparkles"></i>
+                  </div>
+                  <div class="track-header-text">
+                    <span class="track-pill pill-blue">MOST POPULAR • FROM SCRATCH</span>
+                    <h3>AI &amp; Machine Learning (From Scratch)</h3>
+                  </div>
+                </div>
+                <p class="track-desc">
+                  Taught right from fundamental math and Python intuition up to multimodal generative models. Students build functional computer vision OCR, sentiment classifiers, and Gemini AI automation pipelines.
+                </p>
+                <div class="track-tags">
+                  <span>Python</span>
+                  <span>PyTorch</span>
+                  <span>Gemini Vision</span>
+                  <span>OpenCV</span>
+                  <span>Jupyter</span>
+                </div>
+                <div class="track-cta-row">
+                  <button type="button" class="btn-track-action" onclick="openBookingModal('AI & Machine Learning')">
+                    <span>Inquire Track</span>
+                    <i data-lucide="arrow-right"></i>
+                  </button>
+                  <a href="#curriculum" class="btn-track-secondary">
+                    <span>View Curriculum Modules</span>
+                    <i data-lucide="chevron-right"></i>
+                  </a>
+                </div>
               </div>
-              <span class="track-pill pill-blue">MOST POPULAR • FROM SCRATCH</span>
-            </div>
-            <h3>AI &amp; Machine Learning (From Scratch)</h3>
-            <p class="track-desc">
-              Taught right from fundamental math and Python intuition up to multimodal generative models. Students build functional computer vision OCR, sentiment classifiers, and Gemini AI automation pipelines.
-            </p>
-            <div class="track-highlights">
-              <h4>Key Learning Modules:</h4>
-              <ul>
-                <li><i data-lucide="check-circle-2"></i> Python for Data Science, NumPy &amp; Pandas</li>
-                <li><i data-lucide="check-circle-2"></i> Neural Network Intuition &amp; Model Training</li>
-                <li><i data-lucide="check-circle-2"></i> Computer Vision &amp; Real-World OCR Ingestion</li>
-                <li><i data-lucide="check-circle-2"></i> Multimodal Gemini API &amp; LLM Automation</li>
-              </ul>
-            </div>
-            <div class="track-tags">
-              <span>Python</span>
-              <span>PyTorch</span>
-              <span>Gemini Vision</span>
-              <span>OpenCV</span>
-              <span>Jupyter</span>
-            </div>
-            <div class="track-footer">
-              <button type="button" class="btn-track-action" onclick="openBookingModal('AI & Machine Learning')">
-                <span>Inquire Track</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
+
+              <div class="track-detail-sidebar">
+                <div class="track-highlights-card">
+                  <h4><i data-lucide="layers"></i> Key Learning Modules:</h4>
+                  <ul>
+                    <li><i data-lucide="check-circle-2"></i> Python for Data Science, NumPy &amp; Pandas</li>
+                    <li><i data-lucide="check-circle-2"></i> Neural Network Intuition &amp; Model Training</li>
+                    <li><i data-lucide="check-circle-2"></i> Computer Vision &amp; Real-World OCR Ingestion</li>
+                    <li><i data-lucide="check-circle-2"></i> Multimodal Gemini API &amp; LLM Automation</li>
+                  </ul>
+                  <div class="track-badge-note">
+                    <i data-lucide="award"></i>
+                    <span>Includes terminal hands-on lab code &amp; GitHub repository</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Track 2: Hands-On IoT & Embedded Hardware -->
-          <div class="academy-track-card reveal revealed" id="track-iot">
-            <div class="track-header">
-              <div class="track-icon glow-emerald">
-                <i data-lucide="cpu"></i>
+          <div class="academy-track-card track-detail-panel" id="track-iot" role="tabpanel" aria-labelledby="tab-iot">
+            <div class="track-detail-inner">
+              <div class="track-detail-main">
+                <div class="track-detail-header">
+                  <div class="track-icon glow-emerald">
+                    <i data-lucide="cpu"></i>
+                  </div>
+                  <div class="track-header-text">
+                    <span class="track-pill pill-emerald">CIRCUITS &amp; SENSORS</span>
+                    <h3>IoT, Robotics &amp; Embedded Hardware</h3>
+                  </div>
+                </div>
+                <p class="track-desc">
+                  Real hardware that communicates. Students wire microcontrollers on physical breadboards, write C/C++ firmware, interface sensor arrays, and publish live cloud telemetry over MQTT networks.
+                </p>
+                <div class="track-tags">
+                  <span>ESP32</span>
+                  <span>Arduino C++</span>
+                  <span>MQTT</span>
+                  <span>Raspberry Pi</span>
+                  <span>I2C/SPI</span>
+                </div>
+                <div class="track-cta-row">
+                  <button type="button" class="btn-track-action" onclick="openBookingModal('IoT & Embedded Hardware')">
+                    <span>Inquire Track</span>
+                    <i data-lucide="arrow-right"></i>
+                  </button>
+                  <a href="#curriculum" class="btn-track-secondary">
+                    <span>View Curriculum Modules</span>
+                    <i data-lucide="chevron-right"></i>
+                  </a>
+                </div>
               </div>
-              <span class="track-pill pill-emerald">CIRCUITS &amp; SENSORS</span>
-            </div>
-            <h3>IoT, Robotics &amp; Embedded Hardware</h3>
-            <p class="track-desc">
-              Real hardware that communicates. Students wire microcontrollers on physical breadboards, write C/C++ firmware, interface sensor arrays, and publish live cloud telemetry over MQTT networks.
-            </p>
-            <div class="track-highlights">
-              <h4>Key Learning Modules:</h4>
-              <ul>
-                <li><i data-lucide="check-circle-2"></i> ESP32, Arduino &amp; Raspberry Pi Architecture</li>
-                <li><i data-lucide="check-circle-2"></i> Analog/Digital Sensor Interfacing &amp; Wiring</li>
-                <li><i data-lucide="check-circle-2"></i> Real-time MQTT &amp; HTTP Cloud Telemetry</li>
-                <li><i data-lucide="check-circle-2"></i> Smart Campus &amp; Industrial Edge Node Prototyping</li>
-              </ul>
-            </div>
-            <div class="track-tags">
-              <span>ESP32</span>
-              <span>Arduino C++</span>
-              <span>MQTT</span>
-              <span>Raspberry Pi</span>
-              <span>I2C/SPI</span>
-            </div>
-            <div class="track-footer">
-              <button type="button" class="btn-track-action" onclick="openBookingModal('IoT & Embedded Hardware')">
-                <span>Inquire Track</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
+
+              <div class="track-detail-sidebar">
+                <div class="track-highlights-card">
+                  <h4><i data-lucide="layers"></i> Key Learning Modules:</h4>
+                  <ul>
+                    <li><i data-lucide="check-circle-2"></i> ESP32, Arduino &amp; Raspberry Pi Architecture</li>
+                    <li><i data-lucide="check-circle-2"></i> Analog/Digital Sensor Interfacing &amp; Wiring</li>
+                    <li><i data-lucide="check-circle-2"></i> Real-time MQTT &amp; HTTP Cloud Telemetry</li>
+                    <li><i data-lucide="check-circle-2"></i> Smart Campus &amp; Industrial Edge Node Prototyping</li>
+                  </ul>
+                  <div class="track-badge-note">
+                    <i data-lucide="cpu"></i>
+                    <span>Includes physical breadboards &amp; sensor kits for each attendee</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Track 3: Cybersecurity & Ethical Hacking -->
-          <div class="academy-track-card reveal revealed" id="track-cyber">
-            <div class="track-header">
-              <div class="track-icon glow-purple">
-                <i data-lucide="shield-check"></i>
+          <div class="academy-track-card track-detail-panel" id="track-cyber" role="tabpanel" aria-labelledby="tab-cyber">
+            <div class="track-detail-inner">
+              <div class="track-detail-main">
+                <div class="track-detail-header">
+                  <div class="track-icon glow-purple">
+                    <i data-lucide="shield-check"></i>
+                  </div>
+                  <div class="track-header-text">
+                    <span class="track-pill pill-purple">SYSTEM SECURITY</span>
+                    <h3>Cybersecurity &amp; Ethical Hacking</h3>
+                  </div>
+                </div>
+                <p class="track-desc">
+                  Defensive security literacy for future engineers. Students learn packet sniffing, vulnerability auditing, OWASP security postures, zero-trust architectures, and ethical hacking lab scenarios.
+                </p>
+                <div class="track-tags">
+                  <span>Wireshark</span>
+                  <span>Kali Linux</span>
+                  <span>OWASP</span>
+                  <span>Nmap</span>
+                  <span>Burp Suite</span>
+                </div>
+                <div class="track-cta-row">
+                  <button type="button" class="btn-track-action" onclick="openBookingModal('Cybersecurity & Ethical Hacking')">
+                    <span>Inquire Track</span>
+                    <i data-lucide="arrow-right"></i>
+                  </button>
+                  <a href="#curriculum" class="btn-track-secondary">
+                    <span>View Curriculum Modules</span>
+                    <i data-lucide="chevron-right"></i>
+                  </a>
+                </div>
               </div>
-              <span class="track-pill pill-purple">SYSTEM SECURITY</span>
-            </div>
-            <h3>Cybersecurity &amp; Ethical Hacking</h3>
-            <p class="track-desc">
-              Defensive security literacy for future engineers. Students learn packet sniffing, vulnerability auditing, OWASP security postures, zero-trust architectures, and ethical hacking lab scenarios.
-            </p>
-            <div class="track-highlights">
-              <h4>Key Learning Modules:</h4>
-              <ul>
-                <li><i data-lucide="check-circle-2"></i> Network Architecture &amp; Wireshark Packet Forensics</li>
-                <li><i data-lucide="check-circle-2"></i> Web Application Vulnerabilities (OWASP Top 10)</li>
-                <li><i data-lucide="check-circle-2"></i> Ethical Reconnaissance &amp; Port Scanning (Nmap)</li>
-                <li><i data-lucide="check-circle-2"></i> Cryptography, Zero-Trust &amp; Network Defense</li>
-              </ul>
-            </div>
-            <div class="track-tags">
-              <span>Wireshark</span>
-              <span>Kali Linux</span>
-              <span>OWASP</span>
-              <span>Nmap</span>
-              <span>Burp Suite</span>
-            </div>
-            <div class="track-footer">
-              <button type="button" class="btn-track-action" onclick="openBookingModal('Cybersecurity & Ethical Hacking')">
-                <span>Inquire Track</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
+
+              <div class="track-detail-sidebar">
+                <div class="track-highlights-card">
+                  <h4><i data-lucide="layers"></i> Key Learning Modules:</h4>
+                  <ul>
+                    <li><i data-lucide="check-circle-2"></i> Network Architecture &amp; Wireshark Packet Forensics</li>
+                    <li><i data-lucide="check-circle-2"></i> Web Application Vulnerabilities (OWASP Top 10)</li>
+                    <li><i data-lucide="check-circle-2"></i> Ethical Reconnaissance &amp; Port Scanning (Nmap)</li>
+                    <li><i data-lucide="check-circle-2"></i> Cryptography, Zero-Trust &amp; Network Defense</li>
+                  </ul>
+                  <div class="track-badge-note">
+                    <i data-lucide="shield-check"></i>
+                    <span>Isolated virtual lab environment with pre-configured attack vectors</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Track 4: Enterprise Automation & Advanced Excel -->
-          <div class="academy-track-card reveal revealed" id="track-excel">
-            <div class="track-header">
-              <div class="track-icon glow-cyan">
-                <i data-lucide="table"></i>
+          <div class="academy-track-card track-detail-panel" id="track-excel" role="tabpanel" aria-labelledby="tab-excel">
+            <div class="track-detail-inner">
+              <div class="track-detail-main">
+                <div class="track-detail-header">
+                  <div class="track-icon glow-cyan">
+                    <i data-lucide="table"></i>
+                  </div>
+                  <div class="track-header-text">
+                    <span class="track-pill pill-cyan">PROCESS AUTOMATION</span>
+                    <h3>Enterprise Automation &amp; Advanced Excel</h3>
+                  </div>
+                </div>
+                <p class="track-desc">
+                  Eliminate hours of manual data entry. We train college departments, administrative staff, accountants, and students to build automated spreadsheet workflows, Power Query models, macros, and Python bridges.
+                </p>
+                <div class="track-tags">
+                  <span>Advanced Excel</span>
+                  <span>Power Query</span>
+                  <span>VBA Macros</span>
+                  <span>Python pandas</span>
+                  <span>Office Automation</span>
+                </div>
+                <div class="track-cta-row">
+                  <button type="button" class="btn-track-action" onclick="openBookingModal('Enterprise Automation & Excel')">
+                    <span>Inquire Track</span>
+                    <i data-lucide="arrow-right"></i>
+                  </button>
+                  <a href="#curriculum" class="btn-track-secondary">
+                    <span>View Curriculum Modules</span>
+                    <i data-lucide="chevron-right"></i>
+                  </a>
+                </div>
               </div>
-              <span class="track-pill pill-cyan">PROCESS AUTOMATION</span>
-            </div>
-            <h3>Enterprise Automation &amp; Advanced Excel</h3>
-            <p class="track-desc">
-              Eliminate hours of manual data entry. We train college departments, administrative staff, accountants, and students to build automated spreadsheet workflows, Power Query models, macros, and Python bridges.
-            </p>
-            <div class="track-highlights">
-              <h4>Key Learning Modules:</h4>
-              <ul>
-                <li><i data-lucide="check-circle-2"></i> Advanced Modeling (Dynamic Arrays, XLOOKUP, INDEX)</li>
-                <li><i data-lucide="check-circle-2"></i> Power Query Automated Data Ingestion &amp; Cleansing</li>
-                <li><i data-lucide="check-circle-2"></i> VBA Macros &amp; Repetitive Workflow Automation</li>
-                <li><i data-lucide="check-circle-2"></i> Python-to-Excel Automated PDF &amp; Report Pipelines</li>
-              </ul>
-            </div>
-            <div class="track-tags">
-              <span>Advanced Excel</span>
-              <span>Power Query</span>
-              <span>VBA Macros</span>
-              <span>Python pandas</span>
-              <span>Office Automation</span>
-            </div>
-            <div class="track-footer">
-              <button type="button" class="btn-track-action" onclick="openBookingModal('Enterprise Automation & Excel')">
-                <span>Inquire Track</span>
-                <i data-lucide="arrow-right"></i>
-              </button>
+
+              <div class="track-detail-sidebar">
+                <div class="track-highlights-card">
+                  <h4><i data-lucide="layers"></i> Key Learning Modules:</h4>
+                  <ul>
+                    <li><i data-lucide="check-circle-2"></i> Advanced Modeling (Dynamic Arrays, XLOOKUP, INDEX)</li>
+                    <li><i data-lucide="check-circle-2"></i> Power Query Automated Data Ingestion &amp; Cleansing</li>
+                    <li><i data-lucide="check-circle-2"></i> VBA Macros &amp; Repetitive Workflow Automation</li>
+                    <li><i data-lucide="check-circle-2"></i> Python-to-Excel Automated PDF &amp; Report Pipelines</li>
+                  </ul>
+                  <div class="track-badge-note">
+                    <i data-lucide="table"></i>
+                    <span>Includes production financial &amp; roster workbook templates</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

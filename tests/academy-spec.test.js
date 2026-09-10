@@ -70,11 +70,18 @@ function runAcademySpecTests() {
     return 5;
   });
 
-  // 3. 4 Core Technology Tracks
-  test('4 Core Technology Tracks', () => {
+  // 3. 4 Core Technology Tracks (Compact Category Selector + Dynamic Panels)
+  test('4 Core Technology Tracks & Compact Category Selector', () => {
     const tracksSection = dom.getElementById('tracks');
     Assert.exists(tracksSection, 'Tracks section exists');
     
+    // Category Tabs & Panels
+    const categoryTabs = dom.querySelectorAll('.track-category-tab');
+    Assert.isGreaterThanOrEqual(categoryTabs.length, 4, 'Has at least 4 compact category selector tabs');
+    const detailPanels = dom.querySelectorAll('.track-detail-panel');
+    Assert.isGreaterThanOrEqual(detailPanels.length, 4, 'Has at least 4 track detail panels');
+    Assert.contains(js, 'initTrackCategories', 'JS initializes track category switcher');
+
     // Track 1: AI & ML
     Assert.contains(html, 'AI &amp; Machine Learning (From Scratch)', 'Track 1 AI/ML exists');
     Assert.contains(html, 'Gemini', 'AI track includes Gemini reference');
@@ -90,7 +97,7 @@ function runAcademySpecTests() {
     // Track 4: Excel & Automation
     Assert.contains(html, 'Enterprise Automation &amp; Advanced Excel', 'Track 4 Excel exists');
     Assert.contains(html, 'Power Query', 'Excel track includes Power Query reference');
-    return 9;
+    return 12;
   });
 
   // 4. Institutional Partnerships & Campus Delivery

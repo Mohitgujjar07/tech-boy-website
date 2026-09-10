@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initTheme();
   initMobileDrawer();
+  initTrackCategories();
   initCurriculumTabs();
   initFaqAccordion();
   initScrollReveal();
@@ -91,7 +92,49 @@ function initMobileDrawer() {
 }
 
 // ------------------------------------------------------------
-// 3. CURRICULUM TABS
+// 3. TRACK CATEGORIES SWITCHER (COMPACT INTERACTIVE SHOWCASE)
+// ------------------------------------------------------------
+function initTrackCategories() {
+  const categoryBtns = document.querySelectorAll('.track-category-tab');
+  const detailPanels = document.querySelectorAll('.track-detail-panel');
+
+  if (!categoryBtns.length || !detailPanels.length) return;
+
+  function activateTrack(trackId) {
+    categoryBtns.forEach(b => {
+      const isMatch = b.getAttribute('data-track') === trackId;
+      b.classList.toggle('active', isMatch);
+      b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+
+    detailPanels.forEach(p => {
+      const isMatch = p.id === trackId;
+      p.classList.toggle('active', isMatch);
+    });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  }
+
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-track');
+      if (targetId) activateTrack(targetId);
+    });
+  });
+
+  // Deep-link anchor support (e.g. academy.html#track-iot)
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    if (['track-ai', 'track-iot', 'track-cyber', 'track-excel'].includes(hash)) {
+      activateTrack(hash);
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// 4. CURRICULUM TABS
 // ------------------------------------------------------------
 function initCurriculumTabs() {
   const tabButtons = document.querySelectorAll('.curriculum-tab-btn');
