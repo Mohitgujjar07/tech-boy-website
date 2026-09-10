@@ -1,6 +1,6 @@
 /**
  * @file run-all-tests.js
- * @description Master E2E Test Suite Orchestrator & CLI Runner for Tech Boy Solutions.
+ * @description Master E2E Test Suite Orchestrator & CLI Runner for Aarambhx Technology.
  * Executes Tier 1, Tier 2, Tier 3, and Tier 4 test suites with detailed metrics and formatting.
  *
  * Usage:
@@ -31,7 +31,7 @@ async function main() {
   const overallStartTime = Date.now();
 
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   TECH BOY SOLUTIONS — E2E TEST SUITE (TIERS 1 - 8)                           ${RESET}`);
+  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 8)                           ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 

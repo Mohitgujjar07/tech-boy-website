@@ -1,8 +1,8 @@
-# Tech Boy Solutions — Testing Infrastructure (TEST_INFRA.md)
+# Aarambhx Technology — Testing Infrastructure (TEST_INFRA.md)
 
 ## 1. Overview & Architectural Philosophy
 
-The **Tech Boy Solutions E2E Test Suite** provides exhaustive, opaque-box, multi-tier verification for the entire modern SaaS corporate platform (`d:\techboy-sol-web`).
+The **Aarambhx Technology E2E Test Suite** provides exhaustive, opaque-box, multi-tier verification for the entire modern SaaS corporate platform (`d:\techboy-sol-web`).
 
 ### Core Design Principles
 - **Zero-Dependency Standalone Runtime**: Built using native Node.js standard libraries (`http`, `fs`, `path`, `assert`). No heavy browser automation or `npm install` overhead required to run complete structural, layout, theming, contract, and workflow tests.

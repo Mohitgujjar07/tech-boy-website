@@ -130,7 +130,7 @@ function runTier5Tests() {
 
   // ADV-02: WhatsApp Payload Serialization & URL Encoding Safety
   test(2, 'WhatsApp Payload Serialization & URL Safety under Massive Payload', () => {
-    const massiveText = 'Tech Boy Solutions '.repeat(600) + '🔥🚀💻';
+    const massiveText = 'Aarambhx Technology '.repeat(600) + '🔥🚀💻';
     const payload = {
       fullName: 'Enterprise Systems Architect',
       phone: '+91 63647 68498',
@@ -427,7 +427,7 @@ function runTier5Tests() {
       'lalithlalu.com@yahoo.com',
       'kiran.kumar+work@sit.ac.in',
       'user_123-test@sub.domain.org',
-      'info@techboysolutions.in'
+      'info@aarambhx.in'
     ];
 
     let asserts = 0;

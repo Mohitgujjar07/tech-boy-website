@@ -65,7 +65,7 @@ const server = http.createServer(handleRequest);
 server.listen(PORT, '0.0.0.0', () => {
   const networkIps = getNetworkAddresses();
   console.log('\n======================================================');
-  console.log('   Tech Boy Solutions — Local & Network Web Server    ');
+  console.log('   Aarambhx Technology — Local & Network Web Server   ');
   console.log('======================================================');
   console.log(`  > Local:    http://localhost:${PORT}/`);
   if (networkIps.length > 0) {

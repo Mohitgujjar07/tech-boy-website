@@ -1,7 +1,7 @@
 /**
  * @file test-utils.js
  * @description Shared testing utilities, DOM analysis helpers, CSS token parser,
- * HTTP client, and assertion framework for Tech Boy Solutions E2E test suite.
+ * HTTP client, and assertion framework for Aarambhx Technology E2E test suite.
  */
 
 const fs = require('fs');
@@ -461,7 +461,7 @@ function simulateFormValidation(fields) {
 function buildWhatsAppPayload(fields, config) {
   const number = config.company.whatsapp;
   const lines = [
-    `*New Consultation Request — Tech Boy Solutions*`,
+    `*New Consultation Request — Aarambhx Technology*`,
     `----------------------------------------`,
     `*Name:* ${fields.fullName}`,
     `*Phone:* ${fields.phone}`,

@@ -1,5 +1,5 @@
 /**
- * Tech Boy Solutions — Main JavaScript
+ * Aarambhx Technology — Main JavaScript
  * High-Performance SaaS Platform Engine
  * Complete Animations, Micro-interactions, Accessibility & Diagnostics
  */
@@ -484,7 +484,7 @@ window.prefillContact = function(serviceText) {
   }
 
   if (messageArea && serviceText) {
-    messageArea.value = 'Hello Tech Boy Solutions, I am inquiring about: ' + serviceText;
+    messageArea.value = 'Hello Aarambhx Technology, I am inquiring about: ' + serviceText;
   }
 
   if (contactSection) {
@@ -1037,7 +1037,7 @@ function initConsultationForm() {
     }
 
     const whatsappPayload = encodeURIComponent(
-      `Hello Tech Boy Solutions!\n\n*New Consultation Inquiry*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'N/A'}\n*Service:* ${service}\n*Requirement:* ${message}\n\nLocation: Tumakuru, Karnataka, India`
+      `Hello Aarambhx Technology!\n\n*New Consultation Inquiry*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'N/A'}\n*Service:* ${service}\n*Requirement:* ${message}\n\nLocation: Tumakuru, Karnataka, India`
     );
 
     setTimeout(() => {

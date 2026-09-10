@@ -77,8 +77,8 @@ function runTier1Tests() {
   test(2, 'Brand Logo Mark & Badge', () => {
     const navLogo = dom.querySelector('.nav-brand') || dom.querySelector('.nav-logo');
     Assert.exists(navLogo, 'Logo element must exist in header');
-    Assert.contains(navLogo.textContent, 'Tech Boy', 'Logo text must contain "Tech Boy"');
-    Assert.contains(navLogo.textContent, 'Solutions', 'Logo text must contain "Solutions"');
+    Assert.contains(navLogo.textContent, 'Aarambhx', 'Logo text must contain "Aarambhx"');
+    Assert.contains(navLogo.textContent, 'Technology', 'Logo text must contain "Technology"');
     Assert.contains(navLogo.innerHTML, '<svg', 'Logo must render vector SVG mark');
     Assert.isTrue(navLogo.innerHTML.includes('#2563EB') || navLogo.innerHTML.includes('#00D4AA'), 'Logo must include brand accent color');
     Assert.isTrue(fs.existsSync(FAVICON_PATH), 'assets/favicon.svg asset file must exist on disk');
@@ -623,7 +623,7 @@ function runTier1Tests() {
   test(44, '5-Column Corporate Footer', () => {
     const footer = dom.querySelector('.apple-footer') || dom.getElementById('footer');
     Assert.exists(footer, 'Footer element must exist');
-    Assert.contains(footer.textContent, 'Tech Boy Solutions', 'Footer brand name');
+    Assert.contains(footer.textContent, 'Aarambhx Technology', 'Footer brand name');
     Assert.contains(footer.textContent, '2026', 'Copyright notice with 2026');
     Assert.contains(footer.textContent, 'Tumakuru', 'Footer includes Tumakuru references');
     return 5;

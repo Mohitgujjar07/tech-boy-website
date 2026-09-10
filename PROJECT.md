@@ -1,4 +1,4 @@
-# Project: Tech Boy Solutions SaaS Platform Redesign & Modernization
+# Project: Aarambhx Technology SaaS Platform Redesign & Modernization
 
 ## Architecture
 - **Tech Stack**: Vanilla Modern Web Stack (HTML5, CSS3 Custom Properties & Grid/Flexbox, ES6+ Modular JavaScript, Local Node.js / PowerShell Static Server).
@@ -75,7 +75,7 @@
 - Header container MUST have selector `#navbar` / `.floating-navbar` with `position: fixed`, `top: 16px`, `left: 50%`, `transform: translateX(-50%)`, `border-radius: 9999px`, `backdrop-filter: blur(24px)`.
 
 ### Configuration Contract (`config.js` ↔ `main.js` / HTML)
-- `TBS_CONFIG.company.name`: `"Tech Boy Solutions"`
+- `TBS_CONFIG.company.name`: `"Aarambhx Technology"`
 - `TBS_CONFIG.company.phone`: `"+91 63647 68498"` (raw: `"6364768498"`)
 - `TBS_CONFIG.company.whatsapp`: `"916364768498"`
 - `TBS_CONFIG.company.email`: `"lalithulalu@gmail.com"`

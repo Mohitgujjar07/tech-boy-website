@@ -1,4 +1,4 @@
-# Tech Boy Solutions — Test Readiness & Coverage Report (TEST_READY.md)
+# Aarambhx Technology — Test Readiness & Coverage Report (TEST_READY.md)
 
 **Status**: **TEST SUITE READY — 100% PASS RATE**  
 **Date**: 2026-08-29  
@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary
 
-The standalone, opaque-box E2E test suite for the **Tech Boy Solutions Corporate Platform** has been fully designed, implemented, and verified.
+The standalone, opaque-box E2E test suite for the **Aarambhx Technology Corporate Platform** has been fully designed, implemented, and verified.
 
 The test suite covers:
 - **Tier 1 (Feature Coverage)**: 49 / 49 Features Verified (>= 5 assertions each, 270+ total assertions)

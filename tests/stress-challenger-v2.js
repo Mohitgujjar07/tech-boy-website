@@ -284,7 +284,7 @@ function buildWhatsAppUrl(data) {
   const message = (data.message || '').trim();
 
   const payload = encodeURIComponent(
-    `Hello Tech Boy Solutions!\n\n*New Consultation Inquiry*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'N/A'}\n*Service:* ${service}\n*Requirement:* ${message}\n\nLocation: Tumakuru, Karnataka, India`
+    `Hello Aarambhx Technology!\n\n*New Consultation Inquiry*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'N/A'}\n*Service:* ${service}\n*Requirement:* ${message}\n\nLocation: Tumakuru, Karnataka, India`
   );
   return `https://wa.me/916364768498?text=${payload}`;
 }
@@ -339,7 +339,7 @@ runTest('Form Fuzzing', 'High-Density Emojis, Mathematical Symbols & ZWJ Sequenc
   const emojiCase = {
     fullName: 'Mohit 👨‍💻🚀⚡',
     phone: '+91 94480 12345',
-    email: 'mohit.iot@techboy.io',
+    email: 'mohit.iot@aarambhx.io',
     service: 'Student Project',
     message: 'Building ESP32 telemetry: ∫ f(x)dx & ΔP ≥ 0.05 bar 🔥🛠️✨📡 🏳️‍🌈 💻💡'
   };

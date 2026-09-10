@@ -83,7 +83,7 @@ function runDeveloperPlatformTests() {
     Assert.exists(header, 'dev-header exists in DOM');
     Assert.contains(css, 'top: 38px', 'Header top offset is 38px');
     Assert.contains(css, 'padding: 0 56px', 'Header horizontal padding is 56px');
-    Assert.contains(html, 'TechBoy', 'Brand logo contains TechBoy');
+    Assert.contains(html, 'Aarambhx', 'Brand logo contains Aarambhx');
     Assert.contains(html, 'DEVSTREAM', 'Brand contains DEVSTREAM');
     Assert.contains(html, 'Book a demo', 'Header contains Book a demo CTA');
     return 6;

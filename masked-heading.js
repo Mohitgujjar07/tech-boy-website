@@ -14,7 +14,7 @@
   class MaskedHeadingInstance {
     constructor(element, options = {}) {
       this.root = element;
-      this.text = options.text || element.getAttribute('data-text') || 'TECHBOY SOLUTIONS';
+      this.text = options.text || element.getAttribute('data-text') || 'AARAMBHX TECHNOLOGY';
       this.src = options.src || element.getAttribute('data-src') || '/hero.jpg';
       this.mediaType = options.mediaType || element.getAttribute('data-media-type') || 'image';
       this.poster = options.poster || element.getAttribute('data-poster') || '';

@@ -1,5 +1,5 @@
 // ============================================================
-// TECH BOY SOLUTIONS — SITE CONFIGURATION
+// AARAMBHX TECHNOLOGY — SITE CONFIGURATION
 // Edit this file to update all website content.
 // ============================================================
 //
@@ -26,15 +26,15 @@ const TBS_CONFIG = {
   // COMPANY INFORMATION
   // ----------------------------------------------------------
   company: {
-    name: 'Tech Boy Solutions',
+    name: 'Aarambhx Technology',
     tagline: 'Your Technology. Our Solution.',
     taglineAlt: 'Software. Hardware. Networking. IoT. IT Support.',
-    description: 'Tech Boy Solutions is a complete technology service and solutions company providing software development, digital solutions, hardware services, networking, IoT development, IT support and technology consulting under one roof in Tumakuru, Karnataka.',
+    description: 'Aarambhx Technology is a complete technology service and solutions company providing software development, digital solutions, hardware services, networking, IoT development, IT support and technology consulting under one roof in Tumakuru, Karnataka.',
     phone: '+91 63647 68498',
     phoneRaw: '6364768498',
     whatsapp: '916364768498',
     whatsappDisplay: '+91 63647 68498',
-    whatsappMessage: 'Hello Tech Boy Solutions, I would like to know more about your services.',
+    whatsappMessage: 'Hello Aarambhx Technology, I would like to know more about your services.',
     email: 'lalithulalu@gmail.com',
     emailAlt: 'lalithlalu.com@yahoo.com',
     city: 'Tumakuru',
@@ -55,9 +55,9 @@ const TBS_CONFIG = {
   // SEO & META TAGS
   // ----------------------------------------------------------
   seo: {
-    title: 'Tech Boy Solutions | Software, Hardware, Networking & IT Solutions',
-    description: 'Tech Boy Solutions provides website development, custom software, computer repair, custom PC builds, networking, Wi-Fi, IoT projects, IT support and technology solutions.',
-    keywords: 'Tech Boy Solutions, software solutions, website development, website design, custom software, computer repair, laptop repair, PC repair, custom PC build, networking services, Wi-Fi setup, router configuration, IoT projects, final year projects, Excel solutions, PowerPoint design, IT support, technology solutions',
+    title: 'Aarambhx Technology | Software, Hardware, Networking & IT Solutions',
+    description: 'Aarambhx Technology provides website development, custom software, computer repair, custom PC builds, networking, Wi-Fi, IoT projects, IT support and technology solutions.',
+    keywords: 'Aarambhx Technology, software solutions, website development, website design, custom software, computer repair, laptop repair, PC repair, custom PC build, networking services, Wi-Fi setup, router configuration, IoT projects, final year projects, Excel solutions, PowerPoint design, IT support, technology solutions',
     ogImage: 'assets/og-image.png',
   },
 

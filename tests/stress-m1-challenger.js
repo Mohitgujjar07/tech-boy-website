@@ -109,8 +109,8 @@ function runMilestone1StressSuite() {
     A.exists(logo, 'Logo element must exist');
     const svg = logo.querySelector('svg');
     A.exists(svg, 'Logo SVG icon must exist');
-    A.contains(logo.textContent, 'Tech Boy', 'Logo contains brand name Tech Boy');
-    A.contains(logo.textContent, 'Solutions', 'Logo contains brand name Solutions');
+    A.contains(logo.textContent, 'Aarambhx', 'Logo contains brand name Aarambhx');
+    A.contains(logo.textContent, 'Technology', 'Logo contains brand name Technology');
     A.isTrue(fs.existsSync(FAVICON_PATH), 'Favicon asset exists');
   });
 

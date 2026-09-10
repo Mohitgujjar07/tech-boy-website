@@ -1,7 +1,7 @@
 {
   "name": "techboy-sol-web",
   "version": "2.0.0",
-  "description": "Tech Boy Solutions — Modern SaaS Corporate Platform & Technology Services",
+  "description": "Aarambhx Technology — Modern SaaS Corporate Platform & Technology Services",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,12 +16,12 @@
     "test:morph-slider": "node tests/morph-slider.test.js"
   },
   "keywords": [
-    "tech-boy-solutions",
+    "aarambhx-technology",
     "saas",
     "bento-grid",
     "glassmorphism",
     "e2e-testing"
   ],
-  "author": "Tech Boy Solutions",
+  "author": "Aarambhx Technology",
   "license": "ISC"
 }

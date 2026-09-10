@@ -1,5 +1,5 @@
 /**
- * TechBoy DEVSTREAM — Developer-Centric Light Tech UI Controller
+ * Aarambhx DEVSTREAM — Developer-Centric Light Tech UI Controller
  * Manages Event Stream Table interactions, timeline bar state, and mobile drawer.
  */
 
