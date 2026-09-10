@@ -190,6 +190,8 @@ function initStatCounters() {
     const target = parseFloat(rawTarget);
     if (isNaN(target)) return;
 
+    const suffix = el.getAttribute('data-suffix') || '';
+    const prefix = el.getAttribute('data-prefix') || '';
     const isDecimal = rawTarget.includes('.') || el.getAttribute('data-decimals') === '1';
     const decimals = isDecimal ? 1 : 0;
     const duration = 1500;
@@ -202,12 +204,12 @@ function initStatCounters() {
       const ease = 1 - Math.pow(1 - progress, 3);
       const currentVal = ease * target;
 
-      el.textContent = isDecimal ? currentVal.toFixed(decimals) : Math.floor(currentVal).toString();
+      el.textContent = prefix + (isDecimal ? currentVal.toFixed(decimals) : Math.floor(currentVal).toString()) + suffix;
 
       if (progress < 1) {
         requestAnimationFrame(update);
       } else {
-        el.textContent = isDecimal ? target.toFixed(decimals) : target.toString();
+        el.textContent = prefix + (isDecimal ? target.toFixed(decimals) : target.toString()) + suffix;
       }
     }
     requestAnimationFrame(update);
@@ -218,7 +220,9 @@ function initStatCounters() {
   if (typeof IntersectionObserver === 'undefined' || prefersReducedMotion) {
     statElements.forEach(el => {
       const rawTarget = el.getAttribute('data-count');
-      if (rawTarget) el.textContent = rawTarget;
+      const suffix = el.getAttribute('data-suffix') || '';
+      const prefix = el.getAttribute('data-prefix') || '';
+      if (rawTarget) el.textContent = prefix + rawTarget + suffix;
     });
     return;
   }
