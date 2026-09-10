@@ -973,6 +973,7 @@ function applyTheme(theme) {
     document.documentElement.classList.add('light-theme');
   }
 }
+window.applyTheme = applyTheme;
 
 function initThemeToggle() {
   const themeToggle = document.getElementById('themeToggle');
