@@ -766,6 +766,16 @@ window.closeProjectModal = function() {
   }
 };
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 window.openMediaModal = function(type, title, src, caption) {
   const modal = document.getElementById('mediaModal');
   const modalTitle = document.getElementById('mediaModalTitle');
@@ -773,15 +783,18 @@ window.openMediaModal = function(type, title, src, caption) {
   const modalCaption = document.getElementById('mediaModalCaption');
   if (!modal || !modalBody) return;
 
+  const safeTitle = escapeHtml(title || 'Project Preview');
+  const safeSrc = encodeURI(src || '');
+
   if (modalTitle) {
-    modalTitle.innerHTML = `<i data-lucide="${type === 'demo' ? 'play-circle' : 'image'}"></i> <span>${title || 'Project Preview'}</span>`;
+    modalTitle.innerHTML = `<i data-lucide="${type === 'demo' ? 'play-circle' : 'image'}"></i> <span>${safeTitle}</span>`;
   }
 
   if (type === 'demo') {
     modalBody.innerHTML = `
       <div class="media-demo-player-container">
         <div style="position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000;">
-          <img src="${src}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85);">
+          <img src="${safeSrc}" alt="${safeTitle}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85);">
           <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(8,16,32,0.85) 100%);">
             <div style="width: 64px; height: 64px; border-radius: 50%; background: #2563EB; box-shadow: 0 0 25px rgba(37,99,235,0.7); display: flex; align-items: center; justify-content: center; cursor: pointer; transform: scale(1); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
               <i data-lucide="play" style="width: 28px; height: 28px; color: #FFFFFF; margin-left: 4px;"></i>
@@ -799,7 +812,7 @@ window.openMediaModal = function(type, title, src, caption) {
     `;
   } else {
     modalBody.innerHTML = `
-      <img src="${src}" alt="${title}" class="media-modal-view-img">
+      <img src="${safeSrc}" alt="${safeTitle}" class="media-modal-view-img">
     `;
   }
 
@@ -1041,7 +1054,7 @@ function initConsultationForm() {
     );
 
     setTimeout(() => {
-      window.open(`https://wa.me/916364768498?text=${whatsappPayload}`, '_blank');
+      window.open(`https://wa.me/916364768498?text=${whatsappPayload}`, '_blank', 'noopener,noreferrer');
       form.reset();
     }, 800);
   });
@@ -1069,7 +1082,7 @@ window.applyTheme = applyTheme;
 
 function initThemeToggle() {
   const themeToggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('tbs_theme') || 'light';
+  const savedTheme = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'light';
 
   applyTheme(savedTheme);
 
@@ -1081,6 +1094,7 @@ function initThemeToggle() {
 
     applyTheme(newTheme);
     localStorage.setItem('tbs_theme', newTheme);
+    localStorage.setItem('tb_theme', newTheme);
 
     window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
   });

@@ -2,7 +2,6 @@
   "name": "techboy-sol-web",
   "version": "2.0.0",
   "description": "Aarambhx Technology — Modern SaaS Corporate Platform & Technology Services",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node tests/run-all-tests.js",

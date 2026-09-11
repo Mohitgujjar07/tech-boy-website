@@ -37,7 +37,7 @@
   <script>
     (function() {
       try {
-        var savedTheme = localStorage.getItem('tbs_theme') || 'light';
+        var savedTheme = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark-theme');
