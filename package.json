@@ -12,7 +12,10 @@
     "test:t5": "node -e \"const {runTier5Tests}=require('./tests/tier5-adversarial-hardening.test'); console.log(runTier5Tests());\"",
     "test:dev": "node tests/developer-platform.test.js",
     "test:scroll-expand": "node tests/scroll-expand.test.js",
-    "test:morph-slider": "node tests/morph-slider.test.js"
+    "test:morph-slider": "node tests/morph-slider.test.js",
+    "test:lh": "node tests/lighthouse-audit.test.js",
+    "build:minify": "node scripts/build-minified.js",
+    "build:webp": "node scripts/convert-webp.js"
   },
   "keywords": [
     "aarambhx-technology",
