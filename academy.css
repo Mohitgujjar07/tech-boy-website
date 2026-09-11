@@ -822,6 +822,24 @@ body.dark-theme .academy-tracks-bg-layer {
   mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
 }
 
+/* Light Theme subtle dark scrim behind upper header text to tone down bright cloud glare */
+.academy-workshops-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 520px;
+  background: radial-gradient(ellipse 85% 65% at 50% 28%, rgba(15, 23, 42, 0.32) 0%, rgba(15, 23, 42, 0.16) 50%, transparent 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .academy-workshops-section::before,
+body.dark-theme .academy-workshops-section::before {
+  display: none;
+}
+
 [data-theme="dark"] .academy-workshops-bg-layer,
 body.dark-theme .academy-workshops-bg-layer {
   opacity: 0.58;
@@ -833,6 +851,94 @@ body.dark-theme .academy-workshops-bg-layer {
 .academy-workshops-container {
   position: relative;
   z-index: 2;
+}
+
+/* Institutional Partnerships Pure Glassmorphism Eyebrow Badge */
+.academy-workshops-section .apple-eyebrow,
+.academy-workshops-eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 6px 24px -2px rgba(15, 23, 42, 0.10), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
+  color: #1d4ed8 !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.academy-workshops-section .apple-eyebrow:hover,
+.academy-workshops-eyebrow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.22), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+}
+
+.academy-workshops-section .apple-eyebrow svg,
+.academy-workshops-eyebrow svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+  color: #2563eb !important;
+}
+
+/* Workshops Header Text: Dark in Light Theme, Light in Dark Theme */
+.academy-workshops-section .section-header-center h2 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-weight: 850;
+  letter-spacing: -0.028em;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.academy-workshops-section .section-lead {
+  color: #020617 !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 760px;
+  margin: 0 auto 36px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* Dark Theme Overrides: Crisp Glowing Contrast in Dark Mode */
+[data-theme="dark"] .academy-workshops-section .apple-eyebrow,
+body.dark-theme .academy-workshops-section .apple-eyebrow,
+[data-theme="dark"] .academy-workshops-eyebrow,
+body.dark-theme .academy-workshops-eyebrow {
+  background: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-workshops-section .apple-eyebrow svg,
+body.dark-theme .academy-workshops-section .apple-eyebrow svg,
+[data-theme="dark"] .academy-workshops-eyebrow svg,
+body.dark-theme .academy-workshops-eyebrow svg {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-workshops-section .section-header-center h2,
+body.dark-theme .academy-workshops-section .section-header-center h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .academy-workshops-section .section-lead,
+body.dark-theme .academy-workshops-section .section-lead {
+  color: #cbd5e1 !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
 }
 
 .academy-delivery-grid {
