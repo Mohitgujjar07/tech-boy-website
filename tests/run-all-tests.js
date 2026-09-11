@@ -16,6 +16,7 @@ const { runDeveloperPlatformTests } = require('./developer-platform.test');
 const { runAcademySpecTests } = require('./academy-spec.test');
 const { runScrollExpandTests } = require('./scroll-expand.test');
 const { runMorphSliderTests } = require('./morph-slider.test');
+const { runLighthouseAuditTests } = require('./lighthouse-audit.test');
 const { makeHttpRequest } = require('./test-utils');
 
 // ANSI Color Codes
@@ -32,7 +33,7 @@ async function main() {
   const overallStartTime = Date.now();
 
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 8)                           ${RESET}`);
+  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 9)                           ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 
@@ -301,6 +302,39 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
+  // Tier 9: Google Lighthouse 95+ Audit Suite (Performance, A11y, Best Practices, SEO)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 9: Google Lighthouse 95+ Audit Spec (Performance, A11y, Best Practices, SEO)${RESET}`);
+  const t9Results = runLighthouseAuditTests();
+  let t9Passed = 0;
+  let t9Failed = 0;
+  let t9Assertions = 0;
+
+  t9Results.forEach(r => {
+    totalTests++;
+    totalAssertions += r.assertions;
+    t9Assertions += r.assertions;
+    if (r.passed) {
+      t9Passed++;
+      totalPassed++;
+      console.log(`  ${GREEN}✔${RESET} [${r.id}] ${r.name} ${GRAY}(${r.assertions} assertions, ${r.durationMs}ms)${RESET}`);
+    } else {
+      t9Failed++;
+      totalFailed++;
+      console.log(`  ${RED}✖${RESET} [${r.id}] ${r.name} ${RED}FAILED${RESET}`);
+      console.log(`    ${RED}${r.error}${RESET}`);
+    }
+  });
+
+  tierReports.push({
+    tier: 'Tier 9: Lighthouse 95+ Audit Spec',
+    total: t9Results.length,
+    passed: t9Passed,
+    failed: t9Failed,
+    assertions: t9Assertions
+  });
+
+  // -------------------------------------------------------------------------
   // Optional Live HTTP Server Check
   // -------------------------------------------------------------------------
   console.log(`\n${BOLD}${CYAN}▶ CHECKING LOCAL HTTP SERVER STATUS${RESET}`);
@@ -340,7 +374,7 @@ async function main() {
   console.log(`  ${BOLD}Pass Rate:${RESET} ${finalColor}${((totalPassed / totalTests) * 100).toFixed(1)}%${RESET}`);
 
   if (totalFailed === 0) {
-    console.log(`\n${BOLD}${GREEN}✔ ALL 8 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
+    console.log(`\n${BOLD}${GREEN}✔ ALL 9 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
     process.exit(0);
   } else {
     console.log(`\n${BOLD}${RED}✖ ${totalFailed} TEST(S) FAILED${RESET}\n`);

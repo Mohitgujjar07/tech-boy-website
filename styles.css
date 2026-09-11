@@ -7610,3 +7610,76 @@ body.dark-theme .projects-header-wrap .section-lead {
   color: #F1F5F9;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.95), 0 2px 20px rgba(0, 0, 0, 0.85);
 }
+
+/* ============================================================
+   LIGHTHOUSE & A11Y CORE OPTIMIZATIONS
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 16px;
+  background: #2563EB;
+  color: #FFFFFF !important;
+  padding: 12px 24px;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border-radius: 8px;
+  z-index: 100000;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
+  transition: top 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid #60A5FA;
+  outline-offset: 3px;
+}
+
+/* CLS & Image Stability */
+.banner-ascii-img,
+.methodology-banner-img {
+  aspect-ratio: 1200 / 480;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.diagnostic-art-img {
+  aspect-ratio: 600 / 400;
+  object-fit: cover;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.tech-logo-img {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+}
+
+/* High-Contrast Accessible Focus Rings */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #2563EB !important;
+  outline-offset: 2px !important;
+}
+
+[data-theme="dark"] a:focus-visible,
+[data-theme="dark"] button:focus-visible,
+[data-theme="dark"] input:focus-visible,
+[data-theme="dark"] select:focus-visible,
+[data-theme="dark"] textarea:focus-visible,
+body.dark-theme a:focus-visible,
+body.dark-theme button:focus-visible,
+body.dark-theme input:focus-visible,
+body.dark-theme select:focus-visible,
+body.dark-theme textarea:focus-visible {
+  outline: 2px solid #60A5FA !important;
+  outline-offset: 2px !important;
+}

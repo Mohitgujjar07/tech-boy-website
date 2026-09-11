@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+const zlib = require('zlib');
+
 const DEFAULT_PORT = 3000; // PORT = 3000
 const PORT = parseInt(process.env.PORT || process.argv[2] || DEFAULT_PORT, 10);
 const BASE_DIR = path.resolve(__dirname);
@@ -15,6 +17,9 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.avif': 'image/avif',
   '.ico': 'image/x-icon',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
@@ -36,14 +41,34 @@ function handleRequest(req, res) {
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    const acceptEncoding = req.headers['accept-encoding'] || '';
 
-    res.writeHead(200, {
-      'Content-Type': contentType,
-      'Content-Length': stats.size,
-      'Cache-Control': 'no-cache'
-    });
+    const isCompressible = /^(text\/|application\/javascript|application\/json|image\/svg\+xml)/.test(contentType);
 
-    fs.createReadStream(filePath).pipe(res);
+    if (isCompressible && /\bgzip\b/.test(acceptEncoding)) {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Encoding': 'gzip',
+        'Vary': 'Accept-Encoding',
+        'Cache-Control': 'no-cache'
+      });
+      fs.createReadStream(filePath).pipe(zlib.createGzip()).pipe(res);
+    } else if (isCompressible && /\bdeflate\b/.test(acceptEncoding)) {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Encoding': 'deflate',
+        'Vary': 'Accept-Encoding',
+        'Cache-Control': 'no-cache'
+      });
+      fs.createReadStream(filePath).pipe(zlib.createDeflate()).pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Length': stats.size,
+        'Cache-Control': 'no-cache'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
   });
 }
 

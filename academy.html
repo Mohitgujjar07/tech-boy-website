@@ -9,22 +9,43 @@
   <title>AarambhX Academy — Hands-On AI, IoT, Cybersecurity & Enterprise Automation</title>
   <meta name="title" content="AarambhX Academy — Hands-On AI, IoT, Cybersecurity & Enterprise Automation">
   <meta name="description" content="Industrial training and hands-on campus workshops for schools, colleges, and institutions in Tumakuru & Karnataka. Master AI from scratch, IoT robotics, cybersecurity, and Excel automation with 100% practical engineering.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#2563EB">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://aarambhx-technology.vercel.app/academy">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AarambhX Academy">
+  <meta property="og:url" content="https://aarambhx-technology.vercel.app/academy">
   <meta property="og:title" content="AarambhX Academy — Practical Tech Workshops & Industrial Training">
-  <meta property="og:description" content="Master AI from scratch, IoT robotics, cybersecurity, and enterprise automation with practical, lab-first training.">
+  <meta property="og:description" content="Terminal-driven, hands-on campus workshops for schools & colleges across Karnataka. Master AI from scratch, IoT robotics, cybersecurity, and enterprise automation.">
   <meta property="og:image" content="assets/aarambhx-logo.jpg">
+  <meta property="og:image:secure_url" content="https://aarambhx-technology.vercel.app/assets/aarambhx-logo.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="AarambhX Academy Industrial Workshops & Technology Training">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://aarambhx-technology.vercel.app/academy">
+  <meta name="twitter:title" content="AarambhX Academy — Hands-On AI, IoT, Cybersecurity & Enterprise Automation">
+  <meta name="twitter:description" content="Terminal-driven, hands-on campus workshops for schools & colleges across Karnataka. Master AI from scratch, IoT robotics, cybersecurity, and enterprise automation.">
+  <meta name="twitter:image" content="https://aarambhx-technology.vercel.app/assets/aarambhx-logo.jpg">
+  <meta name="twitter:image:alt" content="AarambhX Academy Industrial Workshops & Technology Training">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
   <link rel="apple-touch-icon" href="assets/aarambhx-logo.jpg">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts Preconnect & Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons -->
@@ -33,6 +54,223 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css?v=20260911_v4">
   <link rel="stylesheet" href="academy.css?v=20260911_v4">
+
+  <!-- Schema.org JSON-LD Structured Data: EducationalOrganization, Courses & FAQs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://aarambhx-technology.vercel.app/academy#organization",
+        "name": "AarambhX Academy",
+        "alternateName": "AarambhX Engineering Academy",
+        "url": "https://aarambhx-technology.vercel.app/academy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aarambhx-technology.vercel.app/assets/aarambhx-logo.jpg",
+          "width": 1024,
+          "height": 1024
+        },
+        "description": "Industrial engineering academy and hands-on campus workshop provider for colleges, polytechnics, and schools across Karnataka.",
+        "telephone": "+919481261244",
+        "email": "lalithulalu@gmail.com",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Aarambhx Technology",
+          "url": "https://aarambhx-technology.vercel.app/"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Tumakuru",
+          "addressRegion": "Karnataka",
+          "postalCode": "572103",
+          "addressCountry": "IN"
+        }
+      },
+      {
+        "@type": "Course",
+        "@id": "https://aarambhx-technology.vercel.app/academy#course-aiml",
+        "name": "AI & Machine Learning (From Scratch)",
+        "description": "Hands-on machine learning engineering from fundamentals and Python intuition up to multimodal generative models. Students build functional computer vision OCR, sentiment classifiers, and Gemini AI automation pipelines.",
+        "courseCode": "AA-AIML-101",
+        "educationalCredentialAwarded": "Certificate of Course Completion",
+        "provider": {
+          "@id": "https://aarambhx-technology.vercel.app/academy#organization"
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Blended",
+          "courseWorkload": "PT30H"
+        },
+        "teaches": [
+          "Python for Data Science",
+          "NumPy and Pandas",
+          "Neural Networks & Model Training",
+          "Computer Vision & OCR",
+          "Multimodal Gemini API Automation"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "category": "Campus Workshop & Bootcamp",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "INR"
+        }
+      },
+      {
+        "@type": "Course",
+        "@id": "https://aarambhx-technology.vercel.app/academy#course-iot",
+        "name": "IoT, Embedded Systems & Hardware Prototyping",
+        "description": "Hands-on embedded systems training with physical breadboards, ESP32 microcontrollers, sensor integration, and MQTT telemetry clouds.",
+        "courseCode": "AA-IOT-201",
+        "educationalCredentialAwarded": "Certificate of Course Completion",
+        "provider": {
+          "@id": "https://aarambhx-technology.vercel.app/academy#organization"
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Hands-on Laboratory",
+          "courseWorkload": "PT25H"
+        },
+        "teaches": [
+          "C++ Embedded Programming",
+          "ESP32 Architecture & GPIO Pinouts",
+          "Sensor Interfacing & ADC Calibration",
+          "MQTT Broker & Wi-Fi Networking",
+          "Cloud IoT Telemetry Dashboards"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "category": "Campus Workshop & Bootcamp",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "INR"
+        }
+      },
+      {
+        "@type": "Course",
+        "@id": "https://aarambhx-technology.vercel.app/academy#course-cybersecurity",
+        "name": "Applied Cybersecurity & Practical Defense",
+        "description": "Terminal-driven ethical hacking, Kali Linux network penetration, OWASP Top 10 web vulnerabilities, firewall configuration, and defense strategies.",
+        "courseCode": "AA-SEC-301",
+        "educationalCredentialAwarded": "Certificate of Course Completion",
+        "provider": {
+          "@id": "https://aarambhx-technology.vercel.app/academy#organization"
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Terminal Laboratory",
+          "courseWorkload": "PT25H"
+        },
+        "teaches": [
+          "Kali Linux & Terminal Fundamentals",
+          "Network Analysis with Wireshark & Nmap",
+          "OWASP Top 10 Web Vulnerabilities",
+          "Defensive Hardening & Firewalls",
+          "Capture The Flag (CTF) Defense"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "category": "Campus Workshop & Bootcamp",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "INR"
+        }
+      },
+      {
+        "@type": "Course",
+        "@id": "https://aarambhx-technology.vercel.app/academy#course-excel",
+        "name": "Enterprise Excel, VBA & Process Automation",
+        "description": "Advanced spreadsheet modeling, Power Query automated ingestion, VBA macro scripting, and dynamic KPI executive dashboards.",
+        "courseCode": "AA-EXCEL-401",
+        "educationalCredentialAwarded": "Certificate of Course Completion",
+        "provider": {
+          "@id": "https://aarambhx-technology.vercel.app/academy#organization"
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Interactive Workshop",
+          "courseWorkload": "PT20H"
+        },
+        "teaches": [
+          "Dynamic Array Formulas (XLOOKUP, FILTER, UNIQUE)",
+          "Power Query ETL & Automated Pipeline",
+          "VBA Macros & Batch Automation",
+          "Executive KPI Dashboards",
+          "Python OpenPyXL Integration"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "category": "Campus Workshop & Bootcamp",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "INR"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://aarambhx-technology.vercel.app/academy#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://aarambhx-technology.vercel.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AarambhX Academy",
+            "item": "https://aarambhx-technology.vercel.app/academy"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://aarambhx-technology.vercel.app/academy#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do students require prior programming experience for these workshops?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No prior experience is necessary. All tracks begin with fundamental conceptual intuition before moving to advanced implementation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does AarambhX Academy bring hardware components for IoT workshops?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we bring complete hardware kits including ESP32 boards, sensors, jumper wires, breadboards, and power supplies for every lab team."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do participants receive recognized certificates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, all students and faculty coordinators receive verifiable certificates of completion highlighting key technologies mastered."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can the syllabus be tailored to align with our university/NBA requirements?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we customize our curriculum modules and project rubrics to align with university syllabus standards and NBA accreditation criteria."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where are workshops conducted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We conduct on-campus workshops directly in your institution's computer and hardware laboratories across Karnataka."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <!-- Immediate Theme Initializer -->
   <script>
@@ -47,6 +285,9 @@
 </head>
 <body>
 
+  <!-- Accessible Skip to Content Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ============================================================
        1. GLASSMORPHIC NAVIGATION BAR
        ============================================================ -->
@@ -56,7 +297,11 @@
       <!-- Brand Logo -->
       <a href="#" class="nav-brand" aria-label="AarambhX Academy Home">
         <span class="brand-badge">
-          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" width="34" height="34" class="brand-logo-img">
+          <picture>
+            <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" width="34" height="34" class="brand-logo-img">
+          </picture>
         </span>
         <span class="brand-text">Aarambh<span class="brand-highlight">X</span> Academy</span>
       </a>
@@ -96,7 +341,11 @@
     <div class="mobile-drawer-content">
       <div class="drawer-header">
         <div class="drawer-brand">
-          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="drawer-logo-img" width="44" height="44">
+          <picture>
+            <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="drawer-logo-img" width="44" height="44" loading="lazy">
+          </picture>
           <span class="brand-name">Aarambh<span class="brand-highlight">X</span> Academy</span>
         </div>
         <button type="button" class="drawer-close-btn" id="drawerClose" aria-label="Close navigation drawer">
@@ -123,7 +372,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main-content">
     <!-- ============================================================
          2. HERO SECTION
          ============================================================ -->
@@ -867,7 +1116,11 @@
         <!-- Brand Column -->
         <div class="footer-brand-col">
           <a href="academy.html" class="footer-logo">
-            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-img" width="44" height="44">
+            <picture>
+              <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+              <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+              <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-img" width="44" height="44" loading="lazy">
+            </picture>
             <span class="logo-text">
               <span class="logo-brand">Aarambh<span class="logo-accent">X</span></span>
               <span class="logo-corp">Academy</span>
