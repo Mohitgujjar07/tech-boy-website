@@ -346,10 +346,24 @@ html {
   mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
 }
 
+/* Dark Theme subtle dark scrim behind upper header text to tone down bright sunset glare in dark mode */
+[data-theme="dark"] .academy-tracks-section::before,
+body.dark-theme .academy-tracks-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 520px;
+  background: radial-gradient(ellipse 85% 65% at 50% 28%, rgba(4, 9, 20, 0.72) 0%, rgba(4, 9, 20, 0.45) 50%, transparent 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 [data-theme="dark"] .academy-tracks-bg-layer,
 body.dark-theme .academy-tracks-bg-layer {
-  opacity: 0.65;
-  filter: saturate(1.4) contrast(1.18) brightness(0.92);
+  opacity: 0.55;
+  filter: saturate(1.35) contrast(1.2) brightness(0.82);
   -webkit-mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
   mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
 }
@@ -357,6 +371,84 @@ body.dark-theme .academy-tracks-bg-layer {
 .academy-tracks-container {
   position: relative;
   z-index: 2;
+}
+
+/* Academic & Industrial Tracks Pure Glassmorphism Eyebrow Badge */
+.academy-tracks-section .apple-eyebrow,
+.academy-tracks-eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 6px 24px -2px rgba(15, 23, 42, 0.10), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
+  color: #1d4ed8 !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.academy-tracks-section .apple-eyebrow:hover,
+.academy-tracks-eyebrow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.22), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+}
+
+.academy-tracks-section .apple-eyebrow svg,
+.academy-tracks-eyebrow svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+  color: #2563eb !important;
+}
+
+/* Header Text in Light Theme - untouched */
+.academy-tracks-section .section-header-center h2 {
+  font-weight: 850;
+  letter-spacing: -0.028em;
+  margin-bottom: 14px;
+}
+
+/* Header & Eyebrow in Dark Theme - Made dark/moody with high contrast, pure glassmorphism */
+[data-theme="dark"] .academy-tracks-section .apple-eyebrow,
+body.dark-theme .academy-tracks-section .apple-eyebrow,
+[data-theme="dark"] .academy-tracks-eyebrow,
+body.dark-theme .academy-tracks-eyebrow {
+  background: rgba(8, 14, 28, 0.76) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-tracks-section .apple-eyebrow svg,
+body.dark-theme .academy-tracks-section .apple-eyebrow svg,
+[data-theme="dark"] .academy-tracks-eyebrow svg,
+body.dark-theme .academy-tracks-eyebrow svg {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-tracks-section .section-header-center h2,
+body.dark-theme .academy-tracks-section .section-header-center h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .academy-tracks-section .section-lead,
+body.dark-theme .academy-tracks-section .section-lead {
+  color: #cbd5e1 !important;
+  font-weight: 500;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
 }
 
 /* Category Navigation Selector (4 Compact Category Cards) */
