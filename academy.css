@@ -321,8 +321,38 @@ html {
    2. CORE TECHNOLOGY TRACKS (COMPACT INTERACTIVE SHOWCASE)
    ------------------------------------------------------------ */
 .academy-tracks-section {
-  padding-top: 50px;
-  padding-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 95px;
+}
+
+.academy-tracks-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/tracks-floating-island-sunset.jpg');
+  background-repeat: no-repeat;
+  background-position: center 30%;
+  background-size: cover;
+  opacity: 0.38;
+  filter: saturate(1.25) contrast(1.08);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
+}
+
+[data-theme="dark"] .academy-tracks-bg-layer,
+body.dark-theme .academy-tracks-bg-layer {
+  opacity: 0.52;
+  filter: saturate(1.35) contrast(1.15) brightness(0.95);
+  -webkit-mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 94%);
+  mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 94%);
+}
+
+.academy-tracks-container {
+  position: relative;
+  z-index: 2;
 }
 
 /* Category Navigation Selector (4 Compact Category Cards) */
