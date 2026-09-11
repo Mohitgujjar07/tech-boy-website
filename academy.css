@@ -799,8 +799,40 @@ body.dark-theme .academy-tracks-bg-layer {
    3. INSTITUTIONAL DELIVERY MODEL
    ------------------------------------------------------------ */
 .academy-workshops-section {
-  padding-top: 60px;
-  padding-bottom: 70px;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 95px;
+}
+
+.academy-workshops-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/workshops-portal-clouds.jpg');
+  background-image: -webkit-image-set(url('assets/art/workshops-portal-clouds.webp') 1x, url('assets/art/workshops-portal-clouds.jpg') 1x);
+  background-image: image-set(url('assets/art/workshops-portal-clouds.webp') type('image/webp'), url('assets/art/workshops-portal-clouds.jpg') type('image/jpeg'));
+  background-repeat: no-repeat;
+  background-position: center 38%;
+  background-size: cover;
+  opacity: 0.65;
+  filter: saturate(1.28) contrast(1.1);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+}
+
+[data-theme="dark"] .academy-workshops-bg-layer,
+body.dark-theme .academy-workshops-bg-layer {
+  opacity: 0.58;
+  filter: saturate(1.35) contrast(1.15) brightness(0.92);
+  -webkit-mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+  mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+}
+
+.academy-workshops-container {
+  position: relative;
+  z-index: 2;
 }
 
 .academy-delivery-grid {
@@ -811,20 +843,22 @@ body.dark-theme .academy-tracks-bg-layer {
 }
 
 .delivery-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 18px;
   padding: 26px 22px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 [data-theme="dark"] .delivery-card {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.78);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
 }
 
 .delivery-card:hover {
