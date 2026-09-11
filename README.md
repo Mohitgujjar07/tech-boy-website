@@ -10,7 +10,7 @@
 
   <p align="center">
     <a href="https://aarambhx-technology.vercel.app/"><img src="https://img.shields.io/badge/Production-Live%20on%20Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel Deployment"></a>
-    <a href="https://github.com/Mohitgujjar07/tech-boy-website"><img src="https://img.shields.io/badge/Tests-127%2F127%20Passed%20(100%25)-10B981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Test Suite"></a>
+    <a href="https://github.com/Mohitgujjar07/tech-boy-website"><img src="https://img.shields.io/badge/Tests-135%2F135%20Passed%20(100%25)-10B981?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Test Suite"></a>
     <a href="#-google-lighthouse-95-audit-scores"><img src="https://img.shields.io/badge/Lighthouse-98%20%7C%20100%20%7C%20100%20%7C%20100-2563EB?style=for-the-badge&logo=lighthouse&logoColor=white" alt="Lighthouse Scores"></a>
     <a href="#-modern-webp-image-pipeline"><img src="https://img.shields.io/badge/WebP%20Assets--84.7%25%20Payload-8B5CF6?style=for-the-badge&logo=webassembly&logoColor=white" alt="WebP Assets"></a>
   </p>
@@ -42,7 +42,7 @@
    - [Zero Cumulative Layout Shift (CLS < 0.05)](#zero-cumulative-layout-shift-cls--005)
    - [Complete Schema.org JSON-LD Structured Data](#complete-schemaorg-json-ld-structured-data)
    - [OpenGraph & Twitter Large Preview Cards](#dynamic-opengraph--twitter-cards)
-5. [8-Tier Automated Test Suite (127 Tests)](#-8-tier-automated-test-suite-127-tests)
+5. [9-Tier Automated Test Suite (135 Tests)](#-9-tier-automated-test-suite-135-tests)
 6. [Getting Started & Local Development](#-getting-started--local-development)
 7. [Single Source of Truth Configuration (`config.js`)](#-configuration-system-configjs)
 8. [Production Deployment & Security Headers](#-production-deployment--security-headers)
@@ -148,9 +148,9 @@ Both `index.html` and `academy.html` have been audited and optimized to meet Goo
 
 ---
 
-## 🧪 8-Tier Automated Test Suite (127 Tests)
+## 🧪 9-Tier Automated Test Suite (135 Tests)
 
-The repository features an industrial-grade opaque-box test runner (`tests/run-all-tests.js`) running **127 automated tests with 962 assertions** in under 4 seconds:
+The repository features an industrial-grade opaque-box test runner (`tests/run-all-tests.js`) running **135 automated tests with 1,046 assertions** in under 4 seconds:
 
 ```
 ================================================================================
@@ -166,8 +166,9 @@ The repository features an industrial-grade opaque-box test runner (`tests/run-a
   Tier 6: AarambhX Academy & Platform Spec | 18     | 18     | 0      | 104
   Tier 7: ScrollExpand Spec                | 8      | 8      | 0      | 55
   Tier 8: MorphSlider Spec                 | 6      | 6      | 0      | 57
+  Tier 9: Lighthouse 95+ Audit Spec        | 8      | 8      | 0      | 84
   ------------------------------------------------------------------------------
-  TOTALS                                   | 127    | 127    | 0      | 962
+  TOTALS                                   | 135    | 135    | 0      | 1,046
 
   Pass Rate: 100.0% (Zero Failures)
 ================================================================================
@@ -200,7 +201,7 @@ The repository features an industrial-grade opaque-box test runner (`tests/run-a
    ```
    *The server binds to `http://localhost:3000/` and mirrors traffic to companion port `http://localhost:8080/` with live Gzip compression.*
 
-3. **Run the full 8-tier test suite**:
+3. **Run the full 9-tier test suite**:
    ```bash
    npm test
    ```
