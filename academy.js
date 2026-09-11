@@ -30,6 +30,17 @@ function initTheme() {
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      root.classList.remove('light-theme');
+      root.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+      document.body.classList.add('dark-theme');
+    } else {
+      root.classList.remove('dark-theme');
+      root.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
+      document.body.classList.add('light-theme');
+    }
     localStorage.setItem('tb_theme', theme);
     localStorage.setItem('tbs_theme', theme);
   }

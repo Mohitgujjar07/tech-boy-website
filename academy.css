@@ -1259,8 +1259,38 @@ html {
    7. EDUCATIONAL FAQ ACCORDION
    ------------------------------------------------------------ */
 .academy-faq-section {
-  padding-top: 60px;
-  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 95px;
+}
+
+.academy-faq-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/faq-ascii-clouds.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 0.32;
+  filter: saturate(1.15) contrast(1.05);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 92%);
+}
+
+[data-theme="dark"] .academy-faq-bg-layer,
+body.dark-theme .academy-faq-bg-layer {
+  opacity: 0.44;
+  filter: saturate(1.25) contrast(1.15) brightness(0.92);
+  -webkit-mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 94%);
+  mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 94%);
+}
+
+.academy-faq-container {
+  position: relative;
+  z-index: 2;
 }
 
 .academy-faq-accordion {
@@ -1272,22 +1302,40 @@ html {
 }
 
 .faq-item {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.06);
 }
 
 [data-theme="dark"] .faq-item {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .faq-item:hover {
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 8px 28px rgba(96, 165, 250, 0.1);
 }
 
 .faq-item.active {
-  border-color: rgba(37, 99, 235, 0.35);
+  border-color: rgba(37, 99, 235, 0.45);
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.09);
+}
+
+[data-theme="dark"] .faq-item.active {
+  border-color: rgba(96, 165, 250, 0.45);
+  box-shadow: 0 8px 30px rgba(96, 165, 250, 0.15);
 }
 
 .faq-question {
@@ -1305,6 +1353,15 @@ html {
   text-align: left;
   color: var(--text-primary);
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.faq-item.active .faq-question {
+  color: #2563eb;
+}
+
+[data-theme="dark"] .faq-item.active .faq-question {
+  color: #60a5fa;
 }
 
 .faq-chevron {
