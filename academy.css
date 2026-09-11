@@ -322,6 +322,18 @@ html {
 /* ------------------------------------------------------------
    2. CORE TECHNOLOGY TRACKS (COMPACT INTERACTIVE SHOWCASE)
    ------------------------------------------------------------ */
+/* Embedded Seamless Section Transitions - No lines or gaps between sections */
+.academy-hero-section,
+.academy-tracks-section,
+.academy-workshops-section,
+.academy-curriculum-section,
+.academy-booking-section,
+.academy-faq-section,
+section.section-compact {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
 .academy-tracks-section {
   position: relative;
   overflow: hidden;
@@ -1805,7 +1817,7 @@ body.dark-theme .academy-faq-bg-layer {
 .site-footer.apple-footer {
   position: relative;
   background: #ffffff;
-  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  border-top: none !important;
   padding: 80px 0 40px;
   overflow: hidden;
   z-index: 10;
@@ -1813,7 +1825,7 @@ body.dark-theme .academy-faq-bg-layer {
 
 [data-theme="dark"] .site-footer.apple-footer {
   background: #090d16;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none !important;
 }
 
 .footer-academy-container {
