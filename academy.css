@@ -1055,8 +1055,127 @@ body.dark-theme .academy-workshops-section .section-lead {
    4. CURRICULUM TIMELINE & TABS
    ------------------------------------------------------------ */
 .academy-curriculum-section {
-  padding-top: 60px;
-  padding-bottom: 70px;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 95px;
+}
+
+.academy-curriculum-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/art/curriculum-matrix-atrium.jpg');
+  background-image: -webkit-image-set(url('assets/art/curriculum-matrix-atrium.webp') 1x, url('assets/art/curriculum-matrix-atrium.jpg') 1x);
+  background-image: image-set(url('assets/art/curriculum-matrix-atrium.webp') type('image/webp'), url('assets/art/curriculum-matrix-atrium.jpg') type('image/jpeg'));
+  background-repeat: no-repeat;
+  background-position: center 25%;
+  background-size: cover;
+  opacity: 0.58;
+  filter: saturate(1.25) contrast(1.1);
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 95%);
+}
+
+[data-theme="dark"] .academy-curriculum-bg-layer,
+body.dark-theme .academy-curriculum-bg-layer {
+  opacity: 0.52;
+  filter: saturate(1.35) contrast(1.15) brightness(0.92);
+  -webkit-mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+  mask-image: radial-gradient(ellipse 95% 88% at 50% 45%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+}
+
+.academy-curriculum-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Curriculum Header Eyebrow Pure Glassmorphism */
+.academy-curriculum-section .apple-eyebrow,
+.academy-curriculum-eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 6px 24px -2px rgba(15, 23, 42, 0.10), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
+  color: #1d4ed8 !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.academy-curriculum-section .apple-eyebrow:hover,
+.academy-curriculum-eyebrow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.22), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+}
+
+.academy-curriculum-section .apple-eyebrow svg,
+.academy-curriculum-eyebrow svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+  color: #2563eb !important;
+}
+
+/* Curriculum Header Text */
+.academy-curriculum-section .section-header-center h2 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  font-weight: 850;
+  letter-spacing: -0.028em;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.academy-curriculum-section .section-lead {
+  color: #020617 !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 760px;
+  margin: 0 auto 36px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .academy-curriculum-section .apple-eyebrow,
+body.dark-theme .academy-curriculum-section .apple-eyebrow,
+[data-theme="dark"] .academy-curriculum-eyebrow,
+body.dark-theme .academy-curriculum-eyebrow {
+  background: rgba(15, 23, 42, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-curriculum-section .apple-eyebrow svg,
+body.dark-theme .academy-curriculum-section .apple-eyebrow svg,
+[data-theme="dark"] .academy-curriculum-eyebrow svg,
+body.dark-theme .academy-curriculum-eyebrow svg {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .academy-curriculum-section .section-header-center h2,
+body.dark-theme .academy-curriculum-section .section-header-center h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .academy-curriculum-section .section-lead,
+body.dark-theme .academy-curriculum-section .section-lead {
+  color: #cbd5e1 !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
 }
 
 .curriculum-tabs-nav {
@@ -1072,36 +1191,51 @@ body.dark-theme .academy-workshops-section .section-lead {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 11px 22px;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
-  background: rgba(0, 0, 0, 0.04);
-  color: var(--text-secondary);
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-primary);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
 }
 
 [data-theme="dark"] .curriculum-tab-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 23, 42, 0.68);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .curriculum-tab-btn:hover {
-  background: rgba(37, 99, 235, 0.08);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(37, 99, 235, 0.35);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .curriculum-tab-btn:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(96, 165, 250, 0.35);
 }
 
 .curriculum-tab-btn.active {
   background: #2563eb;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  transform: translateY(-2px);
 }
 
 [data-theme="dark"] .curriculum-tab-btn.active {
   background: #3b82f6;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+  border-color: #3b82f6;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .curriculum-tab-btn svg {
@@ -1134,31 +1268,38 @@ body.dark-theme .academy-workshops-section .section-lead {
 .timeline-step {
   display: flex;
   gap: 20px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 16px;
-  padding: 22px 24px;
-  transition: transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 [data-theme="dark"] .timeline-step {
-  background: rgba(15, 23, 42, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.78);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
 }
 
 .timeline-step:hover {
-  transform: translateX(4px);
+  transform: translateX(6px);
+  box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="dark"] .timeline-step:hover {
+  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.5);
 }
 
 .step-num {
   font-family: var(--font-mono, monospace);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: #2563eb;
   line-height: 1;
-  min-width: 38px;
+  min-width: 42px;
 }
 
 [data-theme="dark"] .step-num {
@@ -1166,15 +1307,15 @@ body.dark-theme .academy-workshops-section .section-lead {
 }
 
 .step-content h4 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--text-primary);
 }
 
 .step-content p {
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  line-height: 1.65;
   color: var(--text-secondary);
   margin: 0;
 }
