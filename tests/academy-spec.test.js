@@ -122,13 +122,14 @@ function runAcademySpecTests() {
     return 3;
   });
 
-  // 6. Downloadable Resource Hub
-  test('Resource & Download Hub', () => {
+  // 6. Section Cleanliness & Core Navigation Integrity
+  test('Section Cleanliness & Core Navigation Integrity', () => {
     const resources = dom.getElementById('resources');
-    Assert.exists(resources, 'Resources section exists');
-    const cards = dom.querySelectorAll('.resource-card');
-    Assert.isGreaterThanOrEqual(cards.length, 4, 'Has at least 4 downloadable resource items');
-    Assert.contains(html, 'downloadResourceMock', 'Has simulated download interaction');
+    Assert.isTrue(!resources, 'Resources section is completely removed');
+    const tracks = dom.getElementById('tracks');
+    Assert.exists(tracks, 'Core Tracks section exists');
+    const booking = dom.getElementById('booking');
+    Assert.exists(booking, 'Booking section exists');
     return 3;
   });
 

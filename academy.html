@@ -31,8 +31,8 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260911_v3">
-  <link rel="stylesheet" href="academy.css?v=20260911_v3">
+  <link rel="stylesheet" href="styles.css?v=20260911_v4">
+  <link rel="stylesheet" href="academy.css?v=20260911_v4">
 
   <!-- Immediate Theme Initializer -->
   <script>
@@ -48,27 +48,26 @@
 <body>
 
   <!-- ============================================================
-       1. FLOATING GLASSMORPHIC NAVIGATION BAR
+       1. GLASSMORPHIC NAVIGATION BAR
        ============================================================ -->
-  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
-    <div class="nav-container">
+  <header class="apple-glass-nav" id="navbar">
+    <div class="container nav-container">
       
-      <!-- Brand Logo Badge -->
-      <a href="academy.html" class="nav-brand" aria-label="AarambhX Academy Home">
-        <div class="brand-badge">
-          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-img" width="44" height="44">
-        </div>
-        <span class="brand-name">Aarambh<span class="brand-highlight">X</span> Academy</span>
+      <!-- Brand Logo -->
+      <a href="#" class="nav-brand" aria-label="AarambhX Academy Home">
+        <span class="brand-badge">
+          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" width="34" height="34" class="brand-logo-img">
+        </span>
+        <span class="brand-text">Aarambh<span class="brand-highlight">X</span> Academy</span>
       </a>
 
-      <!-- Desktop Links Track -->
-      <nav class="nav-menu">
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="#overview" class="nav-item active">Overview</a></li>
           <li><a href="#tracks" class="nav-item">Tracks</a></li>
           <li><a href="#workshops" class="nav-item">Workshops</a></li>
           <li><a href="#curriculum" class="nav-item">Curriculum</a></li>
-          <li><a href="#resources" class="nav-item">Resources</a></li>
           <li><a href="#faq" class="nav-item">FAQ</a></li>
           <li><a href="index.html" class="nav-item agency-nav-back" style="color: #2563EB; font-weight: 700;" title="Return to Agency Main Site">Agency ↗</a></li>
         </ul>
@@ -110,7 +109,6 @@
         <a href="#tracks" class="drawer-link">Tracks</a>
         <a href="#workshops" class="drawer-link">Campus Workshops</a>
         <a href="#curriculum" class="drawer-link">Curriculum</a>
-        <a href="#resources" class="drawer-link">Resources Hub</a>
         <a href="#faq" class="drawer-link">FAQ</a>
         <a href="index.html" class="drawer-link">Agency Main Site ↗</a>
         <a href="work.html" class="drawer-link">Client Work Portfolio ↗</a>
@@ -697,76 +695,7 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         6. RESOURCE & DOWNLOAD HUB
-         ============================================================ -->
-    <section id="resources" class="section-compact academy-resources-section">
-      <div class="container">
-        
-        <div class="section-header-center reveal revealed">
-          <span class="apple-eyebrow"><i data-lucide="download-cloud"></i> Open Learning Hub</span>
-          <h2>Download Syllabus &amp; Workshop Materials</h2>
-          <p class="section-lead">Free access to our curated study guides, lab pinout diagrams, and sample curriculum PDFs.</p>
-        </div>
 
-        <div class="academy-resources-grid">
-          
-          <div class="resource-card reveal revealed">
-            <div class="resource-icon"><i data-lucide="file-text"></i></div>
-            <div class="resource-info">
-              <h4>AI &amp; ML Complete Syllabus (PDF)</h4>
-              <p>Detailed 30-hour module roadmap, prerequisite checklist, and sample project rubrics.</p>
-              <span class="resource-meta">PDF • 4.2 MB • Updated 2026</span>
-            </div>
-            <button class="btn-resource-dl" onclick="downloadResourceMock('AI-ML-Syllabus-AarambhX-Academy.pdf')">
-              <i data-lucide="download"></i>
-              <span>Download</span>
-            </button>
-          </div>
-
-          <div class="resource-card reveal revealed">
-            <div class="resource-icon"><i data-lucide="cpu"></i></div>
-            <div class="resource-info">
-              <h4>IoT Workshop Hardware Kit Checklist (PDF)</h4>
-              <p>Complete component bill of materials (BOM), pinout cheat-sheet, and ESP32 driver setup guide.</p>
-              <span class="resource-meta">PDF • 2.8 MB • Hardware Lab</span>
-            </div>
-            <button class="btn-resource-dl" onclick="downloadResourceMock('IoT-Hardware-Kit-AarambhX-Academy.pdf')">
-              <i data-lucide="download"></i>
-              <span>Download</span>
-            </button>
-          </div>
-
-          <div class="resource-card reveal revealed">
-            <div class="resource-icon"><i data-lucide="shield"></i></div>
-            <div class="resource-info">
-              <h4>Cybersecurity Lab Manual &amp; OWASP Guide</h4>
-              <p>Step-by-step instructions for configuring Kali Linux virtual machines and ethical hacking lab safety.</p>
-              <span class="resource-meta">PDF • 5.1 MB • Security Track</span>
-            </div>
-            <button class="btn-resource-dl" onclick="downloadResourceMock('Cybersecurity-Lab-Manual-AarambhX.pdf')">
-              <i data-lucide="download"></i>
-              <span>Download</span>
-            </button>
-          </div>
-
-          <div class="resource-card reveal revealed">
-            <div class="resource-icon"><i data-lucide="table"></i></div>
-            <div class="resource-info">
-              <h4>Advanced Excel Automation Formula Handbook</h4>
-              <p>Top 50 high-impact productivity formulas, Power Query shortcuts, and reusable macro snippets.</p>
-              <span class="resource-meta">PDF • 3.4 MB • Productivity</span>
-            </div>
-            <button class="btn-resource-dl" onclick="downloadResourceMock('Excel-Automation-Handbook-AarambhX.pdf')">
-              <i data-lucide="download"></i>
-              <span>Download</span>
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
 
     <!-- ============================================================
          7. WORKSHOP BOOKING & CONSULTATION ENGINE
@@ -973,7 +902,6 @@
             <li><a href="#workshops">College Hackathons</a></li>
             <li><a href="#workshops">Faculty Development (FDP)</a></li>
             <li><a href="#workshops">School STEAM Labs</a></li>
-            <li><a href="#resources">Download Syllabi</a></li>
             <li><a href="#booking">Book Campus Workshop</a></li>
           </ul>
         </div>
