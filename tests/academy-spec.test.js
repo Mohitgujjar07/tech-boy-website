@@ -63,8 +63,8 @@ function runAcademySpecTests() {
   test('Hero Section & Impact Metrics', () => {
     const hero = dom.getElementById('overview');
     Assert.exists(hero, 'Overview hero section exists');
-    Assert.contains(html, '500+', 'Contains 500+ students metric');
-    Assert.contains(html, '12+', 'Contains 12+ campus workshops metric');
+    Assert.contains(html, '150+', 'Contains 150+ students metric');
+    Assert.contains(html, '4+', 'Contains 4+ campus workshops metric');
     Assert.contains(html, 'Tumakuru', 'Contains Tumakuru location narrative');
     Assert.contains(html, 'Hands-On Labs', 'Contains 100% Hands-On Labs');
     return 5;
