@@ -1,0 +1,38 @@
+name: Deploy to Firebase Hosting & Production Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify All Test Suites
+        run: node tests/run-all-tests.js
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AARAMBHX_TECHNOLOGY }}'
+          channelId: live
+          projectId: aarambhx-technology
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+        continue-on-error: true
+
+      - name: Fallback CLI Deploy with FIREBASE_TOKEN
+        if: env.FIREBASE_TOKEN != ''
+        run: npx --yes firebase-tools deploy --only hosting --project aarambhx-technology --token "${{ secrets.FIREBASE_TOKEN }}"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
