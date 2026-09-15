@@ -83,7 +83,7 @@ function runAcademySpecTests() {
     Assert.contains(js, 'initTrackCategories', 'JS initializes track category switcher');
 
     // Track 1: AI & ML
-    Assert.contains(html, 'AI &amp; Machine Learning (From Scratch)', 'Track 1 AI/ML exists');
+    Assert.contains(html, 'AI, GenAI &amp; Autonomous Agentic Systems', 'Track 1 AI/ML exists');
     Assert.contains(html, 'Gemini', 'AI track includes Gemini reference');
     
     // Track 2: IoT
@@ -94,8 +94,8 @@ function runAcademySpecTests() {
     Assert.contains(html, 'Cybersecurity &amp; Ethical Hacking', 'Track 3 Cyber exists');
     Assert.contains(html, 'Wireshark', 'Cyber track includes Wireshark reference');
 
-    // Track 4: Excel & Automation
-    Assert.contains(html, 'Enterprise Automation &amp; Advanced Excel', 'Track 4 Excel exists');
+    // Track 4: AI & Workflow Automation
+    Assert.contains(html, 'AI &amp; Intelligent Workflow Automation', 'Track 4 AI Automation exists');
     Assert.contains(html, 'Power Query', 'Excel track includes Power Query reference');
     return 12;
   });
