@@ -16,8 +16,8 @@
     "test:lh": "node tests/lighthouse-audit.test.js",
     "build:minify": "node scripts/build-minified.js",
     "build:webp": "node scripts/convert-webp.js",
-    "deploy:firebase": "npx firebase deploy --only hosting",
-    "deploy:all": "git push origin main && npx firebase deploy --only hosting"
+    "deploy:firebase": "npx firebase-tools deploy --only hosting",
+    "deploy:all": "git push origin main && npx firebase-tools deploy --only hosting"
   },
   "keywords": [
     "aarambhx-technology",
