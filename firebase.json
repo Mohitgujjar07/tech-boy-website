@@ -10,6 +10,7 @@
       "scripts/**",
       "scratch/**",
       "*.log",
+      "*.exe",
       "package.json",
       "package-lock.json"
     ],
