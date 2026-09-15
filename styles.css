@@ -2952,6 +2952,7 @@ body.dark-theme .methodology-feature-banner {
   position: relative;
   min-height: 260px;
   height: 100%;
+  width: 100%;
   overflow: hidden;
   background: #020508;
 }
@@ -2961,14 +2962,24 @@ body.dark-theme .methodology-feature-banner {
   width: 100%;
   height: 100%;
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .methodology-banner-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
   display: block;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -4938,6 +4949,7 @@ body.dark-theme .card-action-btn:hover {
   overflow: hidden;
   min-height: 280px;
   height: 100%;
+  width: 100%;
 }
 
 .banner-art-wrap picture {
@@ -4945,14 +4957,24 @@ body.dark-theme .card-action-btn:hover {
   width: 100%;
   height: 100%;
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .banner-ascii-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -7678,10 +7700,17 @@ body.dark-theme .projects-header-wrap .section-lead {
 /* CLS & Image Stability */
 .banner-ascii-img,
 .methodology-banner-img {
-  aspect-ratio: 1200 / 480;
-  object-fit: cover;
-  width: 100%;
-  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
 }
 
 .diagnostic-art-img {
