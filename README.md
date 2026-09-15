@@ -236,8 +236,8 @@ const TBS_CONFIG = {
   },
   academy: {
     name: "AarambhX Academy",
-    whatsapp: "919481261244",
-    phone: "+91 94812 61244"
+    whatsapp: "919916856922",
+    phone: "+91 99168 56922"
   }
 };
 ```
@@ -319,7 +319,7 @@ tech-boy-website/
 **AarambhX Technology & AarambhX Academy**  
 - 📍 **Location**: B.H. Road, Tumakuru, Karnataka 572101, India  
 - 📞 **Corporate Phone**: [+91 63647 68498](tel:+916364768498)  
-- 🎓 **Academy Phone**: [+91 94812 61244](tel:+919481261244)  
+- 🎓 **Academy Phone**: [+91 99168 56922](tel:+919916856922)  
 - 💬 **WhatsApp Inquiry**: [Chat with AarambhX on WhatsApp](https://wa.me/916364768498)  
 - ✉️ **Primary Email**: [lalithulalu@gmail.com](mailto:lalithulalu@gmail.com)  
 - 🌐 **Live Website**: [https://aarambhx-technology.vercel.app](https://aarambhx-technology.vercel.app)

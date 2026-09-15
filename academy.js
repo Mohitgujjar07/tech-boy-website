@@ -270,7 +270,7 @@ function downloadResourceMock(filename) {
   const sampleContent = `# AarambhX Academy — Course Syllabus & Lab Manual
 Document: ${filename}
 Issued by: Aarambhx Technology Educational Platform, Tumakuru
-Official Contact: +91 94812 61244 | lalithulalu@gmail.com
+Official Contact: +91 99168 56922 | lalithulalu@gmail.com
 
 ------------------------------------------------------------
 1. Overview & Prerequisite Assessment
@@ -320,7 +320,7 @@ function handleAcademyBooking(event) {
 ${message ? `📝 *Requirements:* ${message}\n` : ''}----------------------------------------
 Sent from AarambhX Academy Platform`;
 
-  const waUrl = `https://wa.me/919481261244?text=${encodeURIComponent(waPayload)}`;
+  const waUrl = `https://wa.me/919916856922?text=${encodeURIComponent(waPayload)}`;
   window.open(waUrl, '_blank');
 }
 

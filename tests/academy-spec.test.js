@@ -140,7 +140,7 @@ function runAcademySpecTests() {
     Assert.contains(html, 'bookingTrack', 'Has track selector');
     Assert.contains(html, 'bookingRole', 'Has role selector');
     Assert.contains(html, 'handleAcademyBooking', 'Form dispatches to handleAcademyBooking');
-    Assert.contains(js, 'https://wa.me/919481261244', 'JS includes WhatsApp dispatch endpoint');
+    Assert.contains(js, 'https://wa.me/919916856922', 'JS includes WhatsApp dispatch endpoint');
     return 5;
   });
 
