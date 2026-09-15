@@ -9,4 +9,5 @@ Thumbs.db
 screenshot-*.png
 
 .vercel
+.firebase
 *.exe
