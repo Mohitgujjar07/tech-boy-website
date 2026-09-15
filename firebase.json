@@ -1,98 +1,295 @@
 {
-  "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      ".firebaserc",
-      "**/.*",
-      "node_modules/**",
-      "**/node_modules/**",
-      "tests/**",
-      "scripts/**",
-      "scratch/**",
-      "*.log",
-      "**/*.log",
-      "*.bat",
-      "**/*.bat",
-      "*.ps1",
-      "**/*.ps1",
-      "*.cmd",
-      "**/*.cmd",
-      "*.sh",
-      "**/*.sh",
-      "*.exe",
-      "**/*.exe",
-      "server.js",
-      "package.json",
-      "package-lock.json"
-    ],
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "redirects": [
-      {
-        "source": "/developer",
-        "destination": "/academy",
-        "type": 301
-      },
-      {
-        "source": "/developer.html",
-        "destination": "/academy.html",
-        "type": 301
-      }
-    ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "X-Content-Type-Options",
-            "value": "nosniff"
-          },
-          {
-            "key": "X-Frame-Options",
-            "value": "SAMEORIGIN"
-          },
-          {
-            "key": "X-XSS-Protection",
-            "value": "1; mode=block"
-          },
-          {
-            "key": "Referrer-Policy",
-            "value": "strict-origin-when-cross-origin"
-          },
-          {
-            "key": "Permissions-Policy",
-            "value": "camera=(), microphone=(), geolocation=()"
-          }
-        ]
-      },
-      {
-        "source": "assets/**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=31536000, immutable"
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(css|js)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=0, must-revalidate"
-          }
-        ]
-      },
-      {
-        "source": "**/*.html",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=0, must-revalidate"
-          }
-        ]
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "site": "aarambhx-tech",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        ".firebaserc",
+        "**/.*",
+        "node_modules/**",
+        "**/node_modules/**",
+        "tests/**",
+        "scripts/**",
+        "scratch/**",
+        "*.log",
+        "**/*.log",
+        "*.bat",
+        "**/*.bat",
+        "*.ps1",
+        "**/*.ps1",
+        "*.cmd",
+        "**/*.cmd",
+        "*.sh",
+        "**/*.sh",
+        "*.exe",
+        "**/*.exe",
+        "server.js",
+        "package.json",
+        "package-lock.json"
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "redirects": [
+        {
+          "source": "/developer",
+          "destination": "/academy",
+          "type": 301
+        },
+        {
+          "source": "/developer.html",
+          "destination": "/academy.html",
+          "type": 301
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
+          ]
+        },
+        {
+          "source": "assets/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "aarambhxtech",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        ".firebaserc",
+        "**/.*",
+        "node_modules/**",
+        "**/node_modules/**",
+        "tests/**",
+        "scripts/**",
+        "scratch/**",
+        "*.log",
+        "**/*.log",
+        "*.bat",
+        "**/*.bat",
+        "*.ps1",
+        "**/*.ps1",
+        "*.cmd",
+        "**/*.cmd",
+        "*.sh",
+        "**/*.sh",
+        "*.exe",
+        "**/*.exe",
+        "server.js",
+        "package.json",
+        "package-lock.json"
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "redirects": [
+        {
+          "source": "/developer",
+          "destination": "/academy",
+          "type": 301
+        },
+        {
+          "source": "/developer.html",
+          "destination": "/academy.html",
+          "type": 301
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
+          ]
+        },
+        {
+          "source": "assets/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "site": "aarambhx-technology-58499",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        ".firebaserc",
+        "**/.*",
+        "node_modules/**",
+        "**/node_modules/**",
+        "tests/**",
+        "scripts/**",
+        "scratch/**",
+        "*.log",
+        "**/*.log",
+        "*.bat",
+        "**/*.bat",
+        "*.ps1",
+        "**/*.ps1",
+        "*.cmd",
+        "**/*.cmd",
+        "*.sh",
+        "**/*.sh",
+        "*.exe",
+        "**/*.exe",
+        "server.js",
+        "package.json",
+        "package-lock.json"
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "redirects": [
+        {
+          "source": "/developer",
+          "destination": "/academy",
+          "type": 301
+        },
+        {
+          "source": "/developer.html",
+          "destination": "/academy.html",
+          "type": 301
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
+          ]
+        },
+        {
+          "source": "assets/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        },
+        {
+          "source": "**/*.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
