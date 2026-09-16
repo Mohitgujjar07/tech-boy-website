@@ -31,7 +31,7 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=2.3.2">
+  <link rel="stylesheet" href="styles.css?v=2.3.3">
 
   <!-- Immediate Theme Initializer -->
   <script>
@@ -212,7 +212,7 @@
         
         <div class="work-grid work-grid-full">
           
-          <!-- Project 1: VMS -->
+          <!-- Project 1: Centralised Multi-Tenant Visitor Management System (VMS) -->
           <article class="work-card work-card-showcase reveal revealed" data-category="web client all">
             <div class="work-browser-chrome">
               <div class="work-traffic-dots">
@@ -222,47 +222,84 @@
               </div>
               <div class="work-url-pill">
                 <i data-lucide="lock"></i>
-                <span>vms.gate.aarambhx.internal</span>
+                <span>vms.vidyavahini.campus.internal</span>
               </div>
-              <span class="work-live-pill"><span class="status-pulse-dot"></span> Live Deployed</span>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Live Enterprise Deploy</span>
             </div>
 
-            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Centralised Multi-Tenant Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Enterprise VMS Dashboard — Live optical gate pass verification and emergency evacuation radar.')">
-              <img src="assets/art/vms-preview.jpg" alt="Visitor Management System Dashboard UI Preview" class="work-card-media-img" loading="lazy">
+            <!-- Interactive Multi-Image Production Gallery (Pure Screenshots - No Video Preview) -->
+            <div class="work-gallery-viewport" id="vmsGalleryViewport" onclick="openCurrentVmsPhoto()">
+              <img id="vmsMainImg" src="assets/art/vms-reception-dashboard.webp" alt="VMS Front Desk Gate Reception Dashboard" class="gallery-main-img" loading="lazy">
+              
+              <!-- Slide counter badge -->
+              <div class="gallery-slide-badge" id="vmsSlideBadge">
+                <i data-lucide="image"></i>
+                <span>1 / 4: Gate Reception Dashboard</span>
+              </div>
+
+              <!-- Gallery Prev / Next Arrows -->
+              <button type="button" class="gallery-nav-btn gallery-prev-btn" onclick="prevVmsSlide(event)" aria-label="Previous Screenshot" title="Previous Image">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <button type="button" class="gallery-nav-btn gallery-next-btn" onclick="nextVmsSlide(event)" aria-label="Next Screenshot" title="Next Image">
+                <i data-lucide="chevron-right"></i>
+              </button>
+
+              <!-- Media Action Overlay Button (Photo View Only - No Video) -->
               <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
-                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Optical QR Code Verification & Live Emergency Evacuation Radar System.')" title="Zoom in on UI">
+                <button type="button" class="work-media-action-btn" onclick="openCurrentVmsPhoto()" title="Expand Fullscreen High-Res Photo">
                   <i data-lucide="maximize-2"></i>
                   <span>Photo View</span>
                 </button>
-                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Visitor Management System (VMS)', 'assets/art/vms-preview.jpg', 'Interactive Simulation — Optical QR Gate Verification & Multi-Tenant Isolated DB Architecture.')" title="Watch demo walkthrough">
-                  <i data-lucide="play"></i>
-                  <span>Live Demo</span>
-                </button>
               </div>
             </div>
 
+            <!-- Thumbnail Strip Selector -->
+            <div class="work-thumbnail-strip" id="vmsThumbStrip" role="tablist" aria-label="VMS Screenshots">
+              <button type="button" class="work-thumb-btn active" onclick="setVmsSlide(0)" title="Gate Reception Dashboard">
+                <img src="assets/art/vms-reception-dashboard.webp" alt="Reception Dashboard Thumbnail">
+                <span class="work-thumb-label">Gate Reception</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVmsSlide(1)" title="Campus Principal Executive Analytics">
+                <img src="assets/art/vms-principal-analytics.webp" alt="Executive Analytics Thumbnail">
+                <span class="work-thumb-label">Executive Analytics</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVmsSlide(2)" title="Mobile-First Check-In &amp; Photo Capture">
+                <img src="assets/art/vms-visitor-checkin.webp" alt="Visitor Check-In Modal Thumbnail">
+                <span class="work-thumb-label">Check-In &amp; Photo</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVmsSlide(3)" title="Staff Entrance &amp; Authentication Portal">
+                <img src="assets/art/vms-staff-portal.webp" alt="Staff Entrance Portal Thumbnail">
+                <span class="work-thumb-label">Staff Portal</span>
+              </button>
+            </div>
+
             <div class="work-showcase-body">
-              <div class="work-category-pill">Software &amp; Web Systems &bull; Enterprise Gate Security</div>
+              <div class="work-category-pill">Enterprise Security &bull; Multi-Tenant Campus Intelligence</div>
               <h2 class="work-detailed-title">Centralised Multi-Tenant Visitor Management System (VMS)</h2>
-              <p class="work-detailed-desc">High-security campus and enterprise platform streamlining digital pre-registration, instant optical QR gate passes, and emergency evacuation headcounts.</p>
+              <p class="work-detailed-desc">Next-Generation Enterprise Gate Security, Visitor Lifecycle &amp; Campus Intelligence Platform. Features mobile-first WebRTC photo check-in, anti-replay QR gate checkout, instant emergency SOS broadcast channels, executive white-label branding, direct POS thermal receipt printing, and audit-safe soft-archiving.</p>
               
               <!-- Key Architecture Highlights -->
               <div class="work-architecture-box">
-                <h4><i data-lucide="layers"></i> Key Architecture Highlights</h4>
+                <h4><i data-lucide="layers"></i> 💎 Deep Feature &amp; Architecture Highlights</h4>
                 <div class="modal-chips-grid">
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Multi-Tenant Isolated DB Architecture</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Optical QR Code Verification Terminal</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Real-Time Headcount &amp; Evacuation Engine</span>
+                  <span class="modal-spec-chip"><i data-lucide="camera"></i> Mobile-First Check-In &amp; WebRTC Live Photo Capture</span>
+                  <span class="modal-spec-chip"><i data-lucide="qr-code"></i> Anti-Replay QR Scanner (html5-qrcode) Gate Checkout</span>
+                  <span class="modal-spec-chip"><i data-lucide="alert-triangle"></i> Emergency SOS Broadcast Channel &amp; Flash Banners</span>
+                  <span class="modal-spec-chip"><i data-lucide="palette"></i> Executive White-Label Branding Studio (3 Surfaces)</span>
+                  <span class="modal-spec-chip"><i data-lucide="printer"></i> Direct POS 80mm / 4x6" Thermal Receipt CSS Printing</span>
+                  <span class="modal-spec-chip"><i data-lucide="archive"></i> Soft-Archiving &amp; Audit-Safe Purging (Zero Data Loss)</span>
                 </div>
               </div>
 
               <!-- Tech Stack Chips -->
               <div class="work-tech-stack-row">
-                <span class="tech-tag">React.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">PostgreSQL RLS</span>
-                <span class="tech-tag">Redis Cache</span>
-                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Multi-Tenant PostgreSQL</span>
+                <span class="tech-tag">WebRTC Camera API</span>
+                <span class="tech-tag">html5-qrcode</span>
+                <span class="tech-tag">BroadcastChannel SOS</span>
+                <span class="tech-tag">POS Thermal Print</span>
+                <span class="tech-tag">Role-Based Access Control</span>
               </div>
             </div>
 
@@ -321,7 +358,7 @@
             </div>
 
             <!-- Thumbnail Strip Selector -->
-            <div class="work-thumbnail-strip" role="tablist" aria-label="VIMTECH Screenshots">
+            <div class="work-thumbnail-strip" id="vimtechThumbStrip" role="tablist" aria-label="VIMTECH Screenshots">
               <button type="button" class="work-thumb-btn active" onclick="setVimtechSlide(0)" title="Analytics Dashboard &amp; Defects">
                 <img src="assets/art/vimtech-ledger-dashboard.webp" alt="Dashboard Thumbnail">
                 <span class="work-thumb-label">Dashboard</span>
@@ -688,6 +725,6 @@
   <!-- Cosmic ASCII Canvas Background -->
   <script src="ascii-cosmic-shader.js"></script>
   <!-- Main Platform Controller -->
-  <script src="main.js?v=2.3.2"></script>
+  <script src="main.js?v=2.3.3"></script>
 </body>
 </html>

@@ -565,11 +565,23 @@ const projectData = {
   'vms': {
     title: 'Centralised Multi-Tenant Visitor Management System (VMS)',
     category: 'Enterprise Gate Security & Campus Intelligence',
-    desc: 'An enterprise-scale platform built for high-security campuses, corporate parks, and educational institutions. Streamlines the visitor lifecycle from digital pre-registration and instant optical QR gate passes to live security telemetry, blacklisting enforcement, and emergency evacuation headcounts.',
-    bom: ['Multi-Tenant Isolated Tenant Database Architecture', 'Optical QR Code Verification Terminal', 'WhatsApp & SMS Cloud Notification Dispatcher', 'Real-Time Campus Headcount & Evacuation Engine', 'Granular Role-Based Access Control (RBAC)', 'AES-256 Encrypted Visitor Audit Logs'],
+    desc: 'Next-Generation Enterprise Gate Security, Visitor Lifecycle & Campus Intelligence Platform engineered for collegiate institutions and multi-tenant campuses. Streamlines visitor registration, live WebRTC camera photo capture, single-use anti-replay QR check-out, instant emergency SOS broadcast channels, executive white-label branding, direct POS thermal receipt printing, and audit-safe soft-archiving.',
+    bom: [
+      'Mobile-First Check-In & Live WebRTC Camera Photo Capture (Front/Rear Toggle)',
+      'Smart Phone Auto-Fill: Instant Historical Visitor & Photo Lookup by 10-Digit Phone',
+      'Visual Pass Category Presets: Admissions, Parents, Vendors, Official VIPs & General Visitors',
+      'Anti-Replay QR Scanner (html5-qrcode) with Encrypted Single-Use Tokens (VMS-COLLEGE-TOKEN)',
+      'Emergency SOS Broadcast Channel: HTML5 BroadcastChannel & localStorage Flash Alerts',
+      'Persistent High-Visibility Emergency Alert Banner on Branch Principal Dashboard',
+      'Executive White-Label Branding Studio (Digital Pass, Thermal Receipt, Lanyard Pass)',
+      'Direct POS Thermal Receipt CSS Print Engine (@media print for 80mm / 4x6" printers)',
+      'Soft-Archiving & Audit-Safe Purging Engine (is_archived=true, Zero Data Loss)'
+    ],
     viva: [
-      'How is tenant data security ensured? Using PostgreSQL Row-Level Security (RLS) with strictly scoped tenant isolation contexts.',
-      'How does gate pass verification achieve sub-second speeds? QR tokens are signed with HMAC-SHA256 and verified locally on gatekeeper tablets with in-memory Redis cache.'
+      'How does the Anti-Replay QR Scanner Gate Check-Out prevent unauthorized badge sharing? Single-use cryptographically signed QR tokens (VMS-COLLEGE-TOKEN) are validated via html5-qrcode at gate checkout terminals. Once scanned, the token status transitions to checked-out atomically, permanently blocking re-use, passback, or duplicate checkout attempts.',
+      'How does the Emergency SOS Broadcast Channel alert security staff in real time? Front-desk receptionists can trigger an instant Emergency SOS alert utilizing HTML5 BroadcastChannel combined with localStorage event synchronization. This immediately triggers a flash broadcast across all active browser instances and displays a persistent, high-visibility Emergency Alert Banner on the Branch Principal Dashboard with 1-click incident resolution.',
+      'How does the system ensure zero data loss during end-of-shift front desk cleanups? Clearing active reception desk logs triggers soft-archiving (is_archived = true, archived_at = ISO timestamp), which empties the front-desk active gate screen for incoming shifts while keeping all historical records fully queryable and downloadable in Branch Principal and Super Admin PDF/Excel compliance reports.',
+      'How is high-speed thermal receipt printing implemented for physical gate passes? A dedicated CSS print engine (@media print) optimizes passes for standard POS 80mm and 4x6" thermal card printers. The engine isolates the pass container (#printable-pass) while stripping browser headers, navigation elements, and dialogs, ensuring instant 1-second physical badge dispensing.'
     ]
   },
   'lab-ledger': {
@@ -908,7 +920,7 @@ window.setVimtechSlide = function(index) {
 
   const mainImg = document.getElementById('vimtechMainImg');
   const badge = document.getElementById('vimtechSlideBadge');
-  const thumbBtns = document.querySelectorAll('.work-thumb-btn');
+  const thumbBtns = document.querySelectorAll('#vimtechThumbStrip .work-thumb-btn');
 
   if (mainImg) {
     mainImg.style.opacity = '0.35';
@@ -975,6 +987,141 @@ window.openVimtechPhotoModal = function(index) {
         <i data-lucide="chevron-left"></i>
       </button>
       <button type="button" class="gallery-nav-btn gallery-next-btn" onclick="event.stopPropagation(); window.openVimtechPhotoModal(${index + 1})" aria-label="Next Screenshot" title="Next Image" style="position: absolute; right: 14px;">
+        <i data-lucide="chevron-right"></i>
+      </button>
+    </div>
+  `;
+
+  if (modalCaption) {
+    modalCaption.innerHTML = `
+      <span>${slide.caption}</span>
+      <span style="font-weight: 700; color: #38BDF8; margin-left: 12px; white-space: nowrap;">Screen ${index + 1} of ${data.length}</span>
+    `;
+  }
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+};
+
+/* ============================================================
+   VMS PRODUCTION SCREENSHOT GALLERY CONTROLLER
+   ============================================================ */
+window.VMS_GALLERY_DATA = [
+  {
+    title: 'Front Desk Gate Reception Dashboard & Live Visitor Status',
+    src: 'assets/art/vms-reception-dashboard.webp',
+    fallback: 'assets/art/vms-reception-dashboard.png',
+    caption: 'Vidyavahini VMS — Front Desk Gate Reception Dashboard, Live Active Visitors on Campus, QR Check-Out & Single-Use Digital Gate Passes.',
+    badge: '1 / 4: Gate Reception Dashboard',
+    alt: 'VMS Front Desk Gate Reception Dashboard with Live Active Visitor Counts'
+  },
+  {
+    title: 'Campus Principal Executive Analytics & Gate Density Gauge',
+    src: 'assets/art/vms-principal-analytics.webp',
+    fallback: 'assets/art/vms-principal-analytics.png',
+    caption: 'Campus Principal Executive Dashboard — Campus Gate Density Gauge, Total Campus Visits, Weekly Traffic Trends & Security Blacklist Tracking.',
+    badge: '2 / 4: Executive Analytics',
+    alt: 'Campus Principal Executive Analytics and Campus Gate Density Dashboard'
+  },
+  {
+    title: 'Mobile-First Check-In & WebRTC Live Camera Photo Capture',
+    src: 'assets/art/vms-visitor-checkin.webp',
+    fallback: 'assets/art/vms-visitor-checkin.png',
+    caption: 'Mobile-First Check-In Modal — Smart 10-Digit Phone Auto-Fill & Integrated WebRTC Live Camera Photo Capture with Tablet Support.',
+    badge: '3 / 4: Check-In & Photo Capture',
+    alt: 'Mobile-First Check-In Modal with Smart Phone Auto-Fill and WebRTC Photo Stream'
+  },
+  {
+    title: 'Staff Entrance & Multi-Tenant Authentication Portal',
+    src: 'assets/art/vms-staff-portal.webp',
+    fallback: 'assets/art/vms-staff-portal.png',
+    caption: 'Staff Entrance Portal — Centralised Multi-Tenant Access Control, Receptionist Login & Secure Role-Based Session Management.',
+    badge: '4 / 4: Staff Entrance Portal',
+    alt: 'Staff Entrance Portal with Centralised Multi-Tenant Authentication'
+  }
+];
+
+window.currentVmsIndex = 0;
+
+window.setVmsSlide = function(index) {
+  const data = window.VMS_GALLERY_DATA;
+  if (!data || !data.length) return;
+  if (index < 0) index = data.length - 1;
+  if (index >= data.length) index = 0;
+  window.currentVmsIndex = index;
+  const slide = data[index];
+
+  const mainImg = document.getElementById('vmsMainImg');
+  const badge = document.getElementById('vmsSlideBadge');
+  const thumbBtns = document.querySelectorAll('#vmsThumbStrip .work-thumb-btn');
+
+  if (mainImg) {
+    mainImg.style.opacity = '0.35';
+    setTimeout(() => {
+      mainImg.src = slide.src;
+      mainImg.alt = slide.alt;
+      mainImg.style.opacity = '1';
+    }, 120);
+  }
+
+  if (badge) {
+    badge.innerHTML = `<i data-lucide="image"></i> <span>${slide.badge}</span>`;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+
+  thumbBtns.forEach((btn, idx) => {
+    if (idx === index) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+    } else {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    }
+  });
+};
+
+window.nextVmsSlide = function(e) {
+  if (e) e.stopPropagation();
+  window.setVmsSlide((window.currentVmsIndex || 0) + 1);
+};
+
+window.prevVmsSlide = function(e) {
+  if (e) e.stopPropagation();
+  window.setVmsSlide((window.currentVmsIndex || 0) - 1);
+};
+
+window.openCurrentVmsPhoto = function() {
+  window.openVmsPhotoModal(window.currentVmsIndex || 0);
+};
+
+window.openVmsPhotoModal = function(index) {
+  const data = window.VMS_GALLERY_DATA;
+  if (!data || !data.length) return;
+  if (index < 0) index = data.length - 1;
+  if (index >= data.length) index = 0;
+  window.currentVmsIndex = index;
+  window.setVmsSlide(index);
+
+  const slide = data[index];
+  const modal = document.getElementById('mediaModal');
+  const modalTitle = document.getElementById('mediaModalTitle');
+  const modalBody = document.getElementById('mediaModalBody');
+  const modalCaption = document.getElementById('mediaModalCaption');
+  if (!modal || !modalBody) return;
+
+  if (modalTitle) {
+    modalTitle.innerHTML = `<i data-lucide="image"></i> <span>${slide.title} (${index + 1}/${data.length})</span>`;
+  }
+
+  modalBody.innerHTML = `
+    <div style="position: relative; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; padding: 6px 0;">
+      <img src="${slide.src}" alt="${slide.alt}" class="media-modal-view-img" style="max-height: 68vh; object-fit: contain;">
+      <button type="button" class="gallery-nav-btn gallery-prev-btn" onclick="event.stopPropagation(); window.openVmsPhotoModal(${index - 1})" aria-label="Previous Screenshot" title="Previous Image" style="position: absolute; left: 14px;">
+        <i data-lucide="chevron-left"></i>
+      </button>
+      <button type="button" class="gallery-nav-btn gallery-next-btn" onclick="event.stopPropagation(); window.openVmsPhotoModal(${index + 1})" aria-label="Next Screenshot" title="Next Image" style="position: absolute; right: 14px;">
         <i data-lucide="chevron-right"></i>
       </button>
     </div>
