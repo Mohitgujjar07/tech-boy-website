@@ -60,26 +60,46 @@ function initTheme() {
 // 2. MOBILE DRAWER NAVIGATION
 // ------------------------------------------------------------
 function initMobileDrawer() {
-  const drawer = document.getElementById('mobileDrawer');
-  const openBtn = document.getElementById('mobileMenuBtn') || document.getElementById('mobileDrawerOpenBtn');
-  const closeBtn = document.getElementById('drawerClose') || document.getElementById('mobileDrawerCloseBtn');
+  const drawer = document.getElementById('mobileDrawer') || document.getElementById('mobileDrawerOverlay');
+  const openBtn = document.getElementById('mobileMenuBtn') || document.getElementById('hamburgerBtn') || document.getElementById('mobileDrawerOpenBtn');
+  const closeBtn = document.getElementById('drawerClose') || document.getElementById('drawerCloseBtn') || document.getElementById('mobileDrawerCloseBtn');
 
-  if (!drawer || !openBtn || !closeBtn) return;
+  if (!drawer || !openBtn) return;
 
   function openDrawer() {
     drawer.classList.add('active');
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     openBtn.setAttribute('aria-expanded', 'true');
   }
 
   function closeDrawer() {
     drawer.classList.remove('active');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     openBtn.setAttribute('aria-expanded', 'false');
   }
 
-  openBtn.addEventListener('click', openDrawer);
-  closeBtn.addEventListener('click', closeDrawer);
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = drawer.classList.contains('active') || drawer.classList.contains('open');
+    if (isOpen) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeDrawer();
+    });
+  }
 
   // Close when clicking outside drawer content
   drawer.addEventListener('click', (e) => {
@@ -91,12 +111,14 @@ function initMobileDrawer() {
   // Close on link click
   const drawerLinks = drawer.querySelectorAll('a');
   drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
   });
 
   // ESC key listener
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer.classList.contains('active')) {
+    if (e.key === 'Escape' && (drawer.classList.contains('active') || drawer.classList.contains('open'))) {
       closeDrawer();
     }
   });
