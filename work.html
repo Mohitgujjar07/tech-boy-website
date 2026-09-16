@@ -31,7 +31,7 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.3.2">
 
   <!-- Immediate Theme Initializer -->
   <script>
@@ -278,7 +278,7 @@
             </div>
           </article>
 
-          <!-- Project 2: Computer Lab Ledger System -->
+          <!-- Project 2: VIMTECH Computer Lab Ledger System -->
           <article class="work-card work-card-showcase reveal revealed" data-category="ai web client all">
             <div class="work-browser-chrome">
               <div class="work-traffic-dots">
@@ -288,47 +288,88 @@
               </div>
               <div class="work-url-pill">
                 <i data-lucide="lock"></i>
-                <span>ledger.lab.collegiate.internal</span>
+                <span>ledger.vimtech.collegiate.internal</span>
               </div>
-              <span class="work-live-pill"><span class="status-pulse-dot"></span> Collegiate Deployed</span>
+              <span class="work-live-pill"><span class="status-pulse-dot"></span> Institutional Deployed</span>
             </div>
 
-            <div class="work-card-media-viewport" onclick="openMediaModal('photo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Collegiate Lab Ledger — Gemini Vision AI handwriting OCR & NAAC compliance audit dashboard.')">
-              <img src="assets/art/lab-ledger-preview.jpg" alt="Computer Lab Ledger UI with Gemini Vision OCR" class="work-card-media-img" loading="lazy">
+            <!-- Interactive Multi-Image Production Gallery (Pure Screenshots - No Video Preview) -->
+            <div class="work-gallery-viewport" id="vimtechGalleryViewport" onclick="openCurrentVimtechPhoto()">
+              <img id="vimtechMainImg" src="assets/art/vimtech-ledger-dashboard.webp" alt="VIMTECH Computer Lab Ledger Analytics Dashboard" class="gallery-main-img" loading="lazy">
+              
+              <!-- Slide counter badge -->
+              <div class="gallery-slide-badge" id="vimtechSlideBadge">
+                <i data-lucide="image"></i>
+                <span>1 / 5: Analytics Dashboard &amp; Defects</span>
+              </div>
+
+              <!-- Gallery Prev / Next Arrows -->
+              <button type="button" class="gallery-nav-btn gallery-prev-btn" onclick="prevVimtechSlide(event)" aria-label="Previous Screenshot" title="Previous Image">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <button type="button" class="gallery-nav-btn gallery-next-btn" onclick="nextVimtechSlide(event)" aria-label="Next Screenshot" title="Next Image">
+                <i data-lucide="chevron-right"></i>
+              </button>
+
+              <!-- Media Action Overlay Button (Photo View Only - No Video) -->
               <div class="work-media-overlay-actions" onclick="event.stopPropagation()">
-                <button type="button" class="work-media-action-btn" onclick="openMediaModal('photo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Gemini Vision AI Handwriting OCR & Roster Trigram Matching.')" title="Zoom in on UI">
+                <button type="button" class="work-media-action-btn" onclick="openCurrentVimtechPhoto()" title="Expand Fullscreen High-Res Photo">
                   <i data-lucide="maximize-2"></i>
                   <span>Photo View</span>
                 </button>
-                <button type="button" class="work-media-action-btn btn-demo-glow" onclick="openMediaModal('demo', 'Computer Lab Ledger System', 'assets/art/lab-ledger-preview.jpg', 'Interactive Simulation — Optical Ingestion & NAAC Compliance PDF Generation.')" title="Watch demo walkthrough">
-                  <i data-lucide="play"></i>
-                  <span>Live Demo</span>
-                </button>
               </div>
             </div>
 
+            <!-- Thumbnail Strip Selector -->
+            <div class="work-thumbnail-strip" role="tablist" aria-label="VIMTECH Screenshots">
+              <button type="button" class="work-thumb-btn active" onclick="setVimtechSlide(0)" title="Analytics Dashboard &amp; Defects">
+                <img src="assets/art/vimtech-ledger-dashboard.webp" alt="Dashboard Thumbnail">
+                <span class="work-thumb-label">Dashboard</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVimtechSlide(1)" title="Gemini AI OCR Multi-Page Snap">
+                <img src="assets/art/vimtech-ledger-ocr-snap.webp" alt="OCR Snap Thumbnail">
+                <span class="work-thumb-label">AI OCR Snap</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVimtechSlide(2)" title="Daily Attendance &amp; Lab Utilization">
+                <img src="assets/art/vimtech-ledger-analytics.webp" alt="Analytics Charts Thumbnail">
+                <span class="work-thumb-label">Attendance Charts</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVimtechSlide(3)" title="Confirmed Multi-Shift Lab Sessions">
+                <img src="assets/art/vimtech-ledger-sessions.webp" alt="Sessions Log Thumbnail">
+                <span class="work-thumb-label">Sessions Log</span>
+              </button>
+              <button type="button" class="work-thumb-btn" onclick="setVimtechSlide(4)" title="Faculty Portal &amp; PWA Mobile Access">
+                <img src="assets/art/vimtech-ledger-login.webp" alt="Faculty Sign-In Thumbnail">
+                <span class="work-thumb-label">Staff Sign-In</span>
+              </button>
+            </div>
+
             <div class="work-showcase-body">
-              <div class="work-category-pill">AI, Vision &amp; Lab Automation &bull; Collegiate Operations</div>
-              <h2 class="work-detailed-title">Computer Lab Ledger System</h2>
-              <p class="work-detailed-desc">Next-gen digital laboratory ledger automating physical handwritten sign-in ingestion via Gemini Vision OCR, fuzzy roster matching, and defect logs.</p>
+              <div class="work-category-pill">Collegiate AI &amp; Lab Automation &bull; Computer Science &amp; IT Operations</div>
+              <h2 class="work-detailed-title">🎓 VIMTECH Computer Lab Ledger System</h2>
+              <p class="work-detailed-desc">Next-generation digital laboratory management system designed for collegiate computer science &amp; IT departments. Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports.</p>
               
               <!-- Key Architecture Highlights -->
               <div class="work-architecture-box">
-                <h4><i data-lucide="layers"></i> Key Architecture Highlights</h4>
+                <h4><i data-lucide="layers"></i> Key Architecture &amp; Institutional Capabilities</h4>
                 <div class="modal-chips-grid">
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> Gemini Vision OCR Ingestion Pipeline</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> PostgreSQL Fuzzy Trigram (pg_trgm)</span>
-                  <span class="modal-spec-chip"><i data-lucide="check"></i> NAAC &amp; NBA Compliance Reports</span>
+                  <span class="modal-spec-chip"><i data-lucide="camera"></i> Multimodal Gemini Vision OCR (2.5-Flash &amp; 2.5-Pro fallback)</span>
+                  <span class="modal-spec-chip"><i data-lucide="users"></i> Student Roster &amp; Fuzzy Trigram (pg_trgm) Matching</span>
+                  <span class="modal-spec-chip"><i data-lucide="edit-3"></i> Interactive Review Grid &amp; In-Place Cell Editing</span>
+                  <span class="modal-spec-chip"><i data-lucide="wrench"></i> Hardware Defect Tracker &amp; Maintenance Tickets</span>
+                  <span class="modal-spec-chip"><i data-lucide="file-text"></i> NAAC &amp; NBA Audit PDFs &amp; CWE-1236 Sanitized Excel</span>
+                  <span class="modal-spec-chip"><i data-lucide="smartphone"></i> Offline PWA Service Worker &amp; Campus LAN (-H 0.0.0.0)</span>
                 </div>
               </div>
 
               <!-- Tech Stack Chips -->
               <div class="work-tech-stack-row">
-                <span class="tech-tag">Gemini Vision</span>
-                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Gemini Vision OCR</span>
                 <span class="tech-tag">PostgreSQL pg_trgm</span>
-                <span class="tech-tag">Tailwind</span>
-                <span class="tech-tag">PDFKit</span>
+                <span class="tech-tag">FastAPI / Node.js</span>
+                <span class="tech-tag">PWA &amp; Service Worker</span>
+                <span class="tech-tag">CWE-1236 Sanitized Excel</span>
+                <span class="tech-tag">PDFKit Compliance</span>
               </div>
             </div>
 
@@ -337,7 +378,7 @@
                 <i data-lucide="layers"></i>
                 <span>Deep Specs</span>
               </button>
-              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding Computer Lab Ledger System')">
+              <a href="index.html#contact" class="apple-btn-secondary" onclick="prefillContact('Inquiry regarding VIMTECH Computer Lab Ledger System')">
                 <span>Inquire</span>
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -647,6 +688,6 @@
   <!-- Cosmic ASCII Canvas Background -->
   <script src="ascii-cosmic-shader.js"></script>
   <!-- Main Platform Controller -->
-  <script src="main.js"></script>
+  <script src="main.js?v=2.3.2"></script>
 </body>
 </html>

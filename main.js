@@ -573,13 +573,24 @@ const projectData = {
     ]
   },
   'lab-ledger': {
-    title: 'Computer Lab Ledger System',
-    category: 'Institutional AI & Digital Lab Management',
-    desc: 'Next-generation digital laboratory management system designed for collegiate computer science & IT departments. Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports.',
-    bom: ['Google Gemini Vision OCR Ingestion Pipeline', 'PostgreSQL Fuzzy Trigram (pg_trgm) Matching Engine', 'Lab Hardware Incident & Defect Tracking Module', 'Departmental Utilization & Attendance Analytics', 'Audit-Ready One-Click PDF Compliance Dispatcher'],
+    title: '🎓 VIMTECH Computer Lab Ledger System',
+    category: 'Collegiate AI & Institutional Lab Management',
+    desc: 'Next-generation digital laboratory management system designed for collegiate computer science & IT departments. Automatically digitizes physical handwritten sign-in ledger sheets using Google Gemini Vision OCR, reconciles records against student rosters via fuzzy trigram matching, tracks hardware incidents, and generates audit-ready institutional reports. Built to bridge the physical-digital divide for NAAC, NBA, and collegiate compliance.',
+    bom: [
+      'Multimodal AI Ledger Digitization (Gemini OCR with 2.5-Flash / 2.5-Pro fallback)',
+      'High-Resolution In-Browser Canvas Downscaling for Low-Bandwidth Ingress',
+      'Centralized Student Roster Directory with CSV & Excel (.xlsx/.xls) Batch Import',
+      'PostgreSQL Fuzzy Trigram (pg_trgm) Matching Algorithm for Distorted Handwriting',
+      'Interactive Tabular Review Grid with In-Place Cell Editing & One-Click Faculty Confirmation',
+      'Hardware Defect Tracker & Automated Terminal Maintenance Alerts (PC #54, PC #04, PC #24)',
+      'Institutional Export Engine: CWE-1236 Formula-Sanitized Excel (.xlsx) & Inspection PDFs',
+      'Progressive Web App (PWA) with Offline /sw.js Caching & 0.0.0.0 Campus Wi-Fi Binding'
+    ],
     viva: [
-      'How is messy handwriting recognized accurately? High-resolution scans are pre-processed with contrast normalization before sending to Google Gemini Vision with structured JSON schema prompt guidance.',
-      'Why pg_trgm fuzzy matching? Trigram string similarity tolerates student spelling variations and OCR misreads against the official collegiate database.'
+      'What problem does the VIMTECH Lab Ledger solve in collegiate computing labs? In computing laboratories, hundreds of students log in daily across shifts. Manual data entry creates hours of transcription burden, human error, corrupted roll numbers (UUCMS), untracked hardware faults, and immense audit stress during NAAC/NBA inspections. VIMTECH digitizes and verifies full multi-page sign-in ledgers in seconds.',
+      'How is noisy or distorted student handwriting resolved? Photographs are normalized in the browser before streaming to Google Gemini Vision with structured JSON schemas. Row data is then piped into a PostgreSQL pg_trgm fuzzy trigram similarity matching engine, matching names and university roll numbers against official class rosters even when handwriting is abbreviated or messy.',
+      'How does the Hardware Defect Tracking module work? Peripheral complaints (mouse disconnections, keyboard issues, monitor flicker) written in ledger remarks are automatically extracted, tagged with the workstation PC number, and aggregated into flagged maintenance tickets on the administrative dashboard.',
+      'How is institutional data security and compliance guaranteed? Exports are strictly sanitized against CWE-1236 Formula Injection attacks in .xlsx format, and print-ready PDFs are formatted with official college crests, section turnout metrics, and faculty sign-off blocks ready for accreditation inspections.'
     ]
   },
   'elector-portal': {
@@ -837,6 +848,149 @@ window.closeMediaModal = function() {
       document.body.style.overflow = '';
     }
   }
+};
+
+/* ============================================================
+   VIMTECH PRODUCTION SCREENSHOT GALLERY CONTROLLER
+   ============================================================ */
+window.VIMTECH_GALLERY_DATA = [
+  {
+    title: 'VIMTECH Analytics Dashboard & Hardware Defect Tracker',
+    src: 'assets/art/vimtech-ledger-dashboard.webp',
+    fallback: 'assets/art/vimtech-ledger-dashboard.png',
+    caption: 'VIMTECH Analytics Dashboard — Hardware Defect Tracking (PC #54, PC #04, PC #24), 498 Enrolled Students & Session Logs.',
+    badge: '1 / 5: Analytics Dashboard & Defects',
+    alt: 'VIMTECH Computer Lab Ledger Analytics Dashboard with Defect Tracking'
+  },
+  {
+    title: 'Multimodal Gemini AI OCR Ledger Snapping & Ingestion',
+    src: 'assets/art/vimtech-ledger-ocr-snap.webp',
+    fallback: 'assets/art/vimtech-ledger-ocr-snap.png',
+    caption: 'Multimodal Gemini Vision OCR — Instant Multi-Page Paper Ledger Snapshot, Handwriting & Student Signature Extraction.',
+    badge: '2 / 5: Multimodal Gemini OCR',
+    alt: 'VIMTECH Paper Ledger Snap and Gemini AI Vision OCR Ingestion'
+  },
+  {
+    title: 'Attendance Trends & Lab Capacity Utilization Charts',
+    src: 'assets/art/vimtech-ledger-analytics.webp',
+    fallback: 'assets/art/vimtech-ledger-analytics.png',
+    caption: 'Departmental Intelligence — Daily Attendance, Capacity Utilization Breakdown & Section Turnout Visuals.',
+    badge: '3 / 5: Lab Attendance & Capacity',
+    alt: 'VIMTECH Daily Attendance and Lab Capacity Utilization Analytics'
+  },
+  {
+    title: 'Multi-Shift Confirmed Collegiate Lab Sessions Directory',
+    src: 'assets/art/vimtech-ledger-sessions.webp',
+    fallback: 'assets/art/vimtech-ledger-sessions.png',
+    caption: 'Lab Sessions Management — Confirmed Multi-Shift Collegiate Sessions, Section Filtering & Audit History.',
+    badge: '4 / 5: Confirmed Sessions Log',
+    alt: 'VIMTECH Confirmed Lab Sessions Directory and Section Filtering'
+  },
+  {
+    title: 'Faculty & Lab Staff Secure Authentication Portal',
+    src: 'assets/art/vimtech-ledger-login.webp',
+    fallback: 'assets/art/vimtech-ledger-login.png',
+    caption: 'VIMTECH Faculty & Staff Portal — Secure Authentication, Offline Service Worker Caching & PWA Access.',
+    badge: '5 / 5: Faculty Portal & PWA',
+    alt: 'VIMTECH Faculty Sign-In Screen and PWA Offline Access'
+  }
+];
+
+window.currentVimtechIndex = 0;
+
+window.setVimtechSlide = function(index) {
+  const data = window.VIMTECH_GALLERY_DATA;
+  if (!data || !data.length) return;
+  if (index < 0) index = data.length - 1;
+  if (index >= data.length) index = 0;
+  window.currentVimtechIndex = index;
+  const slide = data[index];
+
+  const mainImg = document.getElementById('vimtechMainImg');
+  const badge = document.getElementById('vimtechSlideBadge');
+  const thumbBtns = document.querySelectorAll('.work-thumb-btn');
+
+  if (mainImg) {
+    mainImg.style.opacity = '0.35';
+    setTimeout(() => {
+      mainImg.src = slide.src;
+      mainImg.alt = slide.alt;
+      mainImg.style.opacity = '1';
+    }, 120);
+  }
+
+  if (badge) {
+    badge.innerHTML = `<i data-lucide="image"></i> <span>${slide.badge}</span>`;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+
+  thumbBtns.forEach((btn, idx) => {
+    if (idx === index) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+    } else {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    }
+  });
+};
+
+window.nextVimtechSlide = function(e) {
+  if (e) e.stopPropagation();
+  window.setVimtechSlide((window.currentVimtechIndex || 0) + 1);
+};
+
+window.prevVimtechSlide = function(e) {
+  if (e) e.stopPropagation();
+  window.setVimtechSlide((window.currentVimtechIndex || 0) - 1);
+};
+
+window.openCurrentVimtechPhoto = function() {
+  window.openVimtechPhotoModal(window.currentVimtechIndex || 0);
+};
+
+window.openVimtechPhotoModal = function(index) {
+  const data = window.VIMTECH_GALLERY_DATA;
+  if (!data || !data.length) return;
+  if (index < 0) index = data.length - 1;
+  if (index >= data.length) index = 0;
+  window.currentVimtechIndex = index;
+  window.setVimtechSlide(index);
+
+  const slide = data[index];
+  const modal = document.getElementById('mediaModal');
+  const modalTitle = document.getElementById('mediaModalTitle');
+  const modalBody = document.getElementById('mediaModalBody');
+  const modalCaption = document.getElementById('mediaModalCaption');
+  if (!modal || !modalBody) return;
+
+  if (modalTitle) {
+    modalTitle.innerHTML = `<i data-lucide="image"></i> <span>${slide.title} (${index + 1}/${data.length})</span>`;
+  }
+
+  modalBody.innerHTML = `
+    <div style="position: relative; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; padding: 6px 0;">
+      <img src="${slide.src}" alt="${slide.alt}" class="media-modal-view-img" style="max-height: 68vh; object-fit: contain;">
+      <button type="button" class="gallery-nav-btn gallery-prev-btn" onclick="event.stopPropagation(); window.openVimtechPhotoModal(${index - 1})" aria-label="Previous Screenshot" title="Previous Image" style="position: absolute; left: 14px;">
+        <i data-lucide="chevron-left"></i>
+      </button>
+      <button type="button" class="gallery-nav-btn gallery-next-btn" onclick="event.stopPropagation(); window.openVimtechPhotoModal(${index + 1})" aria-label="Next Screenshot" title="Next Image" style="position: absolute; right: 14px;">
+        <i data-lucide="chevron-right"></i>
+      </button>
+    </div>
+  `;
+
+  if (modalCaption) {
+    modalCaption.innerHTML = `
+      <span>${slide.caption}</span>
+      <span style="font-weight: 700; color: #38BDF8; margin-left: 12px; white-space: nowrap;">Screen ${index + 1} of ${data.length}</span>
+    `;
+  }
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 };
 
 function initModalClose() {
