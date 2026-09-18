@@ -590,27 +590,6 @@ const TBS_CONFIG = {
         ]
       },
       {
-        id: 'elector-portal',
-        title: 'Elector Lookup Portal',
-        category: 'Software',
-        badge: 'High-Performance ETL',
-        desc: 'Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector profile lookups by EPIC number.',
-        tags: ['Web Portal', 'ETL Pipeline', 'Redis Caching', 'PostgreSQL Partitioning', 'Zero-Compromise Security'],
-        diagram: ['Secure Operator Intranet Client', 'Redis In-Memory Key-Value Index', 'PostgreSQL Partitioned Elector Store', 'High-Throughput Go / Node ETL Pipeline', 'Cryptographic Audit Logging Engine'],
-        bom: [
-          'High-Throughput Go / Node.js ETL Streaming Pipeline',
-          'PostgreSQL Range Partitioned Elector Tables',
-          'Redis In-Memory Distributed Indexing Layer',
-          'Cryptographically Signed Operator Audit Logging',
-          'Air-Gapped Intranet Network Deployment Architecture'
-        ],
-        deliverables: [
-          'Air-Gapped Intranet Production Deployment',
-          'Sub-Second Querying Performance Audit',
-          'Cryptographic Operator Audit Trails'
-        ]
-      },
-      {
         id: 'concert-entry',
         title: 'Vivian Vaidhya Fest 2026 — Concert Entry System',
         category: 'Software',

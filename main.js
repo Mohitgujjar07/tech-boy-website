@@ -605,16 +605,6 @@ const projectData = {
       'How is institutional data security and compliance guaranteed? Exports are strictly sanitized against CWE-1236 Formula Injection attacks in .xlsx format, and print-ready PDFs are formatted with official college crests, section turnout metrics, and faculty sign-off blocks ready for accreditation inspections.'
     ]
   },
-  'elector-portal': {
-    title: 'Elector Lookup Portal',
-    category: 'High-Throughput Secure Internal Portal',
-    desc: 'Enterprise-grade, secure, internal web portal and high-performance ETL pipeline for instant elector (voter) profile lookups by EPIC number. Engineered for large-scale institutional identity queries with sub-second response times, multi-stage sanitization, and cryptographic audit security.',
-    bom: ['High-Throughput Go / Node.js ETL Streaming Pipeline', 'PostgreSQL Range Partitioned Elector Tables', 'Redis In-Memory Distributed Indexing Layer', 'Cryptographically Signed Operator Audit Logging', 'Air-Gapped Intranet Network Deployment Architecture'],
-    viva: [
-      'How are sub-second queries achieved over massive elector datasets? Partitioned database indexing combined with in-memory Redis key-value caching of indexed EPIC tokens.',
-      'How is data privacy maintained? End-to-end data encryption at rest and in transit, with role-based masking of sensitive demographic fields.'
-    ]
-  },
   'concert-entry': {
     title: 'Vivian Vaidhya Fest 2026 — Concert Entry System',
     category: 'Live Event High-Throughput Operations',
