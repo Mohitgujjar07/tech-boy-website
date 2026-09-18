@@ -18,6 +18,7 @@ const { runScrollExpandTests } = require('./scroll-expand.test');
 const { runMorphSliderTests } = require('./morph-slider.test');
 const { runLighthouseAuditTests } = require('./lighthouse-audit.test');
 const { runBrochureSpecTests } = require('./brochure-spec.test');
+const { runHighlightsSpecTests } = require('./highlights-spec.test');
 const { makeHttpRequest } = require('./test-utils');
 
 // ANSI Color Codes
@@ -34,7 +35,7 @@ async function main() {
   const overallStartTime = Date.now();
 
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 10)                          ${RESET}`);
+  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 11)                          ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 
@@ -364,6 +365,34 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
+  // Tier 11: Instagram Reels & Highlights Spec (highlights-spec.test.js)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 11: Instagram Reels & Work Highlights Spec Suite${RESET}`);
+  let t11Passed = 0;
+  let t11Failed = 0;
+  let t11Assertions = 0;
+  try {
+    const hlRes = runHighlightsSpecTests();
+    t11Passed = hlRes.passed;
+    t11Assertions = hlRes.assertions;
+  } catch (err) {
+    t11Failed = 1;
+    console.error(`  ${RED}✖ Highlights suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t11Passed + t11Failed);
+  totalPassed += t11Passed;
+  totalFailed += t11Failed;
+  totalAssertions += t11Assertions;
+
+  tierReports.push({
+    tier: 'Tier 11: Reels & Highlights Spec',
+    total: t11Passed + t11Failed,
+    passed: t11Passed,
+    failed: t11Failed,
+    assertions: t11Assertions
+  });
+
+  // -------------------------------------------------------------------------
   // Optional Live HTTP Server Check
   // -------------------------------------------------------------------------
   console.log(`\n${BOLD}${CYAN}▶ CHECKING LOCAL HTTP SERVER STATUS${RESET}`);
@@ -403,7 +432,7 @@ async function main() {
   console.log(`  ${BOLD}Pass Rate:${RESET} ${finalColor}${((totalPassed / totalTests) * 100).toFixed(1)}%${RESET}`);
 
   if (totalFailed === 0) {
-    console.log(`\n${BOLD}${GREEN}✔ ALL 10 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
+    console.log(`\n${BOLD}${GREEN}✔ ALL 11 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
     process.exit(0);
   } else {
     console.log(`\n${BOLD}${RED}✖ ${totalFailed} TEST(S) FAILED${RESET}\n`);

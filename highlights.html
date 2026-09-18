@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary Meta Tags -->
+  <title>Work Highlights &amp; Instagram Reels | Aarambhx Technology</title>
+  <meta name="title" content="Work Highlights &amp; Instagram Reels | Aarambhx Technology">
+  <meta name="description" content="Watch live campus workshops, IoT embedded hardware prototyping, and custom engineering projects by Aarambhx Technology and AarambhX Academy in Karnataka.">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="video.other">
+  <meta property="og:title" content="Aarambhx Technology — Work Highlights &amp; Reels">
+  <meta property="og:description" content="Watch live campus workshops, IoT hardware rigs, and software systems in action.">
+  <meta property="og:image" content="assets/aarambhx-logo.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
+  <link rel="apple-touch-icon" href="assets/aarambhx-logo.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="highlights.css?v=2.5.0">
+
+  <!-- Immediate Theme Initializer -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.documentElement.classList.remove('light-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="dark-theme">
+
+  <div class="highlights-page" id="highlightsApp">
+
+    <!-- ============================================================
+         TOP FLOATING GLASS NAVBAR
+         ============================================================ -->
+    <header class="hl-navbar" role="banner">
+      <div class="hl-nav-left">
+        <a href="index.html" class="hl-back-btn" title="Back to Home">
+          <i data-lucide="arrow-left"></i>
+          <span>Home</span>
+        </a>
+        <a href="index.html" class="hl-brand-group">
+          <picture>
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <source srcset="assets/aarambhx-logo.png" type="image/png">
+            <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Logo" class="hl-logo-img" width="32" height="32">
+          </picture>
+          <span class="hl-brand-title">Aarambhx <span class="hl-brand-badge">Highlights</span></span>
+        </a>
+      </div>
+
+      <div class="hl-nav-right">
+        <!-- Direct Instagram Follow Button -->
+        <a href="https://www.instagram.com/aarambhx_technology?utm_source=qr" target="_blank" rel="noopener noreferrer" class="hl-ig-cta-btn" title="Follow Aarambhx Technology on Instagram">
+          <i data-lucide="instagram"></i>
+          <span>Follow @aarambhx_technology</span>
+        </a>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button type="button" class="hl-theme-btn" id="hlThemeToggle" aria-label="Toggle Theme" title="Toggle dark/light theme">
+          <i data-lucide="moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         CREATOR PROFILE BANNER
+         ============================================================ -->
+    <section class="hl-hero-section">
+      <div class="hl-profile-card">
+        <div class="hl-profile-main">
+          <div class="hl-avatar-wrap">
+            <img src="assets/aarambhx-logo.png" alt="Aarambhx Technology Instagram Avatar" class="hl-avatar-img">
+          </div>
+          <div class="hl-profile-details">
+            <div class="hl-profile-handle">
+              <span>aarambhx_technology</span>
+              <i data-lucide="check-circle-2" class="hl-verified-badge" width="18" height="18"></i>
+            </div>
+            <p class="hl-profile-bio">
+              Complete Technology Services &amp; AarambhX Academy. Demystifying AI, IoT hardware, and custom software in Karnataka.
+            </p>
+            <div class="hl-profile-tags">
+              <span class="hl-meta-pill">Campus Workshops</span>
+              <span class="hl-meta-pill">IoT &amp; Robotics</span>
+              <span class="hl-meta-pill">Software Engineering</span>
+              <span class="hl-meta-pill">Tumakuru • Bengaluru</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hl-profile-actions">
+          <a href="https://www.instagram.com/aarambhx_technology?utm_source=qr" target="_blank" rel="noopener noreferrer" class="hl-ig-cta-btn">
+            <i data-lucide="instagram"></i>
+            <span>Follow on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <nav class="hl-filters-bar" aria-label="Filter media categories">
+        <button type="button" class="hl-filter-btn active" data-filter="all">All Highlights (5)</button>
+        <button type="button" class="hl-filter-btn" data-filter="workshops">Campus Workshops</button>
+        <button type="button" class="hl-filter-btn" data-filter="hardware">IoT &amp; Hardware</button>
+        <button type="button" class="hl-filter-btn" data-filter="software">Software Systems</button>
+      </nav>
+    </section>
+
+    <!-- ============================================================
+         REELS & MEDIA GRID
+         ============================================================ -->
+    <main class="hl-grid-section" id="main-content">
+      <div class="hl-media-grid" id="mediaGrid">
+
+        <!-- Card 1: Instagram Reel 1 (DdZJtHavGHu) -->
+        <article class="hl-card" data-category="workshops">
+          <div class="hl-card-header">
+            <div class="hl-card-source">
+              <span class="hl-ig-icon-gradient"><i data-lucide="instagram" width="16" height="16"></i></span>
+              <span>@aarambhx_technology</span>
+            </div>
+            <span class="hl-card-badge">Campus Workshop</span>
+          </div>
+
+          <div class="hl-embed-wrap" data-src="https://www.instagram.com/reel/DdZJtHavGHu/embed/" data-title="AarambhX Campus Training Reel">
+            <!-- Iframe injected via IntersectionObserver -->
+          </div>
+
+          <div class="hl-card-body">
+            <h2 class="hl-card-title">Interactive Engineering &amp; Hands-On Campus Training</h2>
+            <p class="hl-card-desc">
+              Live footage from our terminal-driven student training sessions, empowering engineering students with practical modern toolchains.
+            </p>
+            <div class="hl-card-footer">
+              <a href="https://www.instagram.com/reel/DdZJtHavGHu/?stkn=aTY5ZzU4djNsc3dr" target="_blank" rel="noopener noreferrer" class="hl-watch-ig-link">
+                <span>Watch on Instagram</span>
+                <i data-lucide="arrow-up-right" width="14" height="14"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Instagram Reel 2 (Ddatp9hvGxd) -->
+        <article class="hl-card" data-category="hardware">
+          <div class="hl-card-header">
+            <div class="hl-card-source">
+              <span class="hl-ig-icon-gradient"><i data-lucide="instagram" width="16" height="16"></i></span>
+              <span>@aarambhx_technology</span>
+            </div>
+            <span class="hl-card-badge">IoT &amp; Hardware</span>
+          </div>
+
+          <div class="hl-embed-wrap" data-src="https://www.instagram.com/reel/Ddatp9hvGxd/embed/" data-title="AarambhX Hardware Prototype Reel">
+            <!-- Iframe injected via IntersectionObserver -->
+          </div>
+
+          <div class="hl-card-body">
+            <h2 class="hl-card-title">Embedded Hardware Prototyping &amp; Realtime Telemetry</h2>
+            <p class="hl-card-desc">
+              ESP32 microcontrollers, breadboard circuitry, and live telemetry data pipelines engineered by our hardware team.
+            </p>
+            <div class="hl-card-footer">
+              <a href="https://www.instagram.com/reel/Ddatp9hvGxd/?stkn=MW1uanVlcWgzd2FoMA==" target="_blank" rel="noopener noreferrer" class="hl-watch-ig-link">
+                <span>Watch on Instagram</span>
+                <i data-lucide="arrow-up-right" width="14" height="14"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Instagram Channel Connect -->
+        <article class="hl-card hl-follow-card" data-category="all">
+          <div class="hl-follow-icon-large">
+            <i data-lucide="instagram" width="32" height="32"></i>
+          </div>
+          <h3>Follow Our Official Channel</h3>
+          <p>
+            Catch regular reels, project demos, behind-the-scenes lab setups, and student hackathons directly on your feed.
+          </p>
+          <a href="https://www.instagram.com/aarambhx_technology?utm_source=qr" target="_blank" rel="noopener noreferrer" class="hl-ig-cta-btn">
+            <i data-lucide="user-plus"></i>
+            <span>Follow @aarambhx_technology</span>
+          </a>
+        </article>
+
+        <!-- Card 4: Campus Labs Showcase -->
+        <article class="hl-card" data-category="workshops">
+          <div class="hl-card-header">
+            <div class="hl-card-source">
+              <i data-lucide="graduation-cap" width="16" height="16" style="color: #60a5fa;"></i>
+              <span>AarambhX Academy</span>
+            </div>
+            <span class="hl-card-badge">Student Innovation</span>
+          </div>
+
+          <div class="hl-embed-wrap" style="aspect-ratio: 16/10; max-height: 280px;">
+            <img src="assets/art/hero-student-lab-wide.jpg" alt="Student Lab Hardware Session" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+
+          <div class="hl-card-body">
+            <h2 class="hl-card-title">100% Practical Campus Delivery Across Karnataka</h2>
+            <p class="hl-card-desc">
+              From 1-day workshops to week-long bootcamps in AI, IoT, and Cybersecurity for colleges, polytechnics, and schools.
+            </p>
+            <div class="hl-card-footer">
+              <a href="academy.html" class="hl-watch-ig-link" style="color: #60a5fa;">
+                <span>Explore Academy Programs</span>
+                <i data-lucide="arrow-right" width="14" height="14"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5: Production Software & IoT Gate -->
+        <article class="hl-card" data-category="software">
+          <div class="hl-card-header">
+            <div class="hl-card-source">
+              <i data-lucide="server" width="16" height="16" style="color: #38bdf8;"></i>
+              <span>Production Systems</span>
+            </div>
+            <span class="hl-card-badge">Deployed Client Work</span>
+          </div>
+
+          <div class="hl-embed-wrap" style="aspect-ratio: 16/10; max-height: 280px;">
+            <img src="assets/art/projects-rfid-iot-gate.jpg" alt="Automated RFID IoT Gate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+
+          <div class="hl-card-body">
+            <h2 class="hl-card-title">Automated Event Entry &amp; Lab Infrastructure</h2>
+            <p class="hl-card-desc">
+              High-throughput offline-capable RFID scanners and live dashboard ledgers engineered for enterprise reliability.
+            </p>
+            <div class="hl-card-footer">
+              <a href="work.html" class="hl-watch-ig-link" style="color: #38bdf8;">
+                <span>View Client Case Studies</span>
+                <i data-lucide="arrow-right" width="14" height="14"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="highlights.js?v=2.5.0"></script>
+  <script>
+    if (window.lucide && window.lucide.createIcons) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
