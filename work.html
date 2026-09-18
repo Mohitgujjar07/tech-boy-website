@@ -66,7 +66,11 @@
       <!-- Brand Logo -->
       <a href="index.html" class="nav-brand" aria-label="Aarambhx Technology Home">
         <span class="brand-badge">
-          <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" class="brand-logo-img" width="46" height="46">
+          <picture>
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <source srcset="assets/aarambhx-logo.png" type="image/png">
+            <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" class="brand-logo-img" width="46" height="46">
+          </picture>
           <svg viewBox="0 0 28 28" width="0" height="0" class="brand-badge-token" aria-hidden="true" style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;">
             <rect width="28" height="28" rx="8" fill="#2563EB"/>
             <path d="M7 9H17M12 9V20" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
@@ -77,21 +81,23 @@
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="nav-menu">
+      <nav class="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
+          <li><a href="index.html" class="nav-item">Home</a></li>
           <li><a href="index.html#services" class="nav-item">Services</a></li>
           <li><a href="work.html" class="nav-item active" style="color: #2563EB; font-weight: 700;">Our Work</a></li>
-          <li><a href="index.html#projects" class="nav-item" title="Student Innovation Lab &amp; Projects">Projects</a></li>
+          <li><a href="index.html#projects" class="nav-item">Projects</a></li>
           <li><a href="index.html#why-us" class="nav-item">Why Us</a></li>
           <li><a href="index.html#faq" class="nav-item">FAQ</a></li>
           <li><a href="index.html#contact" class="nav-item">Contact</a></li>
-          <li><a href="academy.html" class="nav-item dev-link-highlight" title="AarambhX Academy — Industrial Training &amp; Workshops">Academy ↗</a></li>
+          <li><a href="academy.html" class="nav-item" style="color: #2563EB; font-weight: 700;" title="AarambhX Academy">Academy ↗</a></li>
         </ul>
       </nav>
 
-      <!-- CTA, Theme Toggle & Mobile Trigger -->
+      <!-- CTA & Mobile Trigger -->
       <div class="nav-actions">
-        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
           <i data-lucide="moon" class="theme-icon-dark"></i>
           <i data-lucide="sun" class="theme-icon-light"></i>
         </button>
@@ -113,7 +119,11 @@
     <div class="mobile-drawer-card">
       <div class="drawer-header">
         <div class="drawer-brand">
-          <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" class="drawer-logo-img" width="44" height="44">
+          <picture>
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <source srcset="assets/aarambhx-logo.png" type="image/png">
+            <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" class="drawer-logo-img" width="44" height="44">
+          </picture>
           <span>Aarambhx Technology</span>
         </div>
         <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
@@ -621,7 +631,11 @@
       <div class="footer-bottom-grid" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 32px 0;">
         <div class="footer-brand-col">
           <div class="brand-text" style="font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
-            <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" style="width: 36px; height: 36px; border-radius: 8px; object-fit: cover;">
+            <picture>
+              <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+              <source srcset="assets/aarambhx-logo.png" type="image/png">
+              <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" style="width: 36px; height: 36px; object-fit: contain;">
+            </picture>
             <span>Aarambhx <span class="brand-highlight" style="color: #2563EB;">Technology</span></span>
           </div>
           <p class="footer-tagline" style="font-size: 0.85rem; margin-top: 4px;">Complete Technology Solutions &bull; Tumakuru, Karnataka, India</p>
