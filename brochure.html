@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary Meta Tags -->
+  <title>Institutional Training &amp; Technology Programs Brochure (2026) | AarambhX Academy</title>
+  <meta name="title" content="Institutional Training &amp; Technology Programs Brochure (2026) | AarambhX Academy">
+  <meta name="description" content="Explore our interactive 3D institutional brochure for colleges, polytechnics, and schools. AI &amp; GenAI, IoT, Embedded Hardware, Cybersecurity, and Enterprise Automation workshops across Karnataka.">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="book">
+  <meta property="og:title" content="AarambhX Academy — Institutional Training Brochure (2026)">
+  <meta property="og:description" content="Interactive 3D brochure: Hands-on campus workshops, FDPs, and curriculum frameworks for engineering institutions.">
+  <meta property="og:image" content="assets/brochure/pages/thumb-1.webp">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
+  <link rel="apple-touch-icon" href="assets/aarambhx-logo.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Brochure Styles -->
+  <link rel="stylesheet" href="brochure.css?v=2.4.0">
+
+  <!-- Immediate Theme Initializer -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.documentElement.classList.remove('light-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="dark-theme">
+
+  <div class="brochure-app" id="brochureApp">
+
+    <!-- Loading Screen -->
+    <div class="reader-loader" id="reader-loader" role="status" aria-label="Loading interactive brochure">
+      <div class="loader-spinner"></div>
+      <div class="loader-text">Opening AarambhX Institutional Brochure...</div>
+    </div>
+
+    <!-- ============================================================
+         TOP FLOATING GLASS HEADER
+         ============================================================ -->
+    <header class="reader-header" role="banner">
+      <div class="header-left">
+        <a href="academy.html" class="back-link" title="Return to AarambhX Academy">
+          <i data-lucide="arrow-left"></i>
+          <span>Academy</span>
+        </a>
+        <div class="brand-meta">
+          <picture>
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <source srcset="assets/aarambhx-logo.png" type="image/png">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="brand-logo-mini" width="28" height="28">
+          </picture>
+          <div class="brochure-title-group">
+            <span class="brochure-title">Institutional Programs</span>
+            <span class="brochure-subtitle">AarambhX Academy • 2026 Edition</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="page-indicator-pill" role="status" aria-live="polite">
+          <span>Page</span>
+          <strong id="current-page">1</strong>
+          <span>of</span>
+          <strong>12</strong>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Direct PDF Download Button -->
+        <a href="assets/brochure/aarambhx-institutional-brochure.pdf" download="aarambhx-institutional-brochure.pdf" class="download-cta-btn" id="downloadPdfBtn" title="Download Offline PDF (851 KB)">
+          <i data-lucide="download"></i>
+          <span>Download PDF</span>
+          <span class="download-size-badge">851 KB</span>
+        </a>
+
+        <!-- Sound Toggle -->
+        <button type="button" class="icon-action-btn" id="soundToggleBtn" aria-label="Toggle page flip sound" title="Toggle Sound">
+          <i data-lucide="volume-2"></i>
+        </button>
+
+        <!-- Fullscreen Toggle -->
+        <button type="button" class="icon-action-btn" id="fullscreenToggleBtn" aria-label="Toggle fullscreen mode" title="Toggle Fullscreen">
+          <i data-lucide="maximize-2"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="icon-action-btn" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle Theme">
+          <i data-lucide="moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         MAIN 3D FLIPBOOK STAGE
+         ============================================================ -->
+    <main class="reader-stage" id="readerStage">
+
+      <!-- Floating Side Navigation Arrows -->
+      <button type="button" class="side-nav-btn prev-btn" id="sidePrevBtn" aria-label="Previous page">
+        <i data-lucide="chevron-left"></i>
+      </button>
+      <button type="button" class="side-nav-btn next-btn" id="sideNextBtn" aria-label="Next page">
+        <i data-lucide="chevron-right"></i>
+      </button>
+
+      <div class="book-canvas-wrap" id="book-canvas-wrap">
+        <div class="flip-book" id="flipbook">
+
+          <!-- Page 1 (Front Cover - Hardcover) -->
+          <div class="page" data-density="hard">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-1.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-1.png" alt="Institutional Training & Technology Programs Cover" loading="eager">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 2 (Engineering education, delivered where your students are) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-2.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-2.png" alt="About AarambhX Academy & Approach" loading="eager">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 3 (Why institutions choose AarambhX) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-3.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-3.png" alt="Why institutions choose AarambhX" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 4 (Technology training programs - 4 Core Tracks) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-4.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-4.png" alt="Technology training programs - AI, IoT, Cybersecurity, Automation" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 5 (Sample curriculum framework) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-5.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-5.png" alt="Sample curriculum framework" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 6 (Flexible training formats) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-6.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-6.png" alt="Flexible training formats - 1-Day, Bootcamp, Custom" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 7 (Student learning journey) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-7.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-7.png" alt="From learning to building - 6 stages" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 8 (Build something real - Capstones) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-8.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-8.png" alt="Project-based learning and capstones" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 9 (Institutional deliverables) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-9.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-9.png" alt="Institutional deliverables and co-branded certificates" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 10 (Infrastructure & requirements) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-10.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-10.png" alt="Infrastructure and zero-licensing requirements" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 11 (Institutional collaboration process) -->
+          <div class="page" data-density="soft">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-11.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-11.png" alt="How we work with your institution - 5 steps" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+          <!-- Page 12 (Back Cover - Partner with AarambhX - Hardcover) -->
+          <div class="page" data-density="hard">
+            <div class="page-content">
+              <picture>
+                <source srcset="assets/brochure/pages/page-12.webp" type="image/webp">
+                <img src="assets/brochure/pages/page-12.png" alt="Partner with AarambhX - Contact & QR Codes" loading="lazy">
+              </picture>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ============================================================
+         BOTTOM FLOATING DOCK
+         ============================================================ -->
+    <nav class="reader-dock" aria-label="Flipbook Controls">
+      <button type="button" class="dock-btn" id="firstPageBtn" aria-label="First page" title="First Page">
+        <i data-lucide="chevrons-left"></i>
+      </button>
+      <button type="button" class="dock-btn" id="prevPageBtn" aria-label="Previous page" title="Previous Page">
+        <i data-lucide="chevron-left"></i>
+        <span>Prev</span>
+      </button>
+
+      <div class="dock-divider"></div>
+
+      <button type="button" class="dock-btn" id="thumbsToggleBtn" aria-label="Toggle page thumbnails" title="Thumbnail View">
+        <i data-lucide="layout-grid"></i>
+        <span>Pages</span>
+      </button>
+      <button type="button" class="dock-btn" id="zoomToggleBtn" aria-label="Zoom in or out" title="Zoom In">
+        <i data-lucide="zoom-in"></i>
+        <span>Zoom</span>
+      </button>
+
+      <div class="dock-divider"></div>
+
+      <button type="button" class="dock-btn" id="nextPageBtn" aria-label="Next page" title="Next Page">
+        <span>Next</span>
+        <i data-lucide="chevron-right"></i>
+      </button>
+      <button type="button" class="dock-btn" id="lastPageBtn" aria-label="Last page" title="Last Page">
+        <i data-lucide="chevrons-right"></i>
+      </button>
+    </nav>
+
+    <!-- ============================================================
+         THUMBNAILS DRAWER
+         ============================================================ -->
+    <div class="thumbnails-drawer" id="thumbnailsDrawer" role="region" aria-label="Page Thumbnails">
+      <div class="thumbnails-track" id="thumbnailsTrack">
+        <!-- Injected via brochure.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/brochure/page-flip.browser.js"></script>
+  <script src="brochure.js?v=2.4.0"></script>
+  <script>
+    // Initialize Lucide icons
+    if (window.lucide && window.lucide.createIcons) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

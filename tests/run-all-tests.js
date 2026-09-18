@@ -17,6 +17,7 @@ const { runAcademySpecTests } = require('./academy-spec.test');
 const { runScrollExpandTests } = require('./scroll-expand.test');
 const { runMorphSliderTests } = require('./morph-slider.test');
 const { runLighthouseAuditTests } = require('./lighthouse-audit.test');
+const { runBrochureSpecTests } = require('./brochure-spec.test');
 const { makeHttpRequest } = require('./test-utils');
 
 // ANSI Color Codes
@@ -33,7 +34,7 @@ async function main() {
   const overallStartTime = Date.now();
 
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 9)                           ${RESET}`);
+  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 10)                          ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 
@@ -335,6 +336,34 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
+  // Tier 10: Interactive 3D Brochure Spec (brochure-spec.test.js)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 10: Interactive 3D Brochure Spec Suite${RESET}`);
+  let t10Passed = 0;
+  let t10Failed = 0;
+  let t10Assertions = 0;
+  try {
+    const brochureRes = runBrochureSpecTests();
+    t10Passed = brochureRes.passed;
+    t10Assertions = brochureRes.assertions;
+  } catch (err) {
+    t10Failed = 1;
+    console.error(`  ${RED}✖ Brochure suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t10Passed + t10Failed);
+  totalPassed += t10Passed;
+  totalFailed += t10Failed;
+  totalAssertions += t10Assertions;
+
+  tierReports.push({
+    tier: 'Tier 10: Interactive Brochure Spec',
+    total: t10Passed + t10Failed,
+    passed: t10Passed,
+    failed: t10Failed,
+    assertions: t10Assertions
+  });
+
+  // -------------------------------------------------------------------------
   // Optional Live HTTP Server Check
   // -------------------------------------------------------------------------
   console.log(`\n${BOLD}${CYAN}▶ CHECKING LOCAL HTTP SERVER STATUS${RESET}`);
@@ -374,7 +403,7 @@ async function main() {
   console.log(`  ${BOLD}Pass Rate:${RESET} ${finalColor}${((totalPassed / totalTests) * 100).toFixed(1)}%${RESET}`);
 
   if (totalFailed === 0) {
-    console.log(`\n${BOLD}${GREEN}✔ ALL 9 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
+    console.log(`\n${BOLD}${GREEN}✔ ALL 10 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
     process.exit(0);
   } else {
     console.log(`\n${BOLD}${RED}✖ ${totalFailed} TEST(S) FAILED${RESET}\n`);

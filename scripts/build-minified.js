@@ -104,6 +104,7 @@ const cssFiles = [
   'styles.css',
   'academy.css',
   'developer.css',
+  'brochure.css',
   'MaskedHeading.css',
   'ScrollExpand.css',
   'MorphSlider.css'
@@ -113,6 +114,7 @@ const jsFiles = [
   'main.js',
   'academy.js',
   'config.js',
+  'brochure.js',
   'scroll-expand.js',
   'morph-slider.js'
 ];
