@@ -894,21 +894,21 @@
       return getJSON(STORAGE_KEYS.REELS, [
         {
           id: 'reel-1',
-          title: 'Live IoT Embedded Hardware Rig Assembly',
-          category: 'Hardware Lab',
-          url: 'https://www.instagram.com/reel/example1',
-          embedUrl: '',
-          caption: 'Building real-time telemetry rig with ESP32 & sensors.',
-          views: '14.2K'
+          title: 'A Day at BIEC Bengaluru: Electronica India 2026',
+          category: 'Robotics & Edge AI',
+          url: 'https://www.instagram.com/reel/DdZJtHavGHu/?stkn=aTY5ZzU4djNsc3dr',
+          embedUrl: 'https://www.instagram.com/reel/DdZJtHavGHu/embed/',
+          caption: 'Discovering the latest breakthroughs in Edge AI, robotics, industrial electronics, and automation at BIEC Bengaluru.',
+          views: '2.4K+'
         },
         {
           id: 'reel-2',
-          title: 'Campus AI Workshop Terminal Lab Session',
-          category: 'Campus Workshop',
-          url: 'https://www.instagram.com/reel/example2',
-          embedUrl: '',
-          caption: '120 students building custom neural net classifiers.',
-          views: '28.6K'
+          title: 'Unboxed. Powered Up. Ready to Perform: Lenovo AMD Ryzen-5 Setup',
+          category: 'Hardware & PC Setup',
+          url: 'https://www.instagram.com/reel/Ddatp9hvGxd/?stkn=MW1uanVlcWgzd2FoMA==',
+          embedUrl: 'https://www.instagram.com/reel/Ddatp9hvGxd/embed/',
+          caption: 'Premium Lenovo setup powered by AMD Ryzen-5 engineered for smooth performance, productivity, and everyday hustle.',
+          views: '3.8K+'
         }
       ]);
     },

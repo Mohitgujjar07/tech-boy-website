@@ -18,7 +18,9 @@
 
         const filter = this.dataset.filter;
         cards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
+          const cat = card.dataset.category || '';
+          const matches = filter === 'all' || cat === 'all' || cat === filter || cat.split(/\s+/).includes(filter);
+          if (matches) {
             card.style.display = 'flex';
             // slight fade in
             card.style.opacity = '0';
