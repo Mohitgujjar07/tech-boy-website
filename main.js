@@ -1492,13 +1492,14 @@ function initLiveAlertBanner() {
       bannerEl.id = 'axGlobalAlertBanner';
       bannerEl.className = 'ax-global-banner';
       document.body.insertBefore(bannerEl, document.body.firstChild);
+      document.body.classList.add('has-alert-banner');
     }
 
     bannerEl.innerHTML = `
       <div class="ax-banner-inner">
         <span class="ax-banner-text">${banner.text}</span>
         ${banner.ctaText ? `<a href="${banner.ctaLink || '#'}" class="ax-banner-cta">${banner.ctaText} &rarr;</a>` : ''}
-        <button type="button" class="ax-banner-close" aria-label="Close notification" onclick="this.closest('.ax-global-banner').remove()">&times;</button>
+        <button type="button" class="ax-banner-close" aria-label="Close notification" onclick="this.closest('.ax-global-banner').remove(); document.body.classList.remove('has-alert-banner');">&times;</button>
       </div>
     `;
   } catch (e) {

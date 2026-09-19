@@ -300,13 +300,21 @@ ul { list-style: none; }
   box-shadow: var(--glass-shadow-scrolled);
 }
 
+body.has-alert-banner .apple-glass-nav {
+  top: 52px;
+}
+
+body.has-alert-banner .apple-glass-nav.scrolled {
+  top: 46px;
+}
+
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 58px;
-  padding: 0 12px;
-  gap: 8px;
+  padding: 0 16px;
+  gap: 12px;
   box-sizing: border-box;
   width: 100%;
 }
@@ -317,12 +325,13 @@ ul { list-style: none; }
   gap: 8px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--text-primary);
   white-space: nowrap;
   flex-shrink: 0;
   text-decoration: none;
   letter-spacing: -0.015em;
+  z-index: 2;
 }
 
 .brand-badge {
@@ -410,15 +419,15 @@ body.dark-theme .nav-brand:hover .brand-logo-img,
   justify-content: center;
   flex: 1;
   min-width: 0;
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 .nav-list {
   display: inline-flex;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
   background: var(--nav-pill-track);
-  padding: 3px;
+  padding: 3px 4px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border);
   height: 36px;
@@ -430,10 +439,10 @@ body.dark-theme .nav-brand:hover .brand-logo-img,
 
 .nav-item {
   font-family: var(--font-ui);
-  font-size: 0.745rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--text-muted);
-  padding: 4px 7px;
+  padding: 4px 8px;
   border-radius: var(--radius-pill);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
@@ -442,6 +451,10 @@ body.dark-theme .nav-brand:hover .brand-logo-img,
   justify-content: center;
   line-height: 1;
   text-decoration: none;
+}
+
+.nav-item-aux {
+  display: inline-flex;
 }
 
 .nav-item:hover {
@@ -710,7 +723,8 @@ body.dark-theme .theme-icon-dark {
   margin: 32px 0;
 }
 
-.drawer-link {
+.drawer-link,
+.drawer-btn-link {
   font-family: var(--font-ui);
   font-size: 1.05rem;
   font-weight: 600;
@@ -718,9 +732,17 @@ body.dark-theme .theme-icon-dark {
   padding: 8px 12px;
   border-radius: 10px;
   transition: var(--transition);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  text-decoration: none;
 }
 
-.drawer-link:hover {
+.drawer-link:hover,
+.drawer-btn-link:hover {
   background: var(--accent-light);
   color: var(--accent-primary);
   transform: translateX(4px);
@@ -3892,56 +3914,70 @@ body.dark-theme .footer-bg-layer {
    ============================================================ */
 @media (min-width: 1200px) {
   .apple-glass-nav {
-    max-width: 1180px;
+    max-width: 1240px;
+    width: calc(100% - 40px);
+  }
+}
+
+@media (min-width: 1360px) {
+  .apple-glass-nav {
+    max-width: 1300px;
     width: calc(100% - 48px);
   }
 }
 
 @media (min-width: 1440px) {
   .apple-glass-nav {
-    max-width: 1240px;
+    max-width: 1320px;
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1199px) {
+@media (min-width: 1025px) and (max-width: 1260px) {
+  .nav-item-aux {
+    display: none !important;
+  }
   .apple-glass-nav {
     width: calc(100% - 24px);
+    max-width: 1060px;
     top: 10px;
   }
+  body.has-alert-banner .apple-glass-nav {
+    top: 48px;
+  }
   .nav-container {
-    padding: 0 8px 0 10px;
-    gap: 6px;
-    height: 52px;
+    padding: 0 14px;
+    gap: 10px;
+    height: 54px;
   }
   .nav-brand {
-    font-size: 0.925rem;
-    gap: 6px;
+    font-size: 0.98rem;
+    gap: 8px;
   }
   .brand-logo-img {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
   }
   .nav-list {
-    height: 32px;
-    padding: 2px;
-    gap: 0;
+    height: 36px;
+    padding: 3px 4px;
+    gap: 2px;
   }
   .nav-item {
-    padding: 4px 6px;
-    font-size: 0.695rem;
+    padding: 4px 8px;
+    font-size: 0.75rem;
     letter-spacing: -0.01em;
   }
   .nav-actions {
-    gap: 6px;
+    gap: 8px;
   }
   .apple-btn-cta {
-    padding: 5px 10px;
-    font-size: 0.725rem;
-    gap: 4px;
+    padding: 6px 12px;
+    font-size: 0.76rem;
+    gap: 5px;
   }
   .theme-toggle-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -3963,6 +3999,7 @@ body.dark-theme .footer-bg-layer {
 }
 
 @media (max-width: 768px) {
+  body.has-alert-banner .apple-glass-nav { top: 56px; }
   .nav-menu { display: none; }
   .hamburger-btn { display: flex; }
   .apple-btn-cta { display: none; }
