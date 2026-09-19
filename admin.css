@@ -1055,3 +1055,336 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   GLASSMORPHIC TOAST NOTIFICATIONS
+   ============================================================ */
+.ax-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ax-toast {
+  pointer-events: auto;
+  min-width: 280px;
+  max-width: 420px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ax-toast.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.ax-toast-success {
+  border-left: 4px solid #10B981;
+}
+.ax-toast-success i {
+  color: #10B981;
+}
+
+.ax-toast-error {
+  border-left: 4px solid #EF4444;
+}
+.ax-toast-error i {
+  color: #EF4444;
+}
+
+.ax-toast-info {
+  border-left: 4px solid #2563EB;
+}
+.ax-toast-info i {
+  color: #38BDF8;
+}
+
+/* ============================================================
+   INVOICES & QUOTATIONS STYLES
+   ============================================================ */
+.inv-type-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-tax {
+  background: rgba(37, 99, 235, 0.15);
+  color: #2563EB;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.badge-quote {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8B5CF6;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.printable-invoice-card {
+  background: #FFFFFF;
+  color: #0F172A;
+  padding: 36px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-ui, 'Plus Jakarta Sans', sans-serif);
+}
+
+.inv-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #E2E8F0;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.inv-client-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #F8FAFC;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.inv-render-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.inv-render-table th {
+  background: #F1F5F9;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #475569;
+  border-bottom: 1px solid #CBD5E1;
+}
+
+.inv-render-table td {
+  padding: 12px;
+  border-bottom: 1px solid #E2E8F0;
+  font-size: 0.9rem;
+}
+
+.inv-summary-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.inv-upi-box {
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.inv-calc-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inv-calc-totals .calc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.inv-calc-totals .calc-grand-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #2563EB;
+  border-top: 2px solid #E2E8F0;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.inv-footer-stamp {
+  margin-top: 36px;
+  padding-top: 14px;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+/* ============================================================
+   CERTIFICATE HIGH-RES PRINTABLE STYLES
+   ============================================================ */
+.printable-cert-card {
+  background: #FFFFFF;
+  color: #0F172A;
+  padding: 16px;
+  border-radius: 12px;
+  font-family: var(--font-ui, 'Plus Jakarta Sans', sans-serif);
+}
+
+.cert-ornate-border {
+  border: 4px solid #D97706;
+  border-radius: 10px;
+  padding: 8px;
+  background: #FEFDF8;
+}
+
+.cert-inner-frame {
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  border-radius: 6px;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.cert-badge-ribbon {
+  display: inline-block;
+  background: linear-gradient(135deg, #1E3A8A, #2563EB);
+  color: #FFFFFF;
+  font-size: 0.775rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  padding: 4px 18px;
+  border-radius: 9999px;
+  margin-top: 14px;
+}
+
+.cert-student-hero {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1E3A8A;
+  margin: 6px 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.cert-track-hero {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #D97706;
+  background: rgba(217, 119, 6, 0.08);
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 8px;
+  margin: 4px 0 10px;
+}
+
+.cert-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(217, 119, 6, 0.3);
+}
+
+.cert-gold-seal {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px dashed #D97706;
+  background: radial-gradient(circle, #FDE68A 0%, #D97706 100%);
+  color: #78350F;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+  line-height: 1.2;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+}
+
+.cert-signature-line {
+  font-family: cursive, serif;
+  font-size: 1.35rem;
+  color: #1E3A8A;
+  border-bottom: 1px solid #0F172A;
+  padding-bottom: 2px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   GRID LAYOUTS FOR TESTIMONIALS & CATALOG
+   ============================================================ */
+.testimonials-cards-grid,
+.catalog-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.qr-template-btn.active {
+  background: var(--ax-blue) !important;
+  color: #FFFFFF !important;
+  border-color: var(--ax-blue) !important;
+}
+
+/* ============================================================
+   PRINT MEDIA RULES (ZERO UI CHROME ON A4 EXPORT)
+   ============================================================ */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .admin-sidebar,
+  .admin-topbar,
+  .sidebar-nav,
+  .modal-head,
+  .modal-footer-btns,
+  .btn-signout,
+  .ax-toast-container,
+  .ax-modal-overlay:not(.open) {
+    display: none !important;
+  }
+  .ax-modal-overlay.open {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .ax-modal-dialog {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  .printable-invoice-card,
+  .printable-cert-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}
+

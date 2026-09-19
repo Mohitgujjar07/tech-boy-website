@@ -438,6 +438,257 @@ function runAdminDashboardTests() {
     return 7;
   });
 
+  // ---------------------------------------------------------------------------
+  // 12. Instant Quotation & Invoice Management
+  // ---------------------------------------------------------------------------
+  test('ADM-12', 'AarambhXStore Invoices & Quotations Auto-Numbering, Calculation & CRUD', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    // 1. Pre-seeded invoices check
+    const initialInvoices = AarambhXStore.getInvoices();
+    Assert.isArray(initialInvoices, 'getInvoices() returns an array');
+    Assert.isGreaterThanOrEqual(initialInvoices.length, 2, 'Pre-seeded with at least 2 invoices/quotations');
+
+    // 2. Invoice number generation
+    const invNum = AarambhXStore.generateInvoiceNumber('Invoice');
+    const qtNum = AarambhXStore.generateInvoiceNumber('Quotation');
+    const invRegex = /^AX-INV-\d{4}-\d{3}$/;
+    const qtRegex = /^AX-QT-\d{4}-\d{3}$/;
+    Assert.match(invNum, invRegex, 'Invoice number matches AX-INV-YYYY-NNN format');
+    Assert.match(qtNum, qtRegex, 'Quotation number matches AX-QT-YYYY-NNN format');
+
+    // 3. Save new invoice with calculated line items
+    const newInv = AarambhXStore.saveInvoice({
+      clientName: 'SIT Tech Hub',
+      clientPhone: '+91 98800 11223',
+      clientEmail: 'procurement@sit.ac.in',
+      clientGst: '29ABCDE1234F1Z5',
+      type: 'Invoice',
+      status: 'Sent',
+      items: [
+        { desc: 'Custom Deep Learning Rig Setup', qty: 2, rate: 85000, amount: 170000 },
+        { desc: 'Annual On-Site Support', qty: 1, rate: 25000, amount: 25000 }
+      ],
+      taxRate: 18,
+      discount: 5000
+    });
+
+    Assert.exists(newInv.id, 'New invoice assigned an ID');
+    Assert.equal(newInv.clientName, 'SIT Tech Hub', 'Client name recorded accurately');
+    Assert.equal(newInv.subtotal, 195000, 'Subtotal correctly computed (170000 + 25000)');
+    Assert.equal(newInv.taxAmount, 34200, '18% Tax correctly computed on taxable base ((195000 - 5000) * 0.18)');
+    Assert.equal(newInv.total, 224200, 'Total computed accurately (190000 + 34200)');
+
+    // 4. Update status & delete
+    newInv.status = 'Paid';
+    const updated = AarambhXStore.saveInvoice(newInv);
+    Assert.equal(updated.status, 'Paid', 'Invoice status updated to Paid');
+
+    const deleted = AarambhXStore.deleteInvoice(newInv.id);
+    Assert.isTrue(deleted, 'deleteInvoice returns true');
+
+    return 10;
+  });
+
+  // ---------------------------------------------------------------------------
+  // 13. Client Testimonials & Review Management
+  // ---------------------------------------------------------------------------
+  test('ADM-13', 'AarambhXStore Testimonials CRUD & Approval Filtering', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    // 1. Pre-seeded testimonials
+    const allTesti = AarambhXStore.getTestimonials();
+    Assert.isArray(allTesti, 'getTestimonials() returns array');
+    Assert.isGreaterThanOrEqual(allTesti.length, 3, 'Pre-seeded with at least 3 reviews');
+
+    // 2. Approved filtering
+    const approved = AarambhXStore.getApprovedTestimonials();
+    Assert.isTrue(approved.every(t => t.approved === true), 'All items in getApprovedTestimonials() are approved');
+
+    // 3. Save new review
+    const newReview = AarambhXStore.saveTestimonial({
+      name: 'Prof. Anitha Rao',
+      role: 'HOD CSE',
+      organization: 'CIT Gubbi',
+      rating: 5,
+      content: 'Exceptional AI workshop delivered to our 6th sem students.',
+      approved: false
+    });
+
+    Assert.exists(newReview.id, 'Testimonial assigned unique ID');
+    Assert.isFalse(newReview.approved, 'Initially unapproved');
+
+    // 4. Toggle approval
+    const newApprovalState = AarambhXStore.toggleTestimonialApproval(newReview.id);
+    Assert.isTrue(newApprovalState, 'Approval state toggled to true');
+    const reFetched = AarambhXStore.getTestimonials().find(t => t.id === newReview.id);
+    Assert.isTrue(reFetched.approved, 'Approval state updated in store');
+
+    // 5. Delete testimonial
+    const deleted = AarambhXStore.deleteTestimonial(newReview.id);
+    Assert.isTrue(deleted, 'deleteTestimonial returns true');
+
+    return 8;
+  });
+
+  // ---------------------------------------------------------------------------
+  // 14. Pricing & Diagnostics Catalog Controller
+  // ---------------------------------------------------------------------------
+  test('ADM-14', 'AarambhXStore Pricing Catalog CRUD & Category Filtering', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    // 1. Pre-seeded catalog items
+    const catalog = AarambhXStore.getCatalog();
+    Assert.isArray(catalog, 'getCatalog() returns array');
+    Assert.isGreaterThanOrEqual(catalog.length, 4, 'Catalog pre-seeded with solutions');
+
+    // 2. Filter by category
+    const repairs = AarambhXStore.getCatalog('Hardware & Repair');
+    Assert.isTrue(repairs.every(c => c.category === 'Hardware & Repair'), 'Filter returns only Hardware & Repair');
+
+    // 3. Save new catalog item
+    const newItem = AarambhXStore.saveCatalogItem({
+      title: 'Custom Liquid Cooling Loop Maintenance',
+      category: 'Hardware & Repair',
+      basePrice: 2500,
+      turnaround: '24 Hours',
+      description: 'Drain, flush, and refill high-performance custom water loops.'
+    });
+
+    Assert.exists(newItem.id, 'Catalog item assigned ID');
+    Assert.equal(newItem.basePrice, 2500, 'Base price recorded accurately');
+
+    // 4. Delete catalog item
+    const deleted = AarambhXStore.deleteCatalogItem(newItem.id);
+    Assert.isTrue(deleted, 'deleteCatalogItem returns true');
+
+    return 6;
+  });
+
+  // ---------------------------------------------------------------------------
+  // 15. Privacy-First Micro-Analytics & Telemetry
+  // ---------------------------------------------------------------------------
+  test('ADM-15', 'AarambhXStore Analytics Telemetry Tracking & Metrics Aggregation', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    const initial = AarambhXStore.getAnalytics();
+    Assert.exists(initial, 'Analytics object exists');
+    Assert.isTrue(typeof initial.visits === 'number', 'Visits is a number');
+
+    const initialVisits = initial.visits;
+    const initialWa = initial.whatsappClicks;
+
+    // Record events
+    AarambhXStore.recordAnalyticsEvent('visit');
+    AarambhXStore.recordAnalyticsEvent('whatsapp_click', { source: 'floating_badge' });
+    AarambhXStore.recordAnalyticsEvent('brochure_download', { file: 'AarambhX-Brochure.pdf' });
+
+    const updated = AarambhXStore.getAnalytics();
+    Assert.equal(updated.visits, initialVisits + 1, 'Visits incremented');
+    Assert.equal(updated.whatsappClicks, initialWa + 1, 'WhatsApp clicks incremented');
+    Assert.isGreaterThanOrEqual(updated.eventLog.length, 1, 'Event log contains recorded entries');
+
+    // Dashboard metrics calculation
+    const metrics = AarambhXStore.getDashboardMetrics();
+    Assert.exists(metrics.conversionRate, 'Conversion rate computed');
+    Assert.isTrue(typeof metrics.totalPaidAmount === 'number', 'totalPaidAmount computed');
+    Assert.isGreaterThanOrEqual(metrics.totalInvoices, 2, 'Total invoices in metrics');
+
+    return 8;
+  });
+
+  // ---------------------------------------------------------------------------
+  // 16. Data Backup, Snapshot Restore & Passkey Management
+  // ---------------------------------------------------------------------------
+  test('ADM-16', 'AarambhXStore Full JSON Backup Export, Restore & Passkey Security', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    // 1. Full JSON Backup
+    const backupJson = AarambhXStore.exportAllJSON();
+    Assert.isTrue(typeof backupJson === 'string', 'exportAllJSON returns a string');
+    const parsed = JSON.parse(backupJson);
+    Assert.equal(parsed.version, '3.0.0', 'Backup schema version is 3.0.0');
+    Assert.isArray(parsed.inquiries, 'Backup contains inquiries');
+    Assert.isArray(parsed.invoices, 'Backup contains invoices');
+    Assert.isArray(parsed.testimonials, 'Backup contains testimonials');
+    Assert.isArray(parsed.catalog, 'Backup contains catalog');
+
+    // Alias test
+    const backupAlias = AarambhXStore.exportFullBackup();
+    const parsedAlias = JSON.parse(backupAlias);
+    Assert.equal(parsedAlias.version, '3.0.0', 'exportFullBackup() alias produces valid version');
+    Assert.isArray(parsedAlias.invoices, 'exportFullBackup() alias produces invoices array');
+
+    // 2. Snapshot Restore
+    const restoreResult = AarambhXStore.importFullBackup(backupJson);
+    Assert.isTrue(restoreResult.success, 'importFullBackup returns success: true');
+
+    // 3. Passkey Customization
+    const badPass = AarambhXStore.changePasskey('123');
+    Assert.isFalse(badPass, 'Short passkey rejected (< 6 chars)');
+
+    const goodPass = AarambhXStore.changePasskey('supersecret2026');
+    Assert.isTrue(goodPass, 'Valid passkey accepted');
+
+    // 4. Reset to defaults
+    const reset = AarambhXStore.resetToFactoryDefaults();
+    Assert.isTrue(reset, 'resetToFactoryDefaults returns true');
+
+    return 12;
+  });
+
+  // ---------------------------------------------------------------------------
+  // 17. Verifiable QR Certificate Portal & Progressive Web App (PWA) Integrity
+  // ---------------------------------------------------------------------------
+  test('ADM-17', 'Verification Portal (verify.html) & PWA Manifest & Service Worker Integrity', () => {
+    const verifyHtmlPath = path.join(ROOT_DIR, 'verify.html');
+    const manifestPath = path.join(ROOT_DIR, 'manifest.json');
+    const swPath = path.join(ROOT_DIR, 'sw.js');
+    const adminHtml = fs.readFileSync(adminHtmlPath, 'utf8');
+
+    // 1. verify.html checks
+    Assert.isTrue(fs.existsSync(verifyHtmlPath), 'verify.html exists');
+    const verifyHtml = fs.readFileSync(verifyHtmlPath, 'utf8');
+    const verifyDom = new DOMParserLite(verifyHtml);
+    Assert.exists(verifyDom.getElementById('verifyForm'), 'verify.html has #verifyForm');
+    Assert.exists(verifyDom.getElementById('verifyInput'), 'verify.html has #verifyInput');
+    Assert.exists(verifyDom.getElementById('verifyResultArea'), 'verify.html has #verifyResultArea');
+    Assert.contains(verifyHtml, 'admin-store.js', 'verify.html includes admin-store.js');
+
+    // 2. manifest.json checks
+    Assert.isTrue(fs.existsSync(manifestPath), 'manifest.json exists');
+    const manifestRaw = fs.readFileSync(manifestPath, 'utf8');
+    const manifest = JSON.parse(manifestRaw);
+    Assert.equal(manifest.short_name, 'AarambhX Admin', 'PWA short_name is set');
+    Assert.equal(manifest.start_url, './admin.html', 'PWA start_url points to admin.html');
+    Assert.equal(manifest.display, 'standalone', 'PWA display mode is standalone');
+
+    // 3. sw.js checks
+    Assert.isTrue(fs.existsSync(swPath), 'sw.js exists');
+    const swCode = fs.readFileSync(swPath, 'utf8');
+    Assert.contains(swCode, 'CACHE_NAME', 'sw.js defines CACHE_NAME');
+    Assert.contains(swCode, './admin.html', 'sw.js caches admin.html');
+    Assert.contains(swCode, './verify.html', 'sw.js caches verify.html');
+
+    // 4. admin.html v3.0 capabilities check
+    const adminDom = new DOMParserLite(adminHtml);
+    Assert.contains(adminHtml, 'manifest.json', 'admin.html links manifest.json');
+    Assert.contains(adminHtml, 'serviceWorker.register', 'admin.html registers service worker');
+    Assert.exists(adminDom.getElementById('toastContainer'), 'admin.html has #toastContainer');
+    Assert.exists(adminDom.getElementById('modalQuickReply'), 'admin.html has #modalQuickReply');
+    Assert.exists(adminDom.getElementById('tab-quotations'), 'admin.html has #tab-quotations');
+    Assert.exists(adminDom.getElementById('modalAddInvoice'), 'admin.html has #modalAddInvoice');
+    Assert.exists(adminDom.getElementById('modalPrintInvoice'), 'admin.html has #modalPrintInvoice');
+    Assert.exists(adminDom.getElementById('modalPrintCert'), 'admin.html has #modalPrintCert');
+    Assert.exists(adminDom.getElementById('tab-testimonials'), 'admin.html has #tab-testimonials');
+    Assert.exists(adminDom.getElementById('modalAddTestimonial'), 'admin.html has #modalAddTestimonial');
+    Assert.exists(adminDom.getElementById('tab-catalog'), 'admin.html has #tab-catalog');
+    Assert.exists(adminDom.getElementById('modalAddCatalog'), 'admin.html has #modalAddCatalog');
+    Assert.exists(adminDom.getElementById('tab-settings'), 'admin.html has #tab-settings');
+
+    return 24;
+  });
+
   const passed = results.filter(r => r.passed).length;
   const failed = results.filter(r => !r.passed).length;
   const totalAssertions = results.reduce((sum, r) => sum + r.assertions, 0);

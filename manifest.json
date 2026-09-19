@@ -1,0 +1,29 @@
+{
+  "short_name": "AarambhX Admin",
+  "name": "AarambhX Technology Command Suite & Business Hub",
+  "description": "All-in-one business management portal for AarambhX Technology: Inquiries CRM, Invoices, Workshops, Certificates, and Analytics.",
+  "icons": [
+    {
+      "src": "assets/aarambhx-logo.avif",
+      "type": "image/avif",
+      "sizes": "192x192 512x512"
+    },
+    {
+      "src": "assets/aarambhx-logo.webp",
+      "type": "image/webp",
+      "sizes": "192x192 512x512"
+    },
+    {
+      "src": "assets/aarambhx-logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "./admin.html",
+  "background_color": "#0F172A",
+  "theme_color": "#2563EB",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "categories": ["business", "productivity", "utilities"]
+}
