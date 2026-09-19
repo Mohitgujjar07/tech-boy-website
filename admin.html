@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AarambhX Technology | Admin Command Suite &amp; Business Hub</title>
+  
+  <!-- SEO & Robots (Restricted from indexing) -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2563EB">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="light-theme">
+
+  <!-- ============================================================
+       1. AUTH GATE / ADMIN PASSKEY LOCK SCREEN
+       ============================================================ -->
+  <div class="auth-gate-overlay hidden" id="authGateOverlay" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="auth-card">
+      <div class="auth-logo-badge">
+        <picture>
+          <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+          <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" width="52" height="52">
+        </picture>
+      </div>
+      <h2 class="auth-title" id="authTitle">AarambhX Command Hub</h2>
+      <p class="auth-subtitle">Authorized Administrator &amp; Team Authentication</p>
+
+      <form class="auth-form" id="authForm">
+        <div class="auth-field">
+          <label for="authPasskey">Admin Passkey</label>
+          <input type="password" id="authPasskey" class="auth-input" placeholder="Enter administrative passkey" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="auth-btn-submit" id="authSubmitBtn">
+          <span>Authenticate &amp; Enter</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </form>
+      <div class="auth-error-msg" id="authErrorMsg"></div>
+      <p class="auth-hint">Default Passkey: <code>aarambhx2026</code></p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       2. ADMIN APP CONTAINER & SIDEBAR
+       ============================================================ -->
+  <div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <picture>
+          <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+          <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+          <img src="assets/aarambhx-logo.jpg" alt="AarambhX Technology" class="sidebar-brand-logo" width="36" height="36">
+        </picture>
+        <div>
+          <h2 class="sidebar-brand-title">Aarambh<span style="color:var(--ax-blue);">X</span></h2>
+          <span class="sidebar-badge-role">System Admin</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-heading">Intelligence Hub</div>
+        <a href="#overview" class="admin-nav-item active" data-tab="overview">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Overview</span>
+        </a>
+        <a href="#inquiries" class="admin-nav-item" data-tab="inquiries">
+          <i data-lucide="inbox"></i>
+          <span>Inquiries CRM</span>
+          <span class="sidebar-counter-chip" id="sidebarLeadsBadge"></span>
+        </a>
+
+        <div class="nav-heading">Platform Content</div>
+        <a href="#projects" class="admin-nav-item" data-tab="projects">
+          <i data-lucide="folder-git-2"></i>
+          <span>Projects &amp; Portfolio</span>
+        </a>
+        <a href="#workshops" class="admin-nav-item" data-tab="workshops">
+          <i data-lucide="graduation-cap"></i>
+          <span>Academy Workshops</span>
+        </a>
+        <a href="#certificates" class="admin-nav-item" data-tab="certificates">
+          <i data-lucide="award"></i>
+          <span>Certificate Verifier</span>
+        </a>
+        <a href="#reels" class="admin-nav-item" data-tab="reels">
+          <i data-lucide="video"></i>
+          <span>Reels &amp; Highlights</span>
+        </a>
+
+        <div class="nav-heading">Live Operations</div>
+        <a href="#banner" class="admin-nav-item" data-tab="banner">
+          <i data-lucide="megaphone"></i>
+          <span>Alert Banner</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span style="font-size: 0.75rem; color: var(--adm-text-subtle);">v2.0.0 &bull; 2026</span>
+        <button type="button" class="btn-signout" id="btnSignout">
+          <i data-lucide="log-out"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-sidebar-toggle" id="btnSidebarToggle" aria-label="Toggle navigation">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="topbar-title-block">
+            <h1>AarambhX Command Hub</h1>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="admin-clock-chip">
+            <span class="live-dot"></span>
+            <span id="adminClock">00:00:00 IST</span>
+          </div>
+
+          <a href="index.html" target="_blank" rel="noopener" class="btn-public-site">
+            <span>Website</span>
+            <i data-lucide="external-link"></i>
+          </a>
+
+          <button type="button" class="admin-theme-btn" id="adminThemeToggle" aria-label="Toggle theme">
+            <i data-lucide="moon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="admin-content">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section class="tab-pane active" id="tab-overview">
+          
+          <!-- Bento Metrics -->
+          <div class="bento-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Total Inquiries</span>
+                <div class="metric-icon-wrap"><i data-lucide="users"></i></div>
+              </div>
+              <div class="metric-value" id="metricTotalLeads">0</div>
+              <div class="metric-sub">Across General &amp; Academy Forms</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">New Inquiries</span>
+                <div class="metric-icon-wrap" style="color: var(--ax-amber);"><i data-lucide="bell-ring"></i></div>
+              </div>
+              <div class="metric-value" id="metricNewLeads" style="color: var(--ax-amber);">0</div>
+              <div class="metric-sub">Awaiting WhatsApp Outreach</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Active Projects</span>
+                <div class="metric-icon-wrap" style="color: var(--ax-cyan);"><i data-lucide="code"></i></div>
+              </div>
+              <div class="metric-value" id="metricTotalProjects">0</div>
+              <div class="metric-sub">Showcased on Home &amp; Work</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Enrolled Students</span>
+                <div class="metric-icon-wrap" style="color: var(--ax-emerald);"><i data-lucide="graduation-cap"></i></div>
+              </div>
+              <div class="metric-value" id="metricTotalStudents">0</div>
+              <div class="metric-sub">AarambhX Academy Rigs</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions Panel -->
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="sparkles"></i> Quick Operations</span>
+            </div>
+            <div style="padding: 18px 22px; display: flex; flex-wrap: wrap; gap: 12px;">
+              <button type="button" class="ax-btn-primary" onclick="window.location.hash='projects'; document.getElementById('btnOpenProjectModal')?.click();">
+                <i data-lucide="plus-circle"></i> Add New Project
+              </button>
+              <button type="button" class="ax-btn-secondary" onclick="window.location.hash='inquiries';">
+                <i data-lucide="message-square"></i> Review CRM Leads
+              </button>
+              <button type="button" class="ax-btn-secondary" onclick="window.location.hash='certificates'; document.getElementById('btnOpenCertModal')?.click();">
+                <i data-lucide="award"></i> Issue Digital Certificate
+              </button>
+              <button type="button" class="ax-btn-secondary" onclick="window.location.hash='banner';">
+                <i data-lucide="megaphone"></i> Broadcast Announcement
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Inquiries Table -->
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="clock"></i> Recent Inquiries &amp; Consultations</span>
+              <a href="#inquiries" class="ax-btn-secondary" style="font-size: 0.775rem; height: 32px;">View All CRM &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="ax-table">
+                <thead>
+                  <tr>
+                    <th>Client Name</th>
+                    <th>Status</th>
+                    <th>Service / Track</th>
+                    <th>Phone</th>
+                    <th>Quick Action</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewRecentLeadsBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- TAB 2: INQUIRIES CRM -->
+        <section class="tab-pane" id="tab-inquiries">
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="inbox"></i> Client Consultations &amp; Workshop Leads</span>
+              <div class="ax-panel-actions">
+                <input type="text" class="ax-search-input" id="inquiriesSearch" placeholder="Search leads by name/phone...">
+                <select class="ax-filter-select" id="inquiriesFilter">
+                  <option value="all">All Statuses</option>
+                  <option value="New">New</option>
+                  <option value="Contacted">Contacted</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Closed">Closed</option>
+                </select>
+                <button type="button" class="ax-btn-secondary" id="btnExportCSV">
+                  <i data-lucide="download"></i> Export CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="ax-table">
+                <thead>
+                  <tr>
+                    <th>Lead Name &amp; Email</th>
+                    <th>Contact &amp; WhatsApp</th>
+                    <th>Inquiry Category</th>
+                    <th>Requirement Summary</th>
+                    <th>Update Status</th>
+                    <th>Date</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiriesTableBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: PROJECTS & PORTFOLIO -->
+        <section class="tab-pane" id="tab-projects">
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="folder-git-2"></i> Showcase Projects</span>
+              <button type="button" class="ax-btn-primary" id="btnOpenProjectModal">
+                <i data-lucide="plus"></i> Add New Project
+              </button>
+            </div>
+            <div style="padding: 22px;">
+              <div class="cards-grid-3" id="projectsCardsGrid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: ACADEMY WORKSHOPS -->
+        <section class="tab-pane" id="tab-workshops">
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="graduation-cap"></i> Scheduled Campus Workshops</span>
+              <button type="button" class="ax-btn-primary" id="btnOpenWorkshopModal">
+                <i data-lucide="plus"></i> Schedule Workshop
+              </button>
+            </div>
+            <div style="padding: 22px;">
+              <div class="cards-grid-3" id="workshopsCardsGrid">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: CERTIFICATE VERIFIER & ISSUER -->
+        <section class="tab-pane" id="tab-certificates">
+          <!-- Verifier Lookup Box -->
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="shield-check"></i> Live Certificate Verification Test</span>
+              <button type="button" class="ax-btn-primary" id="btnOpenCertModal">
+                <i data-lucide="plus"></i> Issue New Certificate
+              </button>
+            </div>
+            <div style="padding: 22px;">
+              <p style="font-size: 0.85rem; color: var(--adm-text-muted); margin-bottom: 12px;">
+                Enter any Certificate ID to verify credentials in real-time (e.g., <code>AX-2026-AIML-0101</code>):
+              </p>
+              <div style="display: flex; gap: 10px; max-width: 500px;">
+                <input type="text" class="ax-search-input" id="verifyLookupInput" placeholder="e.g. AX-2026-AIML-0101" style="flex:1; width:auto; text-transform:uppercase;">
+                <button type="button" class="ax-btn-primary" id="btnVerifyLookup">
+                  <i data-lucide="search"></i> Verify ID
+                </button>
+              </div>
+              <div id="verifyResultBox" style="display: none;"></div>
+            </div>
+          </div>
+
+          <!-- Issued Certificates List -->
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="list"></i> Issued Student Credentials</span>
+            </div>
+            <div class="table-responsive">
+              <table class="ax-table">
+                <thead>
+                  <tr>
+                    <th>Certificate ID</th>
+                    <th>Student Name</th>
+                    <th>College / Institute</th>
+                    <th>Track</th>
+                    <th>Issue Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="certificatesTableBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6: REELS & HIGHLIGHTS -->
+        <section class="tab-pane" id="tab-reels">
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="video"></i> Media &amp; Instagram Reels Manager</span>
+            </div>
+            <div style="padding: 22px;">
+              <!-- Add Reel Form -->
+              <form id="formAddReel" style="margin-bottom: 24px; padding: 18px; background: var(--adm-pill-track); border-radius: 12px;">
+                <h4 style="font-size: 0.95rem; margin-bottom: 12px;">Add New Media Highlight / Reel</h4>
+                <div class="form-group-2">
+                  <div class="modal-field">
+                    <label for="reelTitle">Reel Title *</label>
+                    <input type="text" id="reelTitle" required placeholder="e.g. Campus Robotics Rig Demo">
+                  </div>
+                  <div class="modal-field">
+                    <label for="reelCategory">Category</label>
+                    <select id="reelCategory">
+                      <option value="Hardware Lab">Hardware Lab</option>
+                      <option value="Campus Workshop">Campus Workshop</option>
+                      <option value="Web Development">Web Development</option>
+                      <option value="Student Innovation">Student Innovation</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group-2" style="margin-top: 10px;">
+                  <div class="modal-field">
+                    <label for="reelUrl">Instagram / Media URL *</label>
+                    <input type="url" id="reelUrl" required placeholder="https://www.instagram.com/reel/...">
+                  </div>
+                  <div class="modal-field">
+                    <label for="reelCaption">Caption</label>
+                    <input type="text" id="reelCaption" placeholder="Brief 1-line description">
+                  </div>
+                </div>
+                <button type="submit" class="ax-btn-primary" style="margin-top: 14px;">
+                  <i data-lucide="plus"></i> Add Reel
+                </button>
+              </form>
+
+              <!-- Reels List -->
+              <div id="reelsCardsList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 7: ANNOUNCEMENT BANNER -->
+        <section class="tab-pane" id="tab-banner">
+          <div class="ax-panel">
+            <div class="ax-panel-header">
+              <span class="ax-panel-title"><i data-lucide="megaphone"></i> Live Top Announcement Banner</span>
+            </div>
+            <div style="padding: 22px;">
+              <form id="formBannerControl" style="max-width: 600px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding: 12px; background: var(--adm-pill-track); border-radius: 10px;">
+                  <input type="checkbox" id="bannerActiveToggle" style="width: 20px; height: 20px; cursor: pointer;">
+                  <label for="bannerActiveToggle" style="font-weight: 700; cursor: pointer;">
+                    Enable Announcement Banner on Public Website
+                  </label>
+                </div>
+
+                <div class="modal-field" style="margin-bottom: 14px;">
+                  <label for="bannerTextInput">Announcement Message *</label>
+                  <textarea id="bannerTextInput" rows="3" placeholder="e.g. Admissions open for AarambhX Academy 2026 Industrial Workshops!"></textarea>
+                </div>
+
+                <div class="form-group-2" style="margin-bottom: 18px;">
+                  <div class="modal-field">
+                    <label for="bannerCtaTextInput">Button Label</label>
+                    <input type="text" id="bannerCtaTextInput" placeholder="e.g. Register Now">
+                  </div>
+                  <div class="modal-field">
+                    <label for="bannerCtaLinkInput">Target Link</label>
+                    <input type="text" id="bannerCtaLinkInput" placeholder="e.g. academy.html#workshops">
+                  </div>
+                </div>
+
+                <button type="submit" class="ax-btn-primary">
+                  <i data-lucide="save"></i> Save Banner Settings
+                </button>
+              </form>
+
+              <div style="margin-top: 28px;">
+                <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--adm-text-muted); margin-bottom: 8px;">Live Public Banner Preview</h4>
+                <div id="bannerPreviewBox"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============================================================
+       MODALS: ADD PROJECT
+       ============================================================ -->
+  <div class="ax-modal-overlay" id="modalAddProject" role="dialog" aria-modal="true">
+    <div class="ax-modal-dialog">
+      <div class="modal-head">
+        <h3>Add New Client Project</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseProjectModal">&times;</button>
+      </div>
+      <form id="formAddProject" class="modal-form-grid">
+        <div class="modal-field">
+          <label for="projTitle">Project Title *</label>
+          <input type="text" id="projTitle" required placeholder="e.g. Automated Billing System">
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="projCategory">Category *</label>
+            <select id="projCategory" required>
+              <option value="Software Development">Software Development</option>
+              <option value="IoT &amp; Robotics">IoT &amp; Robotics</option>
+              <option value="Networking &amp; Infrastructure">Networking &amp; Infrastructure</option>
+              <option value="Custom PC &amp; Hardware">Custom PC &amp; Hardware</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label for="projImage">Cover Image Path / URL</label>
+            <input type="text" id="projImage" placeholder="assets/hero.webp">
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="projDesc">Description &amp; Impact *</label>
+          <textarea id="projDesc" rows="3" required placeholder="Brief technical summary of work delivered..."></textarea>
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="projTags">Tech Stack (comma separated)</label>
+            <input type="text" id="projTags" placeholder="React, Node.js, ESP32">
+          </div>
+          <div class="modal-field">
+            <label for="projLiveUrl">Live URL / Demo Link</label>
+            <input type="url" id="projLiveUrl" placeholder="https://...">
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+          <input type="checkbox" id="projFeatured" style="width: 16px; height: 16px;">
+          <label for="projFeatured" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;">Feature on Homepage Bento Grid</label>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="submit" class="ax-btn-primary">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODALS: SCHEDULE WORKSHOP
+       ============================================================ -->
+  <div class="ax-modal-overlay" id="modalAddWorkshop" role="dialog" aria-modal="true">
+    <div class="ax-modal-dialog">
+      <div class="modal-head">
+        <h3>Schedule Campus Workshop</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseWorkshopModal">&times;</button>
+      </div>
+      <form id="formAddWorkshop" class="modal-form-grid">
+        <div class="modal-field">
+          <label for="wsTitle">Workshop Title *</label>
+          <input type="text" id="wsTitle" required placeholder="e.g. AI Demystified Bootcamp">
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="wsTrack">Technology Track *</label>
+            <select id="wsTrack" required>
+              <option value="Artificial Intelligence &amp; ML">Artificial Intelligence &amp; ML</option>
+              <option value="IoT &amp; Hardware Systems">IoT &amp; Hardware Systems</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+              <option value="Enterprise Automation">Enterprise Automation</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label for="wsInstitution">Partner Institution / College *</label>
+            <input type="text" id="wsInstitution" required placeholder="e.g. SIT Tumakuru">
+          </div>
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="wsDate">Date *</label>
+            <input type="date" id="wsDate" required>
+          </div>
+          <div class="modal-field">
+            <label for="wsDuration">Duration</label>
+            <input type="text" id="wsDuration" placeholder="e.g. 2 Days (16 Hours)">
+          </div>
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="wsSeatsTotal">Total Capacity</label>
+            <input type="number" id="wsSeatsTotal" value="100">
+          </div>
+          <div class="modal-field">
+            <label for="wsSeatsEnrolled">Enrolled Count</label>
+            <input type="number" id="wsSeatsEnrolled" value="0">
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="wsStatus">Status</label>
+          <select id="wsStatus">
+            <option value="Open for Registration">Open for Registration</option>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="submit" class="ax-btn-primary">Schedule Workshop</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODALS: ISSUE CERTIFICATE
+       ============================================================ -->
+  <div class="ax-modal-overlay" id="modalIssueCert" role="dialog" aria-modal="true">
+    <div class="ax-modal-dialog">
+      <div class="modal-head">
+        <h3>Issue Verified Student Certificate</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseCertModal">&times;</button>
+      </div>
+      <form id="formIssueCert" class="modal-form-grid">
+        <div class="modal-field">
+          <label for="certCustomId">Generated Certificate ID *</label>
+          <input type="text" id="certCustomId" readonly style="background: var(--adm-pill-track); font-family: monospace; font-weight: 700;">
+        </div>
+        <div class="modal-field">
+          <label for="certStudentName">Student Full Name *</label>
+          <input type="text" id="certStudentName" required placeholder="e.g. Priya Narayana">
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="certInstitution">Institution / College *</label>
+            <input type="text" id="certInstitution" required placeholder="e.g. SIT Tumakuru">
+          </div>
+          <div class="modal-field">
+            <label for="certTrack">Technology Track *</label>
+            <select id="certTrack" required>
+              <option value="Artificial Intelligence &amp; Machine Learning">AI &amp; Machine Learning</option>
+              <option value="IoT &amp; Robotics Engineering Rig">IoT &amp; Robotics Rig</option>
+              <option value="Defensive Cybersecurity &amp; Network Auditing">Cybersecurity &amp; Network</option>
+              <option value="Enterprise Python &amp; Automation">Enterprise Automation</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="certDate">Issue Date</label>
+            <input type="date" id="certDate">
+          </div>
+          <div class="modal-field">
+            <label for="certGrade">Grade / Performance</label>
+            <input type="text" id="certGrade" placeholder="e.g. Distinction (A+)">
+          </div>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="submit" class="ax-btn-primary">Issue &amp; Verify Credential</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="admin-store.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

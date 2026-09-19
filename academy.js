@@ -342,6 +342,22 @@ function handleAcademyBooking(event) {
 ${message ? `📝 *Requirements:* ${message}\n` : ''}----------------------------------------
 Sent from AarambhX Academy Platform`;
 
+  // Save to Universal Business Store
+  try {
+    if (window.AarambhXStore && typeof window.AarambhXStore.saveInquiry === 'function') {
+      window.AarambhXStore.saveInquiry({
+        name: name,
+        phone: phone,
+        email: '',
+        type: 'Academy Workshop',
+        serviceOrTrack: track || 'Academy Industrial Training',
+        details: `Institution: ${org} | Role: ${role} | Expected Batch: ${batch} ${message ? `| Requirement: ${message}` : ''}`
+      });
+    }
+  } catch (err) {
+    console.warn('[AcademyBooking] Error saving to store:', err);
+  }
+
   const waUrl = `https://wa.me/919916856922?text=${encodeURIComponent(waPayload)}`;
   window.open(waUrl, '_blank');
 }
