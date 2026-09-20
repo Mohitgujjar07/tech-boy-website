@@ -254,7 +254,7 @@ ul { list-style: none; }
 }
 
 /* ============================================================
-   1. APPLE iOS FLOATING GLASSMORPHISM HEADER
+   1. APPLE iOS FLOATING GLASSMORPHISM HEADER (Dynamic Morphing Island)
    ============================================================ */
 .apple-glass-nav {
   position: fixed;
@@ -270,7 +270,14 @@ ul { list-style: none; }
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-pill);
   box-shadow: var(--glass-shadow);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: max-width, top, border-radius;
+  overflow: hidden;
 }
 
 .apple-glass-nav::before {
@@ -279,7 +286,7 @@ ul { list-style: none; }
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), transparent 40%, transparent 60%, rgba(16, 185, 129, 0.2));
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), transparent 40%, transparent 60%, rgba(16, 185, 129, 0.25));
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -294,18 +301,115 @@ ul { list-style: none; }
 
 .apple-glass-nav.scrolled {
   top: 10px;
+  max-width: 1140px;
+  border-radius: 22px;
   background: rgba(255, 255, 255, 0.92);
   background: var(--glass-bg-scrolled, rgba(255, 255, 255, 0.92));
-  border-color: var(--glass-border-scrolled);
-  box-shadow: var(--glass-shadow-scrolled);
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  border-color: var(--glass-border-scrolled, rgba(255, 255, 255, 0.4));
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.12),
+              0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+              var(--glass-shadow-scrolled);
+}
+
+body.dark-theme .apple-glass-nav.scrolled,
+[data-theme="dark"] .apple-glass-nav.scrolled {
+  background: rgba(10, 15, 29, 0.88);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+/* Desktop Compact Island Mode (At Rest / Initial State) */
+@media (min-width: 1025px) {
+  .apple-glass-nav:not(.scrolled) {
+    max-width: 640px;
+    top: 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+  }
+
+  body.dark-theme .apple-glass-nav:not(.scrolled),
+  [data-theme="dark"] .apple-glass-nav:not(.scrolled) {
+    box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.07) inset;
+  }
+
+  /* Auxiliary items collapse gracefully when at rest */
+  .apple-glass-nav:not(.scrolled) .nav-item-aux {
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    overflow: hidden;
+    pointer-events: none;
+    transform: scale(0.85);
+    transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease,
+                padding 0.3s ease,
+                transform 0.3s ease;
+  }
+
+  .apple-glass-nav.scrolled .nav-item-aux {
+    max-width: 110px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease 0.08s,
+                padding 0.3s ease,
+                transform 0.3s ease 0.05s;
+  }
+}
+
+/* Mobile & Tablet Containment */
+@media (max-width: 1024px) {
+  .apple-glass-nav {
+    width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
+  }
+  .apple-glass-nav.scrolled {
+    max-width: calc(100% - 24px);
+    border-radius: 18px;
+  }
 }
 
 body.has-alert-banner .apple-glass-nav {
   top: 52px;
 }
 
+body.has-alert-banner .apple-glass-nav:not(.scrolled) {
+  top: 54px;
+}
+
 body.has-alert-banner .apple-glass-nav.scrolled {
   top: 46px;
+}
+
+/* Reading Scroll Progress Bar */
+.nav-scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 0 0 inherit inherit;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.nav-scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563EB, #00D4AA, #38BDF8);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.65), 0 0 4px #00D4AA;
+  transition: width 0.08s linear;
 }
 
 .nav-container {

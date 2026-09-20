@@ -13,6 +13,8 @@ function initNavbarScroll() {
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
 
+  const progressBar = document.getElementById('navProgressBar');
+
   const onScroll = () => {
     const scrollY = window.scrollY || window.pageYOffset || 0;
     // Toggle scrolled styling
@@ -20,6 +22,13 @@ function initNavbarScroll() {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
+    }
+
+    // Reading scroll progress calculation
+    if (progressBar) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
     }
 
     // Active Section Detection

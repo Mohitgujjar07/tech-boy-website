@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initTheme();
+  initNavbarScroll();
   initMobileDrawer();
   initTrackCategories();
   initCurriculumTabs();
@@ -54,6 +55,34 @@ function initTheme() {
       applyTheme(activeTheme);
     });
   }
+}
+
+// ------------------------------------------------------------
+// 1.5. NAVBAR SCROLL & MORPHING ISLAND
+// ------------------------------------------------------------
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  const progressBar = document.getElementById('navProgressBar');
+
+  const onScroll = () => {
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    if (scrollY > 30) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+    if (progressBar) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 // ------------------------------------------------------------
