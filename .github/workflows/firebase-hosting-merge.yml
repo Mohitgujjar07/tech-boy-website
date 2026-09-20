@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install Dependencies
+        run: npm ci --prefer-offline || npm install
+
       - name: Verify All Test Suites
         run: node tests/run-all-tests.js
 
@@ -33,6 +36,6 @@ jobs:
 
       - name: Fallback CLI Deploy with FIREBASE_TOKEN
         if: env.FIREBASE_TOKEN != ''
-        run: npx --yes firebase-tools deploy --only hosting --project aarambhx-technology-58499 --token "${{ secrets.FIREBASE_TOKEN }}"
+        run: node scripts/deploy-firebase-rest.js
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
