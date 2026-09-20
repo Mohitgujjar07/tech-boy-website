@@ -34,6 +34,7 @@
   const themeToggleBtn = document.getElementById('adminThemeToggle');
   const mobileSidebarToggle = document.getElementById('btnSidebarToggle');
   const sidebar = document.getElementById('adminSidebar');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
   const toastContainer = document.getElementById('toastContainer');
 
   // =========================================================================
@@ -134,7 +135,17 @@
       }
     });
 
-    if (sidebar) sidebar.classList.remove('mobile-open');
+    function openSidebar() {
+      if (sidebar) sidebar.classList.add('mobile-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+    }
+
+    function closeSidebar() {
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+    }
+
+    closeSidebar();
 
     // Route view rendering
     switch (tabId) {
@@ -189,9 +200,33 @@
 
   if (mobileSidebarToggle && sidebar) {
     mobileSidebarToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('mobile-open');
+      if (sidebar.classList.contains('mobile-open')) {
+        if (sidebar) sidebar.classList.remove('mobile-open');
+        if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+      } else {
+        if (sidebar) sidebar.classList.add('mobile-open');
+        if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+      }
     });
   }
+
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', () => {
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+    });
+  }
+
+  // Keyboard accessibility: ESC closes open modal or sidebar
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+      document.querySelectorAll('.ax-modal-overlay.open').forEach(modal => {
+        modal.classList.remove('open');
+      });
+    }
+  });
 
   function handleHash() {
     const hash = window.location.hash.replace('#', '');
@@ -1077,7 +1112,7 @@
                 ${t.approved ? 'Approved' : 'Pending'}
               </button>
             </div>
-            <p style="font-size: 0.9rem; color: var(--text-primary); font-style: italic; margin-bottom: 14px; line-height: 1.5;">
+            <p style="font-size: 0.9rem; color: var(--adm-text); font-style: italic; margin-bottom: 14px; line-height: 1.5;">
               "${escapeHtml(t.content)}"
             </p>
           </div>
@@ -1383,7 +1418,7 @@
             <div style="display:flex; align-items:center; gap: 14px; padding: 12px; background: var(--adm-pill-track); border-radius: 10px;">
               <img src="${webpDataUrl}" alt="Preview" style="width:54px; height:54px; object-fit:cover; border-radius:6px;">
               <div style="flex:1;">
-                <strong style="font-size:0.85rem; color:#0F172A;">Optimized to Next-Gen WebP</strong>
+                <strong style="font-size:0.85rem; color:var(--adm-text);">Optimized to Next-Gen WebP</strong>
                 <p style="font-size:0.775rem; color:var(--adm-text-muted); margin-top:2px;">
                   ${origSizeKb} KB &rarr; <span style="color:#10B981; font-weight:700;">${compSizeKb} KB (-${savingsPct}%)</span>
                 </p>

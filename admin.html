@@ -158,6 +158,9 @@
       </div>
     </aside>
 
+    <!-- Mobile Sidebar Backdrop Drawer Overlay -->
+    <div class="admin-sidebar-backdrop" id="sidebarBackdrop"></div>
+
     <!-- Main Workspace -->
     <main class="admin-main">
       
@@ -178,12 +181,12 @@
             <span id="adminClock">00:00:00 IST</span>
           </div>
 
-          <a href="index.html" target="_blank" rel="noopener" class="btn-public-site">
+          <a href="index.html" target="_blank" rel="noopener" class="btn-public-site" title="View Public Website">
             <span>Website</span>
             <i data-lucide="external-link"></i>
           </a>
 
-          <a href="verify.html" target="_blank" rel="noopener" class="btn-public-site" style="background: rgba(16, 185, 129, 0.1); color: var(--ax-emerald); border-color: rgba(16, 185, 129, 0.3);">
+          <a href="verify.html" target="_blank" rel="noopener" class="btn-public-site btn-verify-portal" title="Certificate Verification Portal">
             <span>Verify Portal</span>
             <i data-lucide="shield-check"></i>
           </a>
@@ -279,7 +282,7 @@
           </div>
 
           <!-- Overview Service Demand & Recent Leads -->
-          <div class="overview-two-col" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 24px;">
+          <div class="overview-two-col">
             <!-- Recent Inquiries -->
             <div class="ax-panel">
               <div class="panel-header">
@@ -496,10 +499,10 @@
             </div>
 
             <!-- Instant Verification Lookup Tool -->
-            <div style="background: var(--adm-pill-track); padding: 18px; border-radius: 12px; margin-bottom: 24px; border: 1px solid var(--adm-border);">
-              <h4 style="margin-bottom: 8px; font-size: 0.95rem;">Quick Certificate Authenticity Check</h4>
-              <div style="display:flex; gap: 8px; max-width: 500px;">
-                <input type="text" id="verifyLookupInput" placeholder="Enter ID e.g. AX-2026-AIML-0101" style="flex:1; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--adm-border); font-family: monospace; text-transform: uppercase;">
+            <div class="verify-lookup-card">
+              <h4 style="margin-bottom: 10px; font-size: 0.95rem; font-weight: 700;">Quick Certificate Authenticity Check</h4>
+              <div class="verify-lookup-row">
+                <input type="text" id="verifyLookupInput" class="verify-lookup-input" placeholder="Enter ID e.g. AX-2026-AIML-0101">
                 <button type="button" class="ax-btn-secondary" id="btnVerifyLookup">
                   <i data-lucide="search"></i> Verify
                 </button>
@@ -561,34 +564,36 @@
               </div>
             </div>
 
-            <!-- Add Reel Form -->
-            <form id="formAddReel" class="ax-panel" style="background: var(--adm-pill-track); margin-bottom: 24px; padding: 18px;">
-              <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Add New Instagram Reel Link</h4>
-              <div class="form-group-2">
-                <div class="modal-field">
-                  <label for="reelTitle">Reel Title *</label>
-                  <input type="text" id="reelTitle" required placeholder="e.g. Campus AI Workshop Highlights">
+            <div class="panel-body">
+              <!-- Add Reel Form -->
+              <form id="formAddReel" style="background: var(--adm-pill-track); border: 1px solid var(--adm-border); border-radius: 12px; margin-bottom: 24px; padding: 20px;">
+                <h4 style="margin-bottom: 14px; font-size: 0.95rem; font-weight: 700;">Add New Instagram Reel Link</h4>
+                <div class="form-group-2">
+                  <div class="modal-field">
+                    <label for="reelTitle">Reel Title *</label>
+                    <input type="text" id="reelTitle" required placeholder="e.g. Campus AI Workshop Highlights">
+                  </div>
+                  <div class="modal-field">
+                    <label for="reelCategory">Category *</label>
+                    <input type="text" id="reelCategory" required placeholder="e.g. Hardware Lab / Workshop">
+                  </div>
                 </div>
-                <div class="modal-field">
-                  <label for="reelCategory">Category *</label>
-                  <input type="text" id="reelCategory" required placeholder="e.g. Hardware Lab / Workshop">
+                <div class="form-group-2">
+                  <div class="modal-field">
+                    <label for="reelUrl">Instagram Reel URL *</label>
+                    <input type="url" id="reelUrl" required placeholder="https://www.instagram.com/reel/...">
+                  </div>
+                  <div class="modal-field">
+                    <label for="reelCaption">Short Caption / Description</label>
+                    <input type="text" id="reelCaption" placeholder="e.g. 120 students building custom robotics rigs">
+                  </div>
                 </div>
-              </div>
-              <div class="form-group-2">
-                <div class="modal-field">
-                  <label for="reelUrl">Instagram Reel URL *</label>
-                  <input type="url" id="reelUrl" required placeholder="https://www.instagram.com/reel/...">
-                </div>
-                <div class="modal-field">
-                  <label for="reelCaption">Short Caption / Description</label>
-                  <input type="text" id="reelCaption" placeholder="e.g. 120 students building custom robotics rigs">
-                </div>
-              </div>
-              <button type="submit" class="ax-btn-primary" style="margin-top: 8px;">Add Reel</button>
-            </form>
+                <button type="submit" class="ax-btn-primary" style="margin-top: 8px;">Add Reel</button>
+              </form>
 
-            <div id="reelsCardsList">
-              <!-- Injected via admin.js -->
+              <div id="reelsCardsList">
+                <!-- Injected via admin.js -->
+              </div>
             </div>
           </div>
         </section>
@@ -605,34 +610,36 @@
               </div>
             </div>
 
-            <form id="formBannerControl" style="max-width: 650px;">
-              <div class="modal-field" style="display:flex; align-items:center; gap: 10px; margin-bottom: 20px;">
-                <input type="checkbox" id="bannerActiveToggle" style="width:20px; height:20px; cursor:pointer;">
-                <label for="bannerActiveToggle" style="font-weight:700; cursor:pointer;">Enable Announcement Banner on Public Website</label>
-              </div>
-
-              <div class="modal-field">
-                <label for="bannerTextInput">Announcement Message Text *</label>
-                <textarea id="bannerTextInput" rows="3" placeholder="e.g. 🚀 Registrations open for AarambhX Academy Summer Batch!"></textarea>
-              </div>
-
-              <div class="form-group-2">
-                <div class="modal-field">
-                  <label for="bannerCtaTextInput">CTA Button Text</label>
-                  <input type="text" id="bannerCtaTextInput" placeholder="e.g. Register Now">
+            <div class="panel-body">
+              <form id="formBannerControl" style="max-width: 650px;">
+                <div class="modal-field" style="display:flex; align-items:center; gap: 10px; margin-bottom: 20px;">
+                  <input type="checkbox" id="bannerActiveToggle" style="width:20px; height:20px; cursor:pointer;">
+                  <label for="bannerActiveToggle" style="font-weight:700; cursor:pointer;">Enable Announcement Banner on Public Website</label>
                 </div>
+
                 <div class="modal-field">
-                  <label for="bannerCtaLinkInput">CTA Target Link</label>
-                  <input type="text" id="bannerCtaLinkInput" placeholder="e.g. academy.html#workshops">
+                  <label for="bannerTextInput">Announcement Message Text *</label>
+                  <textarea id="bannerTextInput" rows="3" placeholder="e.g. 🚀 Registrations open for AarambhX Academy Summer Batch!"></textarea>
                 </div>
+
+                <div class="form-group-2">
+                  <div class="modal-field">
+                    <label for="bannerCtaTextInput">CTA Button Text</label>
+                    <input type="text" id="bannerCtaTextInput" placeholder="e.g. Register Now">
+                  </div>
+                  <div class="modal-field">
+                    <label for="bannerCtaLinkInput">CTA Target Link</label>
+                    <input type="text" id="bannerCtaLinkInput" placeholder="e.g. academy.html#workshops">
+                  </div>
+                </div>
+
+                <button type="submit" class="ax-btn-primary" style="margin-top: 12px;">Save Banner Settings</button>
+              </form>
+
+              <div style="margin-top: 32px;">
+                <h4 style="margin-bottom: 10px; font-size: 0.95rem; font-weight: 700;">Live Appearance Preview</h4>
+                <div id="bannerPreviewBox"></div>
               </div>
-
-              <button type="submit" class="ax-btn-primary" style="margin-top: 12px;">Save Banner Settings</button>
-            </form>
-
-            <div style="margin-top: 32px;">
-              <h4 style="margin-bottom: 8px; font-size: 0.95rem;">Live Appearance Preview</h4>
-              <div id="bannerPreviewBox"></div>
             </div>
           </div>
         </section>
@@ -641,7 +648,7 @@
              TAB 11: SETTINGS, CLOUD SYNC & BACKUP
              ============================================================ -->
         <section class="tab-pane" id="tab-settings">
-          <div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+          <div class="settings-grid">
             
             <!-- Data Backup & Snapshot Restore -->
             <div class="ax-panel">
@@ -651,20 +658,22 @@
                   <p class="panel-subtitle">Export full JSON snapshot or restore database</p>
                 </div>
               </div>
-              <p style="font-size: 0.85rem; color: var(--adm-text-muted); margin-bottom: 16px;">
-                Export all leads, invoices, certificates, projects, and workshops to a single offline JSON backup file.
-              </p>
-              <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button type="button" class="ax-btn-primary" id="btnExportBackup">
-                  <i data-lucide="download"></i> Export Full Backup (.json)
-                </button>
-                <label class="ax-btn-secondary" style="cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
-                  <i data-lucide="upload"></i> Import Backup File (.json)
-                  <input type="file" id="inputImportBackup" accept=".json" style="display:none;">
-                </label>
-                <button type="button" class="ax-btn-secondary" id="btnResetFactory" style="color: var(--ax-rose); border-color: rgba(239, 68, 68, 0.3);">
-                  <i data-lucide="rotate-ccw"></i> Reset to Factory Seeds
-                </button>
+              <div class="panel-body">
+                <p style="font-size: 0.85rem; color: var(--adm-text-muted); margin-bottom: 16px; line-height: 1.5;">
+                  Export all leads, invoices, certificates, projects, and workshops to a single offline JSON backup file.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <button type="button" class="ax-btn-primary" id="btnExportBackup">
+                    <i data-lucide="download"></i> Export Full Backup (.json)
+                  </button>
+                  <label class="ax-btn-secondary" style="cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                    <i data-lucide="upload"></i> Import Backup File (.json)
+                    <input type="file" id="inputImportBackup" accept=".json" style="display:none;">
+                  </label>
+                  <button type="button" class="ax-btn-secondary" id="btnResetFactory" style="color: var(--ax-rose); border-color: rgba(239, 68, 68, 0.3);">
+                    <i data-lucide="rotate-ccw"></i> Reset to Factory Seeds
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -676,17 +685,19 @@
                   <p class="panel-subtitle">Manage administrative passkey</p>
                 </div>
               </div>
-              <form id="formChangePasskey">
-                <div class="modal-field">
-                  <label for="newAdminPasskey">New Admin Passkey *</label>
-                  <input type="password" id="newAdminPasskey" placeholder="At least 6 characters" required>
-                </div>
-                <div class="modal-field">
-                  <label for="confirmAdminPasskey">Confirm New Passkey *</label>
-                  <input type="password" id="confirmAdminPasskey" placeholder="Re-enter new passkey" required>
-                </div>
-                <button type="submit" class="ax-btn-primary" style="margin-top: 8px;">Update Passkey</button>
-              </form>
+              <div class="panel-body">
+                <form id="formChangePasskey" class="modal-form-grid">
+                  <div class="modal-field">
+                    <label for="newAdminPasskey">New Admin Passkey *</label>
+                    <input type="password" id="newAdminPasskey" placeholder="At least 6 characters" required>
+                  </div>
+                  <div class="modal-field">
+                    <label for="confirmAdminPasskey">Confirm New Passkey *</label>
+                    <input type="password" id="confirmAdminPasskey" placeholder="Re-enter new passkey" required>
+                  </div>
+                  <button type="submit" class="ax-btn-primary" style="margin-top: 4px;">Update Passkey</button>
+                </form>
+              </div>
             </div>
 
             <!-- Cloud Database Sync (Firebase Ready) -->
@@ -697,21 +708,23 @@
                   <p class="panel-subtitle">Optional Cloud Firestore synchronization</p>
                 </div>
               </div>
-              <div style="margin-bottom: 14px; padding: 10px 14px; background: rgba(37, 99, 235, 0.08); border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 0.825rem; color: #2563EB;">
-                <i data-lucide="wifi"></i>
-                <span id="cloudStatusLabel">Operating in Resilient Local Storage Mode</span>
+              <div class="panel-body">
+                <div style="margin-bottom: 16px; padding: 12px 14px; background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.825rem; color: #2563EB;">
+                  <i data-lucide="wifi"></i>
+                  <span id="cloudStatusLabel" style="font-weight:600;">Operating in Resilient Local Storage Mode</span>
+                </div>
+                <form id="formCloudConfig" class="modal-form-grid">
+                  <div class="modal-field">
+                    <label for="cloudProjectId">Firebase Project ID</label>
+                    <input type="text" id="cloudProjectId" placeholder="e.g. aarambhx-technology">
+                  </div>
+                  <div class="modal-field">
+                    <label for="cloudApiKey">Web API Key</label>
+                    <input type="password" id="cloudApiKey" placeholder="AIzaSy...">
+                  </div>
+                  <button type="submit" class="ax-btn-secondary" style="margin-top: 4px;">Save Cloud Credentials</button>
+                </form>
               </div>
-              <form id="formCloudConfig">
-                <div class="modal-field">
-                  <label for="cloudProjectId">Firebase Project ID</label>
-                  <input type="text" id="cloudProjectId" placeholder="e.g. aarambhx-technology">
-                </div>
-                <div class="modal-field">
-                  <label for="cloudApiKey">Web API Key</label>
-                  <input type="password" id="cloudApiKey" placeholder="AIzaSy...">
-                </div>
-                <button type="submit" class="ax-btn-secondary" style="margin-top: 8px;">Save Cloud Credentials</button>
-              </form>
             </div>
 
             <!-- Drag & Drop WebP Image Compressor Test -->
@@ -722,13 +735,15 @@
                   <p class="panel-subtitle">Drag-and-drop client-side optimizer</p>
                 </div>
               </div>
-              <div class="dropzone-area" id="demoDropzone" style="border: 2px dashed var(--adm-border); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s ease;">
-                <i data-lucide="image" style="width:32px; height:32px; color: var(--adm-text-subtle); margin: 0 auto 8px; display:block;"></i>
-                <span style="font-weight:700; font-size: 0.9rem;">Drop image here to optimize to WebP</span>
-                <p style="font-size: 0.775rem; color: var(--adm-text-muted); margin-top: 4px;">PNG, JPG up to 5MB</p>
-                <input type="file" id="demoDropzoneInput" accept="image/*" style="display:none;">
+              <div class="panel-body">
+                <div class="dropzone-area" id="demoDropzone">
+                  <i data-lucide="image" style="width:34px; height:34px; color: var(--adm-text-subtle); margin: 0 auto 10px; display:block;"></i>
+                  <span style="font-weight:700; font-size: 0.925rem;">Drop image here to optimize to WebP</span>
+                  <p style="font-size: 0.775rem; color: var(--adm-text-muted); margin-top: 4px;">PNG, JPG up to 5MB</p>
+                  <input type="file" id="demoDropzoneInput" accept="image/*" style="display:none;">
+                </div>
+                <div id="demoDropzoneResult" style="margin-top: 14px; display:none;"></div>
               </div>
-              <div id="demoDropzoneResult" style="margin-top: 12px; display:none;"></div>
             </div>
 
           </div>
@@ -1017,7 +1032,7 @@
         </div>
 
         <!-- Taxes, Discount & Total -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px;">
+        <div class="inv-summary-two-col">
           <div>
             <div class="modal-field">
               <label for="invNotes">Notes / Terms of Service</label>
@@ -1033,7 +1048,7 @@
             </div>
           </div>
 
-          <div class="invoice-calc-box" style="background: var(--adm-pill-track); padding: 16px; border-radius: 10px; display: flex; flex-direction: column; gap: 8px;">
+          <div class="inv-calc-box invoice-calc-box">
             <div style="display:flex; justify-content:space-between;">
               <span>Subtotal:</span>
               <strong id="calcSubtotal">₹0</strong>
