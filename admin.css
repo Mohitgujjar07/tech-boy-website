@@ -2365,15 +2365,22 @@ body.dark-theme .btn-google-auth:hover {
     color: #000000 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+  .admin-wrapper,
   .admin-sidebar,
   .admin-sidebar-backdrop,
   .admin-topbar,
   .sidebar-nav,
+  .admin-main,
+  .admin-content,
   .modal-head,
   .modal-footer-btns,
   .btn-signout,
   .ax-toast-container,
+  .session-lock-overlay,
+  .auth-gate-overlay,
   .ax-modal-overlay:not(.open) {
     display: none !important;
   }
@@ -2381,12 +2388,17 @@ body.dark-theme .btn-google-auth:hover {
     position: static !important;
     background: transparent !important;
     padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: block !important;
   }
   .ax-modal-dialog {
     max-width: 100% !important;
+    width: 100% !important;
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
+    margin: 0 !important;
     background: transparent !important;
   }
   .printable-invoice-card,
@@ -2394,9 +2406,12 @@ body.dark-theme .btn-google-auth:hover {
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
+    margin: 0 auto !important;
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 210mm !important;
     border-radius: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }

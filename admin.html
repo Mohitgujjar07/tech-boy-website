@@ -1183,13 +1183,18 @@
         <!-- Injected dynamically via admin.js -->
       </div>
 
-      <div class="modal-footer-btns" style="margin-top: 20px; justify-content: space-between;">
+      <div class="modal-footer-btns" style="margin-top: 20px; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
         <button type="button" class="ax-btn-secondary" id="btnShareInvoiceWhatsApp" style="color: #25D366;">
           <i data-lucide="message-circle"></i> Send on WhatsApp
         </button>
-        <button type="button" class="ax-btn-primary" id="btnPrintInvoiceAction">
-          <i data-lucide="printer"></i> Print / Download PDF
-        </button>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button type="button" class="ax-btn-secondary" id="btnDirectPrintAction">
+            <i data-lucide="printer"></i> Print
+          </button>
+          <button type="button" class="ax-btn-primary" id="btnPrintInvoiceAction" style="background: linear-gradient(135deg, var(--ax-blue), var(--ax-blue-hover));">
+            <i data-lucide="download"></i> Download PDF
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1365,6 +1370,7 @@
   <div class="ax-toast-container" id="toastContainer" aria-live="polite"></div>
 
   <!-- Scripts -->
+  <script src="assets/html2pdf.bundle.min.js"></script>
   <script src="admin-store.js"></script>
   <script src="admin.js"></script>
   <script>
