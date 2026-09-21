@@ -1124,7 +1124,14 @@
         text: '',
         ctaText: 'Learn More',
         ctaLink: '#',
-        tone: 'blue'
+        tone: 'gold',
+        theme: 'gold',
+        badgeText: 'LIVE NOW',
+        badgePulse: true,
+        countdownDate: '',
+        enableCountdown: false,
+        pageScope: 'all',
+        updatedAt: ''
       });
     },
 
@@ -1134,7 +1141,13 @@
         text: banner.text || '',
         ctaText: banner.ctaText || 'Learn More',
         ctaLink: banner.ctaLink || '#',
-        tone: banner.tone || 'blue',
+        tone: banner.tone || banner.theme || 'gold',
+        theme: banner.theme || banner.tone || 'gold',
+        badgeText: banner.badgeText !== undefined ? banner.badgeText : 'LIVE NOW',
+        badgePulse: banner.badgePulse !== undefined ? !!banner.badgePulse : true,
+        countdownDate: banner.countdownDate || '',
+        enableCountdown: !!banner.enableCountdown,
+        pageScope: banner.pageScope || 'all',
         updatedAt: new Date().toISOString()
       };
       setJSON(STORAGE_KEYS.BANNER, updated);

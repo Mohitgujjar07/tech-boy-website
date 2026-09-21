@@ -1487,7 +1487,7 @@ function initPrebuiltSoftwareSearch() {
 }
 
 // ============================================================
-// 17. Live Announcement Banner Injection
+// 17. Live Announcement Banner Injection (Obsidian Glassmorphism)
 // ============================================================
 function initLiveAlertBanner() {
   try {
@@ -1500,22 +1500,119 @@ function initLiveAlertBanner() {
       return;
     }
 
+    // Check page scope filter
+    if (banner.pageScope && banner.pageScope !== 'all') {
+      const path = (window.location.pathname || '').toLowerCase();
+      const isHome = path === '/' || path === '' || path.endsWith('index.html');
+      const isAcademy = path.includes('academy');
+      const isWork = path.includes('work') || path.includes('highlights');
+
+      if (banner.pageScope === 'home' && !isHome) return;
+      if (banner.pageScope === 'academy' && !isAcademy) return;
+      if (banner.pageScope === 'work' && !isWork) return;
+    }
+
+    // Smart dismiss check
+    const bannerSignature = (banner.text + (banner.updatedAt || '')).trim();
+    try {
+      const dismissedSig = localStorage.getItem('ax_dismissed_banner_sig');
+      if (dismissedSig === bannerSignature) {
+        document.body.classList.remove('has-alert-banner');
+        const existing = document.getElementById('axGlobalAlertBanner');
+        if (existing) existing.remove();
+        return;
+      }
+    } catch (e) {}
+
+    const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const theme = banner.theme || banner.tone || 'gold';
+    const badgeText = banner.badgeText || 'LIVE NOW';
+    const badgePulse = banner.badgePulse !== false;
+
     let bannerEl = document.getElementById('axGlobalAlertBanner');
     if (!bannerEl) {
       bannerEl = document.createElement('div');
       bannerEl.id = 'axGlobalAlertBanner';
-      bannerEl.className = 'ax-global-banner';
       document.body.insertBefore(bannerEl, document.body.firstChild);
       document.body.classList.add('has-alert-banner');
     }
+    bannerEl.className = `ax-global-banner ax-theme-${theme}`;
+
+    const badgeHtml = `
+      <span class="ax-banner-badge">
+        ${badgePulse ? '<span class="ax-radar-dot"></span>' : ''}
+        <span>${esc(badgeText)}</span>
+      </span>
+    `;
+
+    let countdownHtml = '';
+    if (banner.enableCountdown && banner.countdownDate) {
+      countdownHtml = `
+        <div class="ax-banner-countdown" id="axBannerCountdown">
+          <span class="ax-countdown-icon">⏱</span>
+          <span class="ax-countdown-digits">Loading...</span>
+        </div>
+      `;
+    }
+
+    const ctaHtml = banner.ctaText ? `
+      <a href="${esc(banner.ctaLink || '#')}" class="ax-banner-cta">
+        <span>${esc(banner.ctaText)}</span>
+        <span class="cta-arrow">&rarr;</span>
+      </a>
+    ` : '';
 
     bannerEl.innerHTML = `
       <div class="ax-banner-inner">
-        <span class="ax-banner-text">${banner.text}</span>
-        ${banner.ctaText ? `<a href="${banner.ctaLink || '#'}" class="ax-banner-cta">${banner.ctaText} &rarr;</a>` : ''}
-        <button type="button" class="ax-banner-close" aria-label="Close notification" onclick="this.closest('.ax-global-banner').remove(); document.body.classList.remove('has-alert-banner');">&times;</button>
+        ${badgeHtml}
+        <span class="ax-banner-text">${esc(banner.text)}</span>
+        ${countdownHtml}
+        ${ctaHtml}
+        <button type="button" class="ax-banner-close" aria-label="Close notification" onclick="window.dismissLiveAlertBanner()">&times;</button>
       </div>
     `;
+
+    // Global dismissal handler with signature memory
+    window.dismissLiveAlertBanner = function() {
+      try {
+        localStorage.setItem('ax_dismissed_banner_sig', bannerSignature);
+      } catch (e) {}
+      const el = document.getElementById('axGlobalAlertBanner');
+      if (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          el.remove();
+          document.body.classList.remove('has-alert-banner');
+        }, 300);
+      }
+    };
+
+    // Live countdown ticker
+    if (banner.enableCountdown && banner.countdownDate) {
+      const targetTime = new Date(banner.countdownDate).getTime();
+      if (!isNaN(targetTime)) {
+        const updateCountdown = () => {
+          const now = Date.now();
+          const diff = targetTime - now;
+          const digitsEl = document.querySelector('#axBannerCountdown .ax-countdown-digits');
+          if (!digitsEl) return;
+          if (diff <= 0) {
+            digitsEl.textContent = '00d : 00h : 00m : 00s';
+            return;
+          }
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const m = Math.floor((diff / 1000 / 60) % 60);
+          const s = Math.floor((diff / 1000) % 60);
+          const pad = (n) => String(n).padStart(2, '0');
+          digitsEl.textContent = `${pad(d)}d : ${pad(h)}h : ${pad(m)}m : ${pad(s)}s`;
+        };
+        updateCountdown();
+        if (window._axBannerTimer) clearInterval(window._axBannerTimer);
+        window._axBannerTimer = setInterval(updateCountdown, 1000);
+      }
+    }
   } catch (e) {
     console.warn('[AlertBanner] Initialization error:', e);
   }
