@@ -21,8 +21,24 @@ if (!refreshToken) {
   console.error('❌ Error: No Firebase credentials found. Run firebase login or set FIREBASE_TOKEN.');
   process.exit(1);
 }
+// Standalone OAuth token refresh using Google's token endpoint (zero external dependencies)
+async function getFreshOAuthToken(token) {
+  const postData = new URLSearchParams({
+    client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+    client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+    grant_type: 'refresh_token',
+    refresh_token: token
+  }).toString();
 
-const auth = require(path.join(process.cwd(), 'node_modules', 'firebase-tools', 'lib', 'auth'));
+  const res = await makeRequest(
+    'https://oauth2.googleapis.com/token',
+    'POST',
+    { 'Content-Type': 'application/x-www-form-urlencoded' },
+    postData
+  );
+
+  return res.access_token;
+}
 
 function makeRequest(urlStr, method, headers = {}, body = null) {
   return new Promise((resolve, reject) => {
@@ -98,7 +114,7 @@ function getDeployFiles(dir, baseDir = dir) {
       files = files.concat(getDeployFiles(fullPath, baseDir));
     } else {
       const rawContent = fs.readFileSync(fullPath);
-      const gzipped = zlib.gzipSync(rawContent, { level: 9 });
+      const gzipped = zlib.gzipSync(rawContent, { level: 6 });
       const hash = crypto.createHash('sha256').update(gzipped).digest('hex');
       files.push({
         filePath: '/' + relPath,
@@ -257,8 +273,7 @@ async function deploySite(siteId, token, files) {
 async function main() {
   console.log('=== AARAMBHX FIREBASE HOSTING DEPLOYER (REST API) ===');
   console.log('Fetching fresh OAuth credentials...');
-  const tokenRes = await auth.getAccessToken(refreshToken, []);
-  const accessToken = tokenRes.access_token;
+  const accessToken = await getFreshOAuthToken(refreshToken);
   console.log('OAuth token obtained.');
 
   console.log('Scanning project files...');
