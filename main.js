@@ -1493,7 +1493,12 @@ function initLiveAlertBanner() {
   try {
     if (!window.AarambhXStore || typeof window.AarambhXStore.getAlertBanner !== 'function') return;
     const banner = window.AarambhXStore.getAlertBanner();
-    if (!banner || !banner.active || !banner.text) return;
+    if (!banner || !banner.active || !banner.text) {
+      document.body.classList.remove('has-alert-banner');
+      const existing = document.getElementById('axGlobalAlertBanner');
+      if (existing) existing.remove();
+      return;
+    }
 
     let bannerEl = document.getElementById('axGlobalAlertBanner');
     if (!bannerEl) {
