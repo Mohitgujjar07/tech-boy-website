@@ -689,6 +689,73 @@ function runAdminDashboardTests() {
     return 24;
   });
 
+  // ---------------------------------------------------------------------------
+  // 18. Firebase Auth, Dual Whitelisting & Inactivity Hardening
+  // ---------------------------------------------------------------------------
+  test('ADM-18', 'Firebase Auth, Strict Dual Admin Whitelisting, Audit Trail & Security Headers', () => {
+    const { AarambhXStore } = createStoreSandbox();
+
+    // 1. Strict Whitelist verification
+    Assert.isTrue(AarambhXStore.isWhitelistedEmail('lalithulalu@gmail.com'), 'lalithulalu@gmail.com is whitelisted');
+    Assert.isTrue(AarambhXStore.isWhitelistedEmail('mohitjgujjar7@mail.com'), 'mohitjgujjar7@mail.com is whitelisted');
+    Assert.isTrue(AarambhXStore.isWhitelistedEmail('mohitjgujjar7@gmail.com'), 'mohitjgujjar7@gmail.com alias is whitelisted');
+    Assert.isFalse(AarambhXStore.isWhitelistedEmail('attacker@evil.com'), 'Unauthorized email is rejected');
+    Assert.isFalse(AarambhXStore.isWhitelistedEmail('admin@aarambhx.com'), 'Arbitrary non-whitelisted email rejected');
+    Assert.isFalse(AarambhXStore.isWhitelistedEmail(''), 'Empty email rejected');
+
+    // 2. Firebase admin session setting
+    const badUserSession = AarambhXStore.setFirebaseAdminSession({
+      uid: 'fake-uid-123',
+      email: 'hacker@phishing.com',
+      displayName: 'Attacker'
+    });
+    Assert.isFalse(badUserSession, 'setFirebaseAdminSession rejects non-whitelisted user');
+
+    const goodUserSession = AarambhXStore.setFirebaseAdminSession({
+      uid: 'firebase-lalith-1',
+      email: 'lalithulalu@gmail.com',
+      displayName: 'Lalith Kumar',
+      photoURL: 'https://lh3.googleusercontent.com/avatar.jpg'
+    });
+    Assert.isTrue(goodUserSession, 'setFirebaseAdminSession accepts whitelisted user');
+    Assert.isTrue(AarambhXStore.isAuthenticated(), 'User session is authenticated');
+    Assert.equal(AarambhXStore.getAuthUser(), 'Lalith Kumar', 'Auth user name correctly resolved');
+
+    // 3. Audit Trail logging
+    const auditLogs = AarambhXStore.getAuditTrail();
+    Assert.isArray(auditLogs, 'Audit trail returns array');
+    Assert.isTrue(auditLogs.length > 0, 'Audit trail contains recorded events');
+    Assert.isTrue(auditLogs.some(l => l.action === 'LOGIN_GOOGLE_SUCCESS'), 'Contains LOGIN_GOOGLE_SUCCESS event');
+
+    // 4. admin.html DOM security elements
+    const adminHtml = fs.readFileSync(adminHtmlPath, 'utf8');
+    const adminDom = new DOMParserLite(adminHtml);
+    Assert.exists(adminDom.getElementById('btnGoogleSignIn'), '#btnGoogleSignIn button exists in admin.html');
+    Assert.exists(adminDom.getElementById('adminProfileChip'), '#adminProfileChip exists in admin.html');
+    Assert.exists(adminDom.getElementById('sessionLockOverlay'), '#sessionLockOverlay exists in admin.html');
+    Assert.exists(adminDom.getElementById('btnUnlockSession'), '#btnUnlockSession exists');
+    Assert.contains(adminHtml, 'firebase-auth-compat.js', 'admin.html loads Firebase Auth SDK');
+
+    // 5. firestore.rules check
+    const firestoreRulesPath = path.join(ROOT_DIR, 'firestore.rules');
+    Assert.isTrue(fs.existsSync(firestoreRulesPath), 'firestore.rules file exists');
+    const rulesCode = fs.readFileSync(firestoreRulesPath, 'utf8');
+    Assert.contains(rulesCode, 'lalithulalu@gmail.com', 'firestore.rules whitelists lalithulalu@gmail.com');
+    Assert.contains(rulesCode, 'mohitjgujjar7@mail.com', 'firestore.rules whitelists mohitjgujjar7@mail.com');
+
+    // 6. firebase.json and vercel.json security headers
+    const firebaseJsonPath = path.join(ROOT_DIR, 'firebase.json');
+    const firebaseJson = fs.readFileSync(firebaseJsonPath, 'utf8');
+    Assert.contains(firebaseJson, 'admin*', 'firebase.json defines admin* security headers');
+    Assert.contains(firebaseJson, 'DENY', 'firebase.json restricts framing via DENY');
+
+    const vercelJsonPath = path.join(ROOT_DIR, 'vercel.json');
+    const vercelJson = fs.readFileSync(vercelJsonPath, 'utf8');
+    Assert.contains(vercelJson, '/admin(.*)', 'vercel.json defines /admin(.*) headers');
+
+    return 24;
+  });
+
   const passed = results.filter(r => r.passed).length;
   const failed = results.filter(r => !r.passed).length;
   const totalAssertions = results.reduce((sum, r) => sum + r.assertions, 0);

@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Strict Whitelist for AarambhX Administrators
+    function isWhitelistedAdmin() {
+      return request.auth != null &&
+        request.auth.token.email in [
+          'lalithulalu@gmail.com',
+          'mohitjgujjar7@mail.com',
+          'mohitjgujjar7@gmail.com'
+        ];
+    }
+
+    // Public consultation inquiries: anyone can submit; only whitelisted admins can read or manage
+    match /inquiries/{inquiryId} {
+      allow create: if request.resource.data.name is string && request.resource.data.phone is string;
+      allow read, update, delete: if isWhitelistedAdmin();
+    }
+
+    // Global alert banner: readable by public; writable only by whitelisted admins
+    match /banner/{docId} {
+      allow read: if true;
+      allow write: if isWhitelistedAdmin();
+    }
+
+    // Official student certificates: verifiable by public; issued only by whitelisted admins
+    match /certificates/{certId} {
+      allow read: if true;
+      allow write: if isWhitelistedAdmin();
+    }
+
+    // Testimonials & reviews: approved reviews readable by public; pending and updates require admin
+    match /testimonials/{testiId} {
+      allow read: if resource.data.approved == true || isWhitelistedAdmin();
+      allow create: if true;
+      allow update, delete: if isWhitelistedAdmin();
+    }
+
+    // Showcase projects & workshops: readable by public; modifiable only by admins
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isWhitelistedAdmin();
+    }
+
+    match /workshops/{workshopId} {
+      allow read: if true;
+      allow write: if isWhitelistedAdmin();
+    }
+
+    // Invoices, quotations, audit trail, and internal settings: strictly private to whitelisted admins
+    match /invoices/{invoiceId} {
+      allow read, write: if isWhitelistedAdmin();
+    }
+
+    match /audit_trail/{auditId} {
+      allow read, write: if isWhitelistedAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read, write: if isWhitelistedAdmin();
+    }
+
+    // Default catch-all: lock everything else
+    match /{document=**} {
+      allow read, write: if isWhitelistedAdmin();
+    }
+  }
+}

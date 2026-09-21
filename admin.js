@@ -65,40 +65,264 @@
   window.showToast = showToast;
 
   // =========================================================================
-  // 2. AUTH GATE & SECURITY
+  // 2. AUTH GATE & SECURITY (Firebase Auth + Strict Dual Whitelisting)
   // =========================================================================
+  let firebaseAuth = null;
+  const IDLE_TIMEOUT_MS = 15 * 60 * 1000; // 15-minute inactivity threshold
+  let idleTimer = null;
+
+  function initFirebaseAuth() {
+    try {
+      if (typeof firebase !== 'undefined') {
+        const settings = Store.getSettings();
+        const fbConfig = (settings && settings.firebaseConfig && settings.firebaseConfig.apiKey) 
+          ? settings.firebaseConfig 
+          : {
+              apiKey: 'AIzaSyBRPmxyMs3qxSGRm1cqzRMXkzE3SyqcPYk',
+              authDomain: 'aarambhx-technology-58499.firebaseapp.com',
+              projectId: 'aarambhx-technology-58499',
+              storageBucket: 'aarambhx-technology-58499.firebasestorage.app',
+              messagingSenderId: '520659408907',
+              appId: '1:520659408907:web:f597321d3ab36b9e310f0e'
+            };
+
+        if (!firebase.apps || !firebase.apps.length) {
+          firebase.initializeApp(fbConfig);
+        }
+        if (firebase.auth) {
+          firebaseAuth = firebase.auth();
+          
+          // Handle redirect sign-in result (if mobile or popup-blocked)
+          firebaseAuth.getRedirectResult().then(result => {
+            if (result && result.user) {
+              handleAuthResult(result.user);
+            }
+          }).catch(err => {
+            console.warn('[Admin] Redirect result warning:', err);
+          });
+
+          // Listen for persistent auth state changes
+          firebaseAuth.onAuthStateChanged(user => {
+            if (user) {
+              const email = user.email ? user.email.toLowerCase().trim() : '';
+              if (Store.isWhitelistedEmail(email)) {
+                Store.setFirebaseAdminSession(user);
+                updateAdminProfileChip();
+                if (authOverlay) authOverlay.classList.add('hidden');
+                startInactivityTimer();
+              } else {
+                // Unauthorized user signed in via Firebase -> kick immediately
+                firebaseAuth.signOut().catch(() => {});
+                Store.logout();
+                hideAdminProfileChip();
+                if (authOverlay) authOverlay.classList.remove('hidden');
+                alert(`ACCESS DENIED: ${email || 'This account'} is not an authorized administrator. Access is strictly restricted to lalithulalu@gmail.com and mohitjgujjar7@mail.com.`);
+                window.location.href = 'index.html';
+              }
+            } else if (!Store.isAuthenticated()) {
+              if (authOverlay) authOverlay.classList.remove('hidden');
+              hideAdminProfileChip();
+            }
+          });
+        }
+      }
+    } catch (err) {
+      console.warn('[Admin] Firebase Auth initialization exception:', err);
+    }
+  }
+
+  function handleAuthResult(user) {
+    if (!user || !user.email) return;
+    const email = user.email.toLowerCase().trim();
+
+    if (!Store.isWhitelistedEmail(email)) {
+      Store.logAuditEvent('LOGIN_REJECTED_UNAUTHORIZED_EMAIL', {
+        email,
+        displayName: user.displayName || 'Unknown'
+      });
+      if (firebaseAuth) {
+        firebaseAuth.signOut().catch(() => {});
+      }
+      Store.logout();
+      hideAdminProfileChip();
+      alert(`ACCESS DENIED: "${email}" is NOT an authorized administrator.\n\nOnly the following verified accounts are allowed:\n1) lalithulalu@gmail.com\n2) mohitjgujjar7@mail.com`);
+      window.location.href = 'index.html';
+      return;
+    }
+
+    // Authorized Admin Sign-in
+    Store.setFirebaseAdminSession(user);
+    updateAdminProfileChip();
+    if (authErrorMsg) authErrorMsg.textContent = '';
+    if (authOverlay) authOverlay.classList.add('hidden');
+    showToast(`Welcome back, ${user.displayName || 'Admin'}!`, 'success');
+    startInactivityTimer();
+    renderDashboard();
+  }
+
   function checkAuth() {
     if (!Store.isAuthenticated()) {
-      authOverlay.classList.remove('hidden');
+      if (authOverlay) authOverlay.classList.remove('hidden');
+      hideAdminProfileChip();
       if (authPasskeyInput) authPasskeyInput.focus();
     } else {
-      authOverlay.classList.add('hidden');
+      if (authOverlay) authOverlay.classList.add('hidden');
+      updateAdminProfileChip();
+      startInactivityTimer();
       renderDashboard();
     }
   }
 
-  if (authForm) {
-    authForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const passkey = authPasskeyInput.value;
-      if (Store.login(passkey)) {
-        authErrorMsg.textContent = '';
-        authPasskeyInput.value = '';
-        authOverlay.classList.add('hidden');
-        showToast('Authenticated as Administrator', 'success');
-        renderDashboard();
-      } else {
-        authErrorMsg.textContent = 'Invalid passkey. Try: aarambhx2026';
-        authPasskeyInput.focus();
+  // Google Sign-In Click Trigger
+  const btnGoogleSignIn = document.getElementById('btnGoogleSignIn');
+  if (btnGoogleSignIn) {
+    btnGoogleSignIn.addEventListener('click', async () => {
+      if (authErrorMsg) authErrorMsg.textContent = '';
+      if (!firebaseAuth) {
+        initFirebaseAuth();
+      }
+      if (!firebaseAuth) {
+        if (authErrorMsg) authErrorMsg.textContent = 'Firebase SDK is offline or loading. Use emergency passkey below.';
+        return;
+      }
+
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+
+      try {
+        const result = await firebaseAuth.signInWithPopup(provider);
+        if (result && result.user) {
+          handleAuthResult(result.user);
+        }
+      } catch (err) {
+        console.warn('[Admin] Popup sign-in error:', err);
+        if (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user') {
+          try {
+            await firebaseAuth.signInWithRedirect(provider);
+          } catch (redirectErr) {
+            if (authErrorMsg) authErrorMsg.textContent = 'Sign-in failed: ' + (redirectErr.message || 'Popup blocked');
+          }
+        } else {
+          if (authErrorMsg) authErrorMsg.textContent = err.message || 'Google authentication failed';
+        }
       }
     });
   }
 
+  // Developer Fallback: Passkey Submission
+  if (authForm) {
+    authForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const passkey = authPasskeyInput ? authPasskeyInput.value : '';
+      if (Store.login(passkey)) {
+        if (authErrorMsg) authErrorMsg.textContent = '';
+        if (authPasskeyInput) authPasskeyInput.value = '';
+        if (authOverlay) authOverlay.classList.add('hidden');
+        updateAdminProfileChip();
+        showToast('Authenticated via Master Passkey', 'success');
+        startInactivityTimer();
+        renderDashboard();
+      } else {
+        if (authErrorMsg) authErrorMsg.textContent = 'Invalid passkey. Try: aarambhx2026';
+        if (authPasskeyInput) authPasskeyInput.focus();
+      }
+    });
+  }
+
+  // Unified Sign Out Function
+  function handleSignOut() {
+    if (firebaseAuth) {
+      firebaseAuth.signOut().catch(() => {});
+    }
+    Store.logout();
+    hideAdminProfileChip();
+    const sessionLock = document.getElementById('sessionLockOverlay');
+    if (sessionLock) sessionLock.classList.add('hidden');
+    if (authOverlay) authOverlay.classList.remove('hidden');
+    showToast('Signed out successfully', 'info');
+  }
+
   if (btnSignout) {
-    btnSignout.addEventListener('click', () => {
-      Store.logout();
-      authOverlay.classList.remove('hidden');
-      showToast('Signed out successfully', 'info');
+    btnSignout.addEventListener('click', handleSignOut);
+  }
+
+  const btnProfileSignOut = document.getElementById('btnProfileSignOut');
+  if (btnProfileSignOut) {
+    btnProfileSignOut.addEventListener('click', handleSignOut);
+  }
+
+  const btnLockSignOut = document.getElementById('btnLockSignOut');
+  if (btnLockSignOut) {
+    btnLockSignOut.addEventListener('click', handleSignOut);
+  }
+
+  // Topbar Profile Chip
+  function updateAdminProfileChip() {
+    const session = Store.getAuthSession();
+    const chip = document.getElementById('adminProfileChip');
+    const avatar = document.getElementById('adminProfileAvatar');
+    const name = document.getElementById('adminProfileName');
+    const email = document.getElementById('adminProfileEmail');
+
+    if (!session || !session.authenticated) {
+      if (chip) chip.style.display = 'none';
+      return;
+    }
+
+    if (chip) chip.style.display = 'inline-flex';
+    if (name) name.textContent = session.displayName || session.user || 'Admin';
+    if (email) email.textContent = session.email || (session.provider === 'passkey' ? 'Master Passkey' : 'admin@aarambhx.com');
+    if (avatar && session.photoURL) {
+      avatar.src = session.photoURL;
+    } else if (avatar) {
+      avatar.src = 'assets/aarambhx-logo.jpg';
+    }
+  }
+
+  function hideAdminProfileChip() {
+    const chip = document.getElementById('adminProfileChip');
+    if (chip) chip.style.display = 'none';
+  }
+
+  // 15-Minute Inactivity Auto-Lock
+  function resetInactivityTimer() {
+    if (!Store.isAuthenticated()) return;
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(lockSession, IDLE_TIMEOUT_MS);
+  }
+
+  function lockSession() {
+    if (!Store.isAuthenticated()) return;
+    const sessionLock = document.getElementById('sessionLockOverlay');
+    const session = Store.getAuthSession();
+    if (sessionLock) {
+      const lockUserName = document.getElementById('lockUserName');
+      const lockUserEmail = document.getElementById('lockUserEmail');
+      const lockUserAvatar = document.getElementById('lockUserAvatar');
+      if (session) {
+        if (lockUserName) lockUserName.textContent = session.displayName || session.user || 'Administrator';
+        if (lockUserEmail) lockUserEmail.textContent = session.email || 'Master Passkey';
+        if (lockUserAvatar && session.photoURL) lockUserAvatar.src = session.photoURL;
+      }
+      sessionLock.classList.remove('hidden');
+      Store.logAuditEvent('SESSION_AUTO_LOCKED_INACTIVITY', { idleMinutes: 15 });
+    }
+  }
+
+  function startInactivityTimer() {
+    ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, resetInactivityTimer, { passive: true });
+    });
+    resetInactivityTimer();
+  }
+
+  const btnUnlockSession = document.getElementById('btnUnlockSession');
+  if (btnUnlockSession) {
+    btnUnlockSession.addEventListener('click', () => {
+      const sessionLock = document.getElementById('sessionLockOverlay');
+      if (sessionLock) sessionLock.classList.add('hidden');
+      resetInactivityTimer();
+      showToast('Session unlocked', 'success');
     });
   }
 
@@ -1256,6 +1480,38 @@
   // =========================================================================
   // 11. MODULE: SETTINGS, CLOUD SYNC & SNAPSHOT BACKUP
   // =========================================================================
+  function renderAuditTrail() {
+    const tbody = document.getElementById('auditTrailTableBody');
+    if (!tbody) return;
+    const logs = Store.getAuditTrail();
+    if (!logs.length) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--adm-text-subtle); padding:16px;">No audit events recorded yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = logs.map(l => {
+      const time = new Date(l.timestamp).toLocaleString('en-IN');
+      const detailsStr = typeof l.details === 'object' ? JSON.stringify(l.details) : String(l.details || '');
+      const isAlert = l.action.includes('REJECTED') || l.action.includes('FAILED');
+      const colorStyle = isAlert ? 'color: var(--ax-rose); font-weight:700;' : 'font-weight:600;';
+      return `
+        <tr>
+          <td style="font-size:0.775rem; color:var(--adm-text-subtle); white-space:nowrap;">${escapeHtml(time)}</td>
+          <td style="${colorStyle}">${escapeHtml(l.action)}</td>
+          <td style="font-size:0.8rem;">${escapeHtml(l.user || 'System')}</td>
+          <td style="font-size:0.775rem; font-family:monospace; color:var(--adm-text-muted); max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(detailsStr)}">${escapeHtml(detailsStr)}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  const btnRefreshAuditLog = document.getElementById('btnRefreshAuditLog');
+  if (btnRefreshAuditLog) {
+    btnRefreshAuditLog.addEventListener('click', () => {
+      renderAuditTrail();
+      showToast('Audit trail refreshed', 'info');
+    });
+  }
+
   function renderSettings() {
     const settings = Store.getSettings();
     const cloudProjInput = document.getElementById('cloudProjectId');
@@ -1271,6 +1527,7 @@
         cloudStatusLabel.textContent = 'Operating in Resilient Local Storage Mode (Offline-First)';
       }
     }
+    renderAuditTrail();
   }
 
   // Export Full JSON Backup
@@ -1764,6 +2021,7 @@
   window.addEventListener('hashchange', handleHash);
   document.addEventListener('DOMContentLoaded', () => {
     initAdminTheme();
+    initFirebaseAuth();
     checkAuth();
   });
 

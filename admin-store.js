@@ -28,11 +28,19 @@
     TESTIMONIALS: 'ax_testimonials_db',
     CATALOG: 'ax_catalog_db',
     ANALYTICS: 'ax_analytics_db',
-    SETTINGS: 'ax_settings_db'
+    SETTINGS: 'ax_settings_db',
+    AUDIT: 'ax_audit_trail'
   };
 
   // Default Passkey for Admin Access (can also be customized in Settings)
   const DEFAULT_ADMIN_PASSKEY = 'aarambhx2026';
+
+  // Strict Dual Admin Email Whitelist (+ verified alias)
+  const WHITELISTED_ADMINS = [
+    'lalithulalu@gmail.com',
+    'mohitjgujjar7@mail.com',
+    'mohitjgujjar7@gmail.com'
+  ];
 
   // =========================================================================
   // SEED DATASETS
@@ -314,13 +322,14 @@
   const SEED_SETTINGS = {
     adminPasskey: 'aarambhx2026',
     firebaseConfig: {
-      apiKey: '',
-      authDomain: '',
-      projectId: '',
-      storageBucket: '',
-      messagingSenderId: '',
-      appId: '',
-      enabled: false
+      apiKey: 'AIzaSyBRPmxyMs3qxSGRm1cqzRMXkzE3SyqcPYk',
+      authDomain: 'aarambhx-technology-58499.firebaseapp.com',
+      projectId: 'aarambhx-technology-58499',
+      storageBucket: 'aarambhx-technology-58499.firebasestorage.app',
+      messagingSenderId: '520659408907',
+      appId: '1:520659408907:web:f597321d3ab36b9e310f0e',
+      measurementId: 'G-1MZZY0X3FJ',
+      enabled: true
     },
     upiId: 'mohitgujjar07@okhdfcbank',
     upiName: 'AarambhX Technology',
@@ -353,6 +362,26 @@
     }
   }
 
+  function getSessionRaw(key) {
+    try {
+      if (typeof sessionStorage !== 'undefined') {
+        const val = sessionStorage.getItem(key);
+        if (val !== null) return val;
+      }
+    } catch (e) {}
+    return getRaw(key);
+  }
+
+  function setSessionRaw(key, val) {
+    try {
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.setItem(key, val);
+        return;
+      }
+    } catch (e) {}
+    setRaw(key, val);
+  }
+
   function getJSON(key, fallback) {
     const raw = getRaw(key);
     if (!raw) return fallback;
@@ -365,6 +394,20 @@
 
   function setJSON(key, data) {
     setRaw(key, JSON.stringify(data));
+  }
+
+  function getSessionJSON(key, fallback) {
+    const raw = getSessionRaw(key);
+    if (!raw) return fallback;
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function setSessionJSON(key, data) {
+    setSessionRaw(key, JSON.stringify(data));
   }
 
   // =========================================================================
@@ -414,8 +457,49 @@
     },
 
     // -----------------------------------------------------------------------
-    // AUTHENTICATION & SECURITY
+    // AUTHENTICATION & SECURITY (Firebase Auth + Admin Whitelisting)
     // -----------------------------------------------------------------------
+    isWhitelistedEmail(email) {
+      if (!email || typeof email !== 'string') return false;
+      const clean = email.trim().toLowerCase();
+      return WHITELISTED_ADMINS.includes(clean);
+    },
+
+    getWhitelistedAdmins() {
+      return [...WHITELISTED_ADMINS];
+    },
+
+    setFirebaseAdminSession(user) {
+      if (!user || !user.email) return false;
+      if (!this.isWhitelistedEmail(user.email)) {
+        this.logAuditEvent('LOGIN_REJECTED_UNAUTHORIZED_EMAIL', {
+          email: user.email,
+          uid: user.uid || 'unknown'
+        });
+        return false;
+      }
+
+      const sessionPayload = {
+        authenticated: true,
+        provider: 'firebase-google',
+        uid: user.uid,
+        email: user.email.toLowerCase().trim(),
+        user: user.displayName || user.email,
+        displayName: user.displayName || 'System Admin',
+        photoURL: user.photoURL || '',
+        loginTime: new Date().toISOString()
+      };
+
+      setSessionJSON(STORAGE_KEYS.AUTH, sessionPayload);
+      setJSON(STORAGE_KEYS.AUTH, sessionPayload);
+
+      this.logAuditEvent('LOGIN_GOOGLE_SUCCESS', {
+        email: sessionPayload.email,
+        displayName: sessionPayload.displayName
+      });
+      return true;
+    },
+
     login(passkey) {
       if (!passkey) return false;
       const clean = String(passkey).trim();
@@ -423,33 +507,51 @@
       const configuredPasskey = settings && settings.adminPasskey ? settings.adminPasskey : DEFAULT_ADMIN_PASSKEY;
 
       if (clean === configuredPasskey || clean === DEFAULT_ADMIN_PASSKEY || clean === 'admin' || clean.length >= 6) {
-        setJSON(STORAGE_KEYS.AUTH, {
+        const payload = {
           authenticated: true,
+          provider: 'passkey',
           user: 'Admin (AarambhX)',
+          displayName: 'Admin (AarambhX)',
           loginTime: new Date().toISOString()
-        });
+        };
+        setSessionJSON(STORAGE_KEYS.AUTH, payload);
+        setJSON(STORAGE_KEYS.AUTH, payload);
+        this.logAuditEvent('LOGIN_PASSKEY_SUCCESS', { user: payload.user });
         return true;
       }
+      this.logAuditEvent('LOGIN_PASSKEY_FAILED', { reason: 'Incorrect passkey' });
       return false;
     },
 
     logout() {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem(STORAGE_KEYS.AUTH);
+      const currUser = this.getAuthUser();
+      if (currUser) {
+        this.logAuditEvent('LOGOUT', { user: currUser });
       }
-      if (typeof sessionStorage !== 'undefined') {
-        sessionStorage.removeItem(STORAGE_KEYS.AUTH);
-      }
+      try {
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.removeItem(STORAGE_KEYS.AUTH);
+        }
+      } catch (e) {}
+      try {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem(STORAGE_KEYS.AUTH);
+        }
+      } catch (e) {}
     },
 
     isAuthenticated() {
-      const session = getJSON(STORAGE_KEYS.AUTH, null);
+      const session = getSessionJSON(STORAGE_KEYS.AUTH, null);
       return !!(session && session.authenticated);
     },
 
     getAuthUser() {
-      const session = getJSON(STORAGE_KEYS.AUTH, null);
+      const session = getSessionJSON(STORAGE_KEYS.AUTH, null);
       return session ? session.user : null;
+    },
+
+    getAuthSession() {
+      return getSessionJSON(STORAGE_KEYS.AUTH, null);
     },
 
     changePasskey(newPasskey) {
@@ -457,7 +559,30 @@
       const settings = this.getSettings();
       settings.adminPasskey = newPasskey.trim();
       setJSON(STORAGE_KEYS.SETTINGS, settings);
+      this.logAuditEvent('PASSKEY_CHANGED', { timestamp: new Date().toISOString() });
       return true;
+    },
+
+    // -----------------------------------------------------------------------
+    // APPEND-ONLY AUDIT TRAIL LOGGING
+    // -----------------------------------------------------------------------
+    logAuditEvent(action, details = {}) {
+      const logs = getJSON(STORAGE_KEYS.AUDIT, []);
+      const entry = {
+        id: 'aud-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+        timestamp: new Date().toISOString(),
+        action: String(action),
+        user: this.getAuthUser() || 'Anonymous / Pre-auth',
+        details
+      };
+      logs.unshift(entry);
+      if (logs.length > 200) logs.length = 200;
+      setJSON(STORAGE_KEYS.AUDIT, logs);
+      return entry;
+    },
+
+    getAuditTrail() {
+      return getJSON(STORAGE_KEYS.AUDIT, []);
     },
 
     // -----------------------------------------------------------------------
@@ -1021,7 +1146,8 @@
         testimonials: this.getTestimonials(),
         catalog: this.getCatalog(),
         analytics: this.getAnalytics(),
-        settings: this.getSettings()
+        settings: this.getSettings(),
+        auditTrail: this.getAuditTrail()
       }, null, 2);
     },
 
@@ -1045,10 +1171,12 @@
         if (Array.isArray(data.invoices)) setJSON(STORAGE_KEYS.INVOICES, data.invoices);
         if (Array.isArray(data.testimonials)) setJSON(STORAGE_KEYS.TESTIMONIALS, data.testimonials);
         if (Array.isArray(data.catalog)) setJSON(STORAGE_KEYS.CATALOG, data.catalog);
+        if (Array.isArray(data.auditTrail)) setJSON(STORAGE_KEYS.AUDIT, data.auditTrail);
         if (data.banner && typeof data.banner === 'object') setJSON(STORAGE_KEYS.BANNER, data.banner);
         if (data.analytics && typeof data.analytics === 'object') setJSON(STORAGE_KEYS.ANALYTICS, data.analytics);
         if (data.settings && typeof data.settings === 'object') setJSON(STORAGE_KEYS.SETTINGS, data.settings);
 
+        this.logAuditEvent('BACKUP_RESTORED', { timestamp: new Date().toISOString() });
         return { success: true, message: 'Backup restored successfully' };
       } catch (err) {
         return { success: false, message: err.message };
@@ -1065,6 +1193,7 @@
       setJSON(STORAGE_KEYS.CATALOG, SEED_CATALOG);
       setJSON(STORAGE_KEYS.ANALYTICS, SEED_ANALYTICS);
       setJSON(STORAGE_KEYS.SETTINGS, SEED_SETTINGS);
+      setJSON(STORAGE_KEYS.AUDIT, []);
       setJSON(STORAGE_KEYS.BANNER, {
         active: false,
         text: '🚀 Admissions open for AarambhX Academy 2026 Industrial Workshops! Early registrations get complimentary IoT hardware kits.',
@@ -1072,6 +1201,7 @@
         ctaLink: 'academy.html#workshops',
         tone: 'blue'
       });
+      this.logAuditEvent('FACTORY_RESET', { timestamp: new Date().toISOString() });
       return true;
     }
   };
