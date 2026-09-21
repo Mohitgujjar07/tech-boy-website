@@ -116,7 +116,7 @@
                 Store.logout();
                 hideAdminProfileChip();
                 if (authOverlay) authOverlay.classList.remove('hidden');
-                alert(`ACCESS DENIED: ${email || 'This account'} is not an authorized administrator. Access is strictly restricted to lalithulalu@gmail.com and mohitjgujjar7@mail.com.`);
+                alert(`ACCESS DENIED: ${email || 'This account'} is not an authorized administrator. Access denied.`);
                 window.location.href = 'index.html';
               }
             } else if (!Store.isAuthenticated()) {
@@ -145,7 +145,7 @@
       }
       Store.logout();
       hideAdminProfileChip();
-      alert(`ACCESS DENIED: "${email}" is NOT an authorized administrator.\n\nOnly the following verified accounts are allowed:\n1) lalithulalu@gmail.com\n2) mohitjgujjar7@mail.com`);
+      alert(`ACCESS DENIED: "${email}" is not authorized to access the AarambhX Command Hub.`);
       window.location.href = 'index.html';
       return;
     }
@@ -202,6 +202,19 @@
           } catch (redirectErr) {
             if (authErrorMsg) authErrorMsg.textContent = 'Sign-in failed: ' + (redirectErr.message || 'Popup blocked');
           }
+        } else if (err.code === 'auth/configuration-not-found' || err.code === 'auth/operation-not-allowed') {
+          if (authErrorMsg) {
+            authErrorMsg.innerHTML = '<div style="background:rgba(37,99,235,0.08); border:1px solid rgba(37,99,235,0.25); border-radius:10px; padding:12px 14px; margin-bottom:12px; color:var(--adm-text); font-size:0.8rem; line-height:1.45; text-align:left;">' +
+              '<strong style="color:var(--ax-blue); display:flex; align-items:center; gap:6px; margin-bottom:4px;">' +
+              '<i data-lucide="info" style="width:16px;height:16px;"></i> Google Sign-In Setup Pending</strong>' +
+              'Google Sign-In has not been toggled on in the Firebase Console yet. Please enter your <strong>Admin Passkey</strong> below to log in directly, or enable Google Provider in Firebase Console.' +
+              '</div>';
+            if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+          }
+          if (authPasskeyInput) {
+            authPasskeyInput.focus();
+            authPasskeyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         } else {
           if (authErrorMsg) authErrorMsg.textContent = err.message || 'Google authentication failed';
         }
@@ -223,7 +236,7 @@
         startInactivityTimer();
         renderDashboard();
       } else {
-        if (authErrorMsg) authErrorMsg.textContent = 'Invalid passkey. Try: aarambhx2026';
+        if (authErrorMsg) authErrorMsg.textContent = 'Invalid administrative passkey. Access denied.';
         if (authPasskeyInput) authPasskeyInput.focus();
       }
     });

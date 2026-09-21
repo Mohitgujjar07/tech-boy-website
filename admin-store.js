@@ -506,7 +506,7 @@
       const settings = this.getSettings();
       const configuredPasskey = settings && settings.adminPasskey ? settings.adminPasskey : DEFAULT_ADMIN_PASSKEY;
 
-      if (clean === configuredPasskey || clean === DEFAULT_ADMIN_PASSKEY || clean === 'admin' || clean.length >= 6) {
+      if (clean === configuredPasskey || clean === DEFAULT_ADMIN_PASSKEY) {
         const payload = {
           authenticated: true,
           provider: 'passkey',
