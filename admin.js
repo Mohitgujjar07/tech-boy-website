@@ -1078,53 +1078,97 @@
 
     invoicePrintContainer.innerHTML = `
       <div class="printable-invoice-card" id="printableInvoiceNode">
-        <!-- 1. TOP HEADER BANNER (Ultra-HD 3D Gold Ribbon & Metallic AarambhX Emblem) -->
+        <!-- 1. TOP HEADER BANNER (Ultra-HD 3D Gold Facets & AarambhX Emblem) -->
         <div class="inv-top-header-wrap">
-          <div class="inv-hd-header">
-            <svg class="inv-hd-ribbon-svg" viewBox="0 0 760 148" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFE885"/>
-                  <stop offset="35%" stop-color="#E2A63B"/>
-                  <stop offset="70%" stop-color="#B7791F"/>
-                  <stop offset="100%" stop-color="#78350F"/>
-                </linearGradient>
-                <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#D97706"/>
-                  <stop offset="50%" stop-color="#FDE68A"/>
-                  <stop offset="100%" stop-color="#B45309"/>
-                </linearGradient>
-                <linearGradient id="goldFacetDark" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#92400E"/>
-                  <stop offset="100%" stop-color="#451A03"/>
-                </linearGradient>
-                <linearGradient id="goldFacetLight" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#F59E0B"/>
-                  <stop offset="50%" stop-color="#FEF3C7"/>
-                  <stop offset="100%" stop-color="#D97706"/>
-                </linearGradient>
-              </defs>
-              <rect width="760" height="148" fill="#0A0D14"/>
-              <polygon points="460,0 760,0 760,148 375,148" fill="url(#goldGrad1)"/>
-              <polygon points="460,0 560,0 510,74 417,74" fill="url(#goldFacetLight)" opacity="0.9"/>
-              <polygon points="560,0 670,0 630,74 510,74" fill="url(#goldGrad2)" opacity="0.95"/>
-              <polygon points="670,0 760,0 760,50 630,74" fill="url(#goldFacetDark)" opacity="0.6"/>
-              <polygon points="417,74 510,74 465,148 375,148" fill="url(#goldFacetDark)" opacity="0.75"/>
-              <polygon points="510,74 630,74 595,148 465,148" fill="url(#goldFacetLight)" opacity="0.95"/>
-              <polygon points="630,74 760,50 760,148 595,148" fill="url(#goldGrad1)" opacity="0.9"/>
-              <line x1="0" y1="147.5" x2="760" y2="147.5" stroke="#D97706" stroke-width="1.5"/>
-            </svg>
-            <div class="inv-hd-header-content">
-              <div class="inv-hd-brand-col">
-                <img src="assets/invoice-emblem-3d.png" class="inv-hd-emblem-img" alt="AarambhX Emblem" crossorigin="anonymous">
-                <div class="inv-hd-credo">
-                  <span class="inv-hd-credo-bold">IDEAS &nbsp;•&nbsp; TECHNOLOGY &nbsp;•&nbsp; IMPACT</span>
-                  <span class="inv-hd-credo-sub">BUILDING A BRIGHTER TOMORROW</span>
+          <svg class="inv-header-bg-svg" viewBox="0 0 760 142" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bgDarkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#05070B"/>
+                <stop offset="60%" stop-color="#0A0E17"/>
+                <stop offset="100%" stop-color="#080C14"/>
+              </linearGradient>
+              <linearGradient id="goldBeamGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgba(180,83,9,0)"/>
+                <stop offset="35%" stop-color="rgba(217,119,6,0.35)"/>
+                <stop offset="47%" stop-color="rgba(253,230,138,0.95)"/>
+                <stop offset="50%" stop-color="#FFFFFF"/>
+                <stop offset="53%" stop-color="rgba(253,230,138,0.95)"/>
+                <stop offset="65%" stop-color="rgba(217,119,6,0.4)"/>
+                <stop offset="100%" stop-color="rgba(146,64,14,0)"/>
+              </linearGradient>
+              <linearGradient id="facet1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E293B"/>
+                <stop offset="50%" stop-color="#0F172A"/>
+                <stop offset="100%" stop-color="#090D16"/>
+              </linearGradient>
+              <linearGradient id="facet2" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#263449"/>
+                <stop offset="50%" stop-color="#151E2E"/>
+                <stop offset="100%" stop-color="#0B0F19"/>
+              </linearGradient>
+              <linearGradient id="softGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(217,119,6,0.22)"/>
+                <stop offset="100%" stop-color="rgba(217,119,6,0)"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="760" height="142" fill="url(#bgDarkGrad)"/>
+
+            <!-- Metallic Shards / Facets on Right -->
+            <polygon points="480,142 580,0 760,0 760,142" fill="url(#facet1)" opacity="0.85"/>
+            <polygon points="540,142 630,0 760,0 760,70" fill="url(#facet2)" opacity="0.6"/>
+            <polygon points="610,142 700,0 760,0 760,142" fill="#0A0E17" opacity="0.75"/>
+            <line x1="580" y1="0" x2="480" y2="142" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+            <line x1="630" y1="0" x2="540" y2="142" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+            <line x1="700" y1="0" x2="610" y2="142" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+            <!-- Soft diffuse amber light spill -->
+            <ellipse cx="480" cy="70" rx="140" ry="70" fill="url(#softGlowGrad)"/>
+
+            <!-- Sharp core golden light beam -->
+            <polygon points="426,142 442,142 536,0 520,0" fill="url(#goldBeamGrad)" opacity="0.95"/>
+
+            <!-- Bottom gold border line -->
+            <line x1="0" y1="141" x2="760" y2="141" stroke="#D97706" stroke-width="2"/>
+          </svg>
+
+          <div class="inv-header-content">
+            <div class="inv-header-left-group">
+              <!-- Logo (3D Metallic Emblem + Crisp Vector Text, Zero duplicate AAA) -->
+              <div class="inv-brand-block">
+                <img src="assets/invoice-emblem-3d.png" class="inv-emblem-img" alt="AarambhX Emblem" crossorigin="anonymous">
+                <div class="inv-brand-text-row">
+                  <span>AARAMBH</span><span class="inv-brand-x">X</span>
+                </div>
+                <div class="inv-brand-sub">TECHNOLOGY</div>
+              </div>
+
+              <!-- Vertical Divider -->
+              <div class="inv-gold-divider"></div>
+
+              <!-- Credo -->
+              <div class="inv-credo-block">
+                <div class="inv-credo-words">
+                  IDEAS<br>
+                  TECHNOLOGY<br>
+                  IMPACT
+                </div>
+                <div class="inv-credo-bar"></div>
+                <div class="inv-credo-tagline">
+                  BUILDING A<br>
+                  BRIGHTER TOMORROW
                 </div>
               </div>
-              <div class="inv-hd-ribbon-col">
-                <span class="inv-hd-pillars-text">INNOVATE &nbsp;&bull;&nbsp; AUTOMATE &nbsp;&bull;&nbsp; GROW</span>
+            </div>
+
+            <!-- Pillars -->
+            <div class="inv-pillars-block">
+              <div class="inv-pillars-words">
+                INNOVATE<br>
+                AUTOMATE<br>
+                GROW
               </div>
+              <div class="inv-pillars-bar"></div>
             </div>
           </div>
         </div>
@@ -1301,37 +1345,48 @@
           </div>
         </div>
 
-        <!-- 3. FOOTER STRIP WITH GOLD WEDGE -->
+        <!-- 3. FOOTER STRIP (Precision replica) -->
         <div class="inv-bottom-footer-wrap">
-          <div class="inv-hd-footer">
-            <div class="inv-hd-footer-main">
-              <div class="inv-hd-footer-contact">
-                <div class="inv-hd-contact-item">
-                  <svg class="inv-hd-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div class="inv-footer-flex">
+            <div class="inv-footer-info-col">
+              <!-- Row 1: Contact items -->
+              <div class="inv-footer-contact-row">
+                <div class="inv-footer-contact-item">
+                  <svg class="inv-footer-icon" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   <span>lalithlalu.com@yahoo.com</span>
                 </div>
-                <span class="inv-hd-sep">•</span>
-                <div class="inv-hd-contact-item">
-                  <svg class="inv-hd-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="inv-footer-sep">|</span>
+                <div class="inv-footer-contact-item">
+                  <svg class="inv-footer-icon" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   <span>7676690081</span>
                 </div>
-                <span class="inv-hd-sep">•</span>
-                <div class="inv-hd-contact-item">
-                  <svg class="inv-hd-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#FBBF24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span class="inv-footer-sep">|</span>
+                <div class="inv-footer-contact-item">
+                  <svg class="inv-footer-icon" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                   <span>https://aarambhx-tech.web.app/</span>
                 </div>
-                <span class="inv-hd-sep">•</span>
-                <div class="inv-hd-contact-item">
-                  <svg class="inv-hd-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="inv-footer-sep">|</span>
+                <div class="inv-footer-contact-item">
+                  <svg class="inv-footer-icon" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>Tumkur, Karnataka, India</span>
                 </div>
               </div>
-              <div class="inv-hd-wedge">
-                <span>TECHNOLOGY FOR A BRIGHTER TOMORROW</span>
+
+              <!-- Row 2: Brand Tagline -->
+              <div class="inv-footer-brand-row">
+                <div class="inv-footer-gold-bar"></div>
+                <div class="inv-footer-brand-text">AARAMBHX TECHNOLOGY &nbsp;|&nbsp; AARAMBHX ACADEMY</div>
               </div>
             </div>
-            <div class="inv-hd-footer-sub">
-              <span>— AARAMBHX TECHNOLOGY &nbsp;|&nbsp; AARAMBHX ACADEMY</span>
+
+            <!-- Right Gold Wedge -->
+            <div class="inv-footer-gold-wedge">
+              <div class="inv-wedge-text">
+                TECHNOLOGY<br>
+                FOR A BRIGHTER<br>
+                TOMORROW
+              </div>
+              <div class="inv-wedge-bar"></div>
             </div>
           </div>
         </div>

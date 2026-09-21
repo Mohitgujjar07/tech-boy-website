@@ -1621,29 +1621,18 @@ body.dark-theme .btn-google-auth:hover {
   box-sizing: border-box;
 }
 
-/* 1. TOP HEADER BANNER (Ultra-HD 3D Gold Ribbon & Metallic AarambhX Emblem) */
+/* 1. TOP HEADER BANNER (Ultra-HD Vector SVG + Typography) */
 .inv-top-header-wrap {
   width: 100%;
-  background: #0A0D14;
+  height: 142px;
+  background: #06080F;
   position: relative;
   overflow: hidden;
   border-top-left-radius: 11px;
   border-top-right-radius: 11px;
 }
 
-.inv-hd-header {
-  position: relative;
-  width: 100%;
-  height: 148px;
-  background: #0A0D14;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.inv-hd-ribbon-svg {
+.inv-header-bg-svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -1653,7 +1642,7 @@ body.dark-theme .btn-google-auth:hover {
   z-index: 1;
 }
 
-.inv-hd-header-content {
+.inv-header-content {
   position: relative;
   z-index: 2;
   width: 100%;
@@ -1661,75 +1650,129 @@ body.dark-theme .btn-google-auth:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px 0 28px;
+  padding: 0 32px 0 24px;
   box-sizing: border-box;
 }
 
-.inv-hd-brand-col {
+.inv-header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 100%;
+}
+
+.inv-brand-block {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  width: 250px;
+  width: 156px;
 }
 
-.inv-hd-emblem-img {
-  height: 64px;
+.inv-emblem-img {
+  height: 56px;
   width: auto;
   display: block;
-  margin-bottom: 6px;
-  filter: drop-shadow(0 4px 14px rgba(217, 119, 6, 0.45));
+  filter: drop-shadow(0 3px 12px rgba(217, 119, 6, 0.45));
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
-.inv-hd-credo {
+.inv-brand-text-row {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #F1F5F9;
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.inv-brand-x {
+  color: #F59E0B;
+  font-weight: 900;
+}
+
+.inv-brand-sub {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 0.46rem;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  color: #94A3B8;
+  text-transform: uppercase;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+.inv-gold-divider {
+  width: 1.5px;
+  height: 74px;
+  background: linear-gradient(180deg, rgba(217,119,6,0.15) 0%, #D97706 30%, #FDE68A 50%, #D97706 70%, rgba(217,119,6,0.15) 100%);
+  border-radius: 1px;
+}
+
+.inv-credo-block {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  justify-content: center;
 }
 
-.inv-hd-credo-bold {
+.inv-credo-words {
   font-family: 'Space Grotesk', -apple-system, sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  color: #FBBF24;
+  letter-spacing: 0.16em;
+  color: #F1F5F9;
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85);
-  white-space: nowrap;
+  line-height: 1.35;
 }
 
-.inv-hd-credo-sub {
+.inv-credo-bar {
+  width: 32px;
+  height: 2.5px;
+  background: #D97706;
+  border-radius: 2px;
+  margin: 5px 0 5px 0;
+}
+
+.inv-credo-tagline {
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: #E2E8F0;
+  color: #94A3B8;
   text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85);
-  white-space: nowrap;
+  line-height: 1.25;
 }
 
-.inv-hd-ribbon-col {
+.inv-pillars-block {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 18px;
-  height: 100%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
 }
 
-.inv-hd-pillars-text {
+.inv-pillars-words {
   font-family: 'Space Grotesk', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: #0F172A;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #F1F5F9;
   text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  white-space: nowrap;
+  line-height: 1.38;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.inv-pillars-bar {
+  width: 28px;
+  height: 2.5px;
+  background: #D97706;
+  border-radius: 2px;
+  margin-top: 5px;
 }
 
 .inv-top-banner-img {
@@ -2096,10 +2139,10 @@ body.dark-theme .btn-google-auth:hover {
   text-align: center;
 }
 
-/* 8. FOOTER BANNER (Ultra-HD Vector Contact Strip & 3D Gold Wedge) */
+/* 8. FOOTER BANNER (Precision 2-Row Contact Strip & 3D Gold Wedge) */
 .inv-bottom-footer-wrap {
   width: 100%;
-  background: #0A0D14;
+  background: #06080F;
   position: relative;
   overflow: hidden;
   border-bottom-left-radius: 11px;
@@ -2107,31 +2150,30 @@ body.dark-theme .btn-google-auth:hover {
   border-top: 1.5px solid #D97706;
 }
 
-.inv-hd-footer {
-  width: 100%;
-  background: #0A0D14;
-  display: flex;
-  flex-direction: column;
-}
-
-.inv-hd-footer-main {
+.inv-footer-flex {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
-  min-height: 52px;
-  position: relative;
+  min-height: 62px;
+  width: 100%;
 }
 
-.inv-hd-footer-contact {
+.inv-footer-info-col {
+  flex: 1;
+  padding: 10px 20px 10px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.inv-footer-contact-row {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px 14px;
-  padding: 10px 24px;
-  flex: 1;
+  gap: 6px 12px;
 }
 
-.inv-hd-contact-item {
+.inv-footer-contact-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2141,45 +2183,71 @@ body.dark-theme .btn-google-auth:hover {
   white-space: nowrap;
 }
 
-.inv-hd-contact-item svg {
+.inv-footer-icon {
   width: 13px;
   height: 13px;
   color: #FBBF24;
   flex-shrink: 0;
 }
 
-.inv-hd-sep {
+.inv-footer-sep {
   color: #D97706;
   font-size: 0.75rem;
   font-weight: bold;
 }
 
-.inv-hd-wedge {
-  background: linear-gradient(135deg, #FDE68A 0%, #D97706 60%, #92400E 100%);
-  clip-path: polygon(18px 0, 100% 0, 100% 100%, 0 100%);
-  -webkit-clip-path: polygon(18px 0, 100% 0, 100% 100%, 0 100%);
+.inv-footer-brand-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 10px 24px 10px 32px;
-  color: #0F172A;
-  font-family: 'Space Grotesk', -apple-system, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  box-shadow: -4px 0 16px rgba(0,0,0,0.4);
+  gap: 8px;
 }
 
-.inv-hd-footer-sub {
-  background: #05070B;
-  padding: 6px 24px;
-  text-align: center;
-  font-size: 0.64rem;
+.inv-footer-gold-bar {
+  width: 24px;
+  height: 2.5px;
+  background: #D97706;
+  border-radius: 2px;
+}
+
+.inv-footer-brand-text {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 0.65rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: #94A3B8;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  text-transform: uppercase;
+}
+
+.inv-footer-gold-wedge {
+  background: linear-gradient(135deg, #FFE885 0%, #F59E0B 45%, #D97706 75%, #92400E 100%);
+  clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px 8px 36px;
+  color: #0F172A;
+  box-shadow: -4px 0 16px rgba(0,0,0,0.5);
+}
+
+.inv-wedge-text {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1.25;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.inv-wedge-bar {
+  width: 22px;
+  height: 2px;
+  background: #0F172A;
+  margin-top: 4px;
+  border-radius: 1px;
 }
 
 .inv-qr-img,
