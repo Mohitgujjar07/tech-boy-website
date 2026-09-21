@@ -1601,103 +1601,611 @@ body.dark-theme .btn-google-auth:hover {
   border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
+/* ============================================================
+   AARAMBHX CORPORATE INVOICE TEMPLATE (PRECISION REPLICA)
+   ============================================================ */
+
 .printable-invoice-card {
   background: #FFFFFF;
   color: #0F172A;
-  padding: 36px;
-  border-radius: 12px;
+  padding: 0;
+  border-radius: 14px;
   border: 1px solid #E2E8F0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.1);
   font-family: var(--font-ui);
-}
-
-.inv-head-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 2px solid #E2E8F0;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-
-.inv-client-strip {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  background: #F8FAFC;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 24px;
-  border: 1px solid #E2E8F0;
-}
-
-.inv-render-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.inv-render-table th {
-  background: #F1F5F9;
-  padding: 10px 12px;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: #475569;
-  border-bottom: 1px solid #CBD5E1;
+/* 1. TOP HEADER BANNER (Dark with 3D Gold Facets) */
+.inv-top-header {
+  background: #080C14;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  min-height: 125px;
+  position: relative;
+  overflow: hidden;
+  padding: 22px 32px;
 }
 
-.inv-render-table td {
-  padding: 12px;
-  border-bottom: 1px solid #E2E8F0;
-  font-size: 0.9rem;
+.inv-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
 }
 
-.inv-summary-row {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 24px;
-  align-items: flex-start;
+.inv-header-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.inv-upi-box {
-  background: #F8FAFC;
-  border: 1px dashed #CBD5E1;
-  border-radius: 8px;
-  padding: 14px;
+.inv-logo-mark {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.35));
 }
 
-.inv-calc-totals {
+.inv-header-brand-text {
   display: flex;
   flex-direction: column;
+  line-height: 1.15;
+}
+
+.inv-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FDE68A 60%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.inv-brand-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: #94A3B8;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.inv-header-v-divider {
+  width: 1px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.inv-header-credo {
+  display: flex;
+  flex-direction: column;
+}
+
+.inv-credo-lines {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #FFFFFF;
+  line-height: 1.35;
+}
+
+.inv-gold-line {
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, #D4AF37, #F59E0B);
+  border-radius: 2px;
+  margin: 6px 0 5px;
+}
+
+.inv-gold-line-right {
+  margin-left: auto;
+}
+
+.inv-credo-sub {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: #94A3B8;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.inv-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  padding-left: 40px;
+  z-index: 2;
+}
+
+.inv-header-facets {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: -40px;
+  width: 260px;
+  background: radial-gradient(circle at 80% 40%, rgba(212, 175, 55, 0.45) 0%, rgba(180, 83, 9, 0.25) 45%, transparent 75%),
+              linear-gradient(135deg, rgba(253, 230, 138, 0.15) 0%, rgba(180, 83, 9, 0.05) 100%);
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inv-header-facets::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 140px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.35) 0%, rgba(120, 53, 15, 0.5) 100%);
+  clip-path: polygon(45% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.inv-header-pillars {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  z-index: 2;
+}
+
+.inv-pillar-lines {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #FFFFFF;
+  line-height: 1.35;
+}
+
+/* 2. BODY CONTENT CONTAINER */
+.inv-body-wrap {
+  padding: 28px 36px;
+  background: #FFFFFF;
+}
+
+/* 3. INVOICE TITLE & META ROW */
+.inv-title-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 20px;
+}
+
+.inv-title-col {
+  flex: 1;
+}
+
+.inv-main-heading {
+  font-family: var(--font-display);
+  font-size: 2.35rem;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  color: #0B0E14;
+  margin: 0 0 6px 0;
+  line-height: 1;
+}
+
+.inv-heading-gold-bar {
+  width: 44px;
+  height: 4px;
+  background: #D4AF37;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.inv-greeting-text {
+  font-size: 0.825rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0;
+  font-weight: 500;
+}
+
+.inv-meta-col {
+  flex-shrink: 0;
+}
+
+.inv-meta-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 6px 20px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.inv-meta-label {
+  color: #334155;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.inv-meta-val {
+  color: #0F172A;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.inv-meta-mono {
+  font-family: var(--font-mono);
+}
+
+/* 4. BILL TO & FROM SECTION */
+.inv-parties-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 28px;
+  margin-bottom: 26px;
+}
+
+.inv-section-title {
+  font-size: 0.925rem;
+  font-weight: 800;
+  color: #B45309;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.01em;
+}
+
+.inv-party-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 3px;
+  line-height: 1.25;
+}
+
+.inv-party-address {
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.inv-party-detail {
+  font-size: 0.775rem;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.inv-from-dual-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.inv-from-entity {
+  flex: 1;
+}
+
+.inv-from-divider {
+  width: 1px;
+  align-self: stretch;
+  background: #CBD5E1;
+  flex-shrink: 0;
+}
+
+/* 5. ITEM TABLE */
+.inv-table-wrapper {
+  margin-bottom: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.inv-custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.825rem;
+  border: 1px solid #E2E8F0;
+}
+
+.inv-custom-table th {
+  background: #0E131F !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  padding: 10px 14px;
+  border: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.inv-custom-table td {
+  padding: 10px 14px;
+  border: 1px solid #E2E8F0;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.inv-custom-table tbody tr:nth-child(even) {
+  background: #F8FAFC;
+}
+
+.inv-custom-table tbody tr:nth-child(odd) {
+  background: #FFFFFF;
+}
+
+/* 6. PAYMENT BOX & TOTALS SECTION */
+.inv-calc-row {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 26px;
+}
+
+.inv-payment-card {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.inv-payment-instruction {
+  font-size: 0.785rem;
+  color: #475569;
+  margin: 0 0 12px 0;
+}
+
+.inv-qr-frame {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.inv-payment-footer-line {
+  font-size: 0.75rem;
+  color: #64748B;
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
   gap: 6px;
 }
 
-.inv-calc-totals .calc-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #475569;
-}
-
-.inv-calc-totals .calc-grand-total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.25rem;
+.inv-dash-gold {
+  color: #D4AF37;
   font-weight: 800;
-  color: #2563EB;
-  border-top: 2px solid #E2E8F0;
-  padding-top: 10px;
-  margin-top: 4px;
 }
 
-.inv-footer-stamp {
-  margin-top: 36px;
-  padding-top: 14px;
-  border-top: 1px solid #E2E8F0;
+.inv-totals-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.inv-totals-table {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.inv-total-row {
   display: flex;
   justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  color: #334155;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.inv-total-num {
+  font-weight: 700;
+  color: #0F172A;
+  font-variant-numeric: tabular-nums;
+}
+
+.inv-grand-total-banner {
+  background: #0E131F !important;
+  color: #FFFFFF !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+
+.inv-grand-total-val {
+  color: #F59E0B !important;
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.inv-words-container {
+  padding: 0 4px;
+}
+
+.inv-words-label {
+  font-size: 0.725rem;
+  color: #64748B;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.inv-words-val {
+  font-size: 0.825rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.35;
+}
+
+/* 7. TERMS & CONDITIONS + SIGNATURE */
+.inv-bottom-section {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 28px;
+}
+
+.inv-terms-col {
+  padding-right: 12px;
+}
+
+.inv-terms-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.72rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.inv-terms-list li {
+  margin-bottom: 3px;
+}
+
+.inv-sign-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.inv-sign-entity {
+  font-size: 0.825rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.inv-signature-box {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2px;
+}
+
+.inv-signature-svg {
+  max-height: 50px;
+  width: auto;
+}
+
+.inv-sign-rule {
+  width: 175px;
+  height: 2px;
+  background: #D4AF37;
+  margin: 2px 0 5px;
+}
+
+.inv-sign-label {
   font-size: 0.75rem;
+  font-weight: 700;
+  color: #1E293B;
+  letter-spacing: 0.02em;
+}
+
+/* 8. FOOTER STRIP WITH GOLD WEDGE */
+.inv-bottom-footer {
+  background: #080C14;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: relative;
+  min-height: 64px;
+  overflow: hidden;
+}
+
+.inv-footer-left {
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.inv-footer-contact-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.72rem;
+  color: #E2E8F0;
+}
+
+.inv-footer-contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.inv-footer-contact-item svg,
+.inv-footer-contact-item i {
+  width: 13px;
+  height: 13px;
+  color: #D4AF37;
+}
+
+.inv-footer-sep {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.7rem;
+}
+
+.inv-footer-brand-line {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
   color: #94A3B8;
+  font-weight: 600;
+}
+
+.inv-footer-gold-dash {
+  color: #D4AF37;
+  margin-right: 4px;
+  font-weight: 800;
+}
+
+.inv-footer-right-wedge {
+  background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #B45309 100%);
+  color: #0B0E14;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px 10px 38px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.inv-wedge-content {
+  text-align: right;
+  line-height: 1.15;
+}
+
+.inv-wedge-t1 {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.inv-wedge-t2 {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.inv-wedge-t3 {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
 }
 
 /* Certificate Styles */
@@ -2051,9 +2559,15 @@ body.dark-theme .btn-google-auth:hover {
    PRINT MEDIA RULES (A4 CRISP EXPORT, ZERO UI CHROME)
    ============================================================ */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
   body {
     background: #FFFFFF !important;
     color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   .admin-sidebar,
   .admin-sidebar-backdrop,
@@ -2084,5 +2598,8 @@ body.dark-theme .btn-google-auth:hover {
     border: none !important;
     padding: 0 !important;
     width: 100% !important;
+    max-width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
