@@ -1050,61 +1050,17 @@
 
     const items = activePrintInvoice.items || [];
 
+    const isQuotation = activePrintInvoice.type === 'Quotation';
+    const mainHeading = isQuotation ? 'QUOTATION' : 'INVOICE';
+    const thankYouText = isQuotation
+      ? `Thank you for considering Aarambhx Technology!<br>We appreciate your interest in our solutions.`
+      : `Thank you for choosing Aarambhx Technology!<br>We appreciate your business and support.`;
+
     invoicePrintContainer.innerHTML = `
       <div class="printable-invoice-card" id="printableInvoiceNode">
-        <!-- 1. TOP HEADER BANNER (Dark with 3D Gold Facets) -->
-        <div class="inv-top-header">
-          <div class="inv-header-left">
-            <div class="inv-header-logo-group">
-              <svg class="inv-logo-mark" width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 8L16 84H34L50 48L66 84H84L50 8Z" fill="url(#goldGradA)"/>
-                <path d="M50 18L26 74H38L50 48L62 74H74L50 18Z" fill="url(#goldGradB)"/>
-                <path d="M42 56H58L50 36L42 56Z" fill="#080C14"/>
-                <path d="M72 14L74.5 22.5L83 25L74.5 27.5L72 36L69.5 27.5L61 25L69.5 22.5L72 14Z" fill="#FDE68A"/>
-                <defs>
-                  <linearGradient id="goldGradA" x1="16" y1="8" x2="84" y2="84" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FDE68A"/>
-                    <stop offset="0.45" stop-color="#D4AF37"/>
-                    <stop offset="0.75" stop-color="#AA771C"/>
-                    <stop offset="1" stop-color="#80540C"/>
-                  </linearGradient>
-                  <linearGradient id="goldGradB" x1="26" y1="18" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFFBEB"/>
-                    <stop offset="0.5" stop-color="#F59E0B"/>
-                    <stop offset="1" stop-color="#B45309"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div class="inv-header-brand-text">
-                <div class="inv-brand-name">A A R A M B H X</div>
-                <div class="inv-brand-tag">T E C H N O L O G Y</div>
-              </div>
-            </div>
-
-            <div class="inv-header-v-divider"></div>
-
-            <div class="inv-header-credo">
-              <div class="inv-credo-lines">
-                <span>IDEAS</span>
-                <span>TECHNOLOGY</span>
-                <span>IMPACT</span>
-              </div>
-              <div class="inv-gold-line"></div>
-              <div class="inv-credo-sub">BUILDING A BRIGHTER TOMORROW</div>
-            </div>
-          </div>
-
-          <div class="inv-header-right">
-            <div class="inv-header-facets"></div>
-            <div class="inv-header-pillars">
-              <div class="inv-pillar-lines">
-                <span>INNOVATE</span>
-                <span>AUTOMATE</span>
-                <span>GROW</span>
-              </div>
-              <div class="inv-gold-line inv-gold-line-right"></div>
-            </div>
-          </div>
+        <!-- 1. TOP HEADER BANNER (3D Gold Ribbon & Metallic AarambhX Emblem) -->
+        <div class="inv-top-header-wrap">
+          <img src="assets/invoice-header.png" class="inv-top-banner-img" alt="AarambhX Technology">
         </div>
 
         <!-- 2. BODY CONTENT -->
@@ -1112,33 +1068,39 @@
           <!-- Title & Meta Grid -->
           <div class="inv-title-meta-row">
             <div class="inv-title-col">
-              <h1 class="inv-main-heading">INVOICE</h1>
+              <h1 class="inv-main-heading">${mainHeading}</h1>
               <div class="inv-heading-gold-bar"></div>
               <p class="inv-greeting-text">
-                Thank you for choosing Aarambhx Technology!<br>
-                We appreciate your business and support.
+                ${thankYouText}
               </p>
             </div>
 
             <div class="inv-meta-col">
-              <div class="inv-meta-grid">
-                <span class="inv-meta-label">Invoice No.</span>
-                <span class="inv-meta-val inv-meta-mono">${escapeHtml(invoiceNo)}</span>
-
-                <span class="inv-meta-label">Invoice Date</span>
-                <span class="inv-meta-val">${escapeHtml(invoiceDate)}</span>
-
-                <span class="inv-meta-label">Due Date</span>
-                <span class="inv-meta-val">${escapeHtml(dueDate)}</span>
-
-                <span class="inv-meta-label">Payment Terms</span>
-                <span class="inv-meta-val">${escapeHtml(paymentTerms)}</span>
-
-                <span class="inv-meta-label">Place of Supply</span>
-                <span class="inv-meta-val">${escapeHtml(placeOfSupply)}</span>
-
-                <span class="inv-meta-label">GSTIN</span>
-                <span class="inv-meta-val inv-meta-mono">${escapeHtml(gstin)}</span>
+              <div class="inv-meta-card">
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">${isQuotation ? 'Quotation No.' : 'Invoice No.'}</span>
+                  <span class="inv-meta-val">${escapeHtml(invoiceNo)}</span>
+                </div>
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">${isQuotation ? 'Quotation Date' : 'Invoice Date'}</span>
+                  <span class="inv-meta-val">${escapeHtml(invoiceDate)}</span>
+                </div>
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">${isQuotation ? 'Valid Until' : 'Due Date'}</span>
+                  <span class="inv-meta-val">${escapeHtml(dueDate)}</span>
+                </div>
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">Payment Terms</span>
+                  <span class="inv-meta-val">${escapeHtml(paymentTerms)}</span>
+                </div>
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">Place of Supply</span>
+                  <span class="inv-meta-val">${escapeHtml(placeOfSupply)}</span>
+                </div>
+                <div class="inv-meta-row">
+                  <span class="inv-meta-label">GSTIN</span>
+                  <span class="inv-meta-val">${escapeHtml(gstin)}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1146,19 +1108,19 @@
           <!-- Bill To & From Dual Entities -->
           <div class="inv-parties-row">
             <div class="inv-bill-to-col">
-              <h4 class="inv-section-title">Bill To</h4>
+              <div class="inv-section-title">Bill To</div>
               <div class="inv-party-name">${escapeHtml(clientName)}</div>
               <div class="inv-party-address">
                 <div>${escapeHtml(addr1)}</div>
                 <div>${escapeHtml(addr2)}</div>
                 <div>${escapeHtml(cityState)}</div>
                 <div>${escapeHtml(country)}</div>
-                <div class="inv-gstin-line" style="margin-top: 3px; font-weight: 600;">${clientGst}</div>
+                <div class="inv-gstin-line">${clientGst}</div>
               </div>
             </div>
 
             <div class="inv-from-col">
-              <h4 class="inv-section-title">From</h4>
+              <div class="inv-section-title">From</div>
               <div class="inv-from-dual-grid">
                 <div class="inv-from-entity">
                   <div class="inv-party-name">Aarambhx Technology</div>
@@ -1186,21 +1148,21 @@
             <table class="inv-custom-table">
               <thead>
                 <tr>
-                  <th style="width: 44px; text-align: center;">#</th>
-                  <th style="text-align: left;">Description</th>
-                  <th style="width: 60px; text-align: center;">Qty</th>
-                  <th style="width: 130px; text-align: right;">Unit Price (₹)</th>
-                  <th style="width: 140px; text-align: right;">Amount (₹)</th>
+                  <th style="width: 6%; text-align: center;">#</th>
+                  <th style="width: 48%; text-align: left;">Description</th>
+                  <th style="width: 8%; text-align: center;">Qty</th>
+                  <th style="width: 19%; text-align: right;">Unit Price (₹)</th>
+                  <th style="width: 19%; text-align: right;">Amount (₹)</th>
                 </tr>
               </thead>
               <tbody>
                 ${items.map((item, idx) => `
-                  <tr>
-                    <td style="text-align: center; color: #475569; font-weight: 600;">${idx + 1}</td>
-                    <td style="font-weight: 600; color: #0F172A;">${escapeHtml(item.desc)}</td>
-                    <td style="text-align: center; color: #334155; font-weight: 600;">${item.qty}</td>
-                    <td style="text-align: right; color: #334155; font-variant-numeric: tabular-nums;">${formatCurrency(item.rate)}</td>
-                    <td style="text-align: right; font-weight: 700; color: #0F172A; font-variant-numeric: tabular-nums;">${formatCurrency(item.amount)}</td>
+                  <tr class="${idx % 2 === 1 ? 'inv-tr-even' : 'inv-tr-odd'}">
+                    <td style="text-align: center;">${idx + 1}</td>
+                    <td style="text-align: left; font-weight: 500; color: #111827;">${escapeHtml(item.desc)}</td>
+                    <td style="text-align: center;">${item.qty}</td>
+                    <td style="text-align: right;">${formatCurrency(item.rate)}</td>
+                    <td style="text-align: right; font-weight: 600; color: #111827;">${formatCurrency(item.amount)}</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -1210,10 +1172,10 @@
           <!-- Payment Card & Calculations -->
           <div class="inv-calc-row">
             <div class="inv-payment-card">
-              <h4 class="inv-section-title">Payment</h4>
-              <p class="inv-payment-instruction">Scan the QR code to make the payment</p>
+              <div class="inv-section-title">Payment</div>
+              <div class="inv-payment-instruction">Scan the QR code to make the payment</div>
               <div class="inv-qr-frame">
-                ${upiQrSvg}
+                <img src="assets/invoice-qr-code.png" class="inv-qr-img" alt="Scan to Pay QR">
               </div>
               <div class="inv-payment-footer-line">
                 <span class="inv-dash-gold">—</span> Thank you for your support!
@@ -1222,21 +1184,21 @@
 
             <div class="inv-totals-box">
               <div class="inv-totals-table">
-                <div class="inv-total-row">
+                <div class="inv-total-row inv-tr-subtotal">
                   <span>Subtotal</span>
                   <span class="inv-total-num">₹ ${formatCurrency(subtotal)}</span>
                 </div>
                 ${discount > 0 ? `
-                  <div class="inv-total-row">
+                  <div class="inv-total-row inv-tr-discount">
                     <span>Discount</span>
                     <span class="inv-total-num">-₹ ${formatCurrency(discount)}</span>
                   </div>
                 ` : ''}
-                <div class="inv-total-row">
+                <div class="inv-total-row inv-tr-cgst">
                   <span>CGST (9%)</span>
                   <span class="inv-total-num">₹ ${formatCurrency(cgstAmount)}</span>
                 </div>
-                <div class="inv-total-row">
+                <div class="inv-total-row inv-tr-sgst">
                   <span>SGST (9%)</span>
                   <span class="inv-total-num">₹ ${formatCurrency(sgstAmount)}</span>
                 </div>
@@ -1247,7 +1209,7 @@
               </div>
 
               <div class="inv-words-container">
-                <span class="inv-words-label">Amount in Words:</span>
+                <div class="inv-words-label">Amount in Words:</div>
                 <div class="inv-words-val">${numberToWordsIndian(total)}</div>
               </div>
             </div>
@@ -1256,7 +1218,7 @@
           <!-- Terms & Conditions + Authorized Signatory -->
           <div class="inv-bottom-section">
             <div class="inv-terms-col">
-              <h4 class="inv-section-title">Terms &amp; Conditions</h4>
+              <div class="inv-section-title">Terms &amp; Conditions</div>
               <ol class="inv-terms-list">
                 <li>Payment is due within the stipulated due date.</li>
                 <li>Services will be delivered as per the agreed scope of work.</li>
@@ -1268,12 +1230,7 @@
             <div class="inv-sign-col">
               <div class="inv-sign-entity">For Aarambhx Technology</div>
               <div class="inv-signature-box">
-                <svg class="inv-signature-svg" width="165" height="52" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M25 48 C32 38, 46 14, 52 9 C56 6, 58 12, 54 24 C47 42, 40 56, 36 60 C32 63, 27 62, 33 54 C40 43, 58 29, 69 25 C76 22, 83 29, 87 36 C92 43, 98 52, 105 45 C112 38, 116 27, 120 30 C124 33, 122 45, 126 48 C131 51, 142 34, 150 30 C159 26, 164 34, 166 41 C169 47, 175 51, 182 48" stroke="#0F172A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M52 30 C64 27, 82 23, 104 25" stroke="#0F172A" stroke-width="2.4" stroke-linecap="round"/>
-                  <path d="M136 17 C146 9, 160 6, 168 14 C175 22, 167 39, 153 50 C140 60, 131 66, 146 64 C160 62, 186 48, 202 38" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round"/>
-                  <circle cx="98" cy="19" r="2.4" fill="#0F172A"/>
-                </svg>
+                <img src="assets/invoice-signature-real.png" class="inv-signature-img" alt="Lalith H Signature">
               </div>
               <div class="inv-sign-rule"></div>
               <div class="inv-sign-label">Authorized Signatory</div>
@@ -1282,42 +1239,8 @@
         </div>
 
         <!-- 3. FOOTER STRIP WITH GOLD WEDGE -->
-        <div class="inv-bottom-footer">
-          <div class="inv-footer-left">
-            <div class="inv-footer-contact-row">
-              <span class="inv-footer-contact-item">
-                <i data-lucide="mail"></i>
-                <span>${escapeHtml(settings.businessEmail || 'lalithlalu.com@yahoo.com')}</span>
-              </span>
-              <span class="inv-footer-sep">|</span>
-              <span class="inv-footer-contact-item">
-                <i data-lucide="phone"></i>
-                <span>${escapeHtml(settings.businessPhone || '7676690081')}</span>
-              </span>
-              <span class="inv-footer-sep">|</span>
-              <span class="inv-footer-contact-item">
-                <i data-lucide="globe"></i>
-                <span>${escapeHtml(settings.businessWebsite || 'https://aarambhx-tech.web.app/')}</span>
-              </span>
-              <span class="inv-footer-sep">|</span>
-              <span class="inv-footer-contact-item">
-                <i data-lucide="map-pin"></i>
-                <span>${escapeHtml(settings.businessAddress || 'Tumkur, Karnataka, India')}</span>
-              </span>
-            </div>
-            <div class="inv-footer-brand-line">
-              <span class="inv-footer-gold-dash">—</span>
-              <span>A A R A M B H X &nbsp; T E C H N O L O G Y &nbsp; | &nbsp; A A R A M B H X &nbsp; A C A D E M Y</span>
-            </div>
-          </div>
-
-          <div class="inv-footer-right-wedge">
-            <div class="inv-wedge-content">
-              <div class="inv-wedge-t1">TECHNOLOGY</div>
-              <div class="inv-wedge-t2">FOR A BRIGHTER</div>
-              <div class="inv-wedge-t3">TOMORROW</div>
-            </div>
-          </div>
+        <div class="inv-bottom-footer-wrap">
+          <img src="assets/invoice-footer.png" class="inv-bottom-banner-img" alt="AarambhX Technology Footer">
         </div>
       </div>
     `;
