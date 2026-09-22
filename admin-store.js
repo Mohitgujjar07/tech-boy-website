@@ -29,7 +29,8 @@
     CATALOG: 'ax_catalog_db',
     ANALYTICS: 'ax_analytics_db',
     SETTINGS: 'ax_settings_db',
-    AUDIT: 'ax_audit_trail'
+    AUDIT: 'ax_audit_trail',
+    BLOG: 'ax_blog_posts_db'
   };
 
   // Default Passkey for Admin Access (can also be customized in Settings)
@@ -349,6 +350,247 @@
     }
   ];
 
+  // Seed Data: Blog & Engineering Journal Posts
+  const SEED_BLOG_POSTS = [
+    {
+      id: 'blog-1',
+      slug: 'autonomous-ai-agents-rag',
+      title: 'Building Multi-Agent RAG Architectures with Gemini 2.0 & Local Vector Embeddings',
+      summary: 'A deep-dive into orchestrating autonomous multi-agent reasoning, function calling schemas, and zero-leakage enterprise knowledge retrieval.',
+      category: 'AI & Generative Tech',
+      categorySlug: 'ai-tech',
+      author: 'Lalith H & AarambhX AI Lab',
+      authorRole: 'Founder & Principal Systems Architect',
+      authorAvatar: 'assets/aarambhx-logo.jpg',
+      readTime: '6 min read',
+      date: '2026-03-20',
+      views: 342,
+      featured: true,
+      status: 'Published',
+      tags: ['Agentic AI', 'RAG', 'Gemini 2.0', 'Vector DB', 'Python'],
+      metaDescription: 'Complete engineering guide to multi-agent RAG pipelines, function calling schemas, and localized vector search for high-throughput enterprise systems.',
+      image: 'assets/art/hero-digital-clouds.webp',
+      content: `## The Paradigm Shift: From Single Prompts to Autonomous Multi-Agent Swarms
+
+Traditional retrieval-augmented generation (RAG) relied on naive vector similarity: take a user prompt, compute cosine distance over a flat vector index, stuff top-k chunks into context, and hope the language model hallucinated minimally. 
+
+In real-world enterprise deployments across Karnataka institutions, this naive approach fails on:
+1. **Multi-hop reasoning**: "Compare the power efficiency of our 2025 agricultural rig with our 2026 LoRa node and draft an invoice summary."
+2. **Context degradation**: Diluting reasoning tokens with irrelevant retrieved paragraphs.
+3. **Deterministic execution**: When an action must commit to a database or trigger a physical GPIO pin.
+
+At **AarambhX Technology**, we solved this by moving to a **Decoupled Multi-Agent Topology** with hierarchical planner-worker agents.
+
+\`\`\`
+┌─────────────────────────────────────────────────────────────┐
+│                   AARAMBHX AGENTIC TOPOLOGY                 │
+│                                                             │
+│   [User Input] ──► [Supervisor / Planner Agent]             │
+│                            │                                │
+│          ┌─────────────────┼─────────────────┐              │
+│          ▼                 ▼                 ▼              │
+│   [Vector Retrieval]  [SQL DB Query]  [IoT Hardware Telemetry]│
+│          │                 │                 │              │
+│          └─────────────────┼─────────────────┘              │
+│                            ▼                                │
+│                   [Synthesizer Agent]                       │
+│                            │                                │
+│                   [Structured Output]                       │
+└─────────────────────────────────────────────────────────────┘
+\`\`\`
+
+### 1. Vector Quantization & Chunking Strategy
+
+Instead of arbitrary character chunking, we implement semantic syntax boundary splitting with overlapping metadata:
+
+\`\`\`python
+import numpy as np
+from typing import List, Dict
+
+class LocalEmbeddingRetriever:
+    def __init__(self, dimension: int = 768):
+        self.dim = dimension
+        self.vectors: np.ndarray = np.empty((0, dimension), dtype=np.float32)
+        self.metadata: List[Dict] = []
+
+    def cosine_similarity(self, query_vec: np.ndarray, top_k: int = 5):
+        # Normalize query vector
+        norm_query = query_vec / np.linalg.norm(query_vec)
+        # Compute cosine distance across entire matrix in vectorized C-speed
+        norms = np.linalg.norm(self.vectors, axis=1)
+        scores = np.dot(self.vectors, norm_query) / (norms + 1e-9)
+        top_indices = np.argsort(scores)[::-1][:top_k]
+        return [(scores[idx], self.metadata[idx]) for idx in top_indices]
+\`\`\`
+
+### 2. Guardrails & Zero-Hallucination Function Calling
+
+When building real AI products, every tool execution must be strictly validated against JSON schema definitions before evaluation. This prevents agent loops from executing invalid database queries or triggering malformed HTTP requests.
+
+> **Architectural Insight:** Always separate the reasoning phase from the execution phase. An agent must generate a dry-run execution plan before invoking state-changing APIs.
+
+### Key Takeaways for Production Deployments
+- Always use small, dense embeddings (e.g. 768-dim) over bloated multi-thousand dimensions for edge devices.
+- Cache query embeddings locally with an LRU cache to reduce latency by up to 80%.
+- Pair your vector search with reciprocal rank fusion (RRF) combining keyword and semantic scores.`
+    },
+    {
+      id: 'blog-2',
+      slug: 'esp32-lorawan-smart-agriculture',
+      title: 'Industrial ESP32 & LoRaWAN: Engineering Long-Range Precision IoT Sensors for Tumakuru Farms',
+      summary: 'Architecting ultra-low-power environmental telemetry with custom sleep modes (<15uA), LoRaWAN sub-GHz packet routing, and multi-season solar battery resilience.',
+      category: 'Hardware & IoT',
+      categorySlug: 'hardware-iot',
+      author: 'AarambhX Embedded Systems Lab',
+      authorRole: 'Hardware & Firmware Division',
+      authorAvatar: 'assets/aarambhx-logo.jpg',
+      readTime: '5 min read',
+      date: '2026-03-18',
+      views: 289,
+      featured: false,
+      status: 'Published',
+      tags: ['ESP32', 'LoRaWAN', 'IoT', 'Embedded C++', 'Hardware'],
+      metaDescription: 'Field guide to designing long-range battery-powered agricultural IoT rigs using ESP32, SX1276 LoRa transceivers, and deep sleep optimization.',
+      image: 'assets/art/iot-telemetry-preview.webp',
+      content: `## Surviving Harsh Realities: The Farmland IoT Problem
+
+Deploying smart agriculture sensors across agricultural fields in Tumakuru, Karnataka demands exceptional hardware resilience. Standard Wi-Fi or Bluetooth cannot penetrate 2 kilometers of coconut groves and sugarcane canopy. Cellular 4G modules consume hundreds of milliamperes, draining batteries within weeks.
+
+Our solution: **Sub-GHz LoRaWAN (865-867 MHz IN865 band)** paired with a custom low-quiescent-current power management board.
+
+### 1. Power Budget Optimization: Achieving <15µA Deep Sleep
+
+The standard ESP32 development board consumes ~12mA even when "sleeping", primarily due to leaky USB-to-UART bridge ICs and cheap linear LDO regulators (e.g., AMS1117). 
+
+We stripped the board down to bare silicon and added a high-efficiency buck regulator with a quiescent draw of just 1.2µA.
+
+\`\`\`cpp
+#include <Arduino.h>
+#include <esp_sleep.h>
+
+#define uS_TO_S_FACTOR 1000000ULL  // Conversion factor for micro seconds to seconds
+#define TIME_TO_SLEEP  900        // Sleep for 15 minutes (900 seconds)
+
+void setup() {
+    // 1. Isolate GPIO pins to eliminate back-feeding through sensors
+    rtc_gpio_isolate(GPIO_NUM_12);
+    rtc_gpio_isolate(GPIO_NUM_14);
+
+    // 2. Sample Capacitive Moisture & Ambient Temperature Sensors
+    sampleFieldSensors();
+
+    // 3. Transmit 12-byte telemetry packet via SX1276 LoRa
+    transmitLoRaPacket();
+
+    // 4. Configure deep sleep timer and power down RTC domain
+    esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
+    esp_deep_sleep_start();
+}
+\`\`\`
+
+### 2. Packet Serialization & Telemetry Format
+
+To maximize battery life and minimize airtime under regional regulations, sensor data is packed into a compact 12-byte binary payload:
+- **Bytes 0-1**: Soil Moisture (0-1023 raw mapped to 0-100.0%)
+- **Bytes 2-3**: Ambient Temperature (Fixed-point signed int16)
+- **Bytes 4-5**: Relative Humidity
+- **Bytes 6-7**: Battery Voltage (mV)
+- **Bytes 8-11**: Sensor Node Hardware ID & Checksum
+
+> **Field Note:** By compressing data into 12 bytes at SF7 (Spreading Factor 7), transmission time drops to **41 milliseconds**, preserving over 99.98% of power in deep sleep.`
+    },
+    {
+      id: 'blog-3',
+      slug: 'high-performance-fullstack-architecture',
+      title: 'Sub-50ms Global Web Vitals: Modern Zero-Bloat Vanilla & Micro-Hydration Engineering',
+      summary: 'How eliminating multi-megabyte JavaScript frameworks achieved 99+ Google Lighthouse scores, instant INP, and sub-50ms First Contentful Paint globally.',
+      category: 'Full-Stack & Frameworks',
+      categorySlug: 'fullstack',
+      author: 'Lalith H',
+      authorRole: 'Founder & Principal Systems Architect',
+      authorAvatar: 'assets/aarambhx-logo.jpg',
+      readTime: '4 min read',
+      date: '2026-03-15',
+      views: 412,
+      featured: false,
+      status: 'Published',
+      tags: ['Performance', 'Web Vitals', 'JavaScript', 'CSS Architecture'],
+      metaDescription: 'Engineering analysis of achieving sub-50ms Web Vitals, 0ms Cumulative Layout Shift, and 99+ Lighthouse performance scores without framework bloat.',
+      image: 'assets/art/work-showcase-dev-monitors.webp',
+      content: `## The Modern Web Performance Crisis
+
+The modern web is suffering from framework obesity. The average enterprise marketing site ships over 2.4 megabytes of minified JavaScript, forcing mobile CPUs to spend 1,200ms executing hydration code before users can even interact with a button.
+
+When building the **AarambhX Platform**, we chose a radical engineering philosophy: **Zero runtime framework bloat, deterministic DOM updates, and sub-50ms Core Web Vitals**.
+
+### 1. Eliminating Cumulative Layout Shift (CLS < 0.01)
+
+Layout shifts happen when images, fonts, or dynamic banners mount without pre-allocated container geometry. We enforce strict rules:
+1. Every \`<img>\` tag specifies explicit \`width\` and \`height\` attributes matching aspect ratios.
+2. Custom web fonts use \`font-display: swap\` with matched metric fallbacks.
+3. Floating headers use CSS transform-based hardware acceleration rather than manipulating \`top\` on every scroll frame.
+
+\`\`\`css
+/* High-performance scroll transitions with zero repaints */
+.apple-glass-nav {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0);
+  will-change: transform, max-width;
+  backdrop-filter: blur(20px);
+}
+\`\`\`
+
+### 2. Interaction to Next Paint (INP < 16ms)
+
+To guarantee 60fps responsiveness on budget smartphones, UI updates must never block the main browser thread. Long tasks (>50ms) are chunked using \`requestAnimationFrame\` or \`requestIdleCallback\`.
+
+> **Result:** AarambhX achieves **99+ on Google Lighthouse**, zero CLS, and instant sub-16ms touch responses across 2G/3G regional mobile networks.`
+    },
+    {
+      id: 'blog-4',
+      slug: 'case-study-enterprise-campus-lan',
+      title: 'Deploying 10GbE Backbone & Micro-Segmented Wi-Fi 6 Across Academic Campuses',
+      summary: 'Case study on architecting a redundant, high-throughput campus LAN for 2,000+ simultaneous engineering students with VLAN isolation and zero packet drops.',
+      category: 'Case Studies & News',
+      categorySlug: 'case-studies',
+      author: 'AarambhX Infrastructure Team',
+      authorRole: 'Network Engineering Lead',
+      authorAvatar: 'assets/aarambhx-logo.jpg',
+      readTime: '5 min read',
+      date: '2026-03-10',
+      views: 375,
+      featured: false,
+      status: 'Published',
+      tags: ['Networking', 'Wi-Fi 6', 'Cat6A', 'VLAN', 'Cisco'],
+      metaDescription: 'Field deployment report on engineering a 10GbE fiber backbone and high-density Wi-Fi 6 wireless infrastructure for educational campuses.',
+      image: 'assets/art/vms-preview.webp',
+      content: `## The Challenge: Surviving 2,000 Concurrent Student Devices
+
+Educational institutions frequently suffer from network paralysis during campus hackathons and exam sessions. Common failure points include:
+- Flat /24 subnet broadcasts flooding wireless access points.
+- Rogue DHCP servers on student laptops bringing down core gateways.
+- Inadequate backhaul bandwidth between server rooms and computer laboratories.
+
+AarambhX Technology was commissioned to design and commission an enterprise-grade campus infrastructure.
+
+### 1. Network Topology & Micro-Segmentation
+
+We deployed an IEEE 802.1Q VLAN trunking architecture isolating traffic into dedicated security zones:
+- **VLAN 10 - Management & Core Servers**: Isolated from student subnets with strict firewall rules.
+- **VLAN 20 - Computer Science AI Labs**: Full 1GbE symmetrical uplinks with direct access to local GPU clusters.
+- **VLAN 30 - Faculty & Administration**: Prioritized QoS for voice and biometric attendance.
+- **VLAN 40 - Student & BYOD Wi-Fi**: Client isolation enabled, blocking peer-to-peer scans with bandwidth shaping per client.
+
+### 2. Fiber Backbone & Structured Cat6A Cabling
+
+Every distribution switch connects back to the core data center via **10G SFP+ dual LC single-mode fiber links** in LACP link aggregation. 
+
+> **Outcome:** Total throughput jumped from 45 Mbps bottlenecked to **940+ Mbps symmetrical** per lab workstation, with zero Wi-Fi dropouts during a 48-hour continuous student hackathon.`
+    }
+  ];
+
   // Seed Data: Analytics & Engagement Counters
   const SEED_ANALYTICS = {
     visits: 248,
@@ -501,6 +743,9 @@
           ctaLink: 'academy.html#workshops',
           tone: 'blue'
         });
+      }
+      if (!getRaw(STORAGE_KEYS.BLOG)) {
+        setJSON(STORAGE_KEYS.BLOG, SEED_BLOG_POSTS);
       }
     },
 
@@ -1155,6 +1400,105 @@
     },
 
     // -----------------------------------------------------------------------
+    // BLOG & ENGINEERING JOURNAL CMS
+    // -----------------------------------------------------------------------
+    getBlogPosts(categoryFilter, statusFilter) {
+      let posts = getJSON(STORAGE_KEYS.BLOG, null);
+      if (!posts || !Array.isArray(posts) || !posts.length) {
+        posts = SEED_BLOG_POSTS;
+        setJSON(STORAGE_KEYS.BLOG, posts);
+      }
+      let result = [...posts];
+      if (categoryFilter && categoryFilter !== 'all') {
+        result = result.filter(p => p.categorySlug === categoryFilter || p.category === categoryFilter);
+      }
+      if (statusFilter && statusFilter !== 'all') {
+        result = result.filter(p => (p.status || 'Published').toLowerCase() === statusFilter.toLowerCase());
+      }
+      return result;
+    },
+
+    getBlogPostBySlug(slug) {
+      if (!slug) return null;
+      const posts = this.getBlogPosts();
+      return posts.find(p => p.slug === slug || String(p.id) === String(slug)) || null;
+    },
+
+    getBlogPostById(id) {
+      if (!id) return null;
+      const posts = this.getBlogPosts();
+      return posts.find(p => String(p.id) === String(id)) || null;
+    },
+
+    saveBlogPost(post) {
+      let posts = this.getBlogPosts();
+      const slug = (post.slug || post.title || 'untitled').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const now = new Date().toISOString().split('T')[0];
+
+      if (post.id) {
+        const idx = posts.findIndex(p => String(p.id) === String(post.id));
+        if (idx !== -1) {
+          posts[idx] = {
+            ...posts[idx],
+            ...post,
+            slug: slug || posts[idx].slug,
+            updatedAt: new Date().toISOString()
+          };
+          setJSON(STORAGE_KEYS.BLOG, posts);
+          this.logAuditEvent('BLOG_UPDATED', { id: post.id, title: post.title });
+          return posts[idx];
+        }
+      }
+
+      const newPost = {
+        id: 'blog-' + Date.now(),
+        slug: slug || ('article-' + Date.now()),
+        title: post.title || 'Untitled Article',
+        summary: post.summary || '',
+        content: post.content || '',
+        category: post.category || 'AI & Generative Tech',
+        categorySlug: post.categorySlug || 'ai-tech',
+        author: post.author || 'Lalith H & AarambhX AI Lab',
+        authorRole: post.authorRole || 'Founder & Principal Systems Architect',
+        authorAvatar: post.authorAvatar || 'assets/aarambhx-logo.jpg',
+        readTime: post.readTime || '4 min read',
+        date: post.date || now,
+        views: post.views || 0,
+        featured: !!post.featured,
+        status: post.status || 'Published',
+        tags: Array.isArray(post.tags) ? post.tags : (post.tags ? post.tags.split(',').map(t => t.trim()) : []),
+        metaDescription: post.metaDescription || '',
+        image: post.image || 'assets/hero.webp',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      posts.unshift(newPost);
+      setJSON(STORAGE_KEYS.BLOG, posts);
+      this.logAuditEvent('BLOG_CREATED', { id: newPost.id, title: newPost.title });
+      return newPost;
+    },
+
+    deleteBlogPost(id) {
+      let posts = this.getBlogPosts();
+      const filtered = posts.filter(p => String(p.id) !== String(id));
+      setJSON(STORAGE_KEYS.BLOG, filtered);
+      this.logAuditEvent('BLOG_DELETED', { id });
+      return true;
+    },
+
+    incrementBlogPostViews(slugOrId) {
+      let posts = this.getBlogPosts();
+      const post = posts.find(p => p.slug === slugOrId || String(p.id) === String(slugOrId));
+      if (post) {
+        post.views = (post.views || 0) + 1;
+        setJSON(STORAGE_KEYS.BLOG, posts);
+        return post.views;
+      }
+      return 0;
+    },
+
+    // -----------------------------------------------------------------------
     // METRICS / DASHBOARD SUMMARY
     // -----------------------------------------------------------------------
     getDashboardMetrics() {
@@ -1214,7 +1558,8 @@
         catalog: this.getCatalog(),
         analytics: this.getAnalytics(),
         settings: this.getSettings(),
-        auditTrail: this.getAuditTrail()
+        auditTrail: this.getAuditTrail(),
+        blogPosts: this.getBlogPosts()
       }, null, 2);
     },
 
@@ -1238,6 +1583,7 @@
         if (Array.isArray(data.invoices)) setJSON(STORAGE_KEYS.INVOICES, data.invoices);
         if (Array.isArray(data.testimonials)) setJSON(STORAGE_KEYS.TESTIMONIALS, data.testimonials);
         if (Array.isArray(data.catalog)) setJSON(STORAGE_KEYS.CATALOG, data.catalog);
+        if (Array.isArray(data.blogPosts)) setJSON(STORAGE_KEYS.BLOG, data.blogPosts);
         if (Array.isArray(data.auditTrail)) setJSON(STORAGE_KEYS.AUDIT, data.auditTrail);
         if (data.banner && typeof data.banner === 'object') setJSON(STORAGE_KEYS.BANNER, data.banner);
         if (data.analytics && typeof data.analytics === 'object') setJSON(STORAGE_KEYS.ANALYTICS, data.analytics);
@@ -1258,6 +1604,7 @@
       setJSON(STORAGE_KEYS.INVOICES, SEED_INVOICES);
       setJSON(STORAGE_KEYS.TESTIMONIALS, SEED_TESTIMONIALS);
       setJSON(STORAGE_KEYS.CATALOG, SEED_CATALOG);
+      setJSON(STORAGE_KEYS.BLOG, SEED_BLOG_POSTS);
       setJSON(STORAGE_KEYS.ANALYTICS, SEED_ANALYTICS);
       setJSON(STORAGE_KEYS.SETTINGS, SEED_SETTINGS);
       setJSON(STORAGE_KEYS.AUDIT, []);

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AarambhX Engineering Journal &amp; AI Tech News — Advanced Systems, IoT &amp; Full-Stack Architecture</title>
+  
+  <meta name="description" content="Technical breakdowns, production case studies, agentic AI architecture, industrial IoT engineering, and high-performance full-stack systems from the AarambhX Engineering Lab.">
+  <meta name="keywords" content="AarambhX Journal, AI Engineering, Multi-Agent RAG, ESP32 IoT, LoRaWAN, Web Performance, Full-Stack Architecture, Tumakuru Tech">
+  <meta name="author" content="Lalith H &amp; AarambhX Engineering Team">
+  <link rel="canonical" href="https://aarambhx-technology.vercel.app/blog.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aarambhx-technology.vercel.app/blog.html">
+  <meta property="og:title" content="AarambhX Engineering Journal &amp; AI Tech News">
+  <meta property="og:description" content="Technical breakdowns, production case studies, agentic AI architecture, and industrial IoT engineering from AarambhX Technology.">
+  <meta property="og:image" content="assets/hero.webp">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://aarambhx-technology.vercel.app/blog.html">
+  <meta name="twitter:title" content="AarambhX Engineering Journal &amp; AI Tech News">
+  <meta name="twitter:description" content="Technical breakdowns, production case studies, agentic AI architecture, and industrial IoT engineering from AarambhX Technology.">
+  <meta name="twitter:image" content="assets/hero.webp">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/aarambhx-logo.jpg">
+  <link rel="apple-touch-icon" href="assets/aarambhx-logo.jpg">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core & Page Stylesheets -->
+  <link rel="stylesheet" href="styles.css?v=2.3.4">
+  <link rel="stylesheet" href="blog.css?v=3.0.0">
+
+  <!-- Schema.org JSON-LD Structured Data: Blog & BlogPosting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": "https://aarambhx-technology.vercel.app/blog.html#blog",
+        "name": "AarambhX Engineering Journal & AI Tech News",
+        "description": "Deep technical analysis, architecture whitepapers, agentic AI research, and industrial IoT telemetry guides.",
+        "url": "https://aarambhx-technology.vercel.app/blog.html",
+        "publisher": {
+          "@type": "Organization",
+          "name": "AarambhX Technology",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aarambhx-technology.vercel.app/assets/aarambhx-logo.jpg"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://aarambhx-technology.vercel.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Engineering Journal",
+            "item": "https://aarambhx-technology.vercel.app/blog.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="blog-page dark-theme">
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-bar" id="readingProgressBar"></div>
+
+  <!-- Ambient Glowing Meshes -->
+  <div class="blog-bg-ambient" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       APPLE iOS FLOATING GLASSMORPHISM HEADER (Dynamic Island)
+       ============================================================ -->
+  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="nav-brand" aria-label="Aarambhx Technology Home">
+        <span class="brand-badge">
+          <picture>
+            <source srcset="assets/aarambhx-logo.avif" type="image/avif">
+            <source srcset="assets/aarambhx-logo.webp" type="image/webp">
+            <img src="assets/aarambhx-logo.jpg" alt="Aarambhx Technology Logo" class="brand-logo-img" width="38" height="38" fetchpriority="high">
+          </picture>
+        </span>
+        <span class="brand-text">Aarambhx <span class="brand-highlight">Technology</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html#services" class="nav-item">Services</a></li>
+          <li><a href="work.html" class="nav-item">Our Work</a></li>
+          <li><a href="index.html#projects" class="nav-item">Projects</a></li>
+          <li><a href="academy.html" class="nav-item dev-link-highlight" title="AarambhX Academy — Industrial Training &amp; Workshops">Academy</a></li>
+          <li><a href="blog.html" class="nav-item active" style="color:var(--blog-gold); font-weight:700;">Journal</a></li>
+          <li><a href="index.html#contact" class="nav-item">Contact</a></li>
+          <li class="nav-item-aux"><a href="brochure.html" class="nav-item nav-item-aux" title="Institutional Training Brochure">Brochure</a></li>
+          <li class="nav-item-aux"><a href="highlights.html" class="nav-item nav-item-aux" title="Watch Instagram Reels">Reels</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA, Theme Toggle & Mobile Trigger -->
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">
+          <i data-lucide="moon" class="theme-icon-dark"></i>
+          <i data-lucide="sun" class="theme-icon-light"></i>
+        </button>
+        <a href="index.html#contact" class="apple-btn-cta desktop-cta">
+          <span>Get Consultation</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       1. BLOG LISTING VIEW CONTAINER
+       ============================================================ -->
+  <main id="blogListingView">
+    
+    <!-- Hero Header -->
+    <section class="blog-hero">
+      <div class="blog-container">
+        <span class="blog-eyebrow">
+          <i data-lucide="zap" style="width:14px; height:14px;"></i>
+          <span>Engineering Journal &amp; AI Tech News</span>
+        </span>
+        <h1 class="blog-hero-title">
+          Architectural Insights, <span class="gold-accent">AI Research</span> &amp; Hardware Labs
+        </h1>
+        <p class="blog-hero-lead">
+          Field-tested whitepapers, production engineering post-mortems, and industrial IoT implementations direct from AarambhX Technology engineers.
+        </p>
+      </div>
+    </section>
+
+    <div class="blog-container">
+      
+      <!-- Featured Story Mount Point -->
+      <div id="featuredStoryMount"></div>
+
+      <!-- Category Filter Tabs & Instant Search -->
+      <div class="blog-controls-strip">
+        <div class="blog-filter-tabs">
+          <button type="button" class="tab-filter-btn active" data-category="all">All Articles</button>
+          <button type="button" class="tab-filter-btn" data-category="ai-tech">🤖 AI &amp; Generative Tech</button>
+          <button type="button" class="tab-filter-btn" data-category="fullstack">💻 Full-Stack &amp; Frameworks</button>
+          <button type="button" class="tab-filter-btn" data-category="hardware-iot">⚡ Hardware &amp; IoT</button>
+          <button type="button" class="tab-filter-btn" data-category="case-studies">🚀 Case Studies &amp; News</button>
+        </div>
+
+        <div class="blog-search-box">
+          <i data-lucide="search" class="blog-search-icon" style="width:16px; height:16px;"></i>
+          <input type="text" id="blogSearchInput" placeholder="Search technical articles, code, tags..." aria-label="Search articles">
+        </div>
+      </div>
+
+      <!-- Bento Grid Mount Point -->
+      <div class="blog-grid" id="blogGridMount"></div>
+
+      <!-- Bi-Weekly Newsletter Lead Magnet -->
+      <section class="blog-newsletter-section">
+        <h3 class="newsletter-title">Subscribe to the AarambhX Engineering Dispatch</h3>
+        <p class="newsletter-desc">
+          Get high-signal architectural blueprints, embedded system schematics, and agentic AI tutorials delivered directly to your inbox every two weeks. Zero fluff.
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="Enter your corporate or academic email" required aria-label="Email address">
+          <button type="submit" class="newsletter-submit-btn">Subscribe Free</button>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       2. DEDICATED ARTICLE READER VIEW (Deep-Linked via Hash)
+       ============================================================ -->
+  <div id="articleReaderView" class="article-reader-container" style="display: none;"></div>
+
+  <!-- ============================================================
+       3. ULTRA-HD AARAMBHX FOOTER
+       ============================================================ -->
+  <footer class="site-footer" style="margin-top: 80px; padding: 60px 0 30px; border-top: 1px solid rgba(255,255,255,0.08); background: #03060C;">
+    <div class="blog-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; margin-bottom: 40px;">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 14px;">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" style="width:32px; height:32px; border-radius:8px;">
+            <span style="font-size:1.15rem; font-weight:800; color:#FFFFFF;">AarambhX <span style="color:var(--blog-gold);">Technology</span></span>
+          </div>
+          <p style="font-size:0.88rem; color:var(--blog-text-muted); line-height:1.6;">
+            Your single technology partner for custom cloud software, industrial IoT sensor rigs, high-density structured networking, and terminal-driven academy workshops.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Publication Tracks</h4>
+          <ul style="list-style:none; padding:0; margin:0; font-size:0.86rem; line-height:2.2; color:var(--blog-text-muted);">
+            <li><a href="#ai-tech" style="color:inherit; text-decoration:none;">AI &amp; Multi-Agent RAG</a></li>
+            <li><a href="#fullstack" style="color:inherit; text-decoration:none;">Full-Stack &amp; Web Vitals</a></li>
+            <li><a href="#hardware-iot" style="color:inherit; text-decoration:none;">Industrial ESP32 &amp; LoRaWAN</a></li>
+            <li><a href="#case-studies" style="color:inherit; text-decoration:none;">Enterprise Case Studies</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Quick Navigation</h4>
+          <ul style="list-style:none; padding:0; margin:0; font-size:0.86rem; line-height:2.2; color:var(--blog-text-muted);">
+            <li><a href="index.html" style="color:inherit; text-decoration:none;">Home</a></li>
+            <li><a href="work.html" style="color:inherit; text-decoration:none;">Our Work &amp; Portfolio</a></li>
+            <li><a href="academy.html" style="color:inherit; text-decoration:none;">AarambhX Academy</a></li>
+            <li><a href="brochure.html" style="color:inherit; text-decoration:none;">Interactive Brochure</a></li>
+            <li><a href="highlights.html" style="color:inherit; text-decoration:none;">Reels &amp; Highlights</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Contact &amp; Labs</h4>
+          <p style="font-size:0.86rem; color:var(--blog-text-muted); line-height:1.6; margin-bottom:12px;">
+            Tumakuru, Karnataka &bull; Remote Worldwide<br>
+            Direct: +91 7676690081 / +91 9916856922<br>
+            Email: lalithlalu.com@yahoo.com
+          </p>
+          <a href="https://wa.me/919916856922?text=Hello%20AarambhX!%20I%20read%20your%20Engineering%20Journal." target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; color:#22C55E; font-size:0.86rem; font-weight:700; text-decoration:none;">
+            <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
+            <span>Chat with Lead Architect</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:0.78rem; color:var(--blog-text-subtle);">
+        <span>&copy; 2026 AarambhX Technology. All rights reserved.</span>
+        <span>Crafted with Ultra-HD Zero-Bloat Architecture &bull; sub-50ms INP</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/919916856922?text=Hello%20AarambhX!%20I%20have%20an%20inquiry%20regarding%20your%20Engineering%20Journal%20and%20tech%20solutions." 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     class="whatsapp-fab" 
+     aria-label="Chat directly on WhatsApp with AarambhX Team"
+     title="Chat with Us on WhatsApp">
+    <i data-lucide="message-circle"></i>
+    <span class="fab-pulse"></span>
+  </a>
+
+  <!-- Toast Notification Mount -->
+  <div id="toastContainer" class="ax-toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="admin-store.js"></script>
+  <script src="main.js?v=2.3.4"></script>
+  <script src="blog.js?v=3.0.0"></script>
+  <script>
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

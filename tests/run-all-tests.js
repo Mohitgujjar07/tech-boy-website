@@ -20,6 +20,7 @@ const { runLighthouseAuditTests } = require('./lighthouse-audit.test');
 const { runBrochureSpecTests } = require('./brochure-spec.test');
 const { runHighlightsSpecTests } = require('./highlights-spec.test');
 const { runAdminDashboardTests } = require('./admin-dashboard.test');
+const { runBlogSpecTests } = require('./blog-spec.test');
 const { makeHttpRequest } = require('./test-utils');
 
 // ANSI Color Codes
@@ -36,7 +37,7 @@ async function main() {
   const overallStartTime = Date.now();
 
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
-  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 12)                          ${RESET}`);
+  console.log(`${BOLD}${BLUE}   AARAMBHX TECHNOLOGY — E2E TEST SUITE (TIERS 1 - 13)                          ${RESET}`);
   console.log(`${BOLD}${BLUE}================================================================================${RESET}`);
   console.log(`${GRAY}Running opaque-box E2E DOM, CSS, JS, Config, and Integration verification...${RESET}\n`);
 
@@ -423,6 +424,35 @@ async function main() {
   });
 
   // -------------------------------------------------------------------------
+  // Tier 13: Engineering Journal & AI Tech News Spec (blog-spec.test.js)
+  // -------------------------------------------------------------------------
+  console.log(`\n${BOLD}${CYAN}▶ EXECUTING TIER 13: Engineering Journal & AI Tech News Spec${RESET}`);
+  let t13Passed = 0;
+  let t13Failed = 0;
+  let t13Assertions = 0;
+  try {
+    const blogRes = runBlogSpecTests();
+    t13Passed = blogRes.passed;
+    t13Failed = blogRes.failed;
+    t13Assertions = blogRes.assertions;
+  } catch (err) {
+    t13Failed = 1;
+    console.error(`  ${RED}✖ Engineering Journal suite failed: ${err.message}${RESET}`);
+  }
+  totalTests += (t13Passed + t13Failed);
+  totalPassed += t13Passed;
+  totalFailed += t13Failed;
+  totalAssertions += t13Assertions;
+
+  tierReports.push({
+    tier: 'Tier 13: Engineering Journal Spec',
+    total: t13Passed + t13Failed,
+    passed: t13Passed,
+    failed: t13Failed,
+    assertions: t13Assertions
+  });
+
+  // -------------------------------------------------------------------------
   // Optional Live HTTP Server Check
   // -------------------------------------------------------------------------
   console.log(`\n${BOLD}${CYAN}▶ CHECKING LOCAL HTTP SERVER STATUS${RESET}`);
@@ -462,7 +492,7 @@ async function main() {
   console.log(`  ${BOLD}Pass Rate:${RESET} ${finalColor}${((totalPassed / totalTests) * 100).toFixed(1)}%${RESET}`);
 
   if (totalFailed === 0) {
-    console.log(`\n${BOLD}${GREEN}✔ ALL 12 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
+    console.log(`\n${BOLD}${GREEN}✔ ALL 13 TIERS PASSED PERFECTLY (100% SUCCESSFUL TEST RUN)${RESET}\n`);
     process.exit(0);
   } else {
     console.log(`\n${BOLD}${RED}✖ ${totalFailed} TEST(S) FAILED${RESET}\n`);

@@ -162,6 +162,10 @@
           <i data-lucide="video"></i>
           <span>Reels &amp; Highlights</span>
         </a>
+        <a href="#blog" class="admin-nav-item" data-tab="blog">
+          <i data-lucide="book-open"></i>
+          <span>Blog &amp; Journal CMS</span>
+        </a>
 
         <div class="nav-heading">Live Operations</div>
         <a href="#banner" class="admin-nav-item" data-tab="banner">
@@ -725,6 +729,72 @@
                   <span style="font-size: 0.75rem; font-weight: 500; color: var(--adm-text-subtle);">(Updates in real time as you edit)</span>
                 </h4>
                 <div id="bannerPreviewBox" style="border-radius: 12px; overflow: hidden;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             TAB 12: BLOG & JOURNAL CMS
+             ============================================================ -->
+        <section class="tab-pane" id="tab-blog">
+          <!-- Top Metrics Strip -->
+          <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 24px;">
+            <div class="stat-card">
+              <span class="stat-label">Total Articles</span>
+              <span class="stat-value" id="blogMetricTotal">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Published Live</span>
+              <span class="stat-value" id="blogMetricPublished" style="color:#10B981;">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Drafts</span>
+              <span class="stat-value" id="blogMetricDrafts" style="color:#F59E0B;">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Total Reader Views</span>
+              <span class="stat-value" id="blogMetricViews" style="color:#3B82F6;">0</span>
+            </div>
+          </div>
+
+          <div class="ax-panel">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Engineering Journal &amp; AI Tech News CMS</h3>
+                <p class="panel-subtitle">Create, manage, and publish technical breakdowns, whitepapers, and hardware labs</p>
+              </div>
+              <div class="panel-actions">
+                <a href="blog.html" target="_blank" class="ax-btn-secondary" style="text-decoration:none;">
+                  <i data-lucide="external-link"></i>
+                  <span>View Public Journal</span>
+                </a>
+                <button type="button" class="ax-btn-primary" id="btnNewBlogPost">
+                  <i data-lucide="plus-circle"></i>
+                  <span>Write New Article</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="ax-table" id="blogPostsTable">
+                  <thead>
+                    <tr>
+                      <th style="width: 320px;">Article Title &amp; Excerpt</th>
+                      <th>Category</th>
+                      <th>Author</th>
+                      <th>Read Time</th>
+                      <th>Views</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th style="text-align: right;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="blogPostsTableBody">
+                    <!-- Dynamically populated by admin.js -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -1381,6 +1451,113 @@
         </div>
         <div class="modal-footer-btns">
           <button type="submit" class="ax-btn-primary">Save Catalog Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 10: BLOG & JOURNAL ARTICLE EDITOR
+       ============================================================ -->
+  <div class="ax-modal-overlay" id="modalBlogEditor" role="dialog" aria-modal="true" aria-labelledby="modalBlogTitle">
+    <div class="ax-modal-card" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalBlogTitle">Write Technical Article</h3>
+        <button type="button" class="modal-close" data-close-modal="modalBlogEditor">&times;</button>
+      </div>
+      <form id="formBlogEditor">
+        <input type="hidden" id="blogPostId">
+        
+        <div class="modal-field">
+          <label for="blogPostTitle">Article Title *</label>
+          <input type="text" id="blogPostTitle" required placeholder="e.g. Building Multi-Agent RAG Architectures with Gemini 2.0">
+        </div>
+
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="blogPostSlug">URL Slug (Auto-generated or custom)</label>
+            <input type="text" id="blogPostSlug" placeholder="e.g. multi-agent-rag-gemini-2">
+          </div>
+          <div class="modal-field">
+            <label for="blogPostCategory">Technical Track / Category *</label>
+            <select id="blogPostCategory" required>
+              <option value="AI & Generative Tech" data-slug="ai-tech">🤖 AI &amp; Generative Tech</option>
+              <option value="Full-Stack & Frameworks" data-slug="fullstack">💻 Full-Stack &amp; Frameworks</option>
+              <option value="Hardware & IoT" data-slug="hardware-iot">⚡ Hardware &amp; IoT</option>
+              <option value="Case Studies & News" data-slug="case-studies">🚀 Case Studies &amp; News</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="blogPostAuthor">Author Name *</label>
+            <input type="text" id="blogPostAuthor" required placeholder="e.g. Lalith H & AarambhX AI Lab">
+          </div>
+          <div class="modal-field">
+            <label for="blogPostAuthorRole">Author Role / Division</label>
+            <input type="text" id="blogPostAuthorRole" placeholder="e.g. Founder & Principal Systems Architect">
+          </div>
+        </div>
+
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="blogPostReadTime">Estimated Read Time</label>
+            <input type="text" id="blogPostReadTime" placeholder="e.g. 5 min read">
+          </div>
+          <div class="modal-field">
+            <label for="blogPostStatus">Publication Status</label>
+            <select id="blogPostStatus">
+              <option value="Published">Published (Live on Public Hub)</option>
+              <option value="Draft">Draft (Internal Only)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group-2">
+          <div class="modal-field">
+            <label for="blogPostImage">Thumbnail Image URL / Asset</label>
+            <input type="text" id="blogPostImage" placeholder="assets/hero.webp">
+          </div>
+          <div class="modal-field" style="display:flex; align-items:center; gap: 8px; padding-top: 24px;">
+            <input type="checkbox" id="blogPostFeatured" style="width:18px; height:18px;">
+            <label for="blogPostFeatured" style="margin-bottom:0; cursor:pointer; font-weight:700;">Feature on Journal Hero Split-Card</label>
+          </div>
+        </div>
+
+        <div class="modal-field">
+          <label for="blogPostSummary">Article Summary / Excerpt *</label>
+          <textarea id="blogPostSummary" rows="2" required placeholder="High-impact 2-line summary for bento cards and social previews..."></textarea>
+        </div>
+
+        <div class="modal-field">
+          <label for="blogPostMetaDesc">SEO Meta Description</label>
+          <textarea id="blogPostMetaDesc" rows="2" placeholder="Optimized description for search engines and OpenGraph cards..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px; flex-wrap:wrap; gap:8px;">
+          <label for="blogPostContent" style="font-weight:700; margin:0;">Article Body (Markdown &amp; Code Blocks) *</label>
+          <button type="button" class="ax-btn-secondary" id="btnAiGenerateBlogTemplate" style="padding: 4px 12px; font-size: 0.78rem;">
+            <i data-lucide="sparkles" style="width:14px; height:14px;"></i>
+            <span>AI Content Assistant (Generate Template)</span>
+          </button>
+        </div>
+
+        <div class="modal-field">
+          <textarea id="blogPostContent" rows="12" required style="font-family: monospace; font-size: 0.88rem; line-height: 1.5;" placeholder="## Section Heading&#10;&#10;Technical narrative...&#10;&#10;```python&#10;# Code snippet&#10;```&#10;&#10;> **Key Takeaway:** Summary note."></textarea>
+        </div>
+
+        <!-- Live Real-Time WYSIWYG Preview -->
+        <div style="margin: 20px 0; padding: 16px; background: var(--adm-pill-track); border-radius: 10px; border: 1px dashed var(--adm-card-border);">
+          <h4 style="margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: var(--adm-text-subtle);">Real-Time Content Preview</h4>
+          <div id="blogLivePreviewBox" style="background:#06080F; color:#F8FAFC; padding: 18px; border-radius: 8px; max-height: 220px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6;">
+            <!-- Real-time rendered article preview -->
+          </div>
+        </div>
+
+        <div class="modal-footer-btns">
+          <button type="button" class="ax-btn-secondary" data-close-modal="modalBlogEditor">Cancel</button>
+          <button type="submit" class="ax-btn-primary">Save &amp; Publish Article</button>
         </div>
       </form>
     </div>
