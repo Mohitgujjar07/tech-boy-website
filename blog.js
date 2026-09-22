@@ -255,6 +255,7 @@
 
   function showListingView() {
     activePost = null;
+    document.body.classList.remove('mode-terminal', 'mode-sepia', 'mode-obsidian');
     if (listingView) listingView.style.display = 'block';
     if (readerView) {
       readerView.style.display = 'none';
@@ -649,6 +650,11 @@
     // Executive Key Takeaways tailored by post
     const takeaways = getExecutiveTakeaways(post.slug);
 
+    let savedReadingMode = 'obsidian';
+    try {
+      savedReadingMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
+    } catch (e) {}
+
     readerView.innerHTML = `
       <div class="blog-container">
         <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
@@ -660,9 +666,9 @@
         <div class="reader-toolbar">
           <div class="reading-mode-selector">
             <span style="font-size:0.74rem; color:var(--blog-text-subtle); margin-right:4px;">Theme:</span>
-            <button type="button" class="reading-mode-btn active" data-mode="obsidian">Obsidian</button>
-            <button type="button" class="reading-mode-btn" data-mode="terminal">Terminal</button>
-            <button type="button" class="reading-mode-btn" data-mode="sepia">Sepia Paper</button>
+            <button type="button" class="reading-mode-btn ${savedReadingMode === 'obsidian' ? 'active' : ''}" data-mode="obsidian">Obsidian</button>
+            <button type="button" class="reading-mode-btn ${savedReadingMode === 'terminal' ? 'active' : ''}" data-mode="terminal">Terminal</button>
+            <button type="button" class="reading-mode-btn ${savedReadingMode === 'sepia' ? 'active' : ''}" data-mode="sepia">Sepia Paper</button>
           </div>
 
           <div style="display:flex; align-items:center; gap:16px;">
@@ -895,21 +901,53 @@
     return defaultTakeaways;
   }
 
-  // Reading Modes Wireup
+  // Reading Modes Controller & Wireup
+  function applyReadingMode(mode) {
+    const validMode = (mode === 'terminal' || mode === 'sepia' || mode === 'obsidian') ? mode : 'obsidian';
+
+    // 1. Update body classes
+    document.body.classList.remove('mode-terminal', 'mode-sepia', 'mode-obsidian');
+    if (validMode === 'terminal') {
+      document.body.classList.add('mode-terminal');
+    } else if (validMode === 'sepia') {
+      document.body.classList.add('mode-sepia');
+    } else {
+      document.body.classList.add('mode-obsidian');
+    }
+
+    // 2. Persist preference to localStorage
+    try {
+      localStorage.setItem('ax_reading_mode', validMode);
+    } catch (e) {}
+
+    // 3. Synchronize UI buttons active state
+    if (readerView) {
+      const buttons = readerView.querySelectorAll('.reading-mode-btn');
+      buttons.forEach(b => {
+        if (b.getAttribute('data-mode') === validMode) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+    }
+  }
+
   function wireReadingModes() {
+    let savedMode = 'obsidian';
+    try {
+      savedMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
+    } catch (e) {}
+
+    // Apply saved mode immediately
+    applyReadingMode(savedMode);
+
     const buttons = readerView.querySelectorAll('.reading-mode-btn');
     buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const mode = btn.getAttribute('data-mode');
-
-        document.body.classList.remove('mode-terminal', 'mode-sepia');
-        if (mode === 'terminal') {
-          document.body.classList.add('mode-terminal');
-        } else if (mode === 'sepia') {
-          document.body.classList.add('mode-sepia');
-        }
+        applyReadingMode(mode);
       });
     });
   }
@@ -1121,7 +1159,7 @@
             <i data-lucide="info" style="width:16px; height:16px;"></i>
             <span>${escapeHtml(title)}</span>
           </div>
-          <div style="font-size:0.92rem; color:var(--blog-text-muted); line-height:1.6;">${escapeHtml(text.trim())}</div>
+          <div class="callout-body">${escapeHtml(text.trim())}</div>
         </div>
       `;
     });
@@ -1136,7 +1174,7 @@
     // Bold & Italic
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    html = html.replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:4px; font-family:monospace; font-size:0.88em; color:#FBBF24;">$1</code>');
+    html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
 
     // Lists
     html = html.replace(/^\s*-\s+(.*)$/gm, '<li>$1</li>');

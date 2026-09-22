@@ -271,6 +271,44 @@ function runBlogSpecTests() {
     return 11;
   });
 
+  // -------------------------------------------------------------------------
+  // 7. Reading Modes & Theme System Specification (Obsidian, Terminal, Sepia)
+  // -------------------------------------------------------------------------
+  test('Reading Modes & Theme System (Obsidian, Terminal, Sepia Paper)', () => {
+    const blogCss = fs.readFileSync(blogCssPath, 'utf8');
+    const blogJs = fs.readFileSync(blogJsPath, 'utf8');
+
+    // 1. CSS Reading Themes
+    Assert.contains(blogCss, 'body.mode-obsidian', 'Obsidian mode class defined in blog.css');
+    Assert.contains(blogCss, 'body.mode-sepia', 'Sepia mode class defined in blog.css');
+    Assert.contains(blogCss, 'body.mode-terminal', 'Terminal mode class defined in blog.css');
+
+    // 2. Sepia Theme Color Custom Properties & Cosmic Canvas Suppression
+    Assert.contains(blogCss, '--blog-bg: #F4ECE1', 'Sepia parchment background variable defined');
+    Assert.contains(blogCss, '--blog-gold: #B45309', 'Sepia warm amber variable defined');
+    Assert.contains(blogCss, '--blog-text-main: #2C2218', 'Sepia espresso text variable defined');
+    Assert.contains(blogCss, 'body.mode-sepia .blog-cosmic-canvas', 'Sepia cosmic canvas selector exists');
+    Assert.contains(blogCss, 'opacity: 0 !important', 'Cosmic canvas hidden in sepia mode');
+
+    // 3. Terminal Theme Color Custom Properties & Phosphor Monospace
+    Assert.contains(blogCss, '--blog-bg: #020A05', 'Terminal matrix background variable defined');
+    Assert.contains(blogCss, '--blog-gold: #10B981', 'Terminal emerald variable defined');
+    Assert.contains(blogCss, '--blog-text-main: #6EE7B7', 'Terminal phosphor text variable defined');
+    Assert.contains(blogCss, "font-family: 'SFMono-Regular'", 'Terminal monospace typography defined');
+
+    // 4. JS Reading Mode Engine & Persistence
+    Assert.contains(blogJs, 'function applyReadingMode(', 'applyReadingMode function exists in blog.js');
+    Assert.contains(blogJs, 'function wireReadingModes(', 'wireReadingModes function exists in blog.js');
+    Assert.contains(blogJs, "'ax_reading_mode'", 'Reading mode persisted to ax_reading_mode in localStorage');
+    Assert.contains(blogJs, 'mode-obsidian', 'Obsidian mode managed in blog.js');
+    Assert.contains(blogJs, 'mode-sepia', 'Sepia mode managed in blog.js');
+    Assert.contains(blogJs, 'mode-terminal', 'Terminal mode managed in blog.js');
+    Assert.contains(blogJs, "document.body.classList.remove('mode-terminal', 'mode-sepia', 'mode-obsidian')", 'Reader modes cleaned up on returning to listing');
+    Assert.contains(blogJs, '<code class="inline-code">', 'Inline code parser uses themed inline-code class');
+
+    return 20;
+  });
+
   return {
     passed,
     failed,
