@@ -4,18 +4,18 @@
    ============================================================ */
 
 :root {
-  --blog-bg: #06080F;
-  --blog-card-bg: rgba(11, 15, 25, 0.75);
+  --blog-bg: #000000;
+  --blog-card-bg: rgba(9, 11, 16, 0.88);
   --blog-card-border: rgba(255, 255, 255, 0.08);
-  --blog-card-hover: rgba(255, 255, 255, 0.14);
+  --blog-card-hover: rgba(255, 255, 255, 0.16);
   --blog-gold: #F59E0B;
-  --blog-gold-glow: rgba(245, 158, 11, 0.25);
-  --blog-blue: #2563EB;
+  --blog-gold-glow: rgba(245, 158, 11, 0.15);
+  --blog-blue: #3B82F6;
   --blog-cyan: #06B6D4;
   --blog-text-main: #F8FAFC;
   --blog-text-muted: #94A3B8;
   --blog-text-subtle: #64748B;
-  --blog-code-bg: #030712;
+  --blog-code-bg: #03060C;
 }
 
 body.blog-page {
@@ -306,28 +306,30 @@ body.blog-page {
 }
 
 .tab-filter-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   color: var(--blog-text-muted);
-  padding: 7px 16px;
-  border-radius: 9999px;
-  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .tab-filter-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
   border-color: rgba(255, 255, 255, 0.2);
 }
 
 .tab-filter-btn.active {
-  background: linear-gradient(135deg, #2563EB, #1D4ED8);
-  border-color: #3B82F6;
-  color: #FFFFFF;
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #FBBF24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
 }
 
 .blog-search-box {
@@ -873,7 +875,7 @@ body.blog-page {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.7;
+  opacity: 0.14;
 }
 
 /* Gold Shimmer Text Effect */
@@ -965,34 +967,92 @@ body.blog-page {
   grid-column: span 12;
 }
 
-/* Interactive Card Widgets */
-.telemetry-widget-card {
-  background: rgba(11, 15, 25, 0.85);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: 18px;
+/* Minimalist Architectural Bento Cards */
+.telemetry-widget-card,
+.benchmark-widget-card,
+.vitals-widget-card {
+  background: rgba(8, 10, 15, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 22px;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.telemetry-widget-card:hover {
-  border-color: rgba(16, 185, 129, 0.6);
-  box-shadow: 0 16px 36px -8px rgba(16, 185, 129, 0.2);
-  transform: translateY(-3px);
+.telemetry-widget-card:hover,
+.benchmark-widget-card:hover,
+.vitals-widget-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8);
 }
 
-.telemetry-widget-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #10B981, transparent);
+.telemetry-widget-card {
+  border-top: 2px solid #10B981;
+}
+
+.benchmark-widget-card {
+  border-top: 2px solid #F59E0B;
+}
+
+.vitals-widget-card {
+  border-top: 2px solid #38BDF8;
+}
+
+/* Bespoke Architectural SVG Schematic Wrap */
+.card-schematic-wrap {
+  background: #02050B;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 14px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.card-schematic-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 165px;
+}
+
+/* Lead Paper Minimalist Topology Bar */
+.lead-schematic-bar {
+  background: #02050B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.74rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.lead-schematic-bar .mono-label {
+  color: #F59E0B;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.lead-schematic-bar .flow-arrow {
+  color: #10B981;
+}
+
+.lead-schematic-bar .mono-highlight {
+  color: #F8FAFC;
+  font-weight: 600;
 }
 
 .telemetry-screen {
@@ -1021,26 +1081,6 @@ body.blog-page {
 .telemetry-val {
   color: #FFFFFF;
   font-weight: 700;
-}
-
-/* Benchmark Bar Widget */
-.benchmark-widget-card {
-  background: rgba(11, 15, 25, 0.85);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 18px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.benchmark-widget-card:hover {
-  border-color: rgba(245, 158, 11, 0.6);
-  box-shadow: 0 16px 36px -8px rgba(245, 158, 11, 0.25);
-  transform: translateY(-3px);
 }
 
 .benchmark-meter-group {
@@ -1082,25 +1122,6 @@ body.blog-page {
   background: #64748B;
 }
 
-/* Lighthouse Vitals Card */
-.vitals-widget-card {
-  background: rgba(11, 15, 25, 0.85);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 18px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.vitals-widget-card:hover {
-  border-color: rgba(59, 130, 246, 0.6);
-  box-shadow: 0 16px 36px -8px rgba(59, 130, 246, 0.25);
-  transform: translateY(-3px);
-}
-
 .vitals-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1137,11 +1158,12 @@ body.blog-page {
 }
 
 /* ============================================================
-   7. DEDICATED READER VIEW 2.0 (STICKY TOC + FLOATING DOCK)
+   7. DEDICATED READER VIEW (CENTER PROSE + RIGHT TOC)
    ============================================================ */
 .reader-layout-grid {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 740px) 260px;
+  justify-content: center;
   gap: 48px;
   position: relative;
   align-items: start;
