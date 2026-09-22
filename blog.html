@@ -86,6 +86,9 @@
   <!-- Reading Progress Bar -->
   <div class="reading-progress-bar" id="readingProgressBar"></div>
 
+  <!-- GPU-Accelerated Celestial Particle Canvas Background -->
+  <canvas id="blogCosmicCanvas" class="blog-cosmic-canvas" aria-hidden="true"></canvas>
+
   <!-- Ambient Glowing Meshes -->
   <div class="blog-bg-ambient" aria-hidden="true"></div>
 
@@ -143,12 +146,17 @@
     <!-- Hero Header -->
     <section class="blog-hero">
       <div class="blog-container">
+        <div class="blog-hero-status-pill">
+          <span class="blog-live-dot"></span>
+          <span>AARAMBHX R&amp;D DISPATCH &bull; 4 ARCHITECTURAL PAPERS</span>
+        </div>
+        <div style="height: 6px;"></div>
         <span class="blog-eyebrow">
           <i data-lucide="zap" style="width:14px; height:14px;"></i>
           <span>Engineering Journal &amp; AI Tech News</span>
         </span>
         <h1 class="blog-hero-title">
-          Architectural Insights, <span class="gold-accent">AI Research</span> &amp; Hardware Labs
+          Architectural Insights, <span class="gold-shimmer-text">AI Research</span> &amp; Hardware Labs
         </h1>
         <p class="blog-hero-lead">
           Field-tested whitepapers, production engineering post-mortems, and industrial IoT implementations direct from AarambhX Technology engineers.
@@ -174,6 +182,7 @@
         <div class="blog-search-box">
           <i data-lucide="search" class="blog-search-icon" style="width:16px; height:16px;"></i>
           <input type="text" id="blogSearchInput" placeholder="Search technical articles, code, tags..." aria-label="Search articles">
+          <span class="search-kbd-hint">/</span>
         </div>
       </div>
 
@@ -199,6 +208,31 @@
        2. DEDICATED ARTICLE READER VIEW (Deep-Linked via Hash)
        ============================================================ -->
   <div id="articleReaderView" class="article-reader-container" style="display: none;"></div>
+
+  <!-- Sticky Floating Action Dock for Reader View -->
+  <div class="reader-floating-dock" id="readerFloatingDock" style="display: none;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <i data-lucide="clock" style="width:14px; height:14px; color:var(--blog-gold);"></i>
+      <span id="dockReadTime" style="font-weight:600;">5 min read</span>
+    </div>
+    <span style="opacity:0.3;">|</span>
+    <button type="button" class="dock-clap-btn" id="dockClapBtn" title="Applaud Article" aria-label="Applaud article">
+      <span>👏</span>
+      <span id="dockClapCount">48</span>
+    </button>
+    <span style="opacity:0.3;">|</span>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <a href="#" id="dockShareLinkedIn" target="_blank" rel="noopener noreferrer" class="dock-share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+      </a>
+      <a href="#" id="dockShareTwitter" target="_blank" rel="noopener noreferrer" class="dock-share-btn" title="Share on X" aria-label="Share on X">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <button type="button" class="dock-share-btn" id="dockBtnCopyLink" title="Copy Link" aria-label="Copy direct article link">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
 
   <!-- ============================================================
        3. ULTRA-HD AARAMBHX FOOTER
