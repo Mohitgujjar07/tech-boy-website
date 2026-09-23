@@ -31,16 +31,16 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Core & Page Stylesheets -->
   <link rel="stylesheet" href="styles.css?v=2.3.4">
-  <link rel="stylesheet" href="blog.css?v=3.0.0">
+  <link rel="stylesheet" href="blog.css?v=4.0.0">
 
-  <!-- Schema.org JSON-LD Structured Data: Blog & BlogPosting -->
+  <!-- Schema.org JSON-LD Structured Data: Blog & BreadcrumbList -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -93,9 +93,9 @@
   <div class="blog-bg-ambient" aria-hidden="true"></div>
 
   <!-- ============================================================
-       APPLE iOS FLOATING GLASSMORPHISM HEADER (Dynamic Island)
+       FLOATING GLASSMORPHISM HEADER
        ============================================================ -->
-  <header id="navbar" class="apple-glass-nav" role="navigation" aria-label="Main Navigation">
+  <header id="navbar" class="apple-glass-nav" aria-label="Site Header">
     <div class="nav-container">
       
       <!-- Brand Logo -->
@@ -111,7 +111,7 @@
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="nav-menu">
+      <nav class="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="index.html#services" class="nav-item">Services</a></li>
           <li><a href="work.html" class="nav-item">Our Work</a></li>
@@ -146,26 +146,12 @@
     <!-- Hero Header -->
     <section class="blog-hero">
       <div class="blog-container">
-        <!-- Editorial Masthead & Publication Metadata -->
-        <div class="editorial-masthead">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="masthead-badge">DISPATCH // VOL. 04 &bull; 2026</span>
-            <span style="font-weight:700; color:#FFFFFF; letter-spacing:0.04em;">AARAMBHX R&amp;D PUBLICATIONS</span>
-          </div>
-          <div class="masthead-telemetry">
-            <span class="masthead-stat">TUMAKURU LABS 13.34&deg;N 77.10&deg;E</span>
-            <span class="masthead-stat">PEER-REVIEWED ARCHITECTURE</span>
-          </div>
-        </div>
-
-        <span class="blog-eyebrow">
-          <span>[ R&amp;D DISPATCH // TECHNICAL WHITEPAPERS ]</span>
-        </span>
+        <span class="blog-eyebrow">Engineering Journal</span>
         <h1 class="blog-hero-title">
-          Architectural Insights, <span class="gold-shimmer-text">AI Research</span> &amp; Hardware Labs
+          Technical Insights, <span class="gold-shimmer-text">AI Research</span> &amp; Hardware Labs
         </h1>
         <p class="blog-hero-lead">
-          Peer-reviewed architectural blueprints, embedded firmware schematics, and zero-bloat web systems direct from AarambhX Technology engineers.
+          Architecture deep-dives, embedded firmware engineering, and production case studies from the AarambhX R&amp;D lab.
         </p>
       </div>
     </section>
@@ -175,94 +161,35 @@
       <!-- Featured Story Mount Point (Exclusive Lead Paper) -->
       <div id="featuredStoryMount"></div>
 
-      <!-- Lab Field Notes Strip ("Dispatches from the Bench") -->
-      <section class="field-notes-section" id="fieldNotesSection">
-        <div class="field-notes-header">
-          <span class="field-notes-title">
-            <i data-lucide="terminal" style="width:15px; height:15px; color:var(--blog-gold);"></i>
-            <span>Dispatches from the Bench &bull; Rapid Lab Notes</span>
-          </span>
-          <span style="font-size:0.72rem; color:var(--blog-text-subtle); font-family:monospace; letter-spacing:0.06em;">[ BI-WEEKLY CADENCE ]</span>
-        </div>
-        <div class="field-notes-grid">
-          <!-- Field Note 1 -->
-          <div class="field-note-card">
-            <div class="field-note-meta">
-              <span class="field-note-tag">[ NOTE-014 // HARDWARE ]</span>
-              <span style="color:var(--blog-text-subtle);">March 2026</span>
-            </div>
-            <h4 class="field-note-heading">Eliminating ESP32 Brownouts on LoRa TX</h4>
-            <p class="field-note-snippet">
-              Adding a 470µF low-ESR tantalum capacitor in parallel with the AP2112K 3.3V LDO completely mitigated transient 450mA dips during +22dBm radio packet transmission.
-            </p>
-            <div class="field-note-footer">
-              <span>By: Hardware Rig Team</span>
-              <span style="color:var(--blog-gold); font-weight:700;">Verified in Field &rarr;</span>
-            </div>
-          </div>
-
-          <!-- Field Note 2 -->
-          <div class="field-note-card">
-            <div class="field-note-meta">
-              <span class="field-note-tag" style="color:#60A5FA;">[ NOTE-028 // AI_LAB ]</span>
-              <span style="color:var(--blog-text-subtle);">March 2026</span>
-            </div>
-            <h4 class="field-note-heading">Matryoshka Vector Truncation Efficiency</h4>
-            <p class="field-note-snippet">
-              Truncating Gemini embeddings from 1536-dim to 768-dim preserved 98.4% retrieval accuracy on technical documentation while slashing vector RAM requirements by 50%.
-            </p>
-            <div class="field-note-footer">
-              <span>By: Applied AI Lab</span>
-              <span style="color:#60A5FA; font-weight:700;">Latency: -38ms &rarr;</span>
-            </div>
-          </div>
-
-          <!-- Field Note 3 -->
-          <div class="field-note-card">
-            <div class="field-note-meta">
-              <span class="field-note-tag" style="color:#34D399;">[ POST-MORTEM // CLOUD ]</span>
-              <span style="color:var(--blog-text-subtle);">March 2026</span>
-            </div>
-            <h4 class="field-note-heading">PostgreSQL Pool Starvation Mitigation</h4>
-            <p class="field-note-snippet">
-              Deploying PgBouncer in transaction-pooling mode fronting Postgres 16 reduced peak concurrent client connections from 420 to 18 with 0 connection timeouts under load.
-            </p>
-            <div class="field-note-footer">
-              <span>By: Cloud Core Team</span>
-              <span style="color:#34D399; font-weight:700;">Zero Dropped Pkts &rarr;</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Category Filter Tabs & Instant Search -->
       <div class="blog-controls-strip">
-        <div class="blog-filter-tabs">
-          <button type="button" class="tab-filter-btn active" data-category="all">[ ALL ]</button>
-          <button type="button" class="tab-filter-btn" data-category="ai-tech">[ 01 // AI &amp; REASONING ]</button>
-          <button type="button" class="tab-filter-btn" data-category="fullstack">[ 02 // SYSTEMS &amp; FULLSTACK ]</button>
-          <button type="button" class="tab-filter-btn" data-category="hardware-iot">[ 03 // HARDWARE &amp; IOT ]</button>
-          <button type="button" class="tab-filter-btn" data-category="case-studies">[ 04 // CASE STUDIES ]</button>
+        <div class="blog-filter-tabs" role="tablist" aria-label="Filter articles by category">
+          <button type="button" class="tab-filter-btn active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="tab-filter-btn" data-category="ai-tech" role="tab" aria-selected="false">AI &amp; Reasoning</button>
+          <button type="button" class="tab-filter-btn" data-category="fullstack" role="tab" aria-selected="false">Systems &amp; Full-Stack</button>
+          <button type="button" class="tab-filter-btn" data-category="hardware-iot" role="tab" aria-selected="false">Hardware &amp; IoT</button>
+          <button type="button" class="tab-filter-btn" data-category="case-studies" role="tab" aria-selected="false">Case Studies</button>
         </div>
 
         <div class="blog-search-box">
           <i data-lucide="search" class="blog-search-icon" style="width:16px; height:16px;"></i>
-          <input type="text" id="blogSearchInput" placeholder="Search technical articles, code, tags..." aria-label="Search articles">
-          <span class="search-kbd-hint">/</span>
+          <input type="text" id="blogSearchInput" placeholder="Search articles, tags..." aria-label="Search articles">
+          <span class="search-kbd-hint" aria-hidden="true">/</span>
         </div>
       </div>
 
-      <!-- Bento Grid Mount Point -->
+      <!-- Article Grid Mount Point -->
       <div class="blog-grid" id="blogGridMount"></div>
 
-      <!-- Bi-Weekly Newsletter Lead Magnet -->
+      <!-- Newsletter Subscription -->
       <section class="blog-newsletter-section">
-        <h3 class="newsletter-title">Subscribe to the AarambhX Engineering Dispatch</h3>
+        <h2 class="newsletter-title">Subscribe to the AarambhX Engineering Dispatch</h2>
         <p class="newsletter-desc">
-          Get high-signal architectural blueprints, embedded system schematics, and agentic AI tutorials delivered directly to your inbox every two weeks. Zero fluff.
+          Get architectural blueprints, embedded system guides, and AI tutorials delivered to your inbox every two weeks.
         </p>
         <form class="newsletter-form" id="newsletterForm">
-          <input type="email" id="newsletterEmail" placeholder="Enter your corporate or academic email" required aria-label="Email address">
+          <label for="newsletterEmail" class="sr-only">Email address</label>
+          <input type="email" id="newsletterEmail" placeholder="Enter your email" required aria-label="Email address">
           <button type="submit" class="newsletter-submit-btn">Subscribe Free</button>
         </form>
       </section>
@@ -278,79 +205,79 @@
   <!-- Sticky Floating Action Dock for Reader View -->
   <div class="reader-floating-dock" id="readerFloatingDock" style="display: none;">
     <div style="display: flex; align-items: center; gap: 8px;">
-      <i data-lucide="clock" style="width:14px; height:14px; color:var(--blog-gold);"></i>
+      <i data-lucide="clock" style="width:14px; height:14px; color:var(--blog-gold);" aria-hidden="true"></i>
       <span id="dockReadTime" style="font-weight:600;">5 min read</span>
     </div>
-    <span style="opacity:0.3;">|</span>
+    <span style="opacity:0.3;" aria-hidden="true">|</span>
     <button type="button" class="dock-clap-btn" id="dockClapBtn" title="Applaud Article" aria-label="Applaud article">
-      <span>👏</span>
-      <span id="dockClapCount">48</span>
+      <span aria-hidden="true">👏</span>
+      <span id="dockClapCount">0</span>
     </button>
-    <span style="opacity:0.3;">|</span>
+    <span style="opacity:0.3;" aria-hidden="true">|</span>
     <div style="display: flex; align-items: center; gap: 6px;">
       <a href="#" id="dockShareLinkedIn" target="_blank" rel="noopener noreferrer" class="dock-share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
       </a>
       <a href="#" id="dockShareTwitter" target="_blank" rel="noopener noreferrer" class="dock-share-btn" title="Share on X" aria-label="Share on X">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
       <button type="button" class="dock-share-btn" id="dockBtnCopyLink" title="Copy Link" aria-label="Copy direct article link">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
     </div>
   </div>
 
   <!-- ============================================================
-       3. ULTRA-HD AARAMBHX FOOTER
+       3. FOOTER
        ============================================================ -->
-  <footer class="site-footer" style="margin-top: 80px; padding: 60px 0 30px; border-top: 1px solid rgba(255,255,255,0.08); background: #03060C;">
+  <footer class="site-footer blog-footer">
     <div class="blog-container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; margin-bottom: 40px;">
-        <div>
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 14px;">
-            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" style="width:32px; height:32px; border-radius:8px;">
-            <span style="font-size:1.15rem; font-weight:800; color:#FFFFFF;">AarambhX <span style="color:var(--blog-gold);">Technology</span></span>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <img src="assets/aarambhx-logo.jpg" alt="AarambhX Logo" class="footer-logo" width="32" height="32">
+            <span class="footer-brand-name">AarambhX <span class="footer-brand-accent">Technology</span></span>
           </div>
-          <p style="font-size:0.88rem; color:var(--blog-text-muted); line-height:1.6;">
+          <p class="footer-desc">
             Your single technology partner for custom cloud software, industrial IoT sensor rigs, high-density structured networking, and terminal-driven academy workshops.
           </p>
         </div>
-        <div>
-          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Publication Tracks</h4>
-          <ul style="list-style:none; padding:0; margin:0; font-size:0.86rem; line-height:2.2; color:var(--blog-text-muted);">
-            <li><a href="#ai-tech" style="color:inherit; text-decoration:none;">AI &amp; Multi-Agent RAG</a></li>
-            <li><a href="#fullstack" style="color:inherit; text-decoration:none;">Full-Stack &amp; Web Vitals</a></li>
-            <li><a href="#hardware-iot" style="color:inherit; text-decoration:none;">Industrial ESP32 &amp; LoRaWAN</a></li>
-            <li><a href="#case-studies" style="color:inherit; text-decoration:none;">Enterprise Case Studies</a></li>
+        <div class="footer-col">
+          <h3 class="footer-heading">Publication Tracks</h3>
+          <ul class="footer-links">
+            <li><a href="#ai-tech">AI &amp; Multi-Agent RAG</a></li>
+            <li><a href="#fullstack">Full-Stack &amp; Web Vitals</a></li>
+            <li><a href="#hardware-iot">Industrial ESP32 &amp; LoRaWAN</a></li>
+            <li><a href="#case-studies">Enterprise Case Studies</a></li>
           </ul>
         </div>
-        <div>
-          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Quick Navigation</h4>
-          <ul style="list-style:none; padding:0; margin:0; font-size:0.86rem; line-height:2.2; color:var(--blog-text-muted);">
-            <li><a href="index.html" style="color:inherit; text-decoration:none;">Home</a></li>
-            <li><a href="work.html" style="color:inherit; text-decoration:none;">Our Work &amp; Portfolio</a></li>
-            <li><a href="academy.html" style="color:inherit; text-decoration:none;">AarambhX Academy</a></li>
-            <li><a href="brochure.html" style="color:inherit; text-decoration:none;">Interactive Brochure</a></li>
-            <li><a href="highlights.html" style="color:inherit; text-decoration:none;">Reels &amp; Highlights</a></li>
+        <div class="footer-col">
+          <h3 class="footer-heading">Quick Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Our Work &amp; Portfolio</a></li>
+            <li><a href="academy.html">AarambhX Academy</a></li>
+            <li><a href="brochure.html">Interactive Brochure</a></li>
+            <li><a href="highlights.html">Reels &amp; Highlights</a></li>
           </ul>
         </div>
-        <div>
-          <h4 style="font-size:0.95rem; font-weight:700; color:#FFFFFF; margin-bottom:14px;">Contact &amp; Labs</h4>
-          <p style="font-size:0.86rem; color:var(--blog-text-muted); line-height:1.6; margin-bottom:12px;">
+        <div class="footer-col">
+          <h3 class="footer-heading">Contact &amp; Labs</h3>
+          <p class="footer-contact">
             Tumakuru, Karnataka &bull; Remote Worldwide<br>
             Direct: +91 7676690081 / +91 9916856922<br>
             Email: lalithlalu.com@yahoo.com
           </p>
-          <a href="https://wa.me/919916856922?text=Hello%20AarambhX!%20I%20read%20your%20Engineering%20Journal." target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; color:#22C55E; font-size:0.86rem; font-weight:700; text-decoration:none;">
-            <i data-lucide="message-circle" style="width:16px; height:16px;"></i>
+          <a href="https://wa.me/919916856922?text=Hello%20AarambhX!%20I%20read%20your%20Engineering%20Journal." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-link">
+            <i data-lucide="message-circle" style="width:16px; height:16px;" aria-hidden="true"></i>
             <span>Chat with Lead Architect</span>
           </a>
         </div>
       </div>
 
-      <div style="padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:0.78rem; color:var(--blog-text-subtle);">
+      <div class="footer-bottom">
         <span>&copy; 2026 AarambhX Technology. All rights reserved.</span>
-        <span>Crafted with Ultra-HD Zero-Bloat Architecture &bull; sub-50ms INP</span>
+        <span>Crafted with precision engineering</span>
       </div>
     </div>
   </footer>
@@ -372,7 +299,7 @@
   <!-- Scripts -->
   <script src="admin-store.js"></script>
   <script src="main.js?v=2.3.4"></script>
-  <script src="blog.js?v=3.0.0"></script>
+  <script src="blog.js?v=4.0.0"></script>
   <script>
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();

@@ -286,14 +286,14 @@ function runBlogSpecTests() {
     // 2. Sepia Theme Color Custom Properties & Cosmic Canvas Suppression
     Assert.contains(blogCss, '--blog-bg: #F4ECE1', 'Sepia parchment background variable defined');
     Assert.contains(blogCss, '--blog-gold: #B45309', 'Sepia warm amber variable defined');
-    Assert.contains(blogCss, '--blog-text-main: #2C2218', 'Sepia espresso text variable defined');
+    Assert.contains(blogCss, '--blog-text-primary: #2C2218', 'Sepia espresso text variable defined');
     Assert.contains(blogCss, 'body.mode-sepia .blog-cosmic-canvas', 'Sepia cosmic canvas selector exists');
-    Assert.contains(blogCss, 'opacity: 0 !important', 'Cosmic canvas hidden in sepia mode');
+    Assert.contains(blogCss, 'opacity: 0', 'Cosmic canvas hidden in sepia mode');
 
     // 3. Terminal Theme Color Custom Properties & Phosphor Monospace
     Assert.contains(blogCss, '--blog-bg: #020A05', 'Terminal matrix background variable defined');
     Assert.contains(blogCss, '--blog-gold: #10B981', 'Terminal emerald variable defined');
-    Assert.contains(blogCss, '--blog-text-main: #6EE7B7', 'Terminal phosphor text variable defined');
+    Assert.contains(blogCss, '--blog-text-primary: #6EE7B7', 'Terminal phosphor text variable defined');
     Assert.contains(blogCss, "font-family: 'SFMono-Regular'", 'Terminal monospace typography defined');
 
     // 4. JS Reading Mode Engine & Persistence

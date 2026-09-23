@@ -1,13 +1,6 @@
 /**
  * AARAMBHX ENGINEERING JOURNAL & AI TECH NEWS (blog.js)
- * World-Class Publication Engine v4.0 (Stripe Press & MIT Tech Review Tier)
- * - Pure Ambient Celestial Canvas Background
- * - Non-Overlapping Editorial Hierarchy (Exclusive Lead Paper)
- * - Rapid Lab Field Notes Strip ("Dispatches from the Bench")
- * - Asymmetric Bento Research Tracks with Live Telemetry
- * - Next-Gen Reader View: Reading Modes (Obsidian/Terminal/Sepia), Font Scaler,
- *   Simulated Audio Overview, Executive Takeaways Dossier, Living TOC Scroll-Spy,
- *   Multi-Language Tabbed Code Blocks, and Sticky Action Dock.
+ * Clean Architecture Re-write
  */
 
 (function () {
@@ -171,7 +164,7 @@
   }
 
   // ============================================================
-  // 3. KEYBOARD SHORTCUTS (/ and Cmd+K to Search)
+  // 3. KEYBOARD SHORTCUTS
   // ============================================================
   function initKeyboardShortcuts() {
     window.addEventListener('keydown', (e) => {
@@ -291,7 +284,7 @@
   }
 
   // ============================================================
-  // 6. HERO: THE EXCLUSIVE LEAD PAPER (ZERO DUPLICATION)
+  // 6. HERO: FEATURED STORY
   // ============================================================
   function renderFeaturedStory() {
     if (!featuredMount || !Store) return;
@@ -302,58 +295,41 @@
       return;
     }
 
-    const catClass = featured.categorySlug || 'ai-tech';
+    const catClass = getCategoryClass(featured.categorySlug || 'ai-tech');
+    const catLabel = getCategoryLabel(featured.categorySlug || 'ai-tech');
 
     featuredMount.innerHTML = `
-      <div class="featured-blog-card" style="background:rgba(8,10,16,0.92); border:1px solid rgba(255,255,255,0.08); box-shadow:0 20px 45px -12px rgba(0,0,0,0.8);">
-        <div class="featured-img-wrap" style="position:relative; overflow:hidden;">
-          <img src="${escapeHtml(featured.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(featured.title)}" loading="lazy">
-          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(8,10,16,0.95) 0%, transparent 60%);"></div>
-          <span class="featured-badge-pill" style="position:absolute; top:18px; left:18px; border-radius:4px; font-family:monospace; font-size:0.7rem; letter-spacing:0.04em;">[ LEAD RESEARCH DISPATCH ]</span>
-          <span class="difficulty-pill" style="position:absolute; bottom:18px; left:18px; border-radius:4px; font-family:monospace; font-size:0.7rem;">
-            [ LEVEL 4 // ARCHITECTURE ]
-          </span>
+      <div class="featured-blog-card" style="background:rgba(8,10,16,0.92); border:1px solid rgba(255,255,255,0.08); box-shadow:0 20px 45px -12px rgba(0,0,0,0.8); display:flex; flex-wrap:wrap; border-radius:12px; overflow:hidden;">
+        <div class="featured-img-wrap" style="flex:1; min-width:300px; position:relative; overflow:hidden;">
+          <img src="${escapeHtml(featured.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(featured.title)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+          <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent, rgba(8,10,16,0.95));"></div>
         </div>
-        <div class="featured-content" style="padding:32px 36px;">
-          <div class="blog-meta-row" style="margin-bottom:14px;">
-            <span class="category-tag ${catClass}">[ 01 // AI &amp; REASONING ]</span>
+        <div class="featured-content" style="flex:1; min-width:300px; padding:48px;">
+          <div class="blog-meta-row" style="margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <span class="blog-category-pill ${catClass}">${escapeHtml(catLabel)}</span>
             <span>&bull;</span>
-            <span style="font-weight:700; color:var(--blog-gold); font-family:monospace;">${escapeHtml(featured.readTime || '6 min read')}</span>
+            <span style="font-weight:700; color:var(--blog-gold);">${escapeHtml(featured.readTime || '6 min read')}</span>
             <span>&bull;</span>
-            <span style="font-family:monospace;">${escapeHtml(featured.date || 'March 2026')}</span>
+            <span>${escapeHtml(featured.date || 'March 2026')}</span>
           </div>
-          <h2 class="featured-title" style="font-size:1.6rem; line-height:1.28; margin-bottom:12px;">
+          <h2 class="featured-title" style="font-size:2rem; line-height:1.28; margin-bottom:16px;">
             ${escapeHtml(featured.title)}
           </h2>
-          <p class="featured-summary" style="font-size:0.95rem; line-height:1.65; color:var(--blog-text-muted); margin-bottom:20px;">
+          <p class="featured-summary" style="font-size:1.05rem; line-height:1.65; color:var(--blog-text-muted); margin-bottom:24px;">
             ${escapeHtml(featured.summary)}
           </p>
 
-          <!-- Minimalist Agent Architecture Topology Preview -->
-          <div class="lead-schematic-bar">
-            <span class="mono-label">TOPOLOGY:</span>
-            <span>User Ingress</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="mono-highlight">Supervisor StateGraph</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span>Pinecone RAG (768-dim)</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span>Verification Gate</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="mono-highlight">Gemini 2.0 Synthesizer</span>
-          </div>
-
-          <div class="featured-footer" style="padding-top:18px; border-top:1px solid rgba(255,255,255,0.08);">
-            <div class="author-chip">
-              <img src="${escapeHtml(featured.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(featured.author)}" class="author-avatar">
-              <div class="author-info">
-                <span class="author-name">${escapeHtml(featured.author)}</span>
-                <span class="author-role">${escapeHtml(featured.authorRole || 'Founder & Principal Systems Architect')}</span>
+          <div class="featured-footer" style="padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+            <div class="author-chip" style="display:flex; align-items:center; gap:12px;">
+              <img src="${escapeHtml(featured.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(featured.author)}" class="author-avatar" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+              <div class="author-info" style="display:flex; flex-direction:column;">
+                <span class="author-name" style="font-weight:700;">${escapeHtml(featured.author)}</span>
+                <span class="author-role" style="font-size:0.8rem; color:var(--blog-text-subtle);">${escapeHtml(featured.authorRole || 'Founder & Principal Systems Architect')}</span>
               </div>
             </div>
-            <a href="#${escapeHtml(featured.slug)}" class="read-article-btn" style="padding:10px 22px;">
+            <a href="#${escapeHtml(featured.slug)}" class="read-article-btn" style="padding:10px 22px; display:inline-flex; align-items:center; gap:8px; background:var(--blog-gold); color:#000; border-radius:6px; font-weight:700; text-decoration:none;">
               <span>Read Full Breakdown</span>
-              <i data-lucide="arrow-right"></i>
+              <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
             </a>
           </div>
         </div>
@@ -362,7 +338,7 @@
   }
 
   // ============================================================
-  // 7. ASYMMETRIC BENTO GRID (NON-OVERLAPPING RESEARCH TRACKS)
+  // 7. CLEAN UNIFORM CARD GRID
   // ============================================================
   function renderGrid() {
     if (!gridMount || !Store) return;
@@ -370,9 +346,15 @@
 
     if (searchQuery) {
       posts = posts.filter(p => {
-        const hay = `${p.title} ${p.summary} ${p.category} ${(p.tags || []).join(' ')}`.toLowerCase();
+        const hay = \`\${p.title} \${p.summary} \${p.category} \${(p.tags || []).join(' ')}\`.toLowerCase();
         return hay.includes(searchQuery);
       });
+    }
+
+    // Exclude featured post from grid
+    const featuredPost = Store.getBlogPosts('all', 'Published').find(p => p.featured) || Store.getBlogPosts('all', 'Published')[0];
+    if (featuredPost) {
+      posts = posts.filter(p => p.slug !== featuredPost.slug);
     }
 
     if (!posts.length) {
@@ -388,35 +370,37 @@
       return;
     }
 
-    // When viewing All with no search query, render non-overlapping Research Tracks
-    if (currentCategory === 'all' && !searchQuery) {
-      renderBentoTracks(posts);
-      return;
-    }
-
-    // Category / Search Results view: clean responsive grid
     gridMount.className = 'blog-grid';
+    gridMount.style.display = 'grid';
+    gridMount.style.gridTemplateColumns = 'repeat(auto-fill, minmax(340px, 1fr))';
+    gridMount.style.gap = '24px';
+
     gridMount.innerHTML = posts.map(post => {
-      const catClass = post.categorySlug || 'ai-tech';
+      const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
+      const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
       return `
-        <article class="blog-card" data-slug="${escapeHtml(post.slug)}">
-          <div class="blog-card-img-wrap">
-            <img src="${escapeHtml(post.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(post.title)}" loading="lazy">
+        <article class="blog-card" data-slug="${escapeHtml(post.slug)}" style="display:flex; flex-direction:column; background:rgba(8,10,16,0.92); border:1px solid rgba(255,255,255,0.08); border-radius:8px; overflow:hidden;">
+          <div class="blog-card-img-wrap" style="aspect-ratio: 16/9; overflow: hidden;">
+            <img src="${escapeHtml(post.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(post.title)}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <span class="category-tag ${catClass}">${escapeHtml(post.category)}</span>
-              <span>${escapeHtml(post.readTime || '4 min read')}</span>
+          <div class="blog-card-body" style="padding:24px; display:flex; flex-direction:column; flex:1;">
+            <div class="blog-card-meta" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span class="blog-category-pill ${catClass}">${escapeHtml(catLabel)}</span>
+              <span style="font-size:0.85rem; color:var(--blog-text-subtle);">${escapeHtml(post.readTime || '4 min read')}</span>
             </div>
-            <h4 class="blog-card-title">${escapeHtml(post.title)}</h4>
-            <p class="blog-card-excerpt">${escapeHtml(post.summary)}</p>
-            <div class="blog-card-footer">
-              <div class="blog-metrics-chip">
+            <h4 class="blog-card-title" style="font-size:1.25rem; font-weight:700; margin-bottom:12px; line-height:1.4;">
+              ${escapeHtml(post.title)}
+            </h4>
+            <p class="blog-card-excerpt" style="font-size:0.95rem; color:var(--blog-text-muted); line-height:1.6; margin-bottom:24px; flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+              ${escapeHtml(post.summary)}
+            </p>
+            <div class="blog-card-footer" style="display:flex; justify-content:space-between; align-items:center; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06);">
+              <div class="blog-metrics-chip" style="font-size:0.85rem; color:var(--blog-text-subtle);">
+                <span>${escapeHtml(post.author || '')}</span>
+                <span style="margin:0 6px;">&bull;</span>
                 <span>${escapeHtml(post.date || '')}</span>
-                <span>&bull;</span>
-                <span class="blog-views-count"><i data-lucide="eye" style="width:13px; height:13px;"></i> ${post.views || 0}</span>
               </div>
-              <a href="#${escapeHtml(post.slug)}" class="blog-card-link-arrow">
+              <a href="#${escapeHtml(post.slug)}" class="blog-card-link-arrow" style="display:flex; align-items:center; gap:4px; color:var(--blog-gold); text-decoration:none; font-weight:600; font-size:0.9rem;">
                 <span>Read</span>
                 <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
               </a>
@@ -429,478 +413,201 @@
     refreshIcons();
   }
 
-  function renderBentoTracks(posts) {
-    gridMount.className = 'bento-asymmetric-grid';
-
-    // The Lead Paper is autonomous-ai-agents-rag (handled in Hero).
-    // The remaining distinct papers are mapped to their non-overlapping tracks:
-    const pIot = posts.find(p => p.slug === 'esp32-industrial-iot-telemetry') || posts[1] || posts[0];
-    const pFullstack = posts.find(p => p.slug === 'sub-50ms-web-vitals-jamstack') || posts[2] || posts[0];
-    const pEnterprise = posts.find(p => p.slug === 'enterprise-multi-tenant-cloud-erp') || posts[3] || posts[0];
-
-    gridMount.innerHTML = `
-      <!-- TRACK 1: HARDWARE LAB & SCHEMATIC (Span 7 Cols) -->
-      <article class="telemetry-widget-card bento-col-7">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="category-tag hardware-iot" style="font-size:0.72rem;">[ 03 // HARDWARE &amp; IOT ]</span>
-            <span class="difficulty-pill" style="font-size:0.68rem; padding:2px 8px; font-family:monospace;">ESP32-C3 RISC-V</span>
-          </div>
-          <span style="display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; color:#10B981; font-family:monospace; font-weight:700;">
-            [ SCHEMATIC: VERIFIED ]
-          </span>
-        </div>
-
-        <h3 style="font-size:1.22rem; font-weight:700; color:#FFFFFF; line-height:1.3; margin-bottom:6px;">
-          ${escapeHtml(pIot.title)}
-        </h3>
-        <p style="font-size:0.85rem; color:var(--blog-text-muted); line-height:1.55; margin-bottom:6px;">
-          Field-tested firmware blueprints for solar-powered environmental telemetry stations operating on agricultural belts in Tumakuru.
-        </p>
-
-        <!-- Bespoke Architectural SVG Schematic: ESP32 Hardware Bus -->
-        <div class="card-schematic-wrap">
-          <svg viewBox="0 0 520 155" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ESP32-C3 Hardware Schematic">
-            <defs>
-              <pattern id="grid1" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="520" height="155" fill="#02050B"/>
-            <rect width="520" height="155" fill="url(#grid1)"/>
-            
-            <rect x="16" y="20" width="95" height="42" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="63" y="38" fill="#94A3B8" font-size="9" font-family="monospace" text-anchor="middle" font-weight="600">SOLAR MPPT</text>
-            <text x="63" y="51" fill="#10B981" font-size="8.5" font-family="monospace" text-anchor="middle">5.0V / LiFePO4</text>
-            
-            <path d="M 111 41 L 145 41" stroke="#10B981" stroke-width="1.2" stroke-dasharray="2 2"/>
-            <polygon points="145,41 140,38 140,44" fill="#10B981"/>
-            
-            <rect x="145" y="20" width="105" height="42" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="197" y="38" fill="#94A3B8" font-size="9" font-family="monospace" text-anchor="middle" font-weight="600">AP2112K LDO</text>
-            <text x="197" y="51" fill="#FBBF24" font-size="8" font-family="monospace" text-anchor="middle">470µF LOW-ESR</text>
-            
-            <path d="M 250 41 L 285 41" stroke="#10B981" stroke-width="1.2"/>
-            <polygon points="285,41 280,38 280,44" fill="#10B981"/>
-            
-            <rect x="285" y="14" width="125" height="54" rx="4" fill="#06120C" stroke="#10B981" stroke-width="1.2"/>
-            <text x="347" y="34" fill="#34D399" font-size="9.5" font-family="monospace" text-anchor="middle" font-weight="700">ESP32-C3 RISC-V</text>
-            <text x="347" y="47" fill="#6EE7B7" font-size="8.5" font-family="monospace" text-anchor="middle">160MHz // 9.8µA SLEEP</text>
-            <text x="347" y="58" fill="#64748B" font-size="7.5" font-family="monospace" text-anchor="middle">GPIO2/3/4/8/10</text>
-            
-            <path d="M 410 41 L 438 41" stroke="#38BDF8" stroke-width="1.2"/>
-            <polygon points="438,41 433,38 433,44" fill="#38BDF8"/>
-            
-            <rect x="438" y="20" width="70" height="42" rx="4" fill="#08101E" stroke="#0284C7" stroke-width="1"/>
-            <text x="473" y="38" fill="#38BDF8" font-size="9" font-family="monospace" text-anchor="middle" font-weight="600">SX1262</text>
-            <text x="473" y="51" fill="#93C5FD" font-size="8" font-family="monospace" text-anchor="middle">+22dBm 868M</text>
-            
-            <path d="M 347 68 L 347 98" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>
-            <polygon points="347,98 344,93 350,93" fill="#94A3B8"/>
-            
-            <rect x="285" y="98" width="125" height="40" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="347" y="115" fill="#CBD5E1" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">I2C SENSOR BUS</text>
-            <text x="347" y="128" fill="#94A3B8" font-size="7.5" font-family="monospace" text-anchor="middle">SHT40 (Temp/Hum) &bull; BME688</text>
-
-            <path d="M 63 62 L 63 98" stroke="#64748B" stroke-width="1" stroke-dasharray="2 2"/>
-            <rect x="16" y="98" width="95" height="40" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="63" y="115" fill="#94A3B8" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">ADC TELEMETRY</text>
-            <text x="63" y="128" fill="#64748B" font-size="7.5" font-family="monospace" text-anchor="middle">LiFePO4 3.92V Gain</text>
-          </svg>
-        </div>
-
-        <div style="margin-top:auto; padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-size:0.76rem; color:var(--blog-text-subtle); font-family:monospace;">${escapeHtml(pIot.readTime || '4 min read')} &bull; ${escapeHtml(pIot.date)}</span>
-          <a href="#${escapeHtml(pIot.slug)}" class="blog-card-link-arrow">
-            <span>View Firmware &amp; Schematics</span>
-            <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
-          </a>
-        </div>
-      </article>
-
-      <!-- TRACK 2: AI REASONING STATEGRAPH (Span 5 Cols) -->
-      <article class="benchmark-widget-card bento-col-5">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span class="category-tag ai-tech" style="font-size:0.72rem;">[ 01 // AI &amp; REASONING ]</span>
-          <span style="font-size:0.72rem; color:var(--blog-gold); font-family:monospace; font-weight:700;">GEMINI 2.0 FLASH</span>
-        </div>
-        <h3 style="font-size:1.18rem; font-weight:700; color:#FFFFFF; margin-bottom:6px; line-height:1.3;">
-          Multi-Agent Reasoning vs Traditional RAG
-        </h3>
-        <p style="font-size:0.82rem; color:var(--blog-text-muted); line-height:1.5;">
-          Empirical comparison between our supervisor-worker state graph and naive single-prompt retrieval.
-        </p>
-
-        <!-- Bespoke Architectural SVG Schematic: StateGraph Architecture -->
-        <div class="card-schematic-wrap">
-          <svg viewBox="0 0 420 155" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multi-Agent StateGraph Schematic">
-            <defs>
-              <pattern id="grid2" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="420" height="155" fill="#02050B"/>
-            <rect width="420" height="155" fill="url(#grid2)"/>
-
-            <rect x="14" y="58" width="76" height="40" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="52" y="77" fill="#E2E8F0" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">QUERY</text>
-            <text x="52" y="89" fill="#64748B" font-size="7.5" font-family="monospace" text-anchor="middle">INGRESS</text>
-
-            <path d="M 90 78 L 122 78" stroke="#F59E0B" stroke-width="1.2"/>
-            <polygon points="122,78 117,75 117,81" fill="#F59E0B"/>
-
-            <rect x="122" y="46" width="105" height="64" rx="4" fill="#140F04" stroke="#F59E0B" stroke-width="1.2"/>
-            <text x="174" y="68" fill="#FBBF24" font-size="9" font-family="monospace" text-anchor="middle" font-weight="700">SUPERVISOR</text>
-            <text x="174" y="81" fill="#FDE68A" font-size="8" font-family="monospace" text-anchor="middle">STATEGRAPH</text>
-            <text x="174" y="94" fill="#B45309" font-size="7.5" font-family="monospace" text-anchor="middle">ROUTER AGENT</text>
-
-            <path d="M 227 63 L 265 35" stroke="#38BDF8" stroke-width="1.2"/>
-            <polygon points="265,35 258,36 262,42" fill="#38BDF8"/>
-
-            <path d="M 227 93 L 265 121" stroke="#A855F7" stroke-width="1.2"/>
-            <polygon points="265,121 262,114 258,120" fill="#A855F7"/>
-
-            <rect x="265" y="16" width="95" height="38" rx="4" fill="#08101E" stroke="#0284C7" stroke-width="1"/>
-            <text x="312" y="33" fill="#38BDF8" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">RAG RETRIEVER</text>
-            <text x="312" y="45" fill="#94A3B8" font-size="7.5" font-family="monospace" text-anchor="middle">768-DIM VECTOR</text>
-
-            <rect x="265" y="104" width="95" height="38" rx="4" fill="#10081C" stroke="#7E22CE" stroke-width="1"/>
-            <text x="312" y="121" fill="#C084FC" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">TOOL WORKER</text>
-            <text x="312" y="133" fill="#94A3B8" font-size="7.5" font-family="monospace" text-anchor="middle">CODE EXEC / SQL</text>
-
-            <path d="M 360 35 L 388 65" stroke="#10B981" stroke-width="1.2"/>
-            <path d="M 360 121 L 388 91" stroke="#10B981" stroke-width="1.2"/>
-            <polygon points="392,78 385,74 385,82" fill="#10B981"/>
-
-            <circle cx="398" cy="78" r="9" fill="#06120C" stroke="#10B981" stroke-width="1.2"/>
-            <text x="398" y="81" fill="#10B981" font-size="8" font-family="monospace" text-anchor="middle" font-weight="700">&check;</text>
-          </svg>
-        </div>
-
-        <div style="margin-top:auto; padding-top:14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);">
-          <span style="font-size:0.74rem; color:var(--blog-text-subtle); font-family:monospace;">TTFT: 184ms &bull; -74% HALLUCINATIONS</span>
-          <a href="#autonomous-ai-agents-rag" class="blog-card-link-arrow">
-            <span>Inspect Paper</span>
-            <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
-          </a>
-        </div>
-      </article>
-
-      <!-- TRACK 3: FULL-STACK EDGE PIPELINE (Span 6 Cols) -->
-      <article class="vitals-widget-card bento-col-6">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span class="category-tag fullstack" style="font-size:0.72rem;">[ 02 // SYSTEMS &amp; FULLSTACK ]</span>
-          <span style="font-size:0.72rem; color:#60A5FA; font-family:monospace; font-weight:700;">LIGHTHOUSE 100</span>
-        </div>
-        <h3 style="font-size:1.18rem; font-weight:700; color:#FFFFFF; margin-bottom:6px; line-height:1.3;">
-          ${escapeHtml(pFullstack.title)}
-        </h3>
-        <p style="font-size:0.82rem; color:var(--blog-text-muted); line-height:1.5;">
-          Zero-hydration vanilla JavaScript, static Edge caching, and sub-50ms Interaction to Next Paint.
-        </p>
-
-        <!-- Bespoke Architectural SVG Schematic: Edge Delivery Pipeline -->
-        <div class="card-schematic-wrap">
-          <svg viewBox="0 0 500 155" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Edge Delivery Pipeline Schematic">
-            <defs>
-              <pattern id="grid3" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="500" height="155" fill="#02050B"/>
-            <rect width="500" height="155" fill="url(#grid3)"/>
-
-            <rect x="16" y="54" width="95" height="46" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="63" y="74" fill="#E2E8F0" font-size="9" font-family="monospace" text-anchor="middle" font-weight="600">CLIENT SYN</text>
-            <text x="63" y="88" fill="#64748B" font-size="8" font-family="monospace" text-anchor="middle">HTTP/3 QUIC</text>
-
-            <path d="M 111 77 L 146 77" stroke="#38BDF8" stroke-width="1.2"/>
-            <polygon points="146,77 141,74 141,80" fill="#38BDF8"/>
-            <text x="128" y="70" fill="#38BDF8" font-size="7.5" font-family="monospace" text-anchor="middle">14ms</text>
-
-            <rect x="146" y="42" width="125" height="70" rx="4" fill="#05101E" stroke="#0284C7" stroke-width="1.2"/>
-            <text x="208" y="65" fill="#38BDF8" font-size="9" font-family="monospace" text-anchor="middle" font-weight="700">CLOUDFLARE EDGE</text>
-            <text x="208" y="78" fill="#93C5FD" font-size="8" font-family="monospace" text-anchor="middle">V8 ISOLATE CACHE</text>
-            <text x="208" y="90" fill="#0284C7" font-size="7.5" font-family="monospace" text-anchor="middle">0ms COLD START</text>
-            <text x="208" y="102" fill="#38BDF8" font-size="7.5" font-family="monospace" text-anchor="middle">ZERO-HYDRATION</text>
-
-            <path d="M 271 63 L 312 38" stroke="#10B981" stroke-width="1.2"/>
-            <polygon points="312,38 305,39 309,45" fill="#10B981"/>
-
-            <path d="M 271 91 L 312 116" stroke="#10B981" stroke-width="1.2"/>
-            <polygon points="312,116 309,109 305,115" fill="#10B981"/>
-
-            <rect x="312" y="18" width="170" height="40" rx="4" fill="#06120C" stroke="#059669" stroke-width="1"/>
-            <text x="397" y="35" fill="#34D399" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">VANILLA DOM STREAM</text>
-            <text x="397" y="47" fill="#6EE7B7" font-size="8" font-family="monospace" text-anchor="middle">LCP: 0.6s &bull; CLS: 0.000</text>
-
-            <rect x="312" y="96" width="170" height="40" rx="4" fill="#06120C" stroke="#059669" stroke-width="1"/>
-            <text x="397" y="113" fill="#34D399" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">COMPOSITOR PAINT</text>
-            <text x="397" y="125" fill="#10B981" font-size="8" font-family="monospace" text-anchor="middle">SUB-50ms INP (28ms Real)</text>
-          </svg>
-        </div>
-
-        <div style="margin-top:auto; padding-top:14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);">
-          <span style="font-size:0.74rem; color:var(--blog-text-subtle); font-family:monospace;">PERF 100 &bull; A11Y 100 &bull; SEO 100</span>
-          <a href="#${escapeHtml(pFullstack.slug)}" class="blog-card-link-arrow">
-            <span>Read Optimization Guide</span>
-            <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
-          </a>
-        </div>
-      </article>
-
-      <!-- TRACK 4: ENTERPRISE CLOUD ERP ARCHITECTURE (Span 6 Cols) -->
-      <article class="vitals-widget-card bento-col-6" style="border-top-color:#A855F7;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span class="category-tag case-studies" style="font-size:0.72rem;">[ 04 // CASE STUDIES ]</span>
-          <span style="font-size:0.72rem; color:#C084FC; font-family:monospace; font-weight:700;">ENTERPRISE CLOUD</span>
-        </div>
-        <h3 style="font-size:1.18rem; font-weight:700; color:#FFFFFF; margin-bottom:6px; line-height:1.3;">
-          ${escapeHtml(pEnterprise.title)}
-        </h3>
-        <p style="font-size:0.82rem; color:var(--blog-text-muted); line-height:1.5;">
-          Schema-level database tenancy, optical SFP+ network trunking, and high-concurrency connection pooling.
-        </p>
-
-        <!-- Bespoke Architectural SVG Schematic: Multi-Tenant Database Architecture -->
-        <div class="card-schematic-wrap">
-          <svg viewBox="0 0 500 155" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Multi-Tenant Database Architecture">
-            <defs>
-              <pattern id="grid4" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="500" height="155" fill="#02050B"/>
-            <rect width="500" height="155" fill="url(#grid4)"/>
-
-            <rect x="16" y="54" width="95" height="46" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="63" y="74" fill="#E2E8F0" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">CLIENT AUTH</text>
-            <text x="63" y="88" fill="#A855F7" font-size="8" font-family="monospace" text-anchor="middle">JWT TENANT_ID</text>
-
-            <path d="M 111 77 L 146 77" stroke="#A855F7" stroke-width="1.2"/>
-            <polygon points="146,77 141,74 141,80" fill="#A855F7"/>
-
-            <rect x="146" y="42" width="125" height="70" rx="4" fill="#10081C" stroke="#7E22CE" stroke-width="1.2"/>
-            <text x="208" y="65" fill="#C084FC" font-size="9" font-family="monospace" text-anchor="middle" font-weight="700">PGBOUNCER 1.22</text>
-            <text x="208" y="78" fill="#E9D5FF" font-size="8" font-family="monospace" text-anchor="middle">TRANSACTION POOL</text>
-            <text x="208" y="90" fill="#7E22CE" font-size="7.5" font-family="monospace" text-anchor="middle">420 &rarr; 18 CLIENT CONN</text>
-            <text x="208" y="102" fill="#34D399" font-size="7.5" font-family="monospace" text-anchor="middle">ZERO STARVATION</text>
-
-            <path d="M 271 63 L 312 38" stroke="#A855F7" stroke-width="1.2"/>
-            <polygon points="312,38 305,39 309,45" fill="#A855F7"/>
-
-            <path d="M 271 91 L 312 116" stroke="#38BDF8" stroke-width="1.2"/>
-            <polygon points="312,116 309,109 305,115" fill="#38BDF8"/>
-
-            <rect x="312" y="18" width="170" height="40" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="397" y="35" fill="#C084FC" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">POSTGRES 16 RLS</text>
-            <text x="397" y="47" fill="#94A3B8" font-size="8" font-family="monospace" text-anchor="middle">SCHEMA-PER-TENANT</text>
-
-            <rect x="312" y="96" width="170" height="40" rx="4" fill="#090E17" stroke="#334155" stroke-width="1"/>
-            <text x="397" y="113" fill="#38BDF8" font-size="8.5" font-family="monospace" text-anchor="middle" font-weight="600">READ REPLICAS (3X)</text>
-            <text x="397" y="125" fill="#94A3B8" font-size="8" font-family="monospace" text-anchor="middle">0.4ms QUERY DISPATCH</text>
-          </svg>
-        </div>
-
-        <div style="margin-top:auto; padding-top:14px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06);">
-          <span style="font-size:0.74rem; color:var(--blog-text-subtle); font-family:monospace;">${escapeHtml(pEnterprise.author || 'Lalith H')} &bull; ${pEnterprise.views || 0} VIEWS</span>
-          <a href="#${escapeHtml(pEnterprise.slug)}" class="blog-card-link-arrow">
-            <span>Read Case Study</span>
-            <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
-          </a>
-        </div>
-      </article>
-    `;
-
-    refreshIcons();
-  }
-
   // ============================================================
-  // 8. NEXT-GEN DEDICATED READER VIEW
+  // 8. READER DECOMPOSED HELPERS
   // ============================================================
-  function renderArticleReader(post) {
-    if (!readerView) return;
-    const catClass = post.categorySlug || 'ai-tech';
+  function renderReaderHeader(post) {
+    const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
+    const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
     const currentUrl = encodeURIComponent(window.location.href);
     const titleEncoded = encodeURIComponent(post.title + ' — via AarambhX Engineering');
 
+    return `
+      <header class="reader-header">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <span class="blog-category-pill ${catClass}">${escapeHtml(catLabel)}</span>
+        </div>
+        <h1 class="reader-title">${escapeHtml(post.title)}</h1>
+        <p style="font-size: 1.15rem; color: var(--blog-text-muted); line-height: 1.6; margin-bottom: 24px;">
+          ${escapeHtml(post.summary)}
+        </p>
+
+        <div class="reader-meta-bar">
+          <div class="author-chip">
+            <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar">
+            <div class="author-info">
+              <span class="author-name">${escapeHtml(post.author)}</span>
+              <span class="author-role">${escapeHtml(post.authorRole || 'Principal Systems Architect')} &bull; ${escapeHtml(post.date)}</span>
+            </div>
+          </div>
+
+          <div class="social-share-strip">
+            <span style="font-size: 0.78rem; color: var(--blog-text-subtle); margin-right: 4px;">Share:</span>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on X" aria-label="Share on X">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <button type="button" class="share-btn" id="btnCopyArticleLink" title="Copy Direct Link" aria-label="Copy Direct Link">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+          </div>
+        </div>
+      </header>
+    `;
+  }
+
+  function renderReaderToolbar() {
+    let savedReadingMode = 'obsidian';
+    try {
+      savedReadingMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
+    } catch (e) {}
+
+    return `
+      <div class="reader-toolbar">
+        <div class="reading-mode-selector">
+          <span style="font-size:0.74rem; color:var(--blog-text-subtle); margin-right:4px;">Theme:</span>
+          <button type="button" class="reading-mode-btn ${savedReadingMode === 'obsidian' ? 'active' : ''}" data-mode="obsidian">Obsidian</button>
+          <button type="button" class="reading-mode-btn ${savedReadingMode === 'terminal' ? 'active' : ''}" data-mode="terminal">Terminal</button>
+          <button type="button" class="reading-mode-btn ${savedReadingMode === 'sepia' ? 'active' : ''}" data-mode="sepia">Sepia Paper</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="font-size-controls">
+            <span style="font-size:0.74rem; color:var(--blog-text-subtle);">Text:</span>
+            <button type="button" class="font-size-btn" id="btnFontDecr" title="Decrease font size">A-</button>
+            <button type="button" class="font-size-btn" id="btnFontIncr" title="Increase font size">A+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderReaderTakeaways(post) {
+    const takeaways = getExecutiveTakeaways(post.slug);
+    return `
+      <div class="reader-takeaways-box">
+        <div class="takeaways-header">
+          <i data-lucide="check-circle" style="width:16px; height:16px;"></i>
+          <span>Executive Architectural Takeaways</span>
+        </div>
+        <ul class="takeaways-list">
+          ${takeaways.map(t => `<li><span>${escapeHtml(t)}</span></li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  function renderReaderProse(post, prevPost, nextPost) {
     const formattedContent = parseMarkdownToHtml(post.content || '');
+    return `
+      <div class="article-prose" id="articleProseBody">
+        ${formattedContent}
+
+        <!-- Mid-Article Consultation Callout -->
+        <div class="article-lead-box gold-accent" style="margin-top:40px;">
+          <div class="lead-box-text">
+            <h4>Building Next-Gen Systems for Your Enterprise?</h4>
+            <p>Consult directly with AarambhX engineers for AI agents, custom ERP clouds, and industrial IoT architecture.</p>
+          </div>
+          <a href="index.html#contact" class="lead-box-cta-btn">
+            <span>Book Engineering Audit</span>
+            <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+          </a>
+        </div>
+
+        <!-- Sponsored / Tech Tools Slot -->
+        <div class="ax-monetization-slot">
+          <span class="monetization-label">Sponsored Technology Partner</span>
+          <div class="monetization-content">
+            <span>⚡ High-Speed Managed Cloud Hosting &amp; NVMe Storage — Powered by AarambhX Cloud</span>
+            <a href="https://wa.me/919916856922?text=Inquiry%20regarding%20AarambhX%20Cloud%20Hosting" target="_blank" style="color:var(--blog-gold); font-weight:700; text-decoration:underline;">Inquire Here &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Post-Article Workshop CTA -->
+        <div class="article-lead-box">
+          <div class="lead-box-text">
+            <h4>Want to Master These Skills Hands-On?</h4>
+            <p>Join AarambhX Academy workshops for college students &amp; professionals. Build physical AI and IoT projects from scratch.</p>
+          </div>
+          <a href="academy.html" class="lead-box-cta-btn">
+            <span>Explore Academy Workshops</span>
+            <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+          </a>
+        </div>
+
+        <!-- Next & Previous Article Split Cards -->
+        <div class="next-prev-grid">
+          ${prevPost ? `
+            <a href="#${escapeHtml(prevPost.slug)}" class="next-prev-card">
+              <span class="next-prev-label">&larr; Previous Paper</span>
+              <span class="next-prev-title">${escapeHtml(prevPost.title)}</span>
+            </a>
+          ` : '<div></div>'}
+          ${nextPost ? `
+            <a href="#${escapeHtml(nextPost.slug)}" class="next-prev-card" style="text-align:right;">
+              <span class="next-prev-label">Next Paper &rarr;</span>
+              <span class="next-prev-title">${escapeHtml(nextPost.title)}</span>
+            </a>
+          ` : '<div></div>'}
+        </div>
+
+        <!-- Back to Listing Footer -->
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
+          <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
+            <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
+            <span>Back to All Articles</span>
+          </a>
+          <button type="button" class="read-article-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span>Back to Top</span>
+            <i data-lucide="arrow-up" style="width:14px; height:14px;"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderReaderSidebar() {
+    return `
+      <aside class="reader-toc-sidebar" id="readerTocSidebar">
+        <div class="reader-toc-header">
+          <i data-lucide="list" style="width:14px; height:14px;"></i>
+          <span>Article Outline</span>
+        </div>
+        <nav id="tocNavContainer">
+          <ul class="reader-toc-list" id="readerTocList"></ul>
+        </nav>
+      </aside>
+    `;
+  }
+
+  // ============================================================
+  // 9. NEXT-GEN DEDICATED READER VIEW
+  // ============================================================
+  function renderArticleReader(post) {
+    if (!readerView) return;
 
     const allPosts = Store ? Store.getBlogPosts('all', 'Published') : [];
     const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
     const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : allPosts[allPosts.length - 1];
     const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : allPosts[0];
 
-    // Executive Key Takeaways tailored by post
-    const takeaways = getExecutiveTakeaways(post.slug);
-
-    let savedReadingMode = 'obsidian';
-    try {
-      savedReadingMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
-    } catch (e) {}
-
     readerView.innerHTML = `
-      <div class="blog-container">
+      <div class="article-reader-container">
         <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
           <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
           <span>Back to All Articles</span>
         </a>
 
-        <!-- Reading Preferences Toolbar -->
-        <div class="reader-toolbar">
-          <div class="reading-mode-selector">
-            <span style="font-size:0.74rem; color:var(--blog-text-subtle); margin-right:4px;">Theme:</span>
-            <button type="button" class="reading-mode-btn ${savedReadingMode === 'obsidian' ? 'active' : ''}" data-mode="obsidian">Obsidian</button>
-            <button type="button" class="reading-mode-btn ${savedReadingMode === 'terminal' ? 'active' : ''}" data-mode="terminal">Terminal</button>
-            <button type="button" class="reading-mode-btn ${savedReadingMode === 'sepia' ? 'active' : ''}" data-mode="sepia">Sepia Paper</button>
-          </div>
+        ${renderReaderToolbar()}
+        ${renderReaderHeader(post)}
+        ${renderReaderTakeaways(post)}
 
-          <div style="display:flex; align-items:center; gap:16px;">
-            <button type="button" class="audio-player-pill" id="btnAudioOverview">
-              <i data-lucide="volume-2" style="width:13px; height:13px;"></i>
-              <span id="audioPillText">Audio Overview (${escapeHtml(post.readTime || '5 min')})</span>
-              <div class="audio-bars-anim" id="audioWaveform" style="display:none;">
-                <span></span><span></span><span></span>
-              </div>
-            </button>
-
-            <div class="font-size-controls">
-              <span style="font-size:0.74rem; color:var(--blog-text-subtle);">Text:</span>
-              <button type="button" class="font-size-btn" id="btnFontDecr" title="Decrease font size">A-</button>
-              <button type="button" class="font-size-btn" id="btnFontIncr" title="Increase font size">A+</button>
-            </div>
-          </div>
-        </div>
-
-        <header class="reader-header">
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-            <span class="category-tag ${catClass}">${escapeHtml(post.category)}</span>
-            <span class="difficulty-pill">Peer-Reviewed Dispatch</span>
-          </div>
-          <h1 class="reader-title">${escapeHtml(post.title)}</h1>
-          <p style="font-size: 1.15rem; color: var(--blog-text-muted); line-height: 1.6; margin-bottom: 24px;">
-            ${escapeHtml(post.summary)}
-          </p>
-
-          <div class="reader-meta-bar">
-            <div class="author-chip">
-              <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar">
-              <div class="author-info">
-                <span class="author-name">${escapeHtml(post.author)}</span>
-                <span class="author-role">${escapeHtml(post.authorRole || 'Principal Systems Architect')} &bull; ${escapeHtml(post.date)}</span>
-              </div>
-            </div>
-
-            <div class="social-share-strip">
-              <span style="font-size: 0.78rem; color: var(--blog-text-subtle); margin-right: 4px;">Share:</span>
-              <a href="https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-              </a>
-              <a href="https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on X" aria-label="Share on X">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-              <a href="https://api.whatsapp.com/send?text=${titleEncoded}%20${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on WhatsApp" aria-label="Share on WhatsApp">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.45 1.03 2.62.13.17 1.77 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.12-.22-.19-.47-.32"/></svg>
-              </a>
-              <button type="button" class="share-btn" id="btnCopyArticleLink" title="Copy Direct Link" aria-label="Copy Direct Link">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <!-- Executive Summary Box ("Key Takeaways") -->
-        <div class="reader-takeaways-box">
-          <div class="takeaways-header">
-            <i data-lucide="check-circle" style="width:16px; height:16px;"></i>
-            <span>Executive Architectural Takeaways</span>
-          </div>
-          <ul class="takeaways-list">
-            ${takeaways.map(t => `<li><span>${escapeHtml(t)}</span></li>`).join('')}
-          </ul>
-        </div>
-
-        <!-- Two-Column Architecture: Centered Prose Column (max 740px) + Right TOC Sidebar (260px) -->
         <div class="reader-layout-grid">
-          
-          <!-- Main Article Prose -->
-          <div class="article-prose" id="articleProseBody">
-            ${formattedContent}
-
-            <!-- Mid-Article Consultation Callout -->
-            <div class="article-lead-box gold-accent" style="margin-top:40px;">
-              <div class="lead-box-text">
-                <h4>Building Next-Gen Systems for Your Enterprise?</h4>
-                <p>Consult directly with AarambhX engineers for AI agents, custom ERP clouds, and industrial IoT architecture.</p>
-              </div>
-              <a href="index.html#contact" class="lead-box-cta-btn">
-                <span>Book Engineering Audit</span>
-                <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
-              </a>
-            </div>
-
-            <!-- Sponsored / Tech Tools Slot -->
-            <div class="ax-monetization-slot">
-              <span class="monetization-label">Sponsored Technology Partner</span>
-              <div class="monetization-content">
-                <span>⚡ High-Speed Managed Cloud Hosting &amp; NVMe Storage — Powered by AarambhX Cloud</span>
-                <a href="https://wa.me/919916856922?text=Inquiry%20regarding%20AarambhX%20Cloud%20Hosting" target="_blank" style="color:var(--blog-gold); font-weight:700; text-decoration:underline;">Inquire Here &rarr;</a>
-              </div>
-            </div>
-
-            <!-- Post-Article Workshop CTA -->
-            <div class="article-lead-box">
-              <div class="lead-box-text">
-                <h4>Want to Master These Skills Hands-On?</h4>
-                <p>Join AarambhX Academy workshops for college students &amp; professionals. Build physical AI and IoT projects from scratch.</p>
-              </div>
-              <a href="academy.html" class="lead-box-cta-btn">
-                <span>Explore Academy Workshops</span>
-                <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
-              </a>
-            </div>
-
-            <!-- Next & Previous Article Split Cards -->
-            <div class="next-prev-grid">
-              ${prevPost ? `
-                <a href="#${escapeHtml(prevPost.slug)}" class="next-prev-card">
-                  <span class="next-prev-label">&larr; Previous Paper</span>
-                  <span class="next-prev-title">${escapeHtml(prevPost.title)}</span>
-                </a>
-              ` : '<div></div>'}
-              ${nextPost ? `
-                <a href="#${escapeHtml(nextPost.slug)}" class="next-prev-card" style="text-align:right;">
-                  <span class="next-prev-label">Next Paper &rarr;</span>
-                  <span class="next-prev-title">${escapeHtml(nextPost.title)}</span>
-                </a>
-              ` : '<div></div>'}
-            </div>
-
-            <!-- Back to Listing Footer -->
-            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
-              <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
-                <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
-                <span>Back to All Articles</span>
-              </a>
-              <button type="button" class="read-article-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                <span>Back to Top</span>
-                <i data-lucide="arrow-up" style="width:14px; height:14px;"></i>
-              </button>
-            </div>
-
-          </div>
-
-          <!-- Sticky Right-Hand Table of Contents Sidebar -->
-          <aside class="reader-toc-sidebar" id="readerTocSidebar">
-            <div class="reader-toc-header">
-              <i data-lucide="list" style="width:14px; height:14px;"></i>
-              <span>Article Outline</span>
-            </div>
-            <nav id="tocNavContainer">
-              <ul class="reader-toc-list" id="readerTocList"></ul>
-            </nav>
-          </aside>
-
+          ${renderReaderProse(post, prevPost, nextPost)}
+          ${renderReaderSidebar()}
         </div>
       </div>
     `;
@@ -917,10 +624,7 @@
     // 4. Wire Font Scaler Buttons
     wireFontScalers();
 
-    // 5. Wire Audio Overview Simulator
-    wireAudioOverview();
-
-    // 6. Wire Copy Link Button
+    // 5. Wire Copy Link Button
     const btnCopyLink = document.getElementById('btnCopyArticleLink');
     if (btnCopyLink) {
       btnCopyLink.addEventListener('click', () => {
@@ -932,7 +636,7 @@
       });
     }
 
-    // 7. Wire Multi-language Code Block Copy Buttons
+    // 6. Wire Multi-language Code Block Copy Buttons
     const codeBlocks = readerView.querySelectorAll('.code-block-wrap');
     codeBlocks.forEach(wrap => {
       const copyBtn = wrap.querySelector('.copy-code-btn');
@@ -1064,34 +768,8 @@
     }
   }
 
-  // Audio Overview Simulation
-  function wireAudioOverview() {
-    const btn = document.getElementById('btnAudioOverview');
-    const wave = document.getElementById('audioWaveform');
-    const text = document.getElementById('audioPillText');
-    if (!btn || !wave || !text) return;
-
-    let isPlaying = false;
-    btn.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      if (isPlaying) {
-        wave.style.display = 'inline-flex';
-        text.textContent = 'Playing Overview...';
-        btn.style.background = 'rgba(16, 185, 129, 0.2)';
-        btn.style.borderColor = '#10B981';
-        btn.style.color = '#10B981';
-      } else {
-        wave.style.display = 'none';
-        text.textContent = 'Audio Overview (Paused)';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.style.color = '';
-      }
-    });
-  }
-
   // ============================================================
-  // 9. DYNAMIC TABLE OF CONTENTS & INTERSECTION SCROLL-SPY
+  // 10. DYNAMIC TABLE OF CONTENTS & INTERSECTION SCROLL-SPY
   // ============================================================
   function buildTableOfContents() {
     const prose = document.getElementById('articleProseBody');
@@ -1154,7 +832,7 @@
   }
 
   // ============================================================
-  // 10. STICKY FLOATING ACTION DOCK CONTROLLER
+  // 11. STICKY FLOATING ACTION DOCK CONTROLLER
   // ============================================================
   function initFloatingDock(post) {
     if (!readerFloatingDock) return;
@@ -1168,7 +846,7 @@
     const clapBtn = document.getElementById('dockClapBtn');
     const clapCountEl = document.getElementById('dockClapCount');
     const clapStorageKey = `ax_blog_claps_${post.slug}`;
-    let claps = parseInt(localStorage.getItem(clapStorageKey) || '48', 10);
+    let claps = parseInt(localStorage.getItem(clapStorageKey) || '0', 10);
 
     if (clapCountEl) {
       clapCountEl.textContent = claps;
@@ -1201,6 +879,11 @@
     if (shareTw) {
       shareTw.href = `https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}`;
     }
+    
+    const shareWa = document.getElementById('dockShareWhatsApp');
+    if (shareWa) {
+      shareWa.href = `https://api.whatsapp.com/send?text=${titleEncoded}%20${currentUrl}`;
+    }
 
     const copyBtn = document.getElementById('dockBtnCopyLink');
     if (copyBtn) {
@@ -1215,7 +898,7 @@
   }
 
   // ============================================================
-  // 11. LIGHTWEIGHT MARKDOWN / HTML PARSER
+  // 12. LIGHTWEIGHT MARKDOWN / HTML PARSER
   // ============================================================
   function parseMarkdownToHtml(markdown) {
     if (!markdown) return '';
@@ -1281,7 +964,7 @@
   }
 
   // ============================================================
-  // 12. READING PROGRESS BAR
+  // 13. READING PROGRESS BAR
   // ============================================================
   function updateReadingProgress() {
     if (!progressBar || !activePost) return;
@@ -1296,7 +979,7 @@
   }
 
   // ============================================================
-  // 13. NEWSLETTER SUBSCRIPTION
+  // 14. NEWSLETTER SUBSCRIPTION
   // ============================================================
   function handleNewsletterSubmit(e) {
     e.preventDefault();
@@ -1319,8 +1002,28 @@
   }
 
   // ============================================================
-  // 14. UTILITIES
+  // 15. UTILITIES & HELPERS
   // ============================================================
+  function getCategoryLabel(slug) {
+    const map = {
+      'ai-tech': 'AI & Reasoning',
+      'fullstack': 'Systems & Full-Stack',
+      'hardware-iot': 'Hardware & IoT',
+      'case-studies': 'Case Studies'
+    };
+    return map[slug] || slug;
+  }
+
+  function getCategoryClass(slug) {
+    const map = {
+      'ai-tech': 'cat-ai',
+      'fullstack': 'cat-fullstack',
+      'hardware-iot': 'cat-hardware',
+      'case-studies': 'cat-casestudy'
+    };
+    return map[slug] || '';
+  }
+
   function escapeHtml(str) {
     return String(str || '')
       .replace(/&/g, '&amp;')
