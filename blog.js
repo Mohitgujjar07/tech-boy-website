@@ -346,7 +346,7 @@
 
     if (searchQuery) {
       posts = posts.filter(p => {
-        const hay = \`\${p.title} \${p.summary} \${p.category} \${(p.tags || []).join(' ')}\`.toLowerCase();
+        const hay = `${p.title} ${p.summary} ${p.category} ${(p.tags || []).join(' ')}`.toLowerCase();
         return hay.includes(searchQuery);
       });
     }
