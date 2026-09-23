@@ -668,7 +668,13 @@
       'Deterministic verification gates ensure that external function calls and GPIO actuators never execute unvalidated.'
     ];
 
-    if (slug === 'esp32-industrial-iot-telemetry') {
+    if (slug === 'autonomous-agents-hermes-grok-tools') {
+      return [
+        'Open-weight models like Nous Hermes match or exceed frontier closed APIs on deterministic JSON function-calling schema adherence.',
+        'Semantic accessibility tree (AXTree) extraction slashes autonomous crawler token consumption by up to 90% compared to raw HTML ingestion.',
+        'Hybrid architectures pairing local Hermes workers for high-frequency reasoning loops with Grok/frontier models for external web synthesis minimize latency and API costs by up to 85%.'
+      ];
+    } else if (slug === 'esp32-industrial-iot-telemetry' || slug === 'esp32-lorawan-smart-agriculture') {
       return [
         'Deep sleep cycle tuning on ESP32-C3 RISC-V achieves 9.8 µA quiescent draw, extending single 18650 cell operation past 18 months.',
         'LoRaWAN SX1262 transceiver handles +22dBm transmission peaks without brownout when buffered with low-ESR tantalum caps.',
