@@ -44,6 +44,12 @@
           "type": 301
         }
       ],
+      "rewrites": [
+        {
+          "source": "/google6cf729a5f661a4ef.html",
+          "destination": "/google6cf729a5f661a4ef.html"
+        }
+      ],
       "headers": [
         {
           "source": "**",
@@ -160,6 +166,12 @@
           "type": 301
         }
       ],
+      "rewrites": [
+        {
+          "source": "/google6cf729a5f661a4ef.html",
+          "destination": "/google6cf729a5f661a4ef.html"
+        }
+      ],
       "headers": [
         {
           "source": "**",
@@ -274,6 +286,12 @@
           "source": "/developer.html",
           "destination": "/academy.html",
           "type": 301
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "/google6cf729a5f661a4ef.html",
+          "destination": "/google6cf729a5f661a4ef.html"
         }
       ],
       "headers": [
