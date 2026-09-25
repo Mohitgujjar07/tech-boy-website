@@ -69,10 +69,53 @@ function updateActiveNavLink() {
 
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href && (href === `#${currentId}` || ((currentId === 'work' || currentId === 'portfolio') && (href === '#work' || href === '#portfolio')) || (currentId === 'projects' && href === '#projects') || (currentId === 'services' && href === '#services'))) {
+    if (href && (href === `#${currentId}` || ((currentId === 'work' || currentId === 'portfolio') && (href === '#work' || href === '#portfolio')) || (currentId === 'projects' && href === '#projects') || (currentId === 'services' && href === '#services') || ((currentId === 'why-us' || currentId === 'about') && (href === '#why-us' || href === '#about')))) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
+    }
+  });
+}
+
+function initNavbarDropdown() {
+  const trigger = document.getElementById('navDropdownTrigger');
+  const dropdownItem = trigger ? trigger.closest('.nav-dropdown-item') : null;
+  if (!trigger || !dropdownItem) return;
+
+  const toggle = (e) => {
+    e.stopPropagation();
+    const isOpen = dropdownItem.classList.contains('open');
+    if (isOpen) {
+      close();
+    } else {
+      open();
+    }
+  };
+
+  const open = () => {
+    dropdownItem.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+  };
+
+  const close = () => {
+    dropdownItem.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+  };
+
+  trigger.addEventListener('click', toggle);
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdownItem.contains(e.target)) {
+      close();
+    }
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdownItem.classList.contains('open')) {
+      close();
+      trigger.focus();
     }
   });
 }
@@ -188,14 +231,14 @@ function initScrollReveal() {
 // 4. Hero Stat Counter Animations
 // =========================================================================
 function initStatCounters() {
-  const statElements = document.querySelectorAll('[data-count]');
+  const statElements = document.querySelectorAll('[data-count], [data-counter]');
   if (!statElements.length) return;
 
   const animateCounter = (el) => {
     if (el.dataset.animated === 'true') return;
     el.dataset.animated = 'true';
 
-    const rawTarget = el.getAttribute('data-count') || el.textContent;
+    const rawTarget = el.getAttribute('data-count') || el.getAttribute('data-counter') || el.textContent;
     const target = parseFloat(rawTarget);
     if (isNaN(target)) return;
 
@@ -1704,6 +1747,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initThemeToggle();
   initNavbarScroll();
+  initNavbarDropdown();
   initMobileDrawer();
   initScrollReveal();
   initStatCounters();

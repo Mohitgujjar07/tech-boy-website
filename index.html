@@ -212,13 +212,39 @@
           <li><a href="#services" class="nav-item">Services</a></li>
           <li><a href="work.html" class="nav-item">Our Work</a></li>
           <li><a href="#projects" class="nav-item" title="Student Innovation Lab &amp; Projects">Projects</a></li>
-          <li class="nav-item-aux"><a href="#why-us" class="nav-item nav-item-aux">Why Us</a></li>
-          <li><a href="academy.html" class="nav-item dev-link-highlight" title="AarambhX Academy — Industrial Training &amp; Workshops">Academy</a></li>
+          <li><a href="#why-us" class="nav-item">Why Us</a></li>
+          <li><a href="academy.html" class="nav-item dev-link-highlight" title="AarambhX Academy — Industrial Training &amp; Workshops">Academy <span class="nav-badge-dot"></span></a></li>
           <li><a href="blog.html" class="nav-item" title="Engineering Journal &amp; AI Tech News">Journal</a></li>
           <li><a href="#contact" class="nav-item">Contact</a></li>
-          <li class="nav-item-aux"><a href="#faq" class="nav-item nav-item-aux">FAQ</a></li>
-          <li class="nav-item-aux"><a href="brochure.html" class="nav-item nav-item-aux" title="Institutional Training Brochure (Interactive &amp; PDF)">Brochure</a></li>
-          <li class="nav-item-aux"><a href="highlights.html" class="nav-item nav-item-aux" title="Watch Instagram Reels &amp; Work Highlights">Reels</a></li>
+          <li class="nav-dropdown-item">
+            <button type="button" class="nav-item nav-dropdown-trigger" id="navDropdownTrigger" aria-expanded="false" aria-haspopup="true">
+              <span>More</span>
+              <i data-lucide="chevron-down" class="nav-chevron-icon"></i>
+            </button>
+            <div class="nav-dropdown-popover" id="navDropdownPopover" role="menu">
+              <a href="brochure.html" class="dropdown-link" role="menuitem" title="Institutional Training Brochure (Interactive &amp; PDF)">
+                <i data-lucide="file-text"></i>
+                <div class="dropdown-link-text">
+                  <span class="dropdown-link-title">Brochure</span>
+                  <span class="dropdown-link-sub">Interactive 3D &amp; PDF</span>
+                </div>
+              </a>
+              <a href="highlights.html" class="dropdown-link" role="menuitem" title="Watch Instagram Reels &amp; Work Highlights">
+                <i data-lucide="film"></i>
+                <div class="dropdown-link-text">
+                  <span class="dropdown-link-title">Reels &amp; Highlights</span>
+                  <span class="dropdown-link-sub">Lab Engineering Demos</span>
+                </div>
+              </a>
+              <a href="#faq" class="dropdown-link" role="menuitem" title="1-Click Problem Diagnostic &amp; FAQ">
+                <i data-lucide="help-circle"></i>
+                <div class="dropdown-link-text">
+                  <span class="dropdown-link-title">Diagnostics &amp; FAQ</span>
+                  <span class="dropdown-link-sub">1-Click Quick Triage</span>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
       </nav>
 
@@ -259,19 +285,30 @@
         <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
       </div>
       <ul class="drawer-nav-list">
-        <li><a href="#services" class="drawer-link">Services &amp; Solutions</a></li>
-        <li><a href="#work" class="drawer-link">Our Work &amp; Systems</a></li>
-        <li><a href="#projects" class="drawer-link">Student Innovation Lab</a></li>
-        <li><a href="#why-us" class="drawer-link">How We Work</a></li>
-        <li><a href="#highlights" class="drawer-link">Highlights &amp; Reels</a></li>
-        <li><a href="#faq" class="drawer-link">FAQ &amp; Diagnostics</a></li>
-        <li><a href="#contact" class="drawer-link">Contact &amp; Location</a></li>
-        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='brochure.html'">Institutional Brochure &nearr;</button></li>
-        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='academy.html'">AarambhX Academy &nearr;</button></li>
-        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='blog.html'">Engineering Journal &nearr;</button></li>
+        <li><a href="#services" class="drawer-link"><i data-lucide="layers"></i> <span>Services &amp; Solutions</span></a></li>
+        <li><a href="work.html" class="drawer-link"><i data-lucide="briefcase"></i> <span>Our Work &amp; Systems</span></a></li>
+        <li><a href="#projects" class="drawer-link"><i data-lucide="cpu"></i> <span>Student Innovation Lab</span></a></li>
+        <li><a href="#why-us" class="drawer-link"><i data-lucide="shield-check"></i> <span>Engineering Methodology</span></a></li>
+        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='academy.html'"><i data-lucide="graduation-cap"></i> <span>AarambhX Academy</span> <span class="drawer-pill">Industrial</span></button></li>
+        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='blog.html'"><i data-lucide="book-open"></i> <span>Engineering Journal</span> <span class="drawer-pill">AI &amp; Tech</span></button></li>
+        <li><button type="button" class="drawer-link drawer-btn-link" onclick="window.location.href='brochure.html'"><i data-lucide="file-text"></i> <span>Training Brochure 3D</span></button></li>
+        <li><a href="highlights.html" class="drawer-link"><i data-lucide="film"></i> <span>Reels &amp; Lab Highlights</span></a></li>
+        <li><a href="#faq" class="drawer-link"><i data-lucide="help-circle"></i> <span>Diagnostics &amp; FAQ</span></a></li>
+        <li><a href="#contact" class="drawer-link"><i data-lucide="mail"></i> <span>Contact &amp; Location</span></a></li>
       </ul>
-      <div class="drawer-footer">
-        <a href="#contact" class="apple-btn-cta w-full text-center">Request Free Quote</a>
+      <div class="drawer-quick-dock">
+        <a href="tel:+919482181414" class="drawer-dock-btn" title="Call AarambhX Directly">
+          <i data-lucide="phone"></i>
+          <span>Call</span>
+        </a>
+        <a href="https://wa.me/919482181414" target="_blank" rel="noopener noreferrer" class="drawer-dock-btn drawer-dock-wa" title="WhatsApp Chat">
+          <i data-lucide="message-circle"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#contact" class="apple-btn-cta drawer-dock-cta">
+          <span>Get Quote</span>
+          <i data-lucide="arrow-right"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -1279,30 +1316,42 @@
       <div class="container">
         
         <div class="section-header-center reveal">
-          <span class="apple-eyebrow">Our Methodology</span>
-          <h2>How We Build & Support Your Solutions</h2>
-          <p class="section-lead">A transparent, 4-step engineering workflow built for quality and speed.</p>
+          <span class="apple-eyebrow"><i data-lucide="cpu"></i> Engineering Methodology &amp; DNA</span>
+          <h2>Precision Hardware. Resilient Software. Zero Compromise.</h2>
+          <p class="section-lead">A transparent, 4-step engineering workflow built for quality and speed &mdash; engineered directly in our Tumakuru R&amp;D lab.</p>
         </div>
 
         <!-- 4-Step Interactive Pipeline -->
         <div class="pipeline-bento-strip">
           <div class="pipeline-item">
-            <span class="step-num">01</span>
+            <div class="pipeline-meta-row">
+              <span class="step-num">01</span>
+              <span class="pipeline-phase-badge">Phase 01 &bull; Diagnosis</span>
+            </div>
             <h4>Requirement Scope</h4>
-            <p>We analyze your technical problem, project requirement, or business goals in plain language.</p>
+            <p>We analyze your technical problem, hardware constraints, or business goals in plain language with zero jargon.</p>
           </div>
           <div class="pipeline-item">
-            <span class="step-num">02</span>
+            <div class="pipeline-meta-row">
+              <span class="step-num">02</span>
+              <span class="pipeline-phase-badge">Phase 02 &bull; Schematics</span>
+            </div>
             <h4>Solution Blueprint</h4>
             <p>We propose the exact architecture, compatible components, or software framework with transparent pricing.</p>
           </div>
           <div class="pipeline-item">
-            <span class="step-num">03</span>
+            <div class="pipeline-meta-row">
+              <span class="step-num">03</span>
+              <span class="pipeline-phase-badge">Phase 03 &bull; Execution</span>
+            </div>
             <h4>Build & Testing</h4>
-            <p>We build, code, assemble, and stress-test your system to ensure zero bugs and optimum performance.</p>
+            <p>We build, code, assemble, and stress-test your system to ensure zero bugs and optimum performance under peak loads.</p>
           </div>
           <div class="pipeline-item">
-            <span class="step-num">04</span>
+            <div class="pipeline-meta-row">
+              <span class="step-num">04</span>
+              <span class="pipeline-phase-badge">Phase 04 &bull; Rollout</span>
+            </div>
             <h4>Delivery & Support</h4>
             <p>Direct handover with training, setup assistance, and continuous technical support.</p>
           </div>
@@ -1326,16 +1375,20 @@
             <p>From enterprise web servers and structured LAN backbones to thermal-tuned workstations and IoT embedded firmware, we adhere to strict quality control, verified component sourcing, and comprehensive post-delivery support.</p>
             <div class="methodology-metrics-row">
               <div class="methodology-metric">
-                <strong>99.9%</strong>
+                <strong data-counter="99.9" data-suffix="%">99.9%</strong>
                 <span>Architecture Uptime</span>
               </div>
               <div class="methodology-metric">
-                <strong>Zero</strong>
+                <strong data-counter="0" data-prefix="">Zero</strong>
                 <span>Technical Jargon</span>
               </div>
               <div class="methodology-metric">
-                <strong>100%</strong>
+                <strong data-counter="100" data-suffix="%">100%</strong>
                 <span>Verified Deliverables</span>
+              </div>
+              <div class="methodology-metric">
+                <strong data-counter="48" data-suffix="h">48h</strong>
+                <span>Diagnostic Triage</span>
               </div>
             </div>
           </div>
@@ -1346,6 +1399,7 @@
           <div class="pillar-card">
             <div class="pillar-icon"><i data-lucide="check" class="text-blue"></i></div>
             <div>
+              <span class="pillar-badge">Silicon-to-CSS</span>
               <strong>100% Tailored Solutions</strong>
               <p>No generic templates or mismatched parts. Every solution is built for your exact use case.</p>
             </div>
@@ -1354,6 +1408,7 @@
           <div class="pillar-card">
             <div class="pillar-icon"><i data-lucide="shield-check" class="text-emerald"></i></div>
             <div>
+              <span class="pillar-badge">Itemized BOM</span>
               <strong>Transparent &amp; Direct Pricing</strong>
               <p>No hidden charges. Clear itemized estimates before starting any hardware or software project.</p>
             </div>
@@ -1362,6 +1417,7 @@
           <div class="pillar-card">
             <div class="pillar-icon"><i data-lucide="clock" class="text-amber"></i></div>
             <div>
+              <span class="pillar-badge">Sprint Milestones</span>
               <strong>Quick Turnaround</strong>
               <p>Fast diagnostic turnaround on repairs and agile milestones on web and software projects.</p>
             </div>
@@ -1370,6 +1426,7 @@
           <div class="pillar-card">
             <div class="pillar-icon"><i data-lucide="phone-call" class="text-purple"></i></div>
             <div>
+              <span class="pillar-badge">Local Lab Presence</span>
               <strong>Tumakuru &amp; Remote IT Support</strong>
               <p>On-site visits in Tumakuru district and seamless remote desktop/software consulting nationwide.</p>
             </div>
@@ -1394,9 +1451,9 @@
            data-start-radius="24"
            data-end-radius="0"
            data-media-zoom="1.35"
-           data-scroll-distance="1.2"
-           data-hold-distance="0.35"
-           data-smoothing="0.1"
+           data-scroll-distance="0.75"
+           data-hold-distance="0.08"
+           data-smoothing="0.12"
            data-overlay-scrim="0.55"
            data-use-window-scroll="true">
         <div class="scroll-expand-content-inner">
