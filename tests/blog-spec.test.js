@@ -147,16 +147,16 @@ function runBlogSpecTests() {
     Assert.isTrue(Array.isArray(initialPosts), 'getBlogPosts returns array');
     Assert.isTrue(initialPosts.length >= 4, 'At least 4 seed articles pre-populated');
 
-    // 2. Lookup by slug
-    const aiPost = AarambhXStore.getBlogPostBySlug('autonomous-ai-agents-rag');
-    Assert.isTrue(!!aiPost, 'autonomous-ai-agents-rag slug lookup works');
-    Assert.contains(aiPost.title, 'Multi-Agent RAG', 'Seed title matched');
+    // 2. Lookup by slug (supports modern slug and legacy alias)
+    const aiPost = AarambhXStore.getBlogPostBySlug('autonomous-multi-agent-mcp-orchestration') || AarambhXStore.getBlogPostBySlug('autonomous-ai-agents-rag');
+    Assert.isTrue(!!aiPost, 'autonomous-multi-agent-mcp-orchestration slug lookup works');
+    Assert.contains(aiPost.title, 'Multi-Agent', 'Seed title matched');
     Assert.isTrue(aiPost.category.includes('AI'), 'Category matches AI');
 
     // 3. View counter increment
     const initialViews = aiPost.views || 0;
-    AarambhXStore.incrementBlogPostViews('autonomous-ai-agents-rag');
-    const updatedAiPost = AarambhXStore.getBlogPostBySlug('autonomous-ai-agents-rag');
+    AarambhXStore.incrementBlogPostViews('autonomous-multi-agent-mcp-orchestration');
+    const updatedAiPost = AarambhXStore.getBlogPostBySlug('autonomous-multi-agent-mcp-orchestration');
     Assert.equal(updatedAiPost.views, initialViews + 1, 'incrementBlogPostViews works');
 
     // 4. Create new article
