@@ -83,7 +83,7 @@
     const wrapHeight = bookWrapper.clientHeight;
     const aspectRatio = 1.414; // A4 standard
 
-    let pageHeight = Math.min(wrapHeight * 0.9, 1000);
+    let pageHeight = Math.min(wrapHeight * 0.82, 920);
     let pageWidth = pageHeight / aspectRatio;
 
     if (wrapWidth < 800) {
@@ -126,7 +126,7 @@
       minWidth: 260,
       maxWidth: 900,
       minHeight: 360,
-      maxHeight: 1280,
+      maxHeight: 1000,
       maxShadowOpacity: 0.5,
       showCover: true,
       mobileScrollSupport: false,

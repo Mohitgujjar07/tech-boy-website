@@ -245,7 +245,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 72px 2rem 80px 2rem;
+  padding: 84px 2rem 72px 2rem;
   position: relative;
   overflow: hidden;
 }
