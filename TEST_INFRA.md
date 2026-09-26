@@ -43,7 +43,7 @@ Exhaustively validates each of the **49 features** defined in `PROJECT.md` and `
 - **Service Discovery & Bento Architecture (F16–F28)**: 10 category discovery cards, About division cards, 7 Software Bento cards (Web dev, Portfolio, Custom software, Featured Excel automation, UI/UX, QA, Maintenance), 4 Hardware Bento cards (Laptop repair, Desktop repair, Featured Custom PC, Upgrades).
 - **Infrastructure & Student Lab (F29–F35)**: 5 Networking cards, IoT Architecture Hub, 3 Student project streams, 7 Portfolio filter tabs, 6 Portfolio showcase cards, 6-Step student support roadmap, 7-Step Software-to-Hardware pipeline.
 - **Audience, Process, Values (F36–F38)**: 8 Audience segment cards, 8 Value pillar cards, 7-Step work methodology timeline.
-- **Diagnostic, FAQ, Contact, Footer (F39–F45)**: 8 Diagnostic problem chips, 9 FAQ accordion items, Frosted glass contact cards (+91 63647 68498, emails, Tumakuru location), Consultation form validation, WhatsApp dispatch URL builder, 5-Column footer, Floating WhatsApp button.
+- **Diagnostic, FAQ, Contact, Footer (F39–F45)**: 8 Diagnostic problem chips, 9 FAQ accordion items, Frosted glass contact cards (+91 76766 90081, emails, Tumakuru location), Consultation form validation, WhatsApp dispatch URL builder, 5-Column footer, Floating WhatsApp button.
 - **Engine, Animation, Server & Tests (F46–F49)**: Zero-overlap responsive engine (320px to 4K), GSAP animations & fallbacks, Local server architecture, E2E test tracking.
 
 ### Tier 2: Boundary & Corner Cases (`tests/tier2-boundaries.test.js`)

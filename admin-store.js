@@ -38,6 +38,7 @@
 
   // Strict Dual Admin Email Whitelist (+ verified alias)
   const WHITELISTED_ADMINS = [
+    'info@aarambhxtechnology.in',
     'lalithulalu@gmail.com',
     'mohitjgujjar7@mail.com',
     'mohitjgujjar7@gmail.com'
@@ -814,7 +815,7 @@ Every distribution switch connects back to the core data center via **10G SFP+ d
     upiName: 'AarambhX Technology',
     businessAddress: 'Tumkur, Karnataka - 572101',
     businessPhone: '7676690081',
-    businessEmail: 'lalithlalu.com@yahoo.com',
+    businessEmail: 'info@aarambhxtechnology.in',
     businessWebsite: 'https://aarambhx-tech.web.app/',
     gstin: '29ABCDE1234F1Z5',
     placeOfSupply: 'Karnataka (KA)'

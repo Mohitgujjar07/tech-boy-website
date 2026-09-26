@@ -1404,7 +1404,8 @@ function initConsultationForm() {
     );
 
     setTimeout(() => {
-      window.open(`https://wa.me/916364768498?text=${whatsappPayload}`, '_blank', 'noopener,noreferrer');
+      const waNumber = (typeof TBS_CONFIG !== 'undefined' && TBS_CONFIG.company && TBS_CONFIG.company.whatsapp) ? TBS_CONFIG.company.whatsapp : '917676690081';
+      window.open(`https://wa.me/${waNumber}?text=${whatsappPayload}`, '_blank', 'noopener,noreferrer');
       form.reset();
     }, 800);
   });

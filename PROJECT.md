@@ -48,9 +48,9 @@
 | 38 | 7-Step Work Methodology | Process | Structured process timeline from consultation to post-delivery support. | M4 | Codebase Survey |
 | 39 | Interactive Problem Diagnostic Bar | Diagnostic | 8 one-click interactive chips populating consultation form and auto-scrolling. | M5 | ORIGINAL_REQUEST §R2 |
 | 40 | Interactive FAQ Accordion | FAQ | 9 accessible accordion items with smooth expansion and ARIA controls. | M5 | Codebase Survey |
-| 41 | Frosted Glass Contact Cards | Contact | Direct dial (+91 63647 68498), WhatsApp, emails, and Tumakuru location badge. | M5 | ORIGINAL_REQUEST §R2, AC3 |
+| 41 | Frosted Glass Contact Cards | Contact | Direct dial (+91 76766 90081), WhatsApp, emails, and Tumakuru location badge. | M5 | ORIGINAL_REQUEST §R2, AC3 |
 | 42 | Multi-Field Consultation Form | Consultation | Comprehensive inquiry form with real-time validation for all required fields. | M5 | ORIGINAL_REQUEST §AC3 |
-| 43 | WhatsApp Consultation Dispatcher | Consultation | Encodes form payload into WhatsApp URL and redirects to 916364768498 with success alert. | M5 | ORIGINAL_REQUEST §AC3 |
+| 43 | WhatsApp Consultation Dispatcher | Consultation | Encodes form payload into WhatsApp URL and redirects to 917676690081 with success alert. | M5 | ORIGINAL_REQUEST §AC3 |
 | 44 | 5-Column Corporate Footer | Footer | Brand mark, social links, quick service links, Tumakuru badge, and legal info. | M5 | Codebase Survey |
 | 45 | Floating WhatsApp Action Widget | Conversion | Fixed floating WhatsApp button with pulse animation and tooltip. | M5 | Codebase Survey |
 | 46 | Zero-Overlap Responsive Engine | Quality & Layout | Fluid clamp typography, flexible bento grids, and zero collisions from 320px to 4K. | M6 | ORIGINAL_REQUEST §R3, AC2 |
@@ -65,7 +65,7 @@
 | M2 | Hero Section, Interactive SaaS Dashboard Micro-widget & Trust Strip | High-impact SaaS hero grid, word rotator, interactive division dashboard (live software/hardware tabs), floating glass badge, and trust metrics strip. | M1 | DONE |
 | M3 | High-Contrast Bento Grid Architecture (Software & Hardware Divisions) | 12-column bento grids for Software & Digital Solutions and Hardware & IT Infrastructure, specialist featured cards, networking, and IoT hubs. | M1 | DONE |
 | M4 | Student Projects & Innovation Lab Interactive Showcase | Project filter tabs, interactive project cards, detail modals, 6-step roadmap, software-to-hardware pipeline, and audience/methodology grids. | M1, M3 | DONE |
-| M5 | Diagnostic Bar, Contact Hub & WhatsApp Consultation Dispatch Engine | 8 interactive diagnostic problem chips, frosted glass contact cards (+91 63647 68498, emails, Tumakuru badge), consultation form validation, WhatsApp dispatch URL builder, FAQ accordion, footer, and floating WhatsApp widget. | M1, M2 | DONE |
+| M5 | Diagnostic Bar, Contact Hub & WhatsApp Consultation Dispatch Engine | 8 interactive diagnostic problem chips, frosted glass contact cards (+91 76766 90081, emails, Tumakuru badge), consultation form validation, WhatsApp dispatch URL builder, FAQ accordion, footer, and floating WhatsApp widget. | M1, M2 | DONE |
 | M6 | Integration, Zero-Overlap Polish, 100% E2E Test Pass & Adversarial Hardening | End-to-end integration, fluid clamp typography audit, multi-viewport responsive testing (320px-4K), 100% E2E test suite pass (Tiers 1-4), Tier 5 adversarial testing, and forensic audit. | M1, M2, M3, M4, M5 | DONE |
 
 ## Interface Contracts
@@ -76,10 +76,10 @@
 
 ### Configuration Contract (`config.js` ↔ `main.js` / HTML)
 - `TBS_CONFIG.company.name`: `"Aarambhx Technology"`
-- `TBS_CONFIG.company.phone`: `"+91 63647 68498"` (raw: `"6364768498"`)
-- `TBS_CONFIG.company.whatsapp`: `"916364768498"`
-- `TBS_CONFIG.company.email`: `"lalithulalu@gmail.com"`
-- `TBS_CONFIG.company.emailAlt`: `"lalithlalu.com@yahoo.com"`
+- `TBS_CONFIG.company.phone`: `"+91 76766 90081"` (raw: `"7676690081"`)
+- `TBS_CONFIG.company.whatsapp`: `"917676690081"`
+- `TBS_CONFIG.company.email`: `"info@aarambhxtechnology.in"`
+- `TBS_CONFIG.company.emailAlt`: `"info@aarambhxtechnology.in"`
 - `TBS_CONFIG.company.location`: `"Tumakuru, Karnataka, India"`
 
 ### Interactivity & Form Contract (`main.js` ↔ `index.html`)

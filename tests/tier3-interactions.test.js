@@ -167,7 +167,7 @@ function runTier3Tests() {
     Assert.isTrue(validation.isValid, 'Auto-filled problem form must pass validation');
 
     const waUrl = buildWhatsAppPayload(formData, config);
-    Assert.contains(waUrl, 'https://wa.me/916364768498', 'Target WhatsApp endpoint correct');
+    Assert.contains(waUrl, 'https://wa.me/917676690081', 'Target WhatsApp endpoint correct');
     Assert.contains(waUrl, encodeURIComponent(problemText), 'WhatsApp payload contains auto-filled problem text');
     Assert.contains(waUrl, encodeURIComponent('Vikram Joshi'), 'WhatsApp payload contains applicant name');
     return 18;
@@ -223,9 +223,9 @@ function runTier3Tests() {
   // 7. Floating WhatsApp CTA + Dynamic Config Sync
   // =========================================================================
   test(7, 'Floating WhatsApp CTA + Config Sync', () => {
-    Assert.equal(config.company.whatsapp, '916364768498', 'config.js WhatsApp number matches 916364768498');
-    Assert.contains(html, '916364768498', 'index.html contains WhatsApp number');
-    Assert.contains(js, '916364768498', 'main.js uses WhatsApp number');
+    Assert.equal(config.company.whatsapp, '917676690081', 'config.js WhatsApp number matches 917676690081');
+    Assert.contains(html, '917676690081', 'index.html contains WhatsApp number');
+    Assert.contains(js, '917676690081', 'main.js uses WhatsApp number');
     return 5;
   });
 

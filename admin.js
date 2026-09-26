@@ -1240,7 +1240,7 @@
                   <div class="inv-party-detail">Tumkur, Karnataka - 572101</div>
                   <div class="inv-party-detail">India</div>
                   <div class="inv-party-detail">GSTIN: 29ABCDE1234F1Z5</div>
-                  <div class="inv-party-detail">Email: lalithlalu.com@yahoo.com</div>
+                  <div class="inv-party-detail">Email: info@aarambhxtechnology.in</div>
                   <div class="inv-party-detail">Phone: 7676690081</div>
                 </div>
                 <div class="inv-from-divider"></div>
@@ -1249,7 +1249,7 @@
                   <div class="inv-party-detail">Tumkur, Karnataka - 572101</div>
                   <div class="inv-party-detail">India</div>
                   <div class="inv-party-detail">GSTIN: 29ABCDE1234F1Z5</div>
-                  <div class="inv-party-detail">Email: lalithlalu.com@yahoo.com</div>
+                  <div class="inv-party-detail">Email: info@aarambhxtechnology.in</div>
                   <div class="inv-party-detail">Phone: 7676690081</div>
                 </div>
               </div>
@@ -1356,7 +1356,7 @@
               <div class="inv-footer-contact-row">
                 <div class="inv-footer-contact-item">
                   <svg class="inv-footer-icon" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <span>lalithlalu.com@yahoo.com</span>
+                  <span>info@aarambhxtechnology.in</span>
                 </div>
                 <span class="inv-footer-sep">|</span>
                 <div class="inv-footer-contact-item">

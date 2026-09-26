@@ -286,7 +286,7 @@ function buildWhatsAppUrl(data) {
   const payload = encodeURIComponent(
     `Hello Aarambhx Technology!\n\n*New Consultation Inquiry*\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'N/A'}\n*Service:* ${service}\n*Requirement:* ${message}\n\nLocation: Tumakuru, Karnataka, India`
   );
-  return `https://wa.me/916364768498?text=${payload}`;
+  return `https://wa.me/917676690081?text=${payload}`;
 }
 
 runTest('Form Fuzzing', 'Multilingual Unicode & Script Ingestion (Kannada, Hindi, Arabic, Japanese)', () => {
@@ -294,7 +294,7 @@ runTest('Form Fuzzing', 'Multilingual Unicode & Script Ingestion (Kannada, Hindi
     {
       lang: 'Kannada (Tumakuru Local)',
       fullName: 'ಮೋಹನ್ ಕುಮಾರ್ ಗೌಡ',
-      phone: '+91 63647 68498',
+      phone: '+91 76766 90081',
       email: 'mohan.gowda@tumkur.org',
       service: 'Website Development',
       message: 'ನಮಸ್ಕಾರ, ನಮಗೆ ತುಮಕೂರಿನಲ್ಲಿ ನೂತನ ಸಂಸ್ಥೆಗೆ ಉತ್ತಮ ವೆಬ್‌ಸೈಟ್ ಮತ್ತು ಬಿಲ್ಲಿಂಗ್ ಸಾಫ್ಟ್‌ವೇರ್ ಬೇಕಾಗಿದೆ.'
@@ -329,7 +329,7 @@ runTest('Form Fuzzing', 'Multilingual Unicode & Script Ingestion (Kannada, Hindi
     const res = validateConsultationForm(c);
     assert(res.isValid, `Multilingual case [${c.lang}] must be valid, errors: ${JSON.stringify(res.errors)}`);
     const waUrl = buildWhatsAppUrl(c);
-    assert(waUrl.startsWith('https://wa.me/916364768498?text='), `WhatsApp URL must be formatted properly`);
+    assert(waUrl.startsWith('https://wa.me/917676690081?text='), `WhatsApp URL must be formatted properly`);
     assert(waUrl.includes(encodeURIComponent(c.fullName)), `URL must contain encoded name for ${c.lang}`);
     assert(waUrl.includes(encodeURIComponent(c.message)), `URL must contain encoded message for ${c.lang}`);
   }
@@ -353,11 +353,11 @@ runTest('Form Fuzzing', 'High-Density Emojis, Mathematical Symbols & ZWJ Sequenc
 
 runTest('Form Fuzzing', 'XSS & Malicious Payload Resistance (No unescaped injection or crash)', () => {
   const attackPayloads = [
-    { fullName: '<script>alert("XSS")</script>', phone: '6364768498', service: 'Other', message: '<img src=x onerror=alert(1)>' },
-    { fullName: '\' OR \'1\'=\'1', phone: '6364768498', service: 'Other', message: 'DROP TABLE users; --' },
-    { fullName: '${7*7} {{7*7}}', phone: '6364768498', service: 'Other', message: '<svg/onload=alert(1)>' },
-    { fullName: 'javascript:alert(1)', phone: '6364768498', service: 'Other', message: '<iframe src="http://evil.com"></iframe>' },
-    { fullName: '&quot;><script>alert(document.cookie)</script>', phone: '6364768498', service: 'Other', message: '<!--#exec cmd="ls"-->' }
+    { fullName: '<script>alert("XSS")</script>', phone: '7676690081', service: 'Other', message: '<img src=x onerror=alert(1)>' },
+    { fullName: '\' OR \'1\'=\'1', phone: '7676690081', service: 'Other', message: 'DROP TABLE users; --' },
+    { fullName: '${7*7} {{7*7}}', phone: '7676690081', service: 'Other', message: '<svg/onload=alert(1)>' },
+    { fullName: 'javascript:alert(1)', phone: '7676690081', service: 'Other', message: '<iframe src="http://evil.com"></iframe>' },
+    { fullName: '&quot;><script>alert(document.cookie)</script>', phone: '7676690081', service: 'Other', message: '<!--#exec cmd="ls"-->' }
   ];
 
   for (const atk of attackPayloads) {
@@ -372,10 +372,10 @@ runTest('Form Fuzzing', 'XSS & Malicious Payload Resistance (No unescaped inject
 
 runTest('Form Fuzzing', 'Phone Number RFC Boundary & Regex Permutations', () => {
   const validPhones = [
-    '6364768498',
-    '+916364768498',
-    '+91 63647 68498',
-    '+91-63647-68498',
+    '7676690081',
+    '+917676690081',
+    '+91 76766 90081',
+    '+91-76766-90081',
     '(0816) 225588',
     '+1 555 1234567',
     '9876543210',
@@ -416,7 +416,7 @@ runTest('Form Fuzzing', 'Email Format RFC Permutations & Optionality Stress', ()
     'user.name@domain.co.in',
     'user+tag@domain.org',
     'firstname-lastname@sub.domain.edu',
-    'lalithulalu@gmail.com',
+    'info@aarambhxtechnology.in',
     'lalithlalu.com@yahoo.com'
   ];
 
@@ -432,12 +432,12 @@ runTest('Form Fuzzing', 'Email Format RFC Permutations & Optionality Stress', ()
   ];
 
   for (const email of validEmails) {
-    const res = validateConsultationForm({ fullName: 'John', phone: '6364768498', email, service: 'Website Development', message: 'Hi' });
+    const res = validateConsultationForm({ fullName: 'John', phone: '7676690081', email, service: 'Website Development', message: 'Hi' });
     assert(res.isValid, `Email "${email}" should be accepted, error: ${JSON.stringify(res.errors)}`);
   }
 
   for (const email of invalidEmails) {
-    const res = validateConsultationForm({ fullName: 'John', phone: '6364768498', email, service: 'Website Development', message: 'Hi' });
+    const res = validateConsultationForm({ fullName: 'John', phone: '7676690081', email, service: 'Website Development', message: 'Hi' });
     assert(!res.isValid, `Email "${email}" should be REJECTED`);
     assert(res.errors.email !== undefined, `Email "${email}" must have email error`);
   }
@@ -447,7 +447,7 @@ runTest('Form Fuzzing', 'Combinatorial Omission of Required Fields (16 Combinati
   const fields = ['fullName', 'phone', 'service', 'message'];
   const baseData = {
     fullName: 'Lalith Kumar',
-    phone: '6364768498',
+    phone: '7676690081',
     service: 'Laptop / PC Repair',
     message: 'Need urgent screen replacement'
   };
@@ -515,10 +515,9 @@ runTest('Acceptance Criteria', 'R3. Visual Hierarchy, Bento Grids & Smooth Anima
 });
 
 runTest('Acceptance Criteria', 'R4. Content and Services Preservation (Exact Phone, Emails, WhatsApp, Tumakuru, FAQ, Projects)', () => {
-  assert(htmlContent.includes('+91 63647 68498') || htmlContent.includes('6364768498'), 'Exact phone number +91 63647 68498 must be present');
-  assert(htmlContent.includes('lalithulalu@gmail.com'), 'Primary email lalithulalu@gmail.com must be present');
-  assert(htmlContent.includes('lalithlalu.com@yahoo.com'), 'Secondary email lalithlalu.com@yahoo.com must be present');
-  assert(htmlContent.includes('https://wa.me/916364768498'), 'Direct WhatsApp link must target 916364768498');
+  assert(htmlContent.includes('+91 76766 90081') || htmlContent.includes('7676690081'), 'Exact phone number +91 76766 90081 must be present');
+  assert(htmlContent.includes('info@aarambhxtechnology.in'), 'Primary email info@aarambhxtechnology.in must be present');
+  assert(htmlContent.includes('https://wa.me/917676690081'), 'Direct WhatsApp link must target 917676690081');
   assert(htmlContent.includes('Tumakuru'), 'Location Tumakuru, Karnataka must be present');
   
   const hasSoftware = htmlContent.toLowerCase().includes('software') || htmlContent.toLowerCase().includes('website');

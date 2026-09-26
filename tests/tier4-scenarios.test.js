@@ -83,7 +83,7 @@ function runTier4Tests() {
 
     // Step 5: Dispatches to WhatsApp quote link
     const waUrl = buildWhatsAppPayload(studentInput, config);
-    Assert.contains(waUrl, 'https://wa.me/916364768498', 'Directs to verified WhatsApp number');
+    Assert.contains(waUrl, 'https://wa.me/917676690081', 'Directs to verified WhatsApp number');
     Assert.contains(waUrl, encodeURIComponent('Kiran Kumar'), 'Contains student name');
     Assert.contains(waUrl, encodeURIComponent('Student Project'), 'Contains service type');
     Assert.contains(waUrl, encodeURIComponent('ESP32'), 'Contains technical description');
@@ -125,7 +125,7 @@ function runTier4Tests() {
 
     // Step 5: Verify WhatsApp payload
     const waUrl = buildWhatsAppPayload(businessInput, config);
-    Assert.contains(waUrl, 'https://wa.me/916364768498', 'Correct WhatsApp destination');
+    Assert.contains(waUrl, 'https://wa.me/917676690081', 'Correct WhatsApp destination');
     Assert.contains(waUrl, encodeURIComponent('Manjunath Swamy'), 'Contains business owner name');
     Assert.contains(waUrl, encodeURIComponent('Business'), 'Contains customer type');
     Assert.contains(waUrl, encodeURIComponent('Phone Call'), 'Contains preferred contact method');

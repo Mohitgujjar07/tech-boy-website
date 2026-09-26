@@ -19,7 +19,7 @@
     <a href="https://aarambhx-technology.vercel.app/"><strong>🌐 Main Corporate Portal</strong></a> •
     <a href="https://aarambhx-technology.vercel.app/academy"><strong>🎓 AarambhX Academy</strong></a> •
     <a href="https://aarambhx-technology.vercel.app/work.html"><strong>💼 Client Portfolio</strong></a> •
-    <a href="https://wa.me/916364768498"><strong>💬 WhatsApp Consultation</strong></a>
+    <a href="https://wa.me/917676690081"><strong>💬 WhatsApp Consultation</strong></a>
   </p>
 
 </div>
@@ -318,10 +318,10 @@ tech-boy-website/
 
 **AarambhX Technology & AarambhX Academy**  
 - 📍 **Location**: B.H. Road, Tumakuru, Karnataka 572101, India  
-- 📞 **Corporate Phone**: [+91 63647 68498](tel:+916364768498)  
+- 📞 **Corporate Phone**: [+91 76766 90081](tel:+917676690081)  
 - 🎓 **Academy Phone**: [+91 99168 56922](tel:+919916856922)  
-- 💬 **WhatsApp Inquiry**: [Chat with AarambhX on WhatsApp](https://wa.me/916364768498)  
-- ✉️ **Primary Email**: [lalithulalu@gmail.com](mailto:lalithulalu@gmail.com)  
+- 💬 **WhatsApp Inquiry**: [Chat with AarambhX on WhatsApp](https://wa.me/917676690081)  
+- ✉️ **Primary Email**: [info@aarambhxtechnology.in](mailto:info@aarambhxtechnology.in)  
 - 🌐 **Live Website**: [https://aarambhx-technology.vercel.app](https://aarambhx-technology.vercel.app)
 
 ---

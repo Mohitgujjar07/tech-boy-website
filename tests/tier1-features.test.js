@@ -579,13 +579,13 @@ function runTier1Tests() {
     const contactSection = dom.getElementById('contact');
     Assert.exists(contactSection, '#contact section must exist');
     
-    Assert.contains(html, '63647 68498', 'DOM contains verified phone 63647 68498');
-    Assert.contains(html, 'lalithulalu@gmail.com', 'DOM contains primary email lalithulalu@gmail.com');
-    Assert.contains(html, 'lalithlalu.com@yahoo.com', 'DOM contains alternate email lalithlalu.com@yahoo.com');
+    Assert.contains(html, '76766 90081', 'DOM contains verified phone 76766 90081');
+    Assert.contains(html, 'info@aarambhxtechnology.in', 'DOM contains primary email info@aarambhxtechnology.in');
     Assert.contains(html, 'Tumakuru', 'DOM contains Tumakuru location');
     
-    Assert.equal(config.company.phone, '+91 63647 68498', 'config.js phone matches verified phone');
-    Assert.equal(config.company.email, 'lalithulalu@gmail.com', 'config.js email matches verified email');
+    Assert.equal(config.company.phone, '+91 76766 90081', 'config.js phone matches verified phone');
+    Assert.equal(config.company.email, 'info@aarambhxtechnology.in', 'config.js email matches verified email');
+    Assert.contains(config.company.whatsapp, '917676690081', 'config.js whatsapp matches verified whatsapp');
     return 6;
   });
 
@@ -610,7 +610,7 @@ function runTier1Tests() {
   test(43, 'WhatsApp Consultation Dispatcher', () => {
     Assert.contains(js, 'initConsultationForm', 'main.js must implement consultation form handler');
     Assert.contains(js, 'successBanner', 'main.js must display successBanner upon valid submit');
-    Assert.contains(config.company.whatsapp, '916364768498', 'WhatsApp target number configured correctly');
+    Assert.contains(config.company.whatsapp, '917676690081', 'WhatsApp target number configured correctly');
     
     const successEl = dom.getElementById('formSuccess');
     Assert.exists(successEl, '#formSuccess alert container must exist in DOM');

@@ -131,9 +131,9 @@ function runTier2Tests() {
     Assert.isFalse(resD.isValid, 'Symbols in phone must fail');
 
     // Case E: Valid phone formats
-    const resE1 = simulateFormValidation({ ...validBase, phone: '+91 63647 68498' });
+    const resE1 = simulateFormValidation({ ...validBase, phone: '+91 76766 90081' });
     Assert.isTrue(resE1.isValid, 'Standard +91 phone must pass');
-    const resE2 = simulateFormValidation({ ...validBase, phone: '6364768498' });
+    const resE2 = simulateFormValidation({ ...validBase, phone: '7676690081' });
     Assert.isTrue(resE2.isValid, '10-digit phone must pass');
     return 6;
   });
@@ -164,7 +164,7 @@ function runTier2Tests() {
     Assert.isFalse(res3.isValid, 'Email with spaces must fail');
 
     // Valid email
-    const res4 = simulateFormValidation({ ...validBase, email: 'lalithulalu@gmail.com' });
+    const res4 = simulateFormValidation({ ...validBase, email: 'info@aarambhxtechnology.in' });
     Assert.isTrue(res4.isValid, 'Valid email must pass');
 
     // Optional email omitted (empty string)
@@ -200,7 +200,7 @@ function runTier2Tests() {
   test(7, 'Special Characters & URL Encoding', () => {
     const payload = {
       fullName: 'Dr. John O\'Connor & Partners <script>alert(1)</script>',
-      phone: '+91 63647 68498',
+      phone: '+91 76766 90081',
       email: 'john+test@example.com',
       city: 'Tumakuru & Bengaluru #572101',
       customerType: 'Office',
@@ -211,7 +211,7 @@ function runTier2Tests() {
     };
 
     const waUrl = buildWhatsAppPayload(payload, config);
-    Assert.isTrue(waUrl.startsWith('https://wa.me/916364768498?text='), 'Target WhatsApp URL prefix correct');
+    Assert.isTrue(waUrl.startsWith('https://wa.me/917676690081?text='), 'Target WhatsApp URL prefix correct');
     Assert.contains(waUrl, encodeURIComponent(payload.fullName), 'Full name properly URL encoded');
     Assert.contains(waUrl, encodeURIComponent(payload.city), 'City properly URL encoded');
     Assert.contains(waUrl, encodeURIComponent(payload.description), 'Description with quotes and emojis URL encoded');

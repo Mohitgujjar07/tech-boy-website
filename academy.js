@@ -322,7 +322,7 @@ function downloadResourceMock(filename) {
   const sampleContent = `# AarambhX Academy — Course Syllabus & Lab Manual
 Document: ${filename}
 Issued by: Aarambhx Technology Educational Platform, Tumakuru
-Official Contact: +91 99168 56922 | lalithulalu@gmail.com
+Official Contact: +91 76766 90081 | info@aarambhxtechnology.in
 
 ------------------------------------------------------------
 1. Overview & Prerequisite Assessment
