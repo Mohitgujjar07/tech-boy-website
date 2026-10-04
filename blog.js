@@ -286,7 +286,7 @@
               </div>
             </div>
             <a href="${articleLink}" class="read-article-btn">
-              <span>Read Article &rarr;</span>
+              <span>Read Research Dispatch &rarr;</span>
             </a>
           </div>
         </div>
@@ -416,7 +416,7 @@
                 </div>
               </div>
               <a href="${articleLink}" class="card-read-link">
-                <span>Read &rarr;</span>
+                <span>Read Dispatch &rarr;</span>
               </a>
             </div>
           </div>
