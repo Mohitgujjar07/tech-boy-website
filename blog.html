@@ -38,7 +38,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://aarambhx-technology.vercel.app/blog.html">
   <meta name="twitter:title" content="AarambhX Engineering Journal &amp; AI Tech News">
-  <meta name="twitter:description" content="Technical breakdowns, production case studies, agentic AI architecture, and industrial IoT engineering from AarambhX Technology.">
+  <meta property="og:description" content="Technical breakdowns, production case studies, agentic AI architecture, and industrial IoT engineering from AarambhX Technology.">
   <meta name="twitter:image" content="assets/hero.webp">
 
   <!-- Favicon -->
@@ -58,7 +58,7 @@
 
   <!-- Core & Page Stylesheets -->
   <link rel="stylesheet" href="styles.css?v=2.4.0">
-  <link rel="stylesheet" href="blog.css?v=4.3.0">
+  <link rel="stylesheet" href="blog.css?v=4.4.0">
 
   <!-- Schema.org JSON-LD Structured Data: Blog & BreadcrumbList -->
   <script type="application/ld+json">
@@ -105,16 +105,18 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8724628344472439"
        crossorigin="anonymous"></script>
 </head>
-<body class="blog-page">
+<body class="blog-page light-theme">
 
   <!-- Reading Progress Bar -->
   <div class="reading-progress-bar" id="readingProgressBar"></div>
 
-  <!-- Ambient Light/Dark Mesh -->
+  <!-- Ambient Glowing Orbs -->
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
   <div class="blog-bg-ambient" aria-hidden="true"></div>
 
   <!-- ============================================================
-       FLOATING GLASSMORPHISM HEADER
+       FLOATING GLASSMORPHISM HEADER (Dynamic Island)
        ============================================================ -->
   <header id="navbar" class="apple-glass-nav" aria-label="Site Header">
     <div class="nav-container">
@@ -160,44 +162,106 @@
   </header>
 
   <!-- ============================================================
-       1. BLOG LISTING VIEW CONTAINER (JOURNAL HUB)
+       1. BLOG LISTING VIEW CONTAINER (HIGH-IMPACT JOURNAL HUB)
        ============================================================ -->
   <main id="blogListingView">
     
-    <!-- Hero Header -->
-    <section class="blog-hero">
+    <!-- Atmospheric Hero Hub Section -->
+    <section class="blog-hero hero-hub">
       <div class="blog-container">
-        <span class="blog-eyebrow">
-          <i data-lucide="sparkles" style="width:14px; height:14px;"></i>
-          <span>AarambhX Research &amp; Engineering</span>
-        </span>
+        
+        <!-- Live Status Pill Badge -->
+        <div class="apple-pill-badge">
+          <span class="live-dot"></span>
+          <span>AarambhX Engineering Lab &bull; Published Research &amp; Field Reports</span>
+        </div>
+
+        <!-- Dynamic Animated Rotator Headline -->
         <h1 class="blog-hero-title">
-          Engineering Journal &amp; <span class="gold-shimmer-text">AI Systems</span>
+          Engineering Journal &amp;<br>
+          Insights into <span class="gradient-rotator" id="journalHeroRotator">Autonomous AI Agents</span><span class="typing-cursor" id="typingCursor"></span>
         </h1>
+
+        <!-- Subtitle -->
         <p class="blog-hero-lead">
-          Deep-dive architectural breakdowns, autonomous agent swarms, embedded edge compute, and high-performance engineering from the AarambhX R&amp;D lab.
+          Deep architectural breakdowns, decentralized agent swarms, physical edge neural compute, and high-performance engineering from the AarambhX R&amp;D lab.
         </p>
+
+        <!-- Live Stats Metrics Row -->
+        <div class="journal-stats-row">
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Research Papers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">&lt; 50ms</div>
+            <div class="stat-label">Retrieval Latency</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Open Architecture</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2026</div>
+            <div class="stat-label">Next-Gen AI Stacks</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Technology Stack Badges Strip -->
+    <section class="journal-stack-strip" aria-label="Technologies Discussed in Journal">
+      <div class="blog-container">
+        <div class="stack-strip-inner">
+          <span class="stack-strip-label"><i data-lucide="cpu" style="width:14px; height:14px;"></i> Tech Stacks:</span>
+          <div class="stack-badges-wrap">
+            <span class="stack-badge">Model Context Protocol (MCP)</span>
+            <span class="stack-badge">DeepSeek-R1</span>
+            <span class="stack-badge">Claude 3.7</span>
+            <span class="stack-badge">GraphRAG</span>
+            <span class="stack-badge">Small Language Models (SLMs)</span>
+            <span class="stack-badge">Jetson &amp; RK3588</span>
+            <span class="stack-badge">Self-Healing CI/CD</span>
+            <span class="stack-badge">StateGraphs</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <div class="blog-container">
       
-      <!-- Featured Story Mount Point (Exclusive Lead Paper) -->
+      <!-- Featured Story Mount Point (Exclusive Lead Paper Spotlight) -->
       <div id="featuredStoryMount"></div>
 
-      <!-- Category Filter Tabs & Instant Search -->
+      <!-- Controls: Category Filter Tabs & Instant Search -->
       <div class="blog-controls-strip">
         <div class="blog-filter-tabs" role="tablist" aria-label="Filter articles by category">
-          <button type="button" class="tab-filter-btn active" data-category="all" role="tab" aria-selected="true">All Articles</button>
-          <button type="button" class="tab-filter-btn" data-category="ai-tech" role="tab" aria-selected="false">AI &amp; Reasoning</button>
-          <button type="button" class="tab-filter-btn" data-category="fullstack" role="tab" aria-selected="false">Systems &amp; Full-Stack</button>
-          <button type="button" class="tab-filter-btn" data-category="hardware-iot" role="tab" aria-selected="false">Hardware &amp; IoT</button>
-          <button type="button" class="tab-filter-btn" data-category="case-studies" role="tab" aria-selected="false">Case Studies</button>
+          <button type="button" class="tab-filter-btn active" data-category="all" role="tab" aria-selected="true">
+            <span>All Articles</span>
+            <span class="tab-count-pill" id="countAll">5</span>
+          </button>
+          <button type="button" class="tab-filter-btn" data-category="ai-tech" role="tab" aria-selected="false">
+            <span>AI &amp; Reasoning</span>
+            <span class="tab-count-pill" id="countAi">3</span>
+          </button>
+          <button type="button" class="tab-filter-btn" data-category="fullstack" role="tab" aria-selected="false">
+            <span>Systems &amp; Full-Stack</span>
+            <span class="tab-count-pill" id="countFullstack">1</span>
+          </button>
+          <button type="button" class="tab-filter-btn" data-category="hardware-iot" role="tab" aria-selected="false">
+            <span>Hardware &amp; IoT</span>
+            <span class="tab-count-pill" id="countHardware">1</span>
+          </button>
+          <button type="button" class="tab-filter-btn" data-category="case-studies" role="tab" aria-selected="false">
+            <span>Case Studies</span>
+            <span class="tab-count-pill" id="countCase">0</span>
+          </button>
         </div>
 
         <div class="blog-search-box">
           <i data-lucide="search" class="blog-search-icon" style="width:16px; height:16px;"></i>
-          <input type="text" id="blogSearchInput" placeholder="Search dispatches (Press / or Ctrl+K)..." aria-label="Search articles">
+          <input type="text" id="blogSearchInput" placeholder="Search dispatches &amp; tech (Press /)..." aria-label="Search articles">
           <span class="search-kbd-hint" aria-hidden="true">/</span>
         </div>
       </div>
@@ -205,16 +269,23 @@
       <!-- Article Grid Mount Point -->
       <div class="blog-grid" id="blogGridMount"></div>
 
-      <!-- Newsletter Subscription -->
+      <!-- Modern Newsletter Subscription Section -->
       <section class="blog-newsletter-section">
+        <div class="newsletter-badge">
+          <i data-lucide="mail" style="width:14px; height:14px;"></i>
+          <span>Bi-Weekly Engineering Dispatch</span>
+        </div>
         <h2 class="newsletter-title">Subscribe to the AarambhX Engineering Dispatch</h2>
         <p class="newsletter-desc">
-          Get architectural blueprints, embedded system guides, and agentic AI tutorials delivered directly to your inbox. Zero marketing spam.
+          Get architectural blueprints, edge AI benchmarks, and production-tested agentic workflows delivered straight to your inbox. Zero marketing fluff.
         </p>
         <form class="newsletter-form" id="newsletterForm">
           <label for="newsletterEmail" class="sr-only">Email address</label>
-          <input type="email" id="newsletterEmail" placeholder="Enter your email address" required aria-label="Email address">
-          <button type="submit" class="newsletter-submit-btn">Subscribe Free</button>
+          <input type="email" id="newsletterEmail" placeholder="Enter your work email address" required aria-label="Email address">
+          <button type="submit" class="newsletter-submit-btn">
+            <span>Subscribe Free</span>
+            <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
+          </button>
         </form>
       </section>
 
@@ -288,10 +359,10 @@
   <div id="toastContainer" class="ax-toast-container"></div>
 
   <!-- Scripts -->
-  <script src="admin-store.js?v=4.3.0"></script>
-  <script src="journal-core.js?v=4.3.0"></script>
+  <script src="admin-store.js?v=4.4.0"></script>
+  <script src="journal-core.js?v=4.4.0"></script>
   <script src="main.js?v=2.4.0"></script>
-  <script src="blog.js?v=4.3.0"></script>
+  <script src="blog.js?v=4.4.0"></script>
   <script>
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();

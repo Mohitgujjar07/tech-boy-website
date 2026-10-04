@@ -65,6 +65,8 @@
     }
 
     // Initial render
+    initHeroRotator();
+    updateCategoryCounts();
     renderFeaturedStory();
     renderGrid();
     refreshIcons();
@@ -188,7 +190,55 @@
   }
 
   // ============================================================
-  // 5. HERO: FEATURED STORY
+  // 5. HERO ROTATOR & CATEGORY COUNTS
+  // ============================================================
+  function initHeroRotator() {
+    const rotator = document.getElementById('journalHeroRotator');
+    if (!rotator) return;
+    const phrases = [
+      'Autonomous AI Agents',
+      'DeepSeek & Claude Reasoning',
+      'Embedded Edge Compute',
+      'Self-Healing CI/CD Swarms',
+      'Production StateGraphs'
+    ];
+    let idx = 0;
+    setInterval(() => {
+      rotator.classList.add('fade-out');
+      setTimeout(() => {
+        idx = (idx + 1) % phrases.length;
+        rotator.textContent = phrases[idx];
+        rotator.classList.remove('fade-out');
+        rotator.classList.add('fade-in');
+        setTimeout(() => rotator.classList.remove('fade-in'), 350);
+      }, 350);
+    }, 3200);
+  }
+
+  function updateCategoryCounts() {
+    if (!Store) return;
+    const posts = Store.getBlogPosts('all', 'Published');
+    const counts = {
+      all: posts.length,
+      'ai-tech': posts.filter(p => p.categorySlug === 'ai-tech' || (p.category && p.category.includes('AI'))).length,
+      fullstack: posts.filter(p => p.categorySlug === 'fullstack' || (p.category && p.category.includes('Full-Stack'))).length,
+      'hardware-iot': posts.filter(p => p.categorySlug === 'hardware-iot' || (p.category && p.category.includes('Hardware'))).length,
+      'case-studies': posts.filter(p => p.categorySlug === 'case-studies' || (p.category && p.category.includes('Case'))).length
+    };
+    const elAll = document.getElementById('countAll');
+    const elAi = document.getElementById('countAi');
+    const elFullstack = document.getElementById('countFullstack');
+    const elHardware = document.getElementById('countHardware');
+    const elCase = document.getElementById('countCase');
+    if (elAll) elAll.textContent = counts.all;
+    if (elAi) elAi.textContent = counts['ai-tech'];
+    if (elFullstack) elFullstack.textContent = counts.fullstack;
+    if (elHardware) elHardware.textContent = counts['hardware-iot'];
+    if (elCase) elCase.textContent = counts['case-studies'];
+  }
+
+  // ============================================================
+  // 6. HERO: FEATURED STORY
   // ============================================================
   function renderFeaturedStory() {
     if (!featuredMount || !Store) return;
@@ -202,6 +252,9 @@
     const catClass = getCategoryClass(featured.categorySlug || 'ai-tech');
     const catLabel = getCategoryLabel(featured.categorySlug || 'ai-tech');
     const articleLink = `journal/${escapeHtml(featured.slug)}.html`;
+    const tags = Array.isArray(featured.tags) ? featured.tags : [];
+    const techChips = tags.slice(0, 4).map(t => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('');
+    const techRow = techChips ? `<div class="card-tech-row" style="margin-bottom:14px;">${techChips}</div>` : '';
 
     featuredMount.innerHTML = `
       <article class="featured-blog-card">
@@ -219,6 +272,7 @@
           <h2 class="featured-title">
             <a href="${articleLink}">${escapeHtml(featured.title)}</a>
           </h2>
+          ${techRow}
           <p class="featured-summary">
             ${escapeHtml(featured.summary)}
           </p>
@@ -240,7 +294,7 @@
   }
 
   // ============================================================
-  // 6. ARTICLE CARD GRID
+  // 7. ARTICLE CARD GRID
   // ============================================================
   function renderGrid() {
     if (!gridMount || !Store) return;
@@ -278,6 +332,10 @@
       const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
       const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
       const articleLink = `journal/${escapeHtml(post.slug)}.html`;
+      const tags = Array.isArray(post.tags) ? post.tags : [];
+      const techChips = tags.slice(0, 3).map(t => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('');
+      const techRow = techChips ? `<div class="card-tech-row">${techChips}</div>` : '';
+
       return `
         <article class="blog-card" data-slug="${escapeHtml(post.slug)}">
           <a href="${articleLink}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
@@ -291,6 +349,7 @@
             <h3 class="card-title">
               <a href="${articleLink}">${escapeHtml(post.title)}</a>
             </h3>
+            ${techRow}
             <p class="card-excerpt">
               ${escapeHtml(post.summary)}
             </p>

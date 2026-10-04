@@ -201,11 +201,68 @@ body.mode-terminal {
 }
 
 /* ============================================================
-   HERO HEADER SECTION
+   HERO HEADER SECTION & ATMOSPHERE
    ============================================================ */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.hero-orb-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.45), transparent 70%);
+  top: 40px;
+  left: 8%;
+}
+
+.hero-orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.35), transparent 70%);
+  top: 90px;
+  right: 10%;
+}
+
 .blog-hero {
-  padding: 130px 0 40px;
+  padding: 130px 0 36px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.apple-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--blog-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--blog-text-primary);
+  box-shadow: var(--blog-shadow-sm);
+  margin-bottom: 24px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  animation: pulseLiveDot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulseLiveDot {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .blog-eyebrow {
@@ -227,13 +284,46 @@ body.mode-terminal {
 
 .blog-hero-title {
   font-family: var(--blog-font-display);
-  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.3rem, 5vw, 3.6rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.18;
   color: var(--blog-text-primary);
-  max-width: 880px;
+  max-width: 900px;
   margin: 0 auto 18px;
+}
+
+.gradient-rotator {
+  background: linear-gradient(135deg, var(--blog-primary) 0%, var(--blog-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.gradient-rotator.fade-out {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.gradient-rotator.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  background-color: var(--blog-primary);
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .gold-shimmer-text {
@@ -243,11 +333,160 @@ body.mode-terminal {
 }
 
 .blog-hero-lead {
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   line-height: 1.65;
   color: var(--blog-text-secondary);
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
+}
+
+/* Live Stats Metrics Row */
+.journal-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 860px;
+  margin: 36px auto 0;
+  padding: 18px 24px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--blog-radius-lg);
+  box-shadow: var(--blog-shadow-sm);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--blog-font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--blog-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--blog-text-tertiary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Technology Stack Badges Strip */
+.journal-stack-strip {
+  padding: 8px 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.stack-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--blog-radius-pill);
+  box-shadow: var(--blog-shadow-sm);
+}
+
+.stack-strip-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--blog-text-tertiary);
+  white-space: nowrap;
+}
+
+.stack-badges-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  background: var(--blog-surface-hover);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--blog-radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blog-text-secondary);
+  transition: var(--blog-transition);
+}
+
+.stack-badge:hover {
+  border-color: var(--blog-primary);
+  color: var(--blog-primary);
+  transform: translateY(-1px);
+}
+
+/* Category Tab Count Pill */
+.tab-count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--blog-radius-pill);
+  background: var(--blog-surface-hover);
+  border: 1px solid var(--blog-border);
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-left: 6px;
+  color: var(--blog-text-tertiary);
+}
+
+.tab-filter-btn.active .tab-count-pill {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+}
+
+/* Card Tech Chips */
+.card-tech-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  background: var(--blog-surface-hover);
+  border: 1px solid var(--blog-border-subtle);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--blog-font-mono);
+  color: var(--blog-text-tertiary);
+}
+
+.newsletter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: var(--blog-surface-hover);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--blog-radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blog-primary);
+  margin-bottom: 16px;
 }
 
 /* ============================================================
