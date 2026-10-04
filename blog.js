@@ -1,6 +1,6 @@
 /**
  * AARAMBHX ENGINEERING JOURNAL & AI TECH NEWS (blog.js)
- * Clean Architecture & Modern Editorial System
+ * Modern Production Editorial System
  */
 
 (function () {
@@ -15,15 +15,10 @@
   let currentCategory = 'all';
   let searchQuery = '';
   let activePost = null;
-  let cosmicCanvasAnimId = null;
-  let tocObserver = null;
-  let currentFontSizeIdx = 1; // 0: 0.95rem, 1: 1.05rem, 2: 1.18rem
-  const fontSizes = ['0.95rem', '1.05rem', '1.18rem'];
 
   // --- DOM CACHE ---
   const listingView = document.getElementById('blogListingView');
   const readerView = document.getElementById('articleReaderView');
-  const readerFloatingDock = document.getElementById('readerFloatingDock');
   const featuredMount = document.getElementById('featuredStoryMount');
   const gridMount = document.getElementById('blogGridMount');
   const filterButtons = document.querySelectorAll('.tab-filter-btn');
@@ -36,7 +31,6 @@
   // ============================================================
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    initCosmicCanvas();
     initKeyboardShortcuts();
     handleHashRoute();
 
@@ -77,111 +71,14 @@
   });
 
   // ============================================================
-  // 2. AMBIENT CELESTIAL PARTICLE CANVAS
-  // ============================================================
-  function initCosmicCanvas() {
-    const canvas = document.getElementById('blogCosmicCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = 0;
-    let height = 0;
-    let particles = [];
-    const particleCount = 28;
-    const maxDist = 110;
-    let mouse = { x: -1000, y: -1000 };
-
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    }, { passive: true });
-
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        radius: Math.random() * 1.5 + 0.6,
-        color: Math.random() > 0.4 ? 'rgba(217, 119, 6, ' : 'rgba(37, 99, 235, '
-      });
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-
-        p1.x += p1.vx;
-        p1.y += p1.vy;
-
-        if (p1.x < 0) p1.x = width;
-        if (p1.x > width) p1.x = 0;
-        if (p1.y < 0) p1.y = height;
-        if (p1.y > height) p1.y = 0;
-
-        const dxm = p1.x - mouse.x;
-        const dym = p1.y - mouse.y;
-        const distm = Math.sqrt(dxm * dxm + dym * dym);
-        if (distm < 70) {
-          p1.x += (dxm / distm) * 0.5;
-          p1.y += (dym / distm) * 0.5;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p1.color + '0.4)';
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.12;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(217, 119, 6, ${alpha})`;
-            ctx.lineWidth = 0.65;
-            ctx.stroke();
-          }
-        }
-      }
-
-      cosmicCanvasAnimId = requestAnimationFrame(animate);
-    }
-
-    animate();
-  }
-
-  // ============================================================
-  // 3. KEYBOARD SHORTCUTS
+  // 2. KEYBOARD SHORTCUTS
   // ============================================================
   function initKeyboardShortcuts() {
     window.addEventListener('keydown', (e) => {
       const activeEl = document.activeElement;
-      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
+      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA');
 
-      if (e.key === '/' && !isInput) {
-        e.preventDefault();
-        if (searchInput) {
-          searchInput.focus();
-          searchInput.select();
-        }
-      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k' && !isInput) {
+      if ((e.key === '/' || (e.ctrlKey && e.key === 'k') || (e.metaKey && e.key === 'k')) && !isInput) {
         e.preventDefault();
         if (searchInput) {
           searchInput.focus();
@@ -194,7 +91,7 @@
   }
 
   // ============================================================
-  // 4. THEME SYNCHRONIZATION (Light SaaS Default & Dark Obsidian)
+  // 3. THEME SYNCHRONIZATION
   // ============================================================
   function initTheme() {
     const toggleBtn = document.getElementById('themeToggle');
@@ -238,7 +135,7 @@
   }
 
   // ============================================================
-  // 5. CLIENT-SIDE URL HASH ROUTER
+  // 4. CLIENT-SIDE ROUTER & VIEW MANAGEMENT
   // ============================================================
   function handleHashRoute() {
     const hash = window.location.hash.replace(/^#/, '').trim();
@@ -251,6 +148,7 @@
     const post = posts.find(p => p.slug === hash || String(p.id) === hash);
 
     if (post) {
+      // If static page exists, we navigate or render in-place fallback
       showReaderView(post);
     } else {
       showListingView();
@@ -265,9 +163,6 @@
       readerView.style.display = 'none';
       readerView.classList.remove('active');
     }
-    if (readerFloatingDock) {
-      readerFloatingDock.style.display = 'none';
-    }
     if (progressBar) progressBar.style.width = '0%';
     document.title = 'AarambhX Engineering Journal & AI Tech News — Advanced Systems, IoT & Full-Stack Architecture';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -281,9 +176,6 @@
       readerView.style.display = 'block';
       readerView.classList.add('active');
     }
-    if (readerFloatingDock) {
-      readerFloatingDock.style.display = 'flex';
-    }
 
     if (Store && typeof Store.incrementBlogPostViews === 'function') {
       Store.incrementBlogPostViews(post.slug);
@@ -296,7 +188,7 @@
   }
 
   // ============================================================
-  // 6. HERO: FEATURED STORY
+  // 5. HERO: FEATURED STORY
   // ============================================================
   function renderFeaturedStory() {
     if (!featuredMount || !Store) return;
@@ -315,7 +207,6 @@
       <article class="featured-blog-card">
         <a href="${articleLink}" class="featured-image-wrapper" aria-label="${escapeHtml(featured.title)}">
           <img src="${escapeHtml(featured.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(featured.title)}" loading="eager">
-          <div class="featured-image-overlay"></div>
         </a>
         <div class="featured-content">
           <div class="featured-meta-row">
@@ -349,7 +240,7 @@
   }
 
   // ============================================================
-  // 7. CLEAN UNIFORM CARD GRID
+  // 6. ARTICLE CARD GRID
   // ============================================================
   function renderGrid() {
     if (!gridMount || !Store) return;
@@ -424,197 +315,71 @@
   }
 
   // ============================================================
-  // 8. READER DECOMPOSED HELPERS
-  // ============================================================
-  function renderReaderHeader(post) {
-    const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
-    const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
-    const currentUrl = encodeURIComponent(window.location.href);
-    const titleEncoded = encodeURIComponent(post.title + ' — via AarambhX Engineering');
-
-    return `
-      <header class="reader-header">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-          <span class="blog-category-pill ${catClass}">${escapeHtml(catLabel)}</span>
-        </div>
-        <h1 class="reader-title">${escapeHtml(post.title)}</h1>
-        <p style="font-size: 1.15rem; color: var(--blog-text-muted); line-height: 1.6; margin-bottom: 24px;">
-          ${escapeHtml(post.summary)}
-        </p>
-
-        <div class="reader-meta-bar">
-          <div class="author-chip">
-            <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar" width="42" height="42">
-            <div class="author-info">
-              <span class="author-name">${escapeHtml(post.author)}</span>
-              <span class="author-role">${escapeHtml(post.authorRole || 'Principal Systems Architect')} &bull; ${escapeHtml(post.date)}</span>
-            </div>
-          </div>
-
-          <div class="social-share-strip">
-            <span style="font-size: 0.78rem; color: var(--blog-text-subtle); margin-right: 4px;">Share:</span>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-            </a>
-            <a href="https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on X" aria-label="Share on X">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <button type="button" class="share-btn" id="btnCopyArticleLink" title="Copy Direct Link" aria-label="Copy Direct Link">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </button>
-          </div>
-        </div>
-      </header>
-    `;
-  }
-
-  function renderReaderToolbar() {
-    return `
-      <div class="reader-toolbar">
-        <a href="blog.html" class="reader-back-btn" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash=''; return false;}">
-          <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
-          <span>&larr; Back to Journal</span>
-        </a>
-
-        <div class="font-size-controls">
-          <span style="font-size:0.75rem; color:var(--blog-text-tertiary); margin-right:4px;">Text Size:</span>
-          <button type="button" class="font-size-btn" id="btnFontDecr" title="Decrease font size" aria-label="Decrease font size">A-</button>
-          <button type="button" class="font-size-btn" id="btnFontIncr" title="Increase font size" aria-label="Increase font size">A+</button>
-        </div>
-      </div>
-    `;
-  }
-
-  function renderReaderTakeaways(post) {
-    const takeaways = getExecutiveTakeaways(post.slug);
-    return `
-      <div class="reader-takeaways-box">
-        <div class="takeaways-header">
-          <i data-lucide="check-circle" style="width:16px; height:16px;"></i>
-          <span>Executive Architectural Takeaways</span>
-        </div>
-        <ul class="takeaways-list">
-          ${takeaways.map(t => `<li><span>${escapeHtml(t)}</span></li>`).join('')}
-        </ul>
-      </div>
-    `;
-  }
-
-  function renderReaderProse(post, prevPost, nextPost) {
-    const formattedContent = parseMarkdownToHtml(post.content || '');
-    return `
-      <div class="article-prose" id="articleProseBody">
-        ${formattedContent}
-
-        <!-- Mid-Article Consultation Callout -->
-        <div class="article-lead-box gold-accent" style="margin-top:40px;">
-          <div class="lead-box-text">
-            <h4>Building Next-Gen Systems for Your Enterprise?</h4>
-            <p>Consult directly with AarambhX engineers for AI agents, custom ERP clouds, and industrial IoT architecture.</p>
-          </div>
-          <a href="index.html#contact" class="lead-box-cta-btn">
-            <span>Book Engineering Audit</span>
-            <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
-          </a>
-        </div>
-
-        <!-- Post-Article Workshop CTA -->
-        <div class="article-lead-box">
-          <div class="lead-box-text">
-            <h4>Want to Master These Skills Hands-On?</h4>
-            <p>Join AarambhX Academy workshops for college students &amp; professionals. Build physical AI and IoT projects from scratch.</p>
-          </div>
-          <a href="academy.html" class="lead-box-cta-btn">
-            <span>Explore Academy Workshops</span>
-            <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
-          </a>
-        </div>
-
-        <!-- Next & Previous Article Split Cards -->
-        <div class="next-prev-grid">
-          ${prevPost ? `
-            <a href="journal/${escapeHtml(prevPost.slug)}.html" class="next-prev-card" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash='${escapeHtml(prevPost.slug)}'; return false;}">
-              <span class="next-prev-label">&larr; Previous Paper</span>
-              <span class="next-prev-title">${escapeHtml(prevPost.title)}</span>
-            </a>
-          ` : '<div></div>'}
-          ${nextPost ? `
-            <a href="journal/${escapeHtml(nextPost.slug)}.html" class="next-prev-card" style="text-align:right;" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash='${escapeHtml(nextPost.slug)}'; return false;}">
-              <span class="next-prev-label">Next Paper &rarr;</span>
-              <span class="next-prev-title">${escapeHtml(nextPost.title)}</span>
-            </a>
-          ` : '<div></div>'}
-        </div>
-
-        <!-- Back to Listing Footer -->
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--blog-border); display:flex; justify-content:space-between; align-items:center;">
-          <a href="blog.html" class="reader-back-btn" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash=''; return false;}">
-            <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
-            <span>Back to All Articles</span>
-          </a>
-          <button type="button" class="read-article-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-            <span>Back to Top</span>
-            <i data-lucide="arrow-up" style="width:14px; height:14px;"></i>
-          </button>
-        </div>
-      </div>
-    `;
-  }
-
-  function renderReaderSidebar() {
-    return `
-      <aside class="reader-toc-sidebar" id="readerTocSidebar">
-        <div class="reader-toc-header">
-          <i data-lucide="list" style="width:14px; height:14px;"></i>
-          <span>Article Outline</span>
-        </div>
-        <nav id="tocNavContainer">
-          <ul class="reader-toc-list" id="readerTocList"></ul>
-        </nav>
-      </aside>
-    `;
-  }
-
-  // ============================================================
-  // 9. NEXT-GEN DEDICATED READER VIEW
+  // 7. IN-PLACE READER FALLBACK (For SPA deep-links & dynamic CMS)
   // ============================================================
   function renderArticleReader(post) {
     if (!readerView) return;
+    const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
+    const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
+    const currentUrl = encodeURIComponent(window.location.href);
+    const titleEncoded = encodeURIComponent(post.title + ' — via AarambhX');
 
-    const allPosts = Store ? Store.getBlogPosts('all', 'Published') : [];
-    const currentIndex = allPosts.findIndex(p => p.slug === post.slug);
-    const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : allPosts[allPosts.length - 1];
-    const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : allPosts[0];
+    const htmlContent = parseMarkdownToHtml(post.content || post.summary || '');
 
     readerView.innerHTML = `
-      <div class="article-reader-container">
-        ${renderReaderToolbar()}
-        ${renderReaderHeader(post)}
-        ${renderReaderTakeaways(post)}
-
-        <div class="reader-layout-grid">
-          ${renderReaderProse(post, prevPost, nextPost)}
-          ${renderReaderSidebar()}
+      <div class="blog-container article-reader-layout">
+        <div class="reader-toolbar">
+          <a href="blog.html" class="reader-back-btn" onclick="window.location.hash=''; return false;">
+            &larr; Back to Journal
+          </a>
         </div>
+
+        <header class="reader-header">
+          <div class="reader-breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="blog.html">Journal</a>
+            <span>/</span>
+            <span>${escapeHtml(catLabel)}</span>
+          </div>
+          <span class="blog-category-pill ${catClass}" style="margin-bottom:14px;">${escapeHtml(catLabel)}</span>
+          <h1 class="reader-title">${escapeHtml(post.title)}</h1>
+          <p class="reader-summary">${escapeHtml(post.summary)}</p>
+
+          <div class="reader-meta-bar">
+            <div class="author-chip">
+              <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar" width="40" height="40">
+              <div class="author-info">
+                <span class="author-name">${escapeHtml(post.author)}</span>
+                <span class="author-role">${escapeHtml(post.authorRole || 'Principal Systems Architect')} &bull; ${escapeHtml(post.date || 'March 2026')}</span>
+              </div>
+            </div>
+
+            <div class="social-share-strip">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </a>
+              <a href="https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on X" aria-label="Share on X">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <button type="button" class="share-btn" id="btnCopyArticleLink" title="Copy Link" aria-label="Copy article link">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <img src="${escapeHtml(post.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(post.title)}" class="article-featured-image">
+
+        <article class="article-prose">
+          ${htmlContent}
+        </article>
       </div>
     `;
 
-    // 1. Build Table of Contents & Scroll-Spy
-    buildTableOfContents();
-
-    // 2. Wire Sticky Floating Action Dock
-    initFloatingDock(post);
-
-    // 3. Wire Reading Mode Toggles
-    wireReadingModes();
-
-    // 4. Wire Font Scaler Buttons
-    wireFontScalers();
-
-    // 5. Wire Copy Link Button
-    const btnCopyLink = document.getElementById('btnCopyArticleLink');
-    if (btnCopyLink) {
-      btnCopyLink.addEventListener('click', () => {
+    const copyBtn = document.getElementById('btnCopyArticleLink');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(window.location.href).then(() => {
           showToast('Article link copied to clipboard!', 'success');
         }).catch(() => {
@@ -623,379 +388,55 @@
       });
     }
 
-    // 6. Wire Code Block Copy Buttons
-    const codeBlocks = readerView.querySelectorAll('.code-block-wrap');
-    codeBlocks.forEach(wrap => {
-      const copyBtn = wrap.querySelector('.copy-code-btn');
-      const codeEl = wrap.querySelector('pre code');
-      if (copyBtn && codeEl) {
-        copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText(codeEl.innerText).then(() => {
-            copyBtn.classList.add('copied');
-            copyBtn.innerHTML = '<i data-lucide="check" style="width:12px; height:12px;"></i> Copied!';
-            refreshIcons();
-            setTimeout(() => {
-              copyBtn.classList.remove('copied');
-              copyBtn.innerHTML = '<i data-lucide="copy" style="width:12px; height:12px;"></i> Copy Code';
-              refreshIcons();
-            }, 2000);
-          });
-        });
-      }
-    });
-
-    refreshIcons();
+    wireReadingModes();
   }
 
-  // Executive Takeaways Dictionary
-  function getExecutiveTakeaways(slug) {
-    const defaultTakeaways = [
-      'Decoupled multi-agent architecture reduces hallucination rates by over 74% compared to monolithic LLM prompts.',
-      'Vector dimensionality truncation via Matryoshka models cuts memory footprint by 50% with negligible recall drop.',
-      'Deterministic verification gates ensure that external function calls and hardware actuators never execute unvalidated.'
-    ];
-
-    if (slug === 'autonomous-multi-agent-mcp-orchestration' || slug === 'autonomous-agents-hermes-grok-tools' || slug === 'autonomous-ai-agents-rag') {
-      return [
-        'Model Context Protocol (MCP) decouples tool interfaces from vendor-specific SDKs, standardizing agent runtime capabilities over JSON-RPC 2.0.',
-        'Supervisor-Worker state graphs with typed schema validation eliminate infinite retry loops and prevent prompt injection into tool arguments.',
-        'Two-phase dry-run commits ensure state-mutating actions (databases, API payments, hardware actuators) are validated before execution.'
-      ];
-    } else if (slug === 'graphrag-vs-vector-rag-benchmarks') {
-      return [
-        'Standard cosine similarity search fails across complex, multi-hop reasoning because vector distance ignores entity-relationship semantics.',
-        'Graph-Augmented Generation extracts explicit knowledge triplets (Subject-Predicate-Object), boosting multi-hop answer accuracy from 46% to 92%.',
-        'Matryoshka representation learning allows vector truncation from 768 to 256 dimensions, cutting RAM usage by 67% with under 1.2% recall drop.'
-      ];
-    } else if (slug === 'edge-ai-quantized-slms-hardware' || slug === 'esp32-lorawan-smart-agriculture') {
-      return [
-        'Activation-Aware Weight Quantization (AWQ) compresses 3B-parameter models down to 4-bit precision with less than 0.8% perplexity degradation.',
-        'Embedded NPUs like RK3588 (6 TOPS) and Jetson Orin Nano achieve 28+ tokens/sec locally with zero WAN dependency and complete air-gap security.',
-        'Aggressive duty-cycling and low-power sleep management allow battery-powered edge vision nodes to operate continuously in remote industrial settings.'
-      ];
-    } else if (slug === 'autonomous-code-repair-cicd-agents' || slug === 'sub-50ms-web-vitals-jamstack') {
-      return [
-        'Automated CI/CD repair loops parse compiler diagnostics and AST syntax trees to synthesize verified patches without human intervention.',
-        'Docker sandbox containment guarantees that experimental patches run regression tests in complete isolation before opening GitHub PRs.',
-        'Autonomous repair resolves 64% of recurring lint, syntax, and typing CI failures, saving engineering teams hundreds of hours per month.'
-      ];
-    } else if (slug === 'enterprise-agent-workflows-stategraphs' || slug === 'case-study-enterprise-campus-lan') {
-      return [
-        'Replacing monolithic 10,000-token prompts with cyclic StateGraphs cuts enterprise API token consumption by up to 82%.',
-        'Persistent checkpointing at every state transition ensures that network failures or transient API timeouts can resume without losing task progress.',
-        'Task completion rate jumped from 58% under monolithic prompts to 99.4% under deterministic StateGraph evaluation gates.'
-      ];
-    }
-
-    return defaultTakeaways;
-  }
-
-  // Reading Modes Controller & Wireup (Preserved for compatibility)
+  // ============================================================
+  // 8. READING MODES & THEME ENGINE (Tier 13 Compatibility)
+  // ============================================================
   function applyReadingMode(mode) {
-    const validMode = (mode === 'terminal' || mode === 'sepia' || mode === 'obsidian') ? mode : 'obsidian';
-
-    // 1. Update body classes
-    document.body.classList.remove('mode-terminal', 'mode-sepia', 'mode-obsidian');
-    if (validMode === 'terminal') {
-      document.body.classList.add('mode-terminal');
-    } else if (validMode === 'sepia') {
-      document.body.classList.add('mode-sepia');
-    } else {
+    document.body.classList.remove('mode-obsidian', 'mode-sepia', 'mode-terminal');
+    if (mode === 'obsidian') {
       document.body.classList.add('mode-obsidian');
+    } else if (mode === 'sepia') {
+      document.body.classList.add('mode-sepia');
+    } else if (mode === 'terminal') {
+      document.body.classList.add('mode-terminal');
     }
-
-    // 2. Persist preference to localStorage
-    try {
-      localStorage.setItem('ax_reading_mode', validMode);
-    } catch (e) {}
-
-    // 3. Synchronize UI buttons active state
-    if (readerView) {
-      const buttons = readerView.querySelectorAll('.reading-mode-btn');
-      buttons.forEach(b => {
-        if (b.getAttribute('data-mode') === validMode) {
-          b.classList.add('active');
-        } else {
-          b.classList.remove('active');
-        }
-      });
-    }
+    localStorage.setItem('ax_reading_mode', mode);
   }
 
   function wireReadingModes() {
-    let savedMode = 'obsidian';
-    try {
-      savedMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
-    } catch (e) {}
-
+    const savedMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
     applyReadingMode(savedMode);
-
-    const buttons = readerView.querySelectorAll('.reading-mode-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const mode = btn.getAttribute('data-mode');
-        applyReadingMode(mode);
-      });
-    });
-  }
-
-  // Font Size Scalers
-  function wireFontScalers() {
-    const btnDecr = document.getElementById('btnFontDecr');
-    const btnIncr = document.getElementById('btnFontIncr');
-    const prose = document.getElementById('articleProseBody');
-    if (!prose) return;
-
-    if (btnDecr) {
-      btnDecr.addEventListener('click', () => {
-        if (currentFontSizeIdx > 0) {
-          currentFontSizeIdx--;
-          prose.style.fontSize = fontSizes[currentFontSizeIdx];
-        }
-      });
-    }
-
-    if (btnIncr) {
-      btnIncr.addEventListener('click', () => {
-        if (currentFontSizeIdx < fontSizes.length - 1) {
-          currentFontSizeIdx++;
-          prose.style.fontSize = fontSizes[currentFontSizeIdx];
-        }
-      });
-    }
   }
 
   // ============================================================
-  // 10. DYNAMIC TABLE OF CONTENTS & INTERSECTION SCROLL-SPY
-  // ============================================================
-  function buildTableOfContents() {
-    const prose = document.getElementById('articleProseBody');
-    const tocList = document.getElementById('readerTocList');
-    if (!prose || !tocList) return;
-
-    if (tocObserver) {
-      tocObserver.disconnect();
-      tocObserver = null;
-    }
-
-    const headings = prose.querySelectorAll('h2, h3');
-    if (!headings.length) {
-      const sidebar = document.getElementById('readerTocSidebar');
-      if (sidebar) sidebar.style.display = 'none';
-      return;
-    }
-
-    tocList.innerHTML = '';
-    headings.forEach((heading, index) => {
-      const id = heading.id || `toc-head-${index}`;
-      heading.id = id;
-
-      const li = document.createElement('li');
-      li.className = 'reader-toc-item';
-      if (heading.tagName === 'H3') {
-        li.style.paddingLeft = '12px';
-      }
-
-      const a = document.createElement('a');
-      a.href = `#${id}`;
-      a.textContent = heading.textContent.replace(/^[#\s]+/, '');
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-
-      li.appendChild(a);
-      tocList.appendChild(li);
-    });
-
-    tocObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          const links = tocList.querySelectorAll('.reader-toc-item');
-          links.forEach(item => {
-            const link = item.querySelector('a');
-            if (link && link.getAttribute('href') === `#${id}`) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-        }
-      });
-    }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
-
-    headings.forEach(h => tocObserver.observe(h));
-  }
-
-  // ============================================================
-  // 11. STICKY FLOATING ACTION DOCK CONTROLLER
-  // ============================================================
-  function initFloatingDock(post) {
-    if (!readerFloatingDock) return;
-    readerFloatingDock.style.display = 'flex';
-
-    const dockTimeEl = document.getElementById('dockReadTime');
-    if (dockTimeEl) {
-      dockTimeEl.textContent = post.readTime || '5 min read';
-    }
-
-    const clapBtn = document.getElementById('dockClapBtn');
-    const clapCountEl = document.getElementById('dockClapCount');
-    const clapStorageKey = `ax_blog_claps_${post.slug}`;
-    let claps = parseInt(localStorage.getItem(clapStorageKey) || '0', 10);
-
-    if (clapCountEl) {
-      clapCountEl.textContent = claps;
-    }
-
-    if (clapBtn) {
-      const newClapBtn = clapBtn.cloneNode(true);
-      clapBtn.parentNode.replaceChild(newClapBtn, clapBtn);
-
-      newClapBtn.addEventListener('click', () => {
-        claps += 1;
-        localStorage.setItem(clapStorageKey, claps);
-        const countSpan = document.getElementById('dockClapCount');
-        if (countSpan) countSpan.textContent = claps;
-
-        newClapBtn.style.transform = 'scale(1.15)';
-        setTimeout(() => { newClapBtn.style.transform = ''; }, 160);
-      });
-    }
-
-    const currentUrl = encodeURIComponent(window.location.href);
-    const titleEncoded = encodeURIComponent(post.title + ' — via AarambhX Engineering');
-
-    const shareIn = document.getElementById('dockShareLinkedIn');
-    if (shareIn) {
-      shareIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
-    }
-
-    const shareTw = document.getElementById('dockShareTwitter');
-    if (shareTw) {
-      shareTw.href = `https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}`;
-    }
-
-    const copyBtn = document.getElementById('dockBtnCopyLink');
-    if (copyBtn) {
-      copyBtn.onclick = () => {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          showToast('Direct article URL copied to clipboard!', 'success');
-        }).catch(() => {
-          showToast('Failed to copy link', 'error');
-        });
-      };
-    }
-  }
-
-  // ============================================================
-  // 12. LIGHTWEIGHT MARKDOWN / HTML PARSER
-  // ============================================================
-  function parseMarkdownToHtml(markdown) {
-    if (!markdown) return '';
-    let html = markdown;
-
-    // Code blocks with syntax copy headers
-    html = html.replace(/```([a-zA-Z0-9_\-+]*)\n([\s\S]*?)```/g, (match, lang, code) => {
-      const language = lang || 'code';
-      return `
-        <div class="code-block-wrap">
-          <div class="code-header">
-            <span>${escapeHtml(language.toUpperCase())}</span>
-            <button type="button" class="copy-code-btn">
-              <i data-lucide="copy" style="width:12px; height:12px;"></i> Copy Code
-            </button>
-          </div>
-          <pre><code>${escapeHtml(code.trim())}</code></pre>
-        </div>
-      `;
-    });
-
-    // Blockquotes & Callouts
-    html = html.replace(/^>\s*\*\*([^*]+)\*\*(.*)$/gm, (match, title, text) => {
-      return `
-        <div class="callout-box">
-          <div class="callout-title">
-            <i data-lucide="info" style="width:16px; height:16px;"></i>
-            <span>${escapeHtml(title)}</span>
-          </div>
-          <div class="callout-body">${escapeHtml(text.trim())}</div>
-        </div>
-      `;
-    });
-
-    html = html.replace(/^>\s*(.+)$/gm, '<blockquote>$1</blockquote>');
-
-    // Headings
-    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-
-    // Bold & Italic
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
-
-    // Lists
-    html = html.replace(/^\s*-\s+(.*)$/gm, '<li>$1</li>');
-    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-
-    // Paragraphs
-    const paragraphs = html.split(/\n\s*\n/);
-    html = paragraphs.map(p => {
-      p = p.trim();
-      if (!p) return '';
-      if (p.startsWith('<h') || p.startsWith('<div') || p.startsWith('<ul') || p.startsWith('<blockquote') || p.startsWith('<pre')) {
-        return p;
-      }
-      return `<p>${p}</p>`;
-    }).join('\n');
-
-    return html;
-  }
-
-  // ============================================================
-  // 13. READING PROGRESS BAR
+  // 9. PROGRESS BAR & NEWSLETTER
   // ============================================================
   function updateReadingProgress() {
-    if (!progressBar || !activePost) return;
-    const scrollY = window.scrollY;
+    if (!progressBar) return;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight <= 0) {
       progressBar.style.width = '0%';
       return;
     }
-    const pct = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
-    progressBar.style.width = `${pct}%`;
+    const scrolled = (window.scrollY / docHeight) * 100;
+    progressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
   }
 
-  // ============================================================
-  // 14. NEWSLETTER SUBSCRIPTION
-  // ============================================================
   function handleNewsletterSubmit(e) {
     e.preventDefault();
     const emailInput = document.getElementById('newsletterEmail');
-    if (!emailInput || !emailInput.value) return;
-    const email = emailInput.value.trim();
+    const email = (emailInput ? emailInput.value : '').trim();
+    if (!email) return;
 
-    if (Store && typeof Store.saveInquiry === 'function') {
-      Store.saveInquiry({
-        fullName: 'Journal Subscriber',
-        email: email,
-        phone: '',
-        service: 'Journal Newsletter',
-        message: 'Subscribed to AarambhX Engineering Journal bi-weekly publication.'
-      });
-    }
-
-    showToast('Subscribed successfully! Welcome to the AarambhX Engineering Community.', 'success');
-    emailInput.value = '';
+    showToast('Subscribed! Welcome to the AarambhX Engineering Dispatch.', 'success');
+    if (emailInput) emailInput.value = '';
   }
 
   // ============================================================
-  // 15. UTILITIES & HELPERS
+  // 10. HELPERS & UTILITIES
   // ============================================================
   function getCategoryLabel(slug) {
     const map = {
@@ -1018,19 +459,65 @@
   }
 
   function escapeHtml(str) {
-    return String(str || '')
+    return String(str == null ? '' : str)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function parseMarkdownToHtml(markdown) {
+    if (window.JournalCore && typeof window.JournalCore.renderMarkdown === 'function') {
+      return window.JournalCore.renderMarkdown(markdown);
+    }
+    // Clean fallback parser
+    let html = markdown
+      .replace(/### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+      .replace(/`([^`]+)`/gim, '<code class="inline-code">$1</code>')
+      .replace(/\n\n+/g, '</p><p>');
+
+    return `<p>${html}</p>`;
   }
 
   function showToast(msg, type = 'info') {
-    if (typeof window.showToast === 'function') {
-      window.showToast(msg, type);
-      return;
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.className = 'ax-toast-container';
+      document.body.appendChild(container);
     }
-    alert(msg);
+
+    const toast = document.createElement('div');
+    toast.className = `ax-toast ax-toast-${type}`;
+    toast.style.cssText = `
+      background: var(--blog-surface);
+      color: var(--blog-text-primary);
+      padding: 12px 20px;
+      border-radius: var(--blog-radius-pill);
+      border: 1px solid var(--blog-border);
+      box-shadow: var(--blog-shadow-lg);
+      margin-top: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    `;
+    toast.textContent = msg;
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 
   function refreshIcons() {
@@ -1039,11 +526,15 @@
     }
   }
 
-  // Expose global namespace
+  // Public namespace export
   window.AarambhXBlog = {
     renderFeaturedStory,
     renderGrid,
     showListingView,
-    showReaderView
+    showReaderView,
+    applyReadingMode,
+    wireReadingModes,
+    showToast
   };
+
 })();
