@@ -370,7 +370,7 @@
       status: 'Published',
       tags: ['Claude Code', 'Anthropic', 'Multi-Agent', 'MCP Protocol', 'Agentic Coding', 'Python'],
       metaDescription: 'Why Claude Code and autonomous multi-agent terminal swarms are redefining software engineering in 2026 with Model Context Protocol (MCP) and self-healing test loops.',
-      image: 'assets/art/hero-digital-clouds.webp',
+      image: 'assets/journal/claude-code-terminal.webp',
       content: `## The Death of Manual Line-by-Line Coding
 
 For fifty years, software engineering followed an immutable ritual: a human developer reads requirements, opens an editor, and manually types syntax into files, one line at a time. Linters red-squiggled our mistakes; compilers hurled stack traces back into our terminals.
@@ -473,7 +473,7 @@ Does this mean software engineers are obsolete? Absolutely not. But the nature o
       status: 'Published',
       tags: ['DeepSeek-R1', 'OpenAI', 'Open Source AI', 'Local LLMs', 'Reinforcement Learning', 'Ollama'],
       metaDescription: 'Inside DeepSeek-R1 and OpenAI o3-mini: how pure Reinforcement Learning democratized frontier reasoning at 5% of traditional cost, and how to run it locally with Ollama.',
-      image: 'assets/art/work-showcase-dev-monitors.webp',
+      image: 'assets/journal/deepseek-datacenter-ai.webp',
       content: `## The Shockwave That Shook Silicon Valley
 
 On a single Monday morning in early 2025, Wall Street witnessed one of the most violent tech selloffs in history: **over $600 billion in market value evaporated from semiconductor stocks**, led by Nvidia.
@@ -573,7 +573,7 @@ print(response.choices[0].message.content)
       status: 'Published',
       tags: ['Vibe Coding', 'Cursor AI', 'Bolt.new', 'Lovable', 'Full Stack', 'Web Development'],
       metaDescription: 'The rise of Vibe Coding: How Cursor AI, Bolt.new, and Lovable are transforming web development, automating boilerplate, and shifting engineering to system design.',
-      image: 'assets/art/iot-telemetry-preview.webp',
+      image: 'assets/journal/vibe-coding-workspace.webp',
       content: `## What is "Vibe Coding"?
 
 In early 2025, former Tesla AI Director and OpenAI co-founder Andrej Karpathy posted a tweet that captured a cultural turning point in tech:
@@ -652,7 +652,7 @@ While anyone can "vibe code" an MVP in an afternoon, production software comes w
       status: 'Published',
       tags: ['OpenAI Operator', 'Computer Use', 'Autonomous Agents', 'Desktop Automation', 'RPA'],
       metaDescription: 'Deep dive into OpenAI Operator and Computer Use: How multimodal vision agents click buttons, fill forms, and automate legacy desktop apps directly via UI.',
-      image: 'assets/art/vms-preview.webp',
+      image: 'assets/journal/computer-use-automation.webp',
       content: `## Beyond the API: The Screen as the Universal Interface
 
 For decades, the holy grail of enterprise automation was the API. If an application had a REST or GraphQL endpoint, developers could automate it.
@@ -752,7 +752,7 @@ Allowing an autonomous AI agent to control mouse clicks and keystrokes introduce
       status: 'Published',
       tags: ['AI Agent Tutorial', 'Python', 'LangGraph', 'Beginners Guide', 'Step-by-Step', 'Build in Public'],
       metaDescription: 'Complete hands-on blueprint to building your first working autonomous AI agent with Python, LangGraph, and MCP tool calling in under 15 minutes.',
-      image: 'assets/art/hero-digital-clouds.webp',
+      image: 'assets/journal/build-ai-agent-python.webp',
       content: `## You Don't Need a PhD to Build AI Agents
 
 If you look at academic AI papers or social media feeds, building an "autonomous agent" might sound like it requires deep mathematics, massive GPU clusters, or thousands of lines of complex code.
