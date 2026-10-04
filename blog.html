@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,23 @@
   <meta name="keywords" content="AarambhX Journal, AI Engineering, Multi-Agent RAG, ESP32 IoT, LoRaWAN, Web Performance, Full-Stack Architecture, Tumakuru Tech">
   <meta name="author" content="Lalith H &amp; AarambhX Engineering Team">
   <link rel="canonical" href="https://aarambhx-technology.vercel.app/blog.html">
+
+  <!-- Immediate Theme Initializer -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          document.documentElement.classList.remove('light-theme');
+        } else {
+          document.documentElement.classList.add('light-theme');
+          document.documentElement.classList.remove('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -37,11 +54,11 @@
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Core & Page Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=2.3.4">
-  <link rel="stylesheet" href="blog.css?v=4.1.0">
+  <link rel="stylesheet" href="styles.css?v=2.4.0">
+  <link rel="stylesheet" href="blog.css?v=4.2.0">
 
   <!-- Schema.org JSON-LD Structured Data: Blog & BreadcrumbList -->
   <script type="application/ld+json">
@@ -88,12 +105,12 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8724628344472439"
        crossorigin="anonymous"></script>
 </head>
-<body class="blog-page dark-theme">
+<body class="blog-page">
 
   <!-- Reading Progress Bar -->
   <div class="reading-progress-bar" id="readingProgressBar"></div>
 
-  <!-- GPU-Accelerated Celestial Particle Canvas Background -->
+  <!-- Ambient Celestial Canvas Background -->
   <canvas id="blogCosmicCanvas" class="blog-cosmic-canvas" aria-hidden="true"></canvas>
 
   <!-- Ambient Glowing Meshes -->
@@ -153,12 +170,15 @@
     <!-- Hero Header -->
     <section class="blog-hero">
       <div class="blog-container">
-        <span class="blog-eyebrow">Engineering Journal</span>
+        <span class="blog-eyebrow">
+          <i data-lucide="sparkles" style="width:14px; height:14px;"></i>
+          <span>Engineering Journal</span>
+        </span>
         <h1 class="blog-hero-title">
           Engineering Journal &amp; <span class="gold-shimmer-text">Technical Insights</span>
         </h1>
         <p class="blog-hero-lead">
-          Deep-dive architectural breakdowns, agentic AI systems, embedded IoT firmware, and high-performance engineering from the AarambhX R&amp;D lab.
+          Deep-dive architectural breakdowns, autonomous AI swarms, embedded edge compute, and high-performance engineering from the AarambhX R&amp;D lab.
         </p>
       </div>
     </section>
@@ -192,11 +212,11 @@
       <section class="blog-newsletter-section">
         <h2 class="newsletter-title">Subscribe to the AarambhX Engineering Dispatch</h2>
         <p class="newsletter-desc">
-          Get architectural blueprints, embedded system guides, and AI tutorials delivered to your inbox every two weeks.
+          Get architectural blueprints, embedded system guides, and AI tutorials delivered to your inbox every two weeks. Zero marketing spam.
         </p>
         <form class="newsletter-form" id="newsletterForm">
           <label for="newsletterEmail" class="sr-only">Email address</label>
-          <input type="email" id="newsletterEmail" placeholder="Enter your email" required aria-label="Email address">
+          <input type="email" id="newsletterEmail" placeholder="Enter your email address" required aria-label="Email address">
           <button type="submit" class="newsletter-submit-btn">Subscribe Free</button>
         </form>
       </section>
@@ -205,7 +225,7 @@
   </main>
 
   <!-- ============================================================
-       2. DEDICATED ARTICLE READER VIEW (Deep-Linked via Hash)
+       2. DEDICATED ARTICLE READER VIEW (Deep-Linked via Hash / SPA)
        ============================================================ -->
   <div id="articleReaderView" class="article-reader-container" style="display: none;"></div>
 
@@ -296,9 +316,10 @@
   <div id="toastContainer" class="ax-toast-container"></div>
 
   <!-- Scripts -->
-  <script src="admin-store.js?v=4.1.0"></script>
-  <script src="main.js?v=2.3.4"></script>
-  <script src="blog.js?v=4.1.0"></script>
+  <script src="admin-store.js?v=4.2.0"></script>
+  <script src="journal-core.js?v=4.2.0"></script>
+  <script src="main.js?v=2.4.0"></script>
+  <script src="blog.js?v=4.2.0"></script>
   <script>
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();

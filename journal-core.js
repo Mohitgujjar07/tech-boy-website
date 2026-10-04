@@ -1,0 +1,699 @@
+/**
+ * AarambhX Journal — shared rendering core (journal-core.js)
+ *
+ * Used in two places so the output is always identical:
+ *   1. In the browser (blog.html listing + dynamic reader for CMS-only posts).
+ *   2. In Node by scripts/build-journal.js to pre-render static article pages.
+ *
+ * Contains: category metadata, a safe Markdown renderer (HTML is always
+ * escaped), a tiny syntax highlighter, and card/article HTML templates.
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = factory();
+  } else {
+    root.JournalCore = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  // ---------------------------------------------------------------------------
+  // Constants
+  // ---------------------------------------------------------------------------
+  var SITE_URL = 'https://aarambhx-technology.vercel.app';
+  var WHATSAPP_NUMBER = '917676690081';
+  var DEFAULT_IMAGE = 'assets/hero.webp';
+  var DEFAULT_AVATAR = 'assets/aarambhx-logo.jpg';
+
+  var CATEGORIES = [
+    { slug: 'ai-tech', label: 'AI & Agents', tone: 'violet' },
+    { slug: 'fullstack', label: 'Systems & Full-Stack', tone: 'blue' },
+    { slug: 'hardware-iot', label: 'Hardware & IoT', tone: 'green' },
+    { slug: 'case-studies', label: 'Case Studies', tone: 'amber' }
+  ];
+
+  var MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
+    'august', 'september', 'october', 'november', 'december'];
+
+  var TAKEAWAYS = {
+    'autonomous-multi-agent-mcp-orchestration': [
+      'Model Context Protocol (MCP) decouples tool interfaces from vendor-specific SDKs, standardising agent capabilities over JSON-RPC 2.0.',
+      'Supervisor–worker state graphs with typed schema validation stop infinite retry loops and block prompt injection into tool arguments.',
+      'Two-phase dry-run commits make sure state-changing actions (databases, payments, hardware) are validated before they run.'
+    ],
+    'graphrag-vs-vector-rag-benchmarks': [
+      'Plain cosine-similarity search fails on multi-hop questions because vector distance ignores relationships between entities.',
+      'GraphRAG extracts explicit subject–predicate–object triplets, lifting multi-hop answer accuracy from 46% to 92% in our benchmark.',
+      'Matryoshka embeddings can be truncated from 768 to 256 dimensions, cutting RAM by 67% with under 1.2% recall loss.'
+    ],
+    'edge-ai-quantized-slms-hardware': [
+      'Activation-aware weight quantisation (AWQ) shrinks 3B-parameter models to 4-bit with under 0.8% perplexity loss.',
+      'NPUs like the RK3588 and Jetson Orin Nano run small language models at 28+ tokens/sec fully offline.',
+      'Aggressive duty-cycling lets battery-powered edge vision nodes run continuously in remote sites.'
+    ],
+    'autonomous-code-repair-cicd-agents': [
+      'Repair agents read compiler diagnostics and syntax trees to produce targeted, verified patches.',
+      'Running every candidate patch in an isolated Docker sandbox keeps experiments away from real infrastructure.',
+      'Autonomous repair fixed 64% of recurring lint, syntax and typing failures in our CI pipelines.'
+    ],
+    'enterprise-agent-workflows-stategraphs': [
+      'Replacing 10,000-token mega-prompts with cyclic state graphs cut API token usage by up to 82%.',
+      'Checkpointing every state transition lets workflows resume after timeouts without losing progress.',
+      'Task completion rose from 58% to 99.4% once deterministic evaluation gates were added.'
+    ]
+  };
+
+  // ---------------------------------------------------------------------------
+  // Icons (inline SVG, no external icon library)
+  // ---------------------------------------------------------------------------
+  function svg(body, opts) {
+    var o = opts || {};
+    var fill = o.fill ? 'fill="currentColor" stroke="none"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+    return '<svg class="j-icon" viewBox="0 0 24 24" width="' + (o.size || 16) + '" height="' + (o.size || 16) + '" ' + fill + ' aria-hidden="true" focusable="false">' + body + '</svg>';
+  }
+
+  var ICONS = {
+    search: svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', { size: 18 }),
+    arrowRight: svg('<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'),
+    arrowLeft: svg('<path d="M19 12H5"/><path d="m11 18-6-6 6-6"/>'),
+    copy: svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>', { size: 14 }),
+    check: svg('<path d="M20 6 9 17l-5-5"/>', { size: 14 }),
+    link: svg('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'),
+    menu: svg('<path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>', { size: 20 }),
+    close: svg('<path d="M18 6 6 18"/><path d="m6 6 12 12"/>', { size: 20 }),
+    chevronDown: svg('<path d="m6 9 6 6 6-6"/>'),
+    mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', { size: 18 }),
+    linkedin: svg('<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>', { fill: true }),
+    x: svg('<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>', { fill: true, size: 15 }),
+    whatsapp: svg('<path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.45-9.44a9.38 9.38 0 0 1 6.68 2.77 9.38 9.38 0 0 1 2.76 6.68c0 5.21-4.24 9.44-9.46 9.44m8.04-17.48A11.3 11.3 0 0 0 12.05.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.69L.58 23.7l6.08-1.6a11.33 11.33 0 0 0 5.39 1.37h.01c6.26 0 11.36-5.1 11.37-11.36 0-3.03-1.18-5.89-3.33-8.03"/>', { fill: true })
+  };
+
+  // ---------------------------------------------------------------------------
+  // Small utilities
+  // ---------------------------------------------------------------------------
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function slugify(str) {
+    return String(str || '')
+      .toLowerCase()
+      .replace(/&[a-z]+;/g, ' ')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80);
+  }
+
+  function isAbsoluteUrl(url) {
+    return /^(https?:)?\/\//i.test(url);
+  }
+
+  /** Resolve a site-relative asset path ("assets/x.webp") against a base ("", "../"). */
+  function assetUrl(path, base) {
+    var p = String(path || '');
+    if (!p) return '';
+    if (isAbsoluteUrl(p) || /^(data:|\/|#)/i.test(p)) return p;
+    return (base || '') + p.replace(/^\.\//, '');
+  }
+
+  function absoluteUrl(path) {
+    var p = String(path || '');
+    if (isAbsoluteUrl(p)) return p;
+    return SITE_URL + '/' + p.replace(/^\.?\//, '');
+  }
+
+  function getCategory(post) {
+    var slug = post && post.categorySlug;
+    for (var i = 0; i < CATEGORIES.length; i++) {
+      if (CATEGORIES[i].slug === slug) return CATEGORIES[i];
+    }
+    var text = String((post && post.category) || '').toLowerCase();
+    if (/\bai\b|agent|llm|reasoning|generative/.test(text)) return CATEGORIES[0];
+    if (/system|stack|web|devops|cloud/.test(text)) return CATEGORIES[1];
+    if (/hardware|iot|embedded|edge/.test(text)) return CATEGORIES[2];
+    if (/case/.test(text)) return CATEGORIES[3];
+    return { slug: 'general', label: (post && post.category) || 'Article', tone: 'gray' };
+  }
+
+  /** Convert "March 2026", "2026-03-14" or ISO strings into YYYY-MM-DD. */
+  function toISODate(post) {
+    var raw = String((post && (post.publishedAt || post.date)) || '').trim();
+    if (/^\d{4}-\d{2}-\d{2}/.test(raw)) return raw.slice(0, 10);
+    var m = raw.toLowerCase().match(/^([a-z]+)\s+(\d{1,2},?\s+)?(\d{4})$/);
+    if (m) {
+      var month = MONTHS.indexOf(m[1]);
+      if (month !== -1) {
+        var day = m[2] ? parseInt(m[2], 10) : 1;
+        return m[3] + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+      }
+    }
+    return '';
+  }
+
+  /** Human-friendly date for display. */
+  function formatDate(post) {
+    var raw = String((post && post.date) || '').trim();
+    if (/^\d{4}-\d{2}-\d{2}/.test(raw)) {
+      var parts = raw.slice(0, 10).split('-');
+      var month = MONTHS[parseInt(parts[1], 10) - 1] || '';
+      return parseInt(parts[2], 10) + ' ' + month.charAt(0).toUpperCase() + month.slice(1, 3) + ' ' + parts[0];
+    }
+    return raw;
+  }
+
+  function wordCount(markdown) {
+    var text = String(markdown || '').replace(/```[\s\S]*?```/g, ' ').replace(/[#>*_`|\-]/g, ' ');
+    var words = text.trim().split(/\s+/).filter(Boolean);
+    return words.length;
+  }
+
+  function readTime(post) {
+    if (post && post.readTime) return post.readTime;
+    var minutes = Math.max(1, Math.round(wordCount(post && post.content) / 220));
+    return minutes + ' min read';
+  }
+
+  function getTakeaways(post) {
+    if (post && Array.isArray(post.takeaways) && post.takeaways.length) return post.takeaways;
+    return (post && TAKEAWAYS[post.slug]) || [];
+  }
+
+  /** Up to `limit` related posts: same category first, then the most recent others. */
+  function getRelated(post, posts, limit) {
+    var max = limit || 3;
+    var others = (posts || []).filter(function (p) { return p.slug !== post.slug; });
+    var cat = getCategory(post).slug;
+    var same = others.filter(function (p) { return getCategory(p).slug === cat; });
+    var rest = others.filter(function (p) { return getCategory(p).slug !== cat; });
+    return same.concat(rest).slice(0, max);
+  }
+
+  function postHref(post, base) {
+    var b = base || '';
+    if (post && post.isStatic) return b + 'journal/' + encodeURIComponent(post.slug) + '.html';
+    return b + 'blog.html#' + encodeURIComponent((post && post.slug) || '');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Syntax highlighter (keywords, strings, comments, numbers, function names)
+  // ---------------------------------------------------------------------------
+  var JS_KW = 'const let var function return if else for while do switch case break continue new class extends import from export default async await try catch finally throw typeof instanceof in of null undefined true false this yield';
+  var LANGS = {
+    python: { kw: 'and as assert async await break class continue def del elif else except False finally for from global if import in is lambda None nonlocal not or pass raise return True try while with yield self', line: '#', triple: true },
+    js: { kw: JS_KW, line: '//', block: true, tmpl: true },
+    ts: { kw: JS_KW + ' interface type enum implements public private protected readonly as declare', line: '//', block: true, tmpl: true },
+    cpp: { kw: 'int float double char void bool true false return if else for while do switch case break continue struct class public private protected const constexpr static unsigned long short auto namespace using new delete nullptr template typename sizeof uint8_t uint16_t uint32_t uint64_t int8_t int16_t int32_t int64_t size_t std', line: '//', block: true, pre: true },
+    bash: { kw: 'if then else elif fi for in do done while case esac function return export echo sudo cd local set', line: '#' },
+    json: { kw: 'true false null' },
+    yaml: { kw: 'true false null', line: '#' },
+    sql: { kw: 'select from where insert into values update set delete create table index join left right inner outer on group by order limit and or not null as primary key', line: '--', ci: true }
+  };
+  var LANG_ALIASES = {
+    py: 'python', python3: 'python', javascript: 'js', node: 'js', jsx: 'js', mjs: 'js',
+    typescript: 'ts', tsx: 'ts', 'c++': 'cpp', c: 'cpp', h: 'cpp', hpp: 'cpp', arduino: 'cpp', ino: 'cpp',
+    sh: 'bash', shell: 'bash', zsh: 'bash', console: 'bash', yml: 'yaml', postgres: 'sql', postgresql: 'sql'
+  };
+  var LANG_LABELS = {
+    python: 'Python', js: 'JavaScript', ts: 'TypeScript', cpp: 'C++', bash: 'Shell',
+    json: 'JSON', yaml: 'YAML', sql: 'SQL', html: 'HTML', css: 'CSS'
+  };
+
+  function normaliseLang(lang) {
+    var l = String(lang || '').toLowerCase();
+    return LANG_ALIASES[l] || l;
+  }
+
+  function highlight(code, lang) {
+    var spec = LANGS[normaliseLang(lang)];
+    if (!spec) return escapeHtml(code);
+
+    var parts = [];
+    if (spec.pre) parts.push('(^[ \\t]*#[a-z]+[^\\n]*)');
+    else parts.push('(?!)');
+    parts.push(spec.block ? '(\\/\\*[\\s\\S]*?\\*\\/)' : '(?!)');
+    if (spec.line === '#') parts.push('(#[^\\n]*)');
+    else if (spec.line === '//') parts.push('(\\/\\/[^\\n]*)');
+    else if (spec.line === '--') parts.push('(--[^\\n]*)');
+    else parts.push('(?!)');
+    parts.push(spec.triple ? '("""[\\s\\S]*?"""|\'\'\'[\\s\\S]*?\'\'\')' : '(?!)');
+    parts.push('("(?:\\\\.|[^"\\\\\\n])*"|\'(?:\\\\.|[^\'\\\\\\n])*\'' + (spec.tmpl ? '|`(?:\\\\.|[^`\\\\])*`' : '') + ')');
+    parts.push('(\\b0x[0-9a-fA-F]+\\b|\\b\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)');
+    parts.push('([A-Za-z_][A-Za-z0-9_]*)');
+
+    var re = new RegExp(parts.join('|'), 'gm');
+    var keywords = {};
+    spec.kw.split(' ').forEach(function (k) { keywords[spec.ci ? k.toLowerCase() : k] = true; });
+
+    var out = '';
+    var last = 0;
+    var m;
+    while ((m = re.exec(code)) !== null) {
+      if (m[0] === '') { re.lastIndex++; continue; }
+      out += escapeHtml(code.slice(last, m.index));
+      var tok = escapeHtml(m[0]);
+      if (m[1]) out += '<span class="tk-k">' + tok + '</span>';
+      else if (m[2] || m[3]) out += '<span class="tk-c">' + tok + '</span>';
+      else if (m[4] || m[5]) out += '<span class="tk-s">' + tok + '</span>';
+      else if (m[6]) out += '<span class="tk-n">' + tok + '</span>';
+      else if (m[7]) {
+        var key = spec.ci ? m[7].toLowerCase() : m[7];
+        if (keywords[key]) out += '<span class="tk-k">' + tok + '</span>';
+        else if (code.charAt(re.lastIndex) === '(') out += '<span class="tk-f">' + tok + '</span>';
+        else out += tok;
+      } else out += tok;
+      last = re.lastIndex;
+    }
+    out += escapeHtml(code.slice(last));
+    return out;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Markdown renderer
+  // ---------------------------------------------------------------------------
+  function safeUrl(escapedUrl, base) {
+    var raw = String(escapedUrl || '').replace(/&amp;/g, '&').trim();
+    if (!raw || /^(javascript|vbscript|data):/i.test(raw.replace(/\s+/g, ''))) return '';
+    if (/^(https?:|mailto:|tel:|#|\/)/i.test(raw)) return escapedUrl;
+    return escapeHtml(assetUrl(raw, base));
+  }
+
+  function renderInline(text, base) {
+    var codes = [];
+    var s = String(text || '').replace(/`([^`]+)`/g, function (m, c) {
+      codes.push(c);
+      return '\u0000' + (codes.length - 1) + '\u0000';
+    });
+    s = escapeHtml(s);
+    s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, alt, url) {
+      var u = safeUrl(url, base);
+      return u ? '<img src="' + u + '" alt="' + alt + '" loading="lazy" decoding="async">' : alt;
+    });
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, label, url) {
+      var u = safeUrl(url, base);
+      if (!u) return label;
+      var ext = /^https?:/i.test(u);
+      return '<a href="' + u + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + label + '</a>';
+    });
+    s = s.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/__([^_]+?)__/g, '<strong>$1</strong>');
+    s = s.replace(/(^|[^*\w])\*(?!\s)([^*\n]+?)\*(?!\w)/g, '$1<em>$2</em>');
+    s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+    s = s.replace(/\u0000(\d+)\u0000/g, function (m, n) {
+      return '<code>' + escapeHtml(codes[+n]) + '</code>';
+    });
+    return s;
+  }
+
+  function stripInline(text) {
+    return String(text || '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/(\*\*|__|\*|~~)/g, '')
+      .trim();
+  }
+
+  function splitRow(line) {
+    var t = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+    return t.split(/(?<!\\)\|/).map(function (c) { return c.trim().replace(/\\\|/g, '|'); });
+  }
+
+  function renderCodeBlock(code, lang) {
+    var l = normaliseLang(lang);
+    var isDiagram = !l && /[┌┐└┘│─►▼◄▲═║╔╗╚╝├┤┬┴┼]/.test(code);
+    var label = isDiagram ? 'Diagram' : (LANG_LABELS[l] || (l ? l.toUpperCase() : 'Code'));
+    var copyBtn = isDiagram ? '' :
+      '<button type="button" class="j-code-copy" data-copy-code aria-label="Copy code to clipboard">' +
+      ICONS.copy + '<span>Copy</span></button>';
+    return '<figure class="j-code' + (isDiagram ? ' is-diagram' : '') + '">' +
+      '<figcaption class="j-code-head"><span class="j-code-lang">' + escapeHtml(label) + '</span>' + copyBtn + '</figcaption>' +
+      '<pre tabindex="0"><code' + (l ? ' class="language-' + escapeHtml(l) + '"' : '') + '>' + highlight(code, l) + '</code></pre>' +
+      '</figure>';
+  }
+
+  /**
+   * Render Markdown to HTML. Raw HTML in the source is escaped (safe for CMS input).
+   * Returns { html, headings: [{ id, text, level }] }.
+   */
+  function renderMarkdown(markdown, options) {
+    var base = (options && options.base) || '';
+    var lines = String(markdown || '').replace(/\r\n?/g, '\n').split('\n');
+    var out = [];
+    var headings = [];
+    var usedIds = {};
+    var para = [];
+
+    function uniqueId(raw) {
+      var id = raw || 'section';
+      var n = 2;
+      while (usedIds[id]) { id = raw + '-' + n; n++; }
+      usedIds[id] = true;
+      return id;
+    }
+
+    function flushPara() {
+      if (para.length) {
+        out.push('<p>' + renderInline(para.join(' '), base) + '</p>');
+        para = [];
+      }
+    }
+
+    var i = 0;
+    while (i < lines.length) {
+      var line = lines[i];
+
+      // Fenced code
+      var fence = line.match(/^\s*(`{3,}|~{3,})\s*([\w+#.-]*)\s*$/);
+      if (fence) {
+        flushPara();
+        var marker = fence[1];
+        var buf = [];
+        i++;
+        while (i < lines.length && lines[i].trim().indexOf(marker) !== 0) {
+          buf.push(lines[i]);
+          i++;
+        }
+        i++;
+        out.push(renderCodeBlock(buf.join('\n').replace(/\s+$/, ''), fence[2]));
+        continue;
+      }
+
+      if (!line.trim()) { flushPara(); i++; continue; }
+
+      // Headings (# becomes h2: the page already has one h1)
+      var h = line.match(/^(#{1,6})\s+(.+?)\s*#*\s*$/);
+      if (h) {
+        flushPara();
+        var level = Math.min(Math.max(h[1].length, 2), 4);
+        var plain = stripInline(h[2]);
+        var id = uniqueId(slugify(plain));
+        if (level <= 3) headings.push({ id: id, text: plain, level: level });
+        out.push('<h' + level + ' id="' + id + '">' + renderInline(h[2], base) + '</h' + level + '>');
+        i++;
+        continue;
+      }
+
+      // Horizontal rule
+      if (/^\s*([-*_])(\s*\1){2,}\s*$/.test(line)) {
+        flushPara();
+        out.push('<hr>');
+        i++;
+        continue;
+      }
+
+      // Tables
+      if (/^\s*\|/.test(line) && i + 1 < lines.length &&
+          /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?\s*$/.test(lines[i + 1])) {
+        flushPara();
+        var header = splitRow(line);
+        var aligns = splitRow(lines[i + 1]).map(function (c) {
+          if (/^:.*:$/.test(c)) return 'center';
+          if (/:$/.test(c)) return 'right';
+          return '';
+        });
+        i += 2;
+        var rows = [];
+        while (i < lines.length && /^\s*\|/.test(lines[i])) {
+          rows.push(splitRow(lines[i]));
+          i++;
+        }
+        var cell = function (tag, text, idx) {
+          var a = aligns[idx] ? ' style="text-align:' + aligns[idx] + '"' : '';
+          return '<' + tag + a + (tag === 'th' ? ' scope="col"' : '') + '>' + renderInline(text, base) + '</' + tag + '>';
+        };
+        out.push('<div class="j-table-wrap" tabindex="0"><table><thead><tr>' +
+          header.map(function (c, idx) { return cell('th', c, idx); }).join('') +
+          '</tr></thead><tbody>' +
+          rows.map(function (r) {
+            return '<tr>' + header.map(function (_, idx) { return cell('td', r[idx] || '', idx); }).join('') + '</tr>';
+          }).join('') +
+          '</tbody></table></div>');
+        continue;
+      }
+
+      // Blockquote / callout ("> **Title:** text")
+      if (/^\s*>/.test(line)) {
+        flushPara();
+        var qbuf = [];
+        while (i < lines.length && /^\s*>/.test(lines[i])) {
+          qbuf.push(lines[i].replace(/^\s*>\s?/, ''));
+          i++;
+        }
+        var qtext = qbuf.join(' ').trim();
+        var callout = qtext.match(/^\*\*(.+?)\*\*\s*:?\s*([\s\S]*)$/);
+        if (callout && callout[2]) {
+          out.push('<aside class="j-callout"><p class="j-callout-title">' +
+            renderInline(callout[1].replace(/:\s*$/, ''), base) + '</p><p>' +
+            renderInline(callout[2], base) + '</p></aside>');
+        } else {
+          out.push('<blockquote><p>' + renderInline(qtext, base) + '</p></blockquote>');
+        }
+        continue;
+      }
+
+      // Lists
+      var ulm = line.match(/^\s*[-*+]\s+(.*)$/);
+      var olm = line.match(/^\s*(\d+)[.)]\s+(.*)$/);
+      if (ulm || olm) {
+        flushPara();
+        var ordered = !!olm;
+        var start = olm ? parseInt(olm[1], 10) : 1;
+        var items = [];
+        while (i < lines.length) {
+          var l = lines[i];
+          var um = l.match(/^\s*[-*+]\s+(.*)$/);
+          var om = l.match(/^\s*\d+[.)]\s+(.*)$/);
+          if (ordered && om) { items.push(om[1]); i++; continue; }
+          if (!ordered && um) { items.push(um[1]); i++; continue; }
+          if (l.trim() && items.length && /^\s{2,}\S/.test(l) && !um && !om) {
+            items[items.length - 1] += ' ' + l.trim();
+            i++;
+            continue;
+          }
+          break;
+        }
+        var lis = items.map(function (it) { return '<li>' + renderInline(it, base) + '</li>'; }).join('');
+        out.push(ordered
+          ? '<ol' + (start !== 1 ? ' start="' + start + '"' : '') + '>' + lis + '</ol>'
+          : '<ul>' + lis + '</ul>');
+        continue;
+      }
+
+      // Standalone image becomes a figure with caption
+      var img = line.match(/^\s*!\[([^\]]*)\]\(([^)\s]+)\)\s*$/);
+      if (img) {
+        flushPara();
+        var src = safeUrl(escapeHtml(img[2]), base);
+        if (src) {
+          out.push('<figure class="j-figure"><img src="' + src + '" alt="' + escapeHtml(img[1]) +
+            '" loading="lazy" decoding="async">' +
+            (img[1] ? '<figcaption>' + escapeHtml(img[1]) + '</figcaption>' : '') + '</figure>');
+        }
+        i++;
+        continue;
+      }
+
+      para.push(line.trim());
+      i++;
+    }
+    flushPara();
+
+    return { html: out.join('\n'), headings: headings };
+  }
+
+  // ---------------------------------------------------------------------------
+  // HTML templates
+  // ---------------------------------------------------------------------------
+  function chip(post) {
+    var cat = getCategory(post);
+    return '<span class="j-chip j-tone-' + cat.tone + '">' + escapeHtml(cat.label) + '</span>';
+  }
+
+  function metaRow(post) {
+    var iso = toISODate(post);
+    return '<div class="j-meta">' + chip(post) +
+      '<span class="j-meta-text">' +
+      (iso ? '<time datetime="' + iso + '">' + escapeHtml(formatDate(post)) + '</time>' : escapeHtml(formatDate(post))) +
+      '<span class="j-dot" aria-hidden="true"></span>' + escapeHtml(readTime(post)) +
+      '</span></div>';
+  }
+
+  function coverImg(post, base, opts) {
+    var o = opts || {};
+    return '<img src="' + escapeHtml(assetUrl(post.image || DEFAULT_IMAGE, base)) + '" alt="' + escapeHtml(o.alt || '') +
+      '" width="' + (o.width || 800) + '" height="' + (o.height || 450) + '"' +
+      (o.eager ? ' fetchpriority="high" loading="eager"' : ' loading="lazy"') + ' decoding="async">';
+  }
+
+  function renderCard(post, opts) {
+    var base = (opts && opts.base) || '';
+    var cat = getCategory(post);
+    var href = postHref(post, base);
+    return '<article class="j-card" data-slug="' + escapeHtml(post.slug) + '" data-category="' + escapeHtml(cat.slug) + '">' +
+      '<div class="j-card-media">' + coverImg(post, base, { width: 640, height: 360 }) + '</div>' +
+      '<div class="j-card-body">' +
+      metaRow(post) +
+      '<h3 class="j-card-title"><a class="j-card-link" href="' + escapeHtml(href) + '">' + escapeHtml(post.title) + '</a></h3>' +
+      '<p class="j-card-excerpt">' + escapeHtml(post.summary) + '</p>' +
+      '<p class="j-card-author">' + escapeHtml(post.author || 'AarambhX Engineering') + '</p>' +
+      '</div></article>';
+  }
+
+  function renderFeatured(post, opts) {
+    var base = (opts && opts.base) || '';
+    var href = postHref(post, base);
+    return '<article class="j-featured" data-slug="' + escapeHtml(post.slug) + '">' +
+      '<div class="j-featured-media">' + coverImg(post, base, { width: 960, height: 600, eager: true }) + '</div>' +
+      '<div class="j-featured-body">' +
+      '<p class="j-featured-label">Featured</p>' +
+      metaRow(post) +
+      '<h2 class="j-featured-title"><a class="j-card-link" href="' + escapeHtml(href) + '">' + escapeHtml(post.title) + '</a></h2>' +
+      '<p class="j-featured-excerpt">' + escapeHtml(post.summary) + '</p>' +
+      '<div class="j-featured-foot">' +
+      '<span class="j-byline-mini"><img src="' + escapeHtml(assetUrl(post.authorAvatar || DEFAULT_AVATAR, base)) +
+      '" alt="" width="32" height="32" loading="lazy">' + escapeHtml(post.author || 'AarambhX Engineering') + '</span>' +
+      '<span class="j-read-more" aria-hidden="true">Read article ' + ICONS.arrowRight + '</span>' +
+      '</div></div></article>';
+  }
+
+  function shareLinks(post, shareUrl) {
+    var url = encodeURIComponent(shareUrl);
+    var text = encodeURIComponent(post.title);
+    return '<a class="j-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=' + url +
+      '" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">' + ICONS.linkedin + '</a>' +
+      '<a class="j-share-btn" href="https://twitter.com/intent/tweet?url=' + url + '&amp;text=' + text +
+      '" target="_blank" rel="noopener noreferrer" aria-label="Share on X">' + ICONS.x + '</a>' +
+      '<a class="j-share-btn" href="https://wa.me/?text=' + text + '%20' + url +
+      '" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">' + ICONS.whatsapp + '</a>' +
+      '<button type="button" class="j-share-btn" data-copy-link="' + escapeHtml(shareUrl) +
+      '" aria-label="Copy article link">' + ICONS.link + '</button>';
+  }
+
+  function tocList(headings, cls) {
+    return '<ol class="' + cls + '">' + headings.map(function (hd) {
+      return '<li class="j-toc-l' + hd.level + '"><a href="#' + hd.id + '" data-toc-link="' + hd.id + '">' +
+        escapeHtml(hd.text) + '</a></li>';
+    }).join('') + '</ol>';
+  }
+
+  /**
+   * Full article body (everything between the site header and footer).
+   * ctx: { base, related: [], shareUrl }
+   */
+  function renderArticle(post, ctx) {
+    var c = ctx || {};
+    var base = c.base || '';
+    var cat = getCategory(post);
+    var md = renderMarkdown(post.content || '', { base: base });
+    var takeaways = getTakeaways(post);
+    var shareUrl = c.shareUrl || absoluteUrl('journal/' + post.slug);
+    var related = c.related || [];
+    var hasToc = md.headings.length >= 2;
+    var tags = Array.isArray(post.tags) ? post.tags : [];
+
+    var head =
+      '<header class="j-article-head">' +
+      '<nav class="j-crumbs" aria-label="Breadcrumb"><a href="' + base + 'blog.html">' + ICONS.arrowLeft + '<span>Journal</span></a>' +
+      '<span aria-hidden="true">/</span><a href="' + base + 'blog.html?topic=' + cat.slug + '">' + escapeHtml(cat.label) + '</a></nav>' +
+      '<h1 class="j-article-title">' + escapeHtml(post.title) + '</h1>' +
+      '<p class="j-article-dek">' + escapeHtml(post.summary) + '</p>' +
+      '<div class="j-byline">' +
+      '<img src="' + escapeHtml(assetUrl(post.authorAvatar || DEFAULT_AVATAR, base)) + '" alt="" width="44" height="44">' +
+      '<div class="j-byline-text"><strong>' + escapeHtml(post.author || 'AarambhX Engineering') + '</strong>' +
+      '<span>' + (toISODate(post) ? '<time datetime="' + toISODate(post) + '">' + escapeHtml(formatDate(post)) + '</time>' : escapeHtml(formatDate(post))) +
+      '<span class="j-dot" aria-hidden="true"></span>' + escapeHtml(readTime(post)) + '</span></div>' +
+      '</div>' +
+      '</header>';
+
+    var cover = '<figure class="j-article-cover">' + coverImg(post, base, { width: 1200, height: 630, eager: true }) + '</figure>';
+
+    var tldr = takeaways.length
+      ? '<aside class="j-tldr" aria-label="Key takeaways"><p class="j-tldr-label">Key takeaways</p><ul>' +
+        takeaways.map(function (t) { return '<li>' + escapeHtml(t) + '</li>'; }).join('') + '</ul></aside>'
+      : '';
+
+    var mobileToc = hasToc
+      ? '<details class="j-toc-mobile"><summary><span>On this page</span>' + ICONS.chevronDown + '</summary>' +
+        tocList(md.headings, 'j-toc-list') + '</details>'
+      : '';
+
+    var tagHtml = tags.length
+      ? '<ul class="j-tags" aria-label="Tags">' + tags.map(function (t) { return '<li>' + escapeHtml(t) + '</li>'; }).join('') + '</ul>'
+      : '';
+
+    var endShare = '<div class="j-share-row"><span>Share this article</span><div class="j-share-group">' + shareLinks(post, shareUrl) + '</div></div>';
+
+    var author =
+      '<section class="j-author-card" aria-label="About the author">' +
+      '<img src="' + escapeHtml(assetUrl(post.authorAvatar || DEFAULT_AVATAR, base)) + '" alt="" width="56" height="56" loading="lazy">' +
+      '<div><p class="j-author-name">' + escapeHtml(post.author || 'AarambhX Engineering') + '</p>' +
+      '<p class="j-author-role">' + escapeHtml(post.authorRole || 'AarambhX Technology') + '</p>' +
+      '<p class="j-author-bio">AarambhX Technology is an engineering studio in Tumakuru, Karnataka, building AI systems, IoT hardware and production web software.</p></div>' +
+      '</section>';
+
+    var cta =
+      '<section class="j-cta" aria-label="Work with AarambhX">' +
+      '<div><h2 class="j-cta-title">Building something like this?</h2>' +
+      '<p>We design and ship AI agents, edge AI devices and production web systems. Tell us what you are working on.</p></div>' +
+      '<div class="j-cta-actions">' +
+      '<a class="j-btn j-btn-primary" href="' + base + 'index.html#contact">Book a consultation ' + ICONS.arrowRight + '</a>' +
+      '<a class="j-btn j-btn-ghost" href="https://wa.me/' + WHATSAPP_NUMBER + '?text=' +
+      encodeURIComponent('Hi AarambhX, I just read "' + post.title + '" on your Journal.') +
+      '" target="_blank" rel="noopener noreferrer">' + ICONS.whatsapp + ' Chat on WhatsApp</a>' +
+      '</div></section>';
+
+    var aside = '<aside class="j-article-aside" aria-label="Article tools"><div class="j-aside-sticky">' +
+      (hasToc ? '<nav class="j-toc" aria-label="On this page"><p class="j-aside-label">On this page</p>' + tocList(md.headings, 'j-toc-list') + '</nav>' : '') +
+      '<div class="j-aside-share"><p class="j-aside-label">Share</p><div class="j-share-group">' + shareLinks(post, shareUrl) + '</div></div>' +
+      '</div></aside>';
+
+    var relatedHtml = related.length
+      ? '<section class="j-related" aria-labelledby="j-related-title"><div class="j-container">' +
+        '<div class="j-section-head"><h2 id="j-related-title" class="j-section-title">Keep reading</h2>' +
+        '<a class="j-link-arrow" href="' + base + 'blog.html">All articles ' + ICONS.arrowRight + '</a></div>' +
+        '<div class="j-grid">' + related.map(function (p) { return renderCard(p, { base: base }); }).join('') + '</div>' +
+        '</div></section>'
+      : '';
+
+    return '<article class="j-article" data-slug="' + escapeHtml(post.slug) + '">' +
+      '<div class="j-container j-article-top">' + head + '</div>' +
+      '<div class="j-container j-cover-wrap">' + cover + '</div>' +
+      '<div class="j-container j-article-layout' + (hasToc ? '' : ' no-toc') + '">' +
+      '<div class="j-article-main">' + mobileToc + tldr +
+      '<div class="j-prose" id="articleProseBody">' + md.html + '</div>' +
+      tagHtml + endShare + author + cta +
+      '</div>' + aside +
+      '</div>' +
+      relatedHtml +
+      '</article>';
+  }
+
+  return {
+    SITE_URL: SITE_URL,
+    WHATSAPP_NUMBER: WHATSAPP_NUMBER,
+    CATEGORIES: CATEGORIES,
+    ICONS: ICONS,
+    escapeHtml: escapeHtml,
+    slugify: slugify,
+    assetUrl: assetUrl,
+    absoluteUrl: absoluteUrl,
+    getCategory: getCategory,
+    toISODate: toISODate,
+    formatDate: formatDate,
+    wordCount: wordCount,
+    readTime: readTime,
+    getTakeaways: getTakeaways,
+    getRelated: getRelated,
+    postHref: postHref,
+    highlight: highlight,
+    renderMarkdown: renderMarkdown,
+    renderCard: renderCard,
+    renderFeatured: renderFeatured,
+    renderArticle: renderArticle
+  };
+}));

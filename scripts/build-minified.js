@@ -98,6 +98,12 @@ function minifyJS(js) {
     .join('\n');
 }
 
+try {
+  require('./build-journal.js');
+} catch (e) {
+  console.warn('Warning: build-journal failed:', e.message);
+}
+
 console.log('=== AARAMBHX TECHNOLOGY: ASSET MINIFICATION PIPELINE ===\n');
 
 const cssFiles = [
@@ -120,6 +126,7 @@ const jsFiles = [
   'brochure.js',
   'highlights.js',
   'blog.js',
+  'journal-core.js',
   'admin-store.js',
   'admin.js',
   'scroll-expand.js',

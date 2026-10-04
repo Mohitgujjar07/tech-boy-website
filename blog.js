@@ -1,6 +1,6 @@
 /**
  * AARAMBHX ENGINEERING JOURNAL & AI TECH NEWS (blog.js)
- * Clean Architecture Re-write
+ * Clean Architecture & Modern Editorial System
  */
 
 (function () {
@@ -46,8 +46,12 @@
     // Category Filter Listeners
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         currentCategory = btn.getAttribute('data-category') || 'all';
         renderGrid();
       });
@@ -84,7 +88,7 @@
     let width = 0;
     let height = 0;
     let particles = [];
-    const particleCount = 38;
+    const particleCount = 28;
     const maxDist = 110;
     let mouse = { x: -1000, y: -1000 };
 
@@ -105,10 +109,10 @@
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
         radius: Math.random() * 1.5 + 0.6,
-        color: Math.random() > 0.4 ? 'rgba(245, 158, 11, ' : 'rgba(59, 130, 246, '
+        color: Math.random() > 0.4 ? 'rgba(217, 119, 6, ' : 'rgba(37, 99, 235, '
       });
     }
 
@@ -130,13 +134,13 @@
         const dym = p1.y - mouse.y;
         const distm = Math.sqrt(dxm * dxm + dym * dym);
         if (distm < 70) {
-          p1.x += (dxm / distm) * 0.6;
-          p1.y += (dym / distm) * 0.6;
+          p1.x += (dxm / distm) * 0.5;
+          p1.y += (dym / distm) * 0.5;
         }
 
         ctx.beginPath();
         ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p1.color + '0.45)';
+        ctx.fillStyle = p1.color + '0.4)';
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -150,8 +154,8 @@
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = `rgba(217, 119, 6, ${alpha})`;
+            ctx.lineWidth = 0.65;
             ctx.stroke();
           }
         }
@@ -190,7 +194,7 @@
   }
 
   // ============================================================
-  // 4. THEME SYNCHRONIZATION
+  // 4. THEME SYNCHRONIZATION (Light SaaS Default & Dark Obsidian)
   // ============================================================
   function initTheme() {
     const toggleBtn = document.getElementById('themeToggle');
@@ -214,15 +218,23 @@
       localStorage.setItem('tbs_theme', theme);
     }
 
-    const saved = localStorage.getItem('tb_theme') || localStorage.getItem('tbs_theme') || 'dark';
+    const saved = localStorage.getItem('tbs_theme') || localStorage.getItem('tb_theme') || 'light';
     applyTheme(saved);
 
     if (toggleBtn) {
       toggleBtn.addEventListener('click', () => {
-        const curr = root.getAttribute('data-theme') || 'dark';
-        applyTheme(curr === 'dark' ? 'light' : 'dark');
+        const curr = document.body.getAttribute('data-theme') || (document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        const next = curr === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: next } }));
       });
     }
+
+    window.addEventListener('themeChanged', (e) => {
+      if (e.detail && e.detail.theme) {
+        applyTheme(e.detail.theme);
+      }
+    });
   }
 
   // ============================================================
@@ -297,10 +309,11 @@
 
     const catClass = getCategoryClass(featured.categorySlug || 'ai-tech');
     const catLabel = getCategoryLabel(featured.categorySlug || 'ai-tech');
+    const articleLink = `journal/${escapeHtml(featured.slug)}.html`;
 
     featuredMount.innerHTML = `
       <article class="featured-blog-card">
-        <a href="#${escapeHtml(featured.slug)}" class="featured-image-wrapper" aria-label="${escapeHtml(featured.title)}">
+        <a href="${articleLink}" class="featured-image-wrapper" aria-label="${escapeHtml(featured.title)}">
           <img src="${escapeHtml(featured.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(featured.title)}" loading="eager">
           <div class="featured-image-overlay"></div>
         </a>
@@ -313,7 +326,7 @@
             <span class="featured-date">${escapeHtml(featured.date || 'March 2026')}</span>
           </div>
           <h2 class="featured-title">
-            <a href="#${escapeHtml(featured.slug)}">${escapeHtml(featured.title)}</a>
+            <a href="${articleLink}">${escapeHtml(featured.title)}</a>
           </h2>
           <p class="featured-summary">
             ${escapeHtml(featured.summary)}
@@ -326,7 +339,7 @@
                 <span class="author-role">${escapeHtml(featured.authorRole || 'Founder & Principal Systems Architect')}</span>
               </div>
             </div>
-            <a href="#${escapeHtml(featured.slug)}" class="read-article-btn">
+            <a href="${articleLink}" class="read-article-btn">
               <span>Read Article &rarr;</span>
             </a>
           </div>
@@ -373,9 +386,10 @@
     gridMount.innerHTML = posts.map(post => {
       const catClass = getCategoryClass(post.categorySlug || 'ai-tech');
       const catLabel = getCategoryLabel(post.categorySlug || 'ai-tech');
+      const articleLink = `journal/${escapeHtml(post.slug)}.html`;
       return `
         <article class="blog-card" data-slug="${escapeHtml(post.slug)}">
-          <a href="#${escapeHtml(post.slug)}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
+          <a href="${articleLink}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
             <img src="${escapeHtml(post.image || 'assets/art/hero-digital-clouds.webp')}" alt="${escapeHtml(post.title)}" loading="lazy">
           </a>
           <div class="card-content">
@@ -384,7 +398,7 @@
               <span class="card-read-time">${escapeHtml(post.readTime || '4 min read')}</span>
             </div>
             <h3 class="card-title">
-              <a href="#${escapeHtml(post.slug)}">${escapeHtml(post.title)}</a>
+              <a href="${articleLink}">${escapeHtml(post.title)}</a>
             </h3>
             <p class="card-excerpt">
               ${escapeHtml(post.summary)}
@@ -397,7 +411,7 @@
                   <span class="author-date">${escapeHtml(post.date || '')}</span>
                 </div>
               </div>
-              <a href="#${escapeHtml(post.slug)}" class="card-read-link">
+              <a href="${articleLink}" class="card-read-link">
                 <span>Read &rarr;</span>
               </a>
             </div>
@@ -430,7 +444,7 @@
 
         <div class="reader-meta-bar">
           <div class="author-chip">
-            <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar">
+            <img src="${escapeHtml(post.authorAvatar || 'assets/aarambhx-logo.jpg')}" alt="${escapeHtml(post.author)}" class="author-avatar" width="42" height="42">
             <div class="author-info">
               <span class="author-name">${escapeHtml(post.author)}</span>
               <span class="author-role">${escapeHtml(post.authorRole || 'Principal Systems Architect')} &bull; ${escapeHtml(post.date)}</span>
@@ -457,7 +471,7 @@
   function renderReaderToolbar() {
     return `
       <div class="reader-toolbar">
-        <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
+        <a href="blog.html" class="reader-back-btn" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash=''; return false;}">
           <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
           <span>&larr; Back to Journal</span>
         </a>
@@ -504,15 +518,6 @@
           </a>
         </div>
 
-        <!-- Sponsored / Tech Tools Slot -->
-        <div class="ax-monetization-slot">
-          <span class="monetization-label">Sponsored Technology Partner</span>
-          <div class="monetization-content">
-            <span>⚡ High-Speed Managed Cloud Hosting &amp; NVMe Storage — Powered by AarambhX Cloud</span>
-            <a href="https://wa.me/917676690081?text=Inquiry%20regarding%20AarambhX%20Cloud%20Hosting" target="_blank" style="color:var(--blog-gold); font-weight:700; text-decoration:underline;">Inquire Here &rarr;</a>
-          </div>
-        </div>
-
         <!-- Post-Article Workshop CTA -->
         <div class="article-lead-box">
           <div class="lead-box-text">
@@ -528,13 +533,13 @@
         <!-- Next & Previous Article Split Cards -->
         <div class="next-prev-grid">
           ${prevPost ? `
-            <a href="#${escapeHtml(prevPost.slug)}" class="next-prev-card">
+            <a href="journal/${escapeHtml(prevPost.slug)}.html" class="next-prev-card" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash='${escapeHtml(prevPost.slug)}'; return false;}">
               <span class="next-prev-label">&larr; Previous Paper</span>
               <span class="next-prev-title">${escapeHtml(prevPost.title)}</span>
             </a>
           ` : '<div></div>'}
           ${nextPost ? `
-            <a href="#${escapeHtml(nextPost.slug)}" class="next-prev-card" style="text-align:right;">
+            <a href="journal/${escapeHtml(nextPost.slug)}.html" class="next-prev-card" style="text-align:right;" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash='${escapeHtml(nextPost.slug)}'; return false;}">
               <span class="next-prev-label">Next Paper &rarr;</span>
               <span class="next-prev-title">${escapeHtml(nextPost.title)}</span>
             </a>
@@ -542,8 +547,8 @@
         </div>
 
         <!-- Back to Listing Footer -->
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
-          <a href="#all" class="reader-back-btn" onclick="window.location.hash=''; return false;">
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--blog-border); display:flex; justify-content:space-between; align-items:center;">
+          <a href="blog.html" class="reader-back-btn" onclick="if(window.location.pathname.endsWith('blog.html')){window.location.hash=''; return false;}">
             <i data-lucide="arrow-left" style="width:14px; height:14px;"></i>
             <span>Back to All Articles</span>
           </a>
@@ -618,7 +623,7 @@
       });
     }
 
-    // 6. Wire Multi-language Code Block Copy Buttons
+    // 6. Wire Code Block Copy Buttons
     const codeBlocks = readerView.querySelectorAll('.code-block-wrap');
     codeBlocks.forEach(wrap => {
       const copyBtn = wrap.querySelector('.copy-code-btn');
@@ -685,7 +690,7 @@
     return defaultTakeaways;
   }
 
-  // Reading Modes Controller & Wireup
+  // Reading Modes Controller & Wireup (Preserved for compatibility)
   function applyReadingMode(mode) {
     const validMode = (mode === 'terminal' || mode === 'sepia' || mode === 'obsidian') ? mode : 'obsidian';
 
@@ -723,7 +728,6 @@
       savedMode = localStorage.getItem('ax_reading_mode') || 'obsidian';
     } catch (e) {}
 
-    // Apply saved mode immediately
     applyReadingMode(savedMode);
 
     const buttons = readerView.querySelectorAll('.reading-mode-btn');
@@ -872,11 +876,6 @@
     const shareTw = document.getElementById('dockShareTwitter');
     if (shareTw) {
       shareTw.href = `https://twitter.com/intent/tweet?text=${titleEncoded}&url=${currentUrl}`;
-    }
-    
-    const shareWa = document.getElementById('dockShareWhatsApp');
-    if (shareWa) {
-      shareWa.href = `https://api.whatsapp.com/send?text=${titleEncoded}%20${currentUrl}`;
     }
 
     const copyBtn = document.getElementById('dockBtnCopyLink');
