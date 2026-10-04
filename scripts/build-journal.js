@@ -31,6 +31,17 @@ if (!fs.existsSync(JOURNAL_DIR)) {
 console.log('=== AARAMBHX JOURNAL: STATIC PAGE GENERATOR ===\n');
 
 const posts = Store.getBlogPosts('all', 'Published');
+const validSlugs = new Set(posts.map(p => `${p.slug}.html`));
+
+// Clean up stale or deleted article HTML pages
+const existingFiles = fs.readdirSync(JOURNAL_DIR);
+existingFiles.forEach(file => {
+  if (file.endsWith('.html') && !validSlugs.has(file)) {
+    console.log(`Pruning stale static article: journal/${file}`);
+    fs.unlinkSync(path.join(JOURNAL_DIR, file));
+  }
+});
+
 console.log(`Found ${posts.length} published articles to pre-render.`);
 
 const BASE_URL = 'https://aarambhx-technology.vercel.app';
