@@ -67,6 +67,7 @@
     // Initial render
     initHeroRotator();
     updateCategoryCounts();
+    initLiveNewsWire();
     renderFeaturedStory();
     renderGrid();
     refreshIcons();
@@ -291,6 +292,59 @@
         </div>
       </article>
     `;
+  }
+
+  // ============================================================
+  // 6b. LIVE GLOBAL AI NEWS WIRE & 24/7 RADAR
+  // ============================================================
+  async function initLiveNewsWire() {
+    const mount = document.getElementById('liveWireItemsMount');
+    if (!mount) return;
+
+    function renderNews(items) {
+      if (!items || !items.length) return;
+      mount.innerHTML = items.slice(0, 3).map(item => `
+        <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer" class="live-wire-card" aria-label="${escapeHtml(item.title)}">
+          <div class="live-wire-card-meta">
+            <span class="live-wire-source">${escapeHtml(item.source)}</span>
+            <span class="live-wire-time">${escapeHtml(item.timeAgo || 'Recent')}</span>
+          </div>
+          <div class="live-wire-title">${escapeHtml(item.title)}</div>
+          <div class="live-wire-outbound">
+            <span>Read dispatch on ${escapeHtml(item.source)}</span>
+            <i data-lucide="external-link" style="width:12px; height:12px;"></i>
+          </div>
+        </a>
+      `).join('');
+      refreshIcons();
+    }
+
+    // 1. Instant render from local cache if available
+    try {
+      const cached = localStorage.getItem('ax_live_news_cache');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed && parsed.items && parsed.items.length) {
+          renderNews(parsed.items);
+        }
+      }
+    } catch (e) {}
+
+    // 2. Fetch fresh live news from assets/data/live-news.json
+    try {
+      const res = await fetch('assets/data/live-news.json?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.items && data.items.length) {
+          renderNews(data.items);
+          try {
+            localStorage.setItem('ax_live_news_cache', JSON.stringify(data));
+          } catch (e) {}
+        }
+      }
+    } catch (err) {
+      console.warn('[LiveWire] Using cached news fallback');
+    }
   }
 
   // ============================================================
